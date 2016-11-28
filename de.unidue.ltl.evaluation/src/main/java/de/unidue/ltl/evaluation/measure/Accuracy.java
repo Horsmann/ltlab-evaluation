@@ -18,7 +18,7 @@
 
 package de.unidue.ltl.evaluation.measure;
 
-import java.util.Set;
+import java.util.List;
 
 import de.unidue.ltl.evaluation.EvaluationResult;
 
@@ -26,7 +26,13 @@ public class Accuracy
 implements EvaluationMeasure {
 
 	@Override
-	public Set<EvaluationResult> calculate() {
+	public List<EvaluationResult> calculate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getName() {
 		// TODO Auto-generated method stub
 		return null;
 	}

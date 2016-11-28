@@ -21,6 +21,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
+import java.util.List;
+import java.util.Map;
+
 
 import de.unidue.ltl.evaluation.measure.EvaluationMeasure;
 
@@ -55,7 +58,7 @@ public class Evaluation {
 		
 	}
 	
-	public Set<EvaluationResult> calculate(EvaluationMeasure result){
+	public List<EvaluationResult> calculate(EvaluationMeasure result){
 		return result.calculate();
 	}
 	

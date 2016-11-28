@@ -19,14 +19,15 @@
 
 package de.unidue.ltl.evaluation.measure;
 
-import java.util.Set;
+
+import java.util.List;
 
 import de.unidue.ltl.evaluation.EvaluationResult;
 
 public interface EvaluationMeasure {
 
-	public Set<EvaluationResult> calculate();
-	
-	
+
+	public List<EvaluationResult> calculate();
+	public String getName();
 	
 }
