@@ -17,24 +17,24 @@
  ******************************************************************************/
 package de.unidue.ltl.evaluation;
 
-public class EvaluationEntry {
-	private String gold;
-	private String predicted;
+public class EvaluationEntry<T> {
+	private T gold;
+	private T predicted;
 	
-	public EvaluationEntry(String gold, String predicted) {
+	public EvaluationEntry(T gold, T predicted) {
 		this.gold = gold;
 		this.predicted = predicted;
 	}
-	public String getGold() {
+	public T getGold() {
 		return gold;
 	}
-	public void setGold(String gold) {
+	public void setGold(T gold) {
 		this.gold = gold;
 	}
-	public String getPredicted() {
+	public T getPredicted() {
 		return predicted;
 	}
-	public void setPredicted(String predicted) {
+	public void setPredicted(T predicted) {
 		this.predicted = predicted;
 	}
 

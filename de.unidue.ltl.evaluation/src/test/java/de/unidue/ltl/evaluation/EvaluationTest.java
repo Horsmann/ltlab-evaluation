@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.junit.Test;
-import org.junit.Test;
 import org.mockito.Mockito;
 
 import de.unidue.ltl.evaluation.measure.EvaluationMeasure;
@@ -35,16 +34,16 @@ public class EvaluationTest{
 
 	@Test
 	public void entryTest(){
-		Collection<EvaluationEntry> entries= new ArrayList<>();
-		entries.add(new EvaluationEntry("A", "B"));
-		entries.add(new EvaluationEntry("A", "A"));
-		Evaluation evaluation= new Evaluation(entries);
+		Collection<EvaluationEntry<String>> entries= new ArrayList<>();
+		entries.add(new EvaluationEntry<String>("A", "B"));
+		entries.add(new EvaluationEntry<String>("A", "A"));
+		Evaluation<String> evaluation= new Evaluation<String>(entries);
 		assertEquals(2,evaluation.getEntries().size());
 	}
 	
 	@Test
 	public void addEntryTest(){
-		Evaluation evaluation= new Evaluation();
+		Evaluation<String> evaluation= new Evaluation<String>();
 		evaluation.register("A", "B");
 		evaluation.register("B", "B");
 		assertEquals(2,evaluation.getEntries().size());
@@ -52,7 +51,7 @@ public class EvaluationTest{
 	
 	@Test
 	public void addMeasureTest(){
-		Evaluation evaluation= new Evaluation();
+		Evaluation<String> evaluation= new Evaluation<String>();
 		evaluation.register("A", "B");
 		evaluation.register("B", "B");
 		
