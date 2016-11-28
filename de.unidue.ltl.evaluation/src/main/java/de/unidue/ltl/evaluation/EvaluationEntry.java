@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 /*******************************************************************************
  * Copyright 2016
  * Language Technology Lab
@@ -17,18 +15,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
->>>>>>> 1c9eb7739a2498c78ec145d5c3718046a3c5f9ef
 package de.unidue.ltl.evaluation;
 
-public class HelloWorld
-{
-    public String returnHelloWorld(){
-<<<<<<< HEAD
-        return "Hello World";
-=======
-        //FIXME: Not yet implemented
-        return null;
->>>>>>> 1c9eb7739a2498c78ec145d5c3718046a3c5f9ef
-    }
+public class EvaluationEntry {
+	private String gold;
+	private String predicted;
+	
+	public EvaluationEntry(String gold, String predicted) {
+		this.gold = gold;
+		this.predicted = predicted;
+	}
+	public String getGold() {
+		return gold;
+	}
+	public void setGold(String gold) {
+		this.gold = gold;
+	}
+	public String getPredicted() {
+		return predicted;
+	}
+	public void setPredicted(String predicted) {
+		this.predicted = predicted;
+	}
 
 }
