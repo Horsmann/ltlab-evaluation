@@ -29,6 +29,7 @@ public class Evaluation<T> {
 
 	private Collection<EvaluationEntry<T>> entries;
 	private Map<String, EvaluationResult> calculatedMeasures;
+	private ConfusionMatrix<T> confusionMatrix;
 	
 	public Evaluation() {
 		this.init();
