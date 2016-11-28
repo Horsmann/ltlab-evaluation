@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import de.unidue.ltl.evaluation.measure.EvaluationMeasure;
@@ -66,16 +67,11 @@ public class Evaluation<T> {
 		calculatedMeasures= new HashMap<String, EvaluationResult>();
 	}
 	
-	public EvaluationResult calculate(EvaluationMeasure measure){
-		if(calculatedMeasures.containsKey(measure.getName())){
-			return calculatedMeasures.get(measure.getName());
+	public EvaluationResult calculate(EvaluationMeasure<T> measure){
+		if (!calculatedMeasures.containsKey(measure.getName())) {
+			calculatedMeasures.putAll(measure.calculate());
 		}
-		else{
-			for(EvaluationResult result: measure.calculate()){
-				calculatedMeasures.put(result.getName(), result);
-			}
-			return calculatedMeasures.get(measure.getName());
-		}		
+
+		return calculatedMeasures.get(measure.getName());
 	}
-	
 }

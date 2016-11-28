@@ -19,30 +19,31 @@
 package de.unidue.ltl.evaluation.measure;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.Map;
 
 import de.unidue.ltl.evaluation.EvaluationEntry;
 import de.unidue.ltl.evaluation.EvaluationResult;
+import de.unidue.ltl.evaluation.measure.util.CategorialMeasuresUtil;
 
 public class Accuracy 
-	extends EvaluationMeasure
+	extends EvaluationMeasure<String>
 {
 
-	public Accuracy(Collection<EvaluationEntry> entries) {
+	public static final String ACC_MEASURE = "Accuracy";
+	
+	public Accuracy(Collection<EvaluationEntry<String>> entries) {
 		super(entries);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public List<EvaluationResult> calculate() {
-		// TODO Auto-generated method stub
-		return null;
+	public Map<String, EvaluationResult> calculate() {
+		return CategorialMeasuresUtil.computeCategorialResults(entries);
 	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return ACC_MEASURE;
 	}
 
 
