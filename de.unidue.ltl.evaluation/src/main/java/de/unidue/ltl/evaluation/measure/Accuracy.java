@@ -18,12 +18,19 @@
 
 package de.unidue.ltl.evaluation.measure;
 
+import java.util.Collection;
 import java.util.List;
 
+import de.unidue.ltl.evaluation.EvaluationEntry;
 import de.unidue.ltl.evaluation.EvaluationResult;
 
 public class Accuracy 
-implements EvaluationMeasure {
+extends EvaluationMeasure {
+
+	public Accuracy(Collection<EvaluationEntry> entries) {
+		super(entries);
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public List<EvaluationResult> calculate() {
