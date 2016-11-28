@@ -46,4 +46,28 @@ public class ConfusionMatrixTest
         assertEquals(1, matrix.getFalseNegative("A"));
     }
 
+    @Test
+    public void getValues2()
+    {
+        ConfusionMatrix<String> matrix = new ConfusionMatrix<>();
+        matrix.register("Z", "B");
+        matrix.register("A", "A");
+        matrix.register("A", "A");
+        matrix.register("Z", "B");
+        matrix.register("B", "B");
+        matrix.register("B", "Z");
+        matrix.register("B", "B");
+        matrix.register("B", "A");
+        matrix.register("B", "Z");
+        matrix.register("B", "A");
+
+        System.out.println(matrix.toString());
+        
+        assertEquals(2, matrix.getTruePositives("A"));
+        assertEquals(2, matrix.getFalsePositives("A"));
+        assertEquals(0, matrix.getFalseNegative("A"));
+        assertEquals(6, matrix.getTrueNegatives("A")); 
+    }
+    
+    
 }
