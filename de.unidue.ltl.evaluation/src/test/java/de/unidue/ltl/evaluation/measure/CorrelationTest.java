@@ -15,7 +15,7 @@ import de.unidue.ltl.evaluation.measure.util.ScaleMeasureUtil;
 public class CorrelationTest {
 	
 	@Test
-	public void accuracyTest(){
+	public void correlationTest(){
 		Collection<EvaluationEntry<Double>> entries = new ArrayList<EvaluationEntry<Double>>();
 		entries.add(new EvaluationEntry<Double>(1.0, 2.0));
 		entries.add(new EvaluationEntry<Double>(2.0, 3.0));
@@ -28,6 +28,14 @@ public class CorrelationTest {
 		assertEquals(1.0, results.get(PearsonCorrelation.PEARSON).getResult(), 0.001);
 		assertEquals(1.0, results.get(SpearmanCorrelation.SPEARMAN).getResult(), 0.001);
 				
-	}
+		EvaluationMeasure<Double> pearson = new PearsonCorrelation(entries);
+		assertEquals("PearsonCorrelation", pearson.getName());
+		
+		Map<String, EvaluationResult> resultsPearson = pearson.calculate();
 
+		assertEquals(2, resultsPearson.size()); 
+		
+		assertEquals(1.0, resultsPearson.get(PearsonCorrelation.PEARSON).getResult(), 0.001);
+		assertEquals(1.0, resultsPearson.get(SpearmanCorrelation.SPEARMAN).getResult(), 0.001);
+	}
 }
