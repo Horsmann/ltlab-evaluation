@@ -5,6 +5,8 @@ import java.util.List;
 import org.dkpro.statistics.correlation.PearsonCorrelation;
 import org.dkpro.statistics.correlation.SpearmansRankCorrelation_old;
 
+import de.unidue.ltl.evaluation.EvaluationResult;
+
 
 public class ScaleMeasure {
 
@@ -23,21 +25,26 @@ public class ScaleMeasure {
 
 	}
 	
-	public Number getPearson(){
+	public EvaluationResult getPearson(){
 		
-		Number result = 0.0;
+		EvaluationResult eval = new EvaluationResult();
 		
-		result = PearsonCorrelation.computeCorrelation(val1, val1);
-		return result;
+		double result = PearsonCorrelation.computeCorrelation(val1, val1);
+		
+		eval.setResult(result);
+		
+		return eval;
 	}
 
-	public Number getSpearman(){
+	public EvaluationResult getSpearman(){
 		
-		Number result = 0.0;
+		EvaluationResult eval = new EvaluationResult();
 		
-		result = SpearmansRankCorrelation_old.computeCorrelation(val1, val1);
+		double result = SpearmansRankCorrelation_old.computeCorrelation(val1, val1);
 		
-		return result;
+		eval.setResult(result);
+		
+		return eval;
 
 	}
 
