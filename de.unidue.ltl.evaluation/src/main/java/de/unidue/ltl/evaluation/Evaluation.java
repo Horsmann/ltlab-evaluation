@@ -20,12 +20,15 @@ package de.unidue.ltl.evaluation;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 import de.unidue.ltl.evaluation.measure.EvaluationMeasure;
 
 public class Evaluation {
 
 	private Collection<EvaluationEntry> entries;
+	private Map<String, EvaluationResult> calculatedMeasures;
 	
 	public Evaluation() {
 		this.entries = new ArrayList<>();
@@ -54,8 +57,16 @@ public class Evaluation {
 		
 	}
 	
-	public EvaluationResult calculate(EvaluationMeasure result){
-		return result.calculate();
+	public EvaluationResult calculate(EvaluationMeasure measure){
+		if(calculatedMeasures.containsKey(measure.getName())){
+			return calculatedMeasures.get(measure.getName());
+		}
+		else{
+			for(EvaluationResult result: measure.calculate()){
+				calculatedMeasures.put(result.getName(), result);
+			}
+			return calculatedMeasures.get(measure.getName());
+		}		
 	}
 	
 }

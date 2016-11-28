@@ -21,6 +21,8 @@ package de.unidue.ltl.evaluation;
 public class EvaluationResult {
 
 	private double result;
+	//corresponds to measure name
+	private String resultName;
 
 	public double getResult() {
 		return result;
@@ -28,6 +30,10 @@ public class EvaluationResult {
 	
 	public void setResult(double result) {
 		this.result = result;
+	}
+
+	public String getName() {
+		return this.resultName;
 	}
 	
 	
