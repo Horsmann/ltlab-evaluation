@@ -24,7 +24,7 @@ public class AccuracyTest {
 		entries.add(new EvaluationEntry<String>("A", "A"));
 		
 		Map<String, EvaluationResult> results = CategorialMeasuresUtil.computeCategorialResults(entries);
-		assertEquals(7, results.size()); 
+		assertEquals(13, results.size()); 
 		
 		EvaluationResult result = results.get(Accuracy.ACC_MEASURE);
 		assertEquals(0.75, result.getResult(), 0.001);
