@@ -133,11 +133,11 @@ public class PRFTest {
 		EvaluationResult result = results.get(Accuracy.ACC_MEASURE);
 		assertEquals(0.65, result.getResult(), 0.001);
 		
-		result = results.get(Precision.PREC_MEASURE+"_A");
+	//	result = results.get(Precision.PREC_MEASURE+"_A");
 		System.out.println(result.getResult());
 		assertEquals(0.75, result.getResult(), 0.001);
 		
-		result = results.get(Recall.REC_MEASURE+"_A");
+	//	result = results.get(Recall.REC_MEASURE+"_A");
 		System.out.println(result.getResult());
 		assertEquals(0.6, result.getResult(), 0.001);
 		

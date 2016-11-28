@@ -45,7 +45,7 @@ public class CategorialMeasuresUtil {
 					}
 				}
 			}	
-			System.out.println(category+"\t"+tp+"\t"+fp+"\t"+fn);
+	//		System.out.println(category+"\t"+tp+"\t"+fp+"\t"+fn);
 			double precision = (double) tp/(tp+fp);
 			double recall =  (double) tp/(tp+fn);
 			double fscore = 2.0*precision*recall/(precision+recall);
