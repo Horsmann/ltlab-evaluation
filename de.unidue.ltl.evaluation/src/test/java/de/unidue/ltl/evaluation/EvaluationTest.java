@@ -30,9 +30,9 @@ public class EvaluationTest{
 
 	@Test
 	public void entryTest(){
-		Collection<EvaluatioEntry> entries= new ArrayList<>();
-		entries.add(new EvaluatioEntry("A", "B"));
-		entries.add(new EvaluatioEntry("A", "A"));
+		Collection<EvaluationEntry> entries= new ArrayList<>();
+		entries.add(new EvaluationEntry("A", "B"));
+		entries.add(new EvaluationEntry("A", "A"));
 		Evaluation evaluation= new Evaluation(entries);
 		assertEquals(2,evaluation.getEntries().size());
 	}

@@ -17,11 +17,11 @@
  ******************************************************************************/
 package de.unidue.ltl.evaluation;
 
-public class EvaluatioEntry {
+public class EvaluationEntry {
 	private String gold;
 	private String predicted;
 	
-	public EvaluatioEntry(String gold, String predicted) {
+	public EvaluationEntry(String gold, String predicted) {
 		this.gold = gold;
 		this.predicted = predicted;
 	}

@@ -17,27 +17,28 @@
  ******************************************************************************/
 package de.unidue.ltl.evaluation;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
 public class Evaluation {
 
-	private Collection<EvaluatioEntry> entries;
+	private Collection<EvaluationEntry> entries;
 	
 	public Evaluation() {
-		this.entries = Collections.emptyList();
+		this.entries = new ArrayList<>();
 	}
 	
-	public Collection<EvaluatioEntry> getEntries() {
+	public Collection<EvaluationEntry> getEntries() {
 		return entries;
 	}
 
-	public Evaluation(Collection<EvaluatioEntry> entries) {
+	public Evaluation(Collection<EvaluationEntry> entries) {
 		this.entries = entries;
 	}
 	
 	public void register(String gold, String predicted){
-		EvaluatioEntry entry= new EvaluatioEntry(gold, predicted);
+		EvaluationEntry entry= new EvaluationEntry(gold, predicted);
 		entries.add(entry);
 		this.update();
 	}
@@ -50,5 +51,9 @@ public class Evaluation {
 		// TODO Auto-generated method stub
 		
 	}
+	
+//	public EvaluationResult calculate(EvaluationMeasure result){
+//		return result.getResult();
+//	}
 	
 }
