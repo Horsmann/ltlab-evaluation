@@ -525,6 +525,11 @@
       <artifactId>junit</artifactId>
       <version>4.12</version>
     </dependency>
+    <dependency>
+    	<groupId>org.dkpro.statistics</groupId>
+    	<artifactId>dkpro-statistics-correlation</artifactId>
+    	<version>2.1.0</version>
+    </dependency>
   </dependencies>
   <issueManagement>
     <system>GitHub Issues</system>
