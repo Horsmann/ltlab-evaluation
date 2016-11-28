@@ -1,4 +1,4 @@
-package de.unidue.ltl.evaluation;
+package de.unidue.ltl.evaluation.measure;
 
 import static org.junit.Assert.assertEquals;
 
@@ -8,6 +8,8 @@ import java.util.Map;
 
 import org.junit.Test;
 
+import de.unidue.ltl.evaluation.EvaluationEntry;
+import de.unidue.ltl.evaluation.EvaluationResult;
 import de.unidue.ltl.evaluation.measure.Accuracy;
 import de.unidue.ltl.evaluation.measure.Precision;
 import de.unidue.ltl.evaluation.measure.Recall;
