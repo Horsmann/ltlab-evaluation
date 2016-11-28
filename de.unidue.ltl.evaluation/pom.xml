@@ -1,12 +1,7 @@
 <!--
   Copyright 2016
-<<<<<<< HEAD
-  Ubiquitous Knowledge Processing (UKP) Lab
-  Technische Universität Darmstadt
-=======
   Language Technology Lab
   University of Duisburg-Essen
->>>>>>> 1c9eb7739a2498c78ec145d5c3718046a3c5f9ef
   
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -21,38 +16,6 @@
   limitations under the License.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-<<<<<<< HEAD
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>de.unidue.ltl</groupId>
-	<artifactId>de.unidue.ltl.evaluation</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.2</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-	<dependencies>
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-all</artifactId>
-			<version>1.10.19</version>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
-		</dependency>
-	</dependencies>
-=======
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.unidue.ltl</groupId>
@@ -562,17 +525,6 @@
       <artifactId>junit</artifactId>
       <version>4.12</version>
     </dependency>
-    <dependency>
-    	<groupId>org.dkpro.statistics</groupId>
-    	<artifactId>dkpro-statistics</artifactId>
-    	<version>2.1.0</version>
-    	<type>pom</type>
-    </dependency>
-    <dependency>
-    	<groupId>org.dkpro.statistics</groupId>
-    	<artifactId>dkpro-statistics-correlation</artifactId>
-    	<version>2.1.0</version>
-    </dependency>
   </dependencies>
   <issueManagement>
     <system>GitHub Issues</system>
@@ -598,5 +550,4 @@
   <ciManagement>
     <url>https://github.com/Horsmann/ltlab-evaluation</url>
   </ciManagement>
->>>>>>> 1c9eb7739a2498c78ec145d5c3718046a3c5f9ef
 </project>
