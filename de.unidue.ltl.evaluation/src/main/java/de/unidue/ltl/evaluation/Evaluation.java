@@ -19,9 +19,9 @@ package de.unidue.ltl.evaluation;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import de.unidue.ltl.evaluation.measure.EvaluationMeasure;
 
@@ -31,6 +31,7 @@ public class Evaluation {
 	private Map<String, EvaluationResult> calculatedMeasures;
 	
 	public Evaluation() {
+		this.calculatedMeasures= new HashMap<String, EvaluationResult>();
 		this.entries = new ArrayList<>();
 	}
 	
@@ -39,6 +40,7 @@ public class Evaluation {
 	}
 
 	public Evaluation(Collection<EvaluationEntry> entries) {
+		this.calculatedMeasures= new HashMap<String, EvaluationResult>();
 		this.entries = entries;
 	}
 	
@@ -48,13 +50,15 @@ public class Evaluation {
 		this.update();
 	}
 
+	public Set<String> getCalculatedMeasureNames(){
+		return this.calculatedMeasures.keySet();
+	}
 
 	/**
 	 * update Measures etc. because new entry added
 	 */
 	private void update() {
-		// TODO Auto-generated method stub
-		
+		calculatedMeasures= new HashMap<String, EvaluationResult>();
 	}
 	
 	public EvaluationResult calculate(EvaluationMeasure measure){
