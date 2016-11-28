@@ -21,6 +21,16 @@ package de.unidue.ltl.evaluation;
 public class EvaluationResult {
 
 	private double result;
+	
+	private String name;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public double getResult() {
 		return result;
@@ -30,6 +40,14 @@ public class EvaluationResult {
 		this.result = result;
 	}
 	
+	public EvaluationResult(){
+		
+	}
+	
+	public EvaluationResult(double result, String name){
+		this.result = result;
+		this.name = name;
+	}
 	
 	
 }

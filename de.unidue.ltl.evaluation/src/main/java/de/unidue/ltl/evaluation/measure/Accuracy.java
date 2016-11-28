@@ -18,13 +18,15 @@
 
 package de.unidue.ltl.evaluation.measure;
 
+import java.util.Set;
+
 import de.unidue.ltl.evaluation.EvaluationResult;
 
 public class Accuracy 
 implements EvaluationMeasure {
 
 	@Override
-	public EvaluationResult calculate() {
+	public Set<EvaluationResult> calculate() {
 		// TODO Auto-generated method stub
 		return null;
 	}

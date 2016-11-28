@@ -20,6 +20,7 @@ package de.unidue.ltl.evaluation;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Set;
 
 import de.unidue.ltl.evaluation.measure.EvaluationMeasure;
 
@@ -54,7 +55,7 @@ public class Evaluation {
 		
 	}
 	
-	public EvaluationResult calculate(EvaluationMeasure result){
+	public Set<EvaluationResult> calculate(EvaluationMeasure result){
 		return result.calculate();
 	}
 	
