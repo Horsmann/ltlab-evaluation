@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 /*******************************************************************************
  * Copyright 2016
  * Language Technology Lab
@@ -15,13 +17,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
+>>>>>>> 1c9eb7739a2498c78ec145d5c3718046a3c5f9ef
 package de.unidue.ltl.evaluation;
 
 public class HelloWorld
 {
     public String returnHelloWorld(){
+<<<<<<< HEAD
+        return "Hello World";
+=======
         //FIXME: Not yet implemented
         return null;
+>>>>>>> 1c9eb7739a2498c78ec145d5c3718046a3c5f9ef
     }
 
 }

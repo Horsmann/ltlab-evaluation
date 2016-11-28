@@ -31,16 +31,20 @@ public class Evaluation {
 	private Map<String, EvaluationResult> calculatedMeasures;
 	
 	public Evaluation() {
-		this.calculatedMeasures= new HashMap<String, EvaluationResult>();
+		this.init();
 		this.entries = new ArrayList<>();
 	}
 	
+	private void init() {
+		this.calculatedMeasures= new HashMap<String, EvaluationResult>();
+	}
+
 	public Collection<EvaluationEntry> getEntries() {
 		return entries;
 	}
 
 	public Evaluation(Collection<EvaluationEntry> entries) {
-		this.calculatedMeasures= new HashMap<String, EvaluationResult>();
+		this.init();
 		this.entries = entries;
 	}
 	

@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+package de.unidue.ltl.evaluation;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+=======
 /*******************************************************************************
  * Copyright 2016
  * Language Technology Lab
@@ -21,10 +28,18 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.mockito.Mockito;
+>>>>>>> 1c9eb7739a2498c78ec145d5c3718046a3c5f9ef
 
 public class HelloWorldTest
 {
     @Test
+<<<<<<< HEAD
+    public void run() {
+        
+        HelloWorld hw = new HelloWorld();
+        assertEquals("Hello World", hw.returnHelloWorld());
+        
+=======
     public void run()
     {
 
@@ -38,6 +53,7 @@ public class HelloWorldTest
 
         assertEquals("Hello World", mock.returnHelloWorld());
 
+>>>>>>> 1c9eb7739a2498c78ec145d5c3718046a3c5f9ef
     }
 
 }
