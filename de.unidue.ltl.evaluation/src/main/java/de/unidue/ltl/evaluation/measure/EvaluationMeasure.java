@@ -19,13 +19,11 @@
 
 package de.unidue.ltl.evaluation.measure;
 
-
 import java.util.List;
 
 import de.unidue.ltl.evaluation.EvaluationResult;
 
 public interface EvaluationMeasure {
-
 
 	public List<EvaluationResult> calculate();
 	public String getName();

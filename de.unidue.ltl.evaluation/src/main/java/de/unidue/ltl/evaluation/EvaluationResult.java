@@ -21,7 +21,6 @@ package de.unidue.ltl.evaluation;
 public class EvaluationResult {
 
 	private double result;
-
 	//corresponds to measure name
 	private String resultName;
 
@@ -37,14 +36,6 @@ public class EvaluationResult {
 		return this.resultName;
 	}
 	
-	public EvaluationResult(){
-		
-	}
-	
-	public EvaluationResult(double result, String name){
-		this.result = result;
-		this.resultName = name;
-	}
 	
 	
 }
