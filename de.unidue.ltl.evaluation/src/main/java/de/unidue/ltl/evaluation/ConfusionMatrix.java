@@ -36,13 +36,14 @@ public class ConfusionMatrix<T>
     public void register(T gold, T predicted)
     {
         cfd.addSample(gold, predicted, 1);
-        
+
         allLabels.add(gold);
         allLabels.add(predicted);
     }
 
     public String toString()
     {
+        int width = 10;
 
         List<T> conditions = new ArrayList<T>(allLabels);
         Collections.sort(conditions, new Comparator<T>()
@@ -59,28 +60,47 @@ public class ConfusionMatrix<T>
         });
 
         StringBuilder sb = new StringBuilder();
-        
+
         sb.append("Gold (row) / Prediction (col)\n\n");
-        conditions.forEach(x -> sb.append(String.format("%10s\t", x)));
+
+        boolean first = true;
+        for (T c : conditions) {
+            if (first) {
+                sb.append(String.format("%" + (width * 2 - 1) + "s\t", c));
+                first = false;
+            }
+            else {
+                sb.append(String.format("%" + width + "s\t", c));
+            }
+        }
+
         sb.append("\n");
 
         for (T key : conditions) {
             FrequencyDistribution<T> fd = cfd.getFrequencyDistribution(key);
-            sb.append(key);
-            boolean first = true;
+            sb.append(String.format("%" + width + "s", key));
+            first = true;
             for (T t : conditions) {
                 if (first) {
-                    sb.append(String.format("%9s\t", fd.getCount(t)));
+                    sb.append(String.format("%" + (width - 1) + "s\t", getCount(fd, t)));
                     first = false;
                 }
                 else {
-                    sb.append(String.format("%10s\t", fd.getCount(t)));
+                    sb.append(String.format("%" + (width) + "s\t", getCount(fd, t)));
                 }
             }
             sb.append("\n");
         }
 
         return sb.toString();
+    }
+
+    private String getCount(FrequencyDistribution<T> fd, T t)
+    {
+        if (fd != null) {
+            return String.valueOf(fd.getCount(t));
+        }
+        return "0";
     }
 
 }
