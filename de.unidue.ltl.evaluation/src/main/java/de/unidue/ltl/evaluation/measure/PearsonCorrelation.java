@@ -22,17 +22,17 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.dkpro.statistics.correlation.SpearmansRankCorrelation_old;
+import org.dkpro.statistics.correlation.PearsonCorrelation;
 
 import de.unidue.ltl.evaluation.EvaluationEntry;
 import de.unidue.ltl.evaluation.EvaluationResult;
 
 
-public class SpearmanCorrelation 
+public class PearsonCorrelation 
 	extends EvaluationMeasure
 {
 
-	public SpearmanCorrelation(Collection<EvaluationEntry> entries) {
+	public PearsonCorrelation(Collection<EvaluationEntry> entries) {
 		super(entries);
 	}
 
@@ -52,7 +52,7 @@ public class SpearmanCorrelation
 			
 		}
 		
-		double result = SpearmansRankCorrelation_old.computeCorrelation(val1, val1);
+		double result = PearsonCorrelation.computeCorrelation(val1, val1);
 		
 		EvaluationResult obj = new EvaluationResult();
 		obj.setResult(result);
