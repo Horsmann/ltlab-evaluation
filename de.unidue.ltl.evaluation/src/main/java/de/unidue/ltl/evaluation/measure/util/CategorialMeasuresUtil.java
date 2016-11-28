@@ -38,16 +38,17 @@ public class CategorialMeasuresUtil {
 						fn++;
 					}
 				} else {
-					if (gold.equals(pred)){
-						tn++;
-					} else {
+					if (pred.equals(category)){
 						fp++;
+					} else {
+						tn++;
 					}
 				}
 			}	
-			double precision = tp/(tp+fp);
-			double recall = tp/(tp+fn);
-			double fscore = 2*precision*recall/(precision+recall);
+			System.out.println(category+"\t"+tp+"\t"+fp+"\t"+fn);
+			double precision = (double) tp/(tp+fp);
+			double recall =  (double) tp/(tp+fn);
+			double fscore = 2.0*precision*recall/(precision+recall);
 			results.put(Precision.PREC_MEASURE+"_"+category, new EvaluationResult(precision));
 			results.put(Recall.REC_MEASURE+"_"+category, new EvaluationResult(recall));
 			results.put(Fscore.F_MEASURE+"_"+category, new EvaluationResult(fscore));
@@ -71,7 +72,7 @@ public class CategorialMeasuresUtil {
 		return results;
 	}
 
-	private static Set<String> listCategories(
+	public static Set<String> listCategories(
 			Collection<EvaluationEntry<String>> entries) {
 		Set<String> categories = new HashSet<String>();
 		for(EvaluationEntry<String> entry : entries){
