@@ -22,12 +22,21 @@ public class CategorialMeasuresUtil {
 
 		Set<String> categories = listCategories(entries);
 
+		double recall_sum = 0d;
+		double precision_sum = 0d;
+		int tp_sum = 0;
+		int fp_sum = 0;
+		int fn_sum = 0;
+		int tn_sum = 0;
+
+		
 		for(String category : categories){
 			int tp = 0;
 			int fp = 0;
 			int fn = 0;
 			int tn = 0;
 
+			
 			for (EvaluationEntry<String> entry : entries) {
 				String gold = entry.getGold();
 				String pred = entry.getPredicted();
@@ -45,15 +54,33 @@ public class CategorialMeasuresUtil {
 					}
 				}
 			}	
-	//		System.out.println(category+"\t"+tp+"\t"+fp+"\t"+fn);
+			//		System.out.println(category+"\t"+tp+"\t"+fp+"\t"+fn);
 			double precision = (double) tp/(tp+fp);
 			double recall =  (double) tp/(tp+fn);
 			double fscore = 2.0*precision*recall/(precision+recall);
+			precision_sum += precision;
+			recall_sum += recall;
+			tp_sum += tp;
+			fp_sum += fp;
+			tn_sum += tn;
+			fn_sum += fn;
 			results.put(Precision.PREC_MEASURE+"_"+category, new EvaluationResult(precision));
 			results.put(Recall.REC_MEASURE+"_"+category, new EvaluationResult(recall));
 			results.put(Fscore.F_MEASURE+"_"+category, new EvaluationResult(fscore));
-				}
-
+		}
+		double precision_macro = precision_sum/categories.size();
+		double recall_macro = recall_sum/categories.size();
+		double fscore_macro = 2.0*precision_macro*recall_macro/(precision_macro+recall_macro);
+		results.put(Precision.PREC_MEASURE+"_MACRO", new EvaluationResult(precision_macro));
+		results.put(Recall.REC_MEASURE+"_MACRO", new EvaluationResult(recall_macro));
+		results.put(Fscore.F_MEASURE+"_MACRO", new EvaluationResult(fscore_macro));
+		double precision_micro = (double) tp_sum/(tp_sum+fp_sum);
+		double recall_micro = (double) tp_sum/(tp_sum+fn_sum);
+		double fscore_micro = 2.0*precision_micro*recall_micro/(precision_micro+recall_micro);
+		results.put(Precision.PREC_MEASURE+"_MICRO", new EvaluationResult(precision_micro));
+		results.put(Recall.REC_MEASURE+"_MICRO", new EvaluationResult(recall_micro));
+		results.put(Fscore.F_MEASURE+"_MICRO", new EvaluationResult(fscore_micro));
+		
 
 		int tp = 0;
 		for (EvaluationEntry<String> entry : entries) {
