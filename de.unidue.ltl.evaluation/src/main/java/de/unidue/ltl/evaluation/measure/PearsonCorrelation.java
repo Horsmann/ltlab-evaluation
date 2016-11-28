@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.dkpro.statistics.correlation.PearsonCorrelation;
+import org.dkpro.statistics.correlation.*;
 
 import de.unidue.ltl.evaluation.EvaluationEntry;
 import de.unidue.ltl.evaluation.EvaluationResult;
@@ -52,7 +52,7 @@ public class PearsonCorrelation
 			
 		}
 		
-		double result = PearsonCorrelation.computeCorrelation(val1, val1);
+		double result = org.dkpro.statistics.correlation.PearsonCorrelation.computeCorrelation(val1, val1);
 		
 		EvaluationResult obj = new EvaluationResult();
 		obj.setResult(result);
@@ -65,7 +65,7 @@ public class PearsonCorrelation
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return "SpearmanCorrelation";
+		return "PearsonCorrelation";
 	}
 
 }
