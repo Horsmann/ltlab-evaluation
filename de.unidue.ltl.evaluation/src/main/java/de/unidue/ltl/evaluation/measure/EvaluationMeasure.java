@@ -27,7 +27,7 @@ import de.unidue.ltl.evaluation.EvaluationResult;
 
 public abstract class EvaluationMeasure {
 
-	private Collection<EvaluationEntry> entries;
+	protected Collection<EvaluationEntry> entries;
 
 	public abstract List<EvaluationResult> calculate();
 	public abstract String getName();
