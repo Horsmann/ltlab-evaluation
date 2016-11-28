@@ -126,22 +126,50 @@ public class PRFTest {
 	//	System.out.println(entries.size());
 		
 		Map<String, EvaluationResult> results = CategorialMeasuresUtil.computeCategorialResults(entries);
-		assertEquals(10, results.size()); 
+		assertEquals(16, results.size()); 
 		
 		assertEquals(3, CategorialMeasuresUtil.listCategories(entries).size());
 		
 		EvaluationResult result = results.get(Accuracy.ACC_MEASURE);
 		assertEquals(0.65, result.getResult(), 0.001);
 		
-	//	result = results.get(Precision.PREC_MEASURE+"_A");
+		result = results.get(Precision.PREC_MEASURE+"_A");
 		System.out.println(result.getResult());
 		assertEquals(0.75, result.getResult(), 0.001);
 		
-	//	result = results.get(Recall.REC_MEASURE+"_A");
+		result = results.get(Recall.REC_MEASURE+"_A");
 		System.out.println(result.getResult());
 		assertEquals(0.6, result.getResult(), 0.001);
 		
+		result = results.get(Fscore.F_MEASURE+"_A");
+		System.out.println(result.getResult());
+		assertEquals(0.6666, result.getResult(), 0.001);	
+		
+		result = results.get(Precision.PREC_MEASURE+"_B");
+		System.out.println(result.getResult());
+		assertEquals(0.6, result.getResult(), 0.001);
+		
+		result = results.get(Recall.REC_MEASURE+"_B");
+		System.out.println(result.getResult());
+		assertEquals(0.833, result.getResult(), 0.001);
+		
+		result = results.get(Precision.PREC_MEASURE+"_C");
+		System.out.println(result.getResult());
+		assertEquals(0.57143, result.getResult(), 0.001);
+		
+		result = results.get(Recall.REC_MEASURE+"_C");
+		System.out.println(result.getResult());
+		assertEquals(0.625, result.getResult(), 0.001);
+		
+		result = results.get(Precision.PREC_MEASURE+"_MACRO");
+		System.out.println(result.getResult());
+		assertEquals(0.6405, result.getResult(), 0.001);
+	
+		result = results.get(Recall.REC_MEASURE+"_MACRO");
+		System.out.println(result.getResult());
+		assertEquals(0.686, result.getResult(), 0.001);
 		
 	}
+	
 
 }
