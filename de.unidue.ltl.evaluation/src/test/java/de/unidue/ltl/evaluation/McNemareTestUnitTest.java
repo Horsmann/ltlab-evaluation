@@ -18,6 +18,8 @@
 
 package de.unidue.ltl.evaluation;
 
+import static org.junit.Assert.*;
+
 import org.junit.Test;
 
 import de.unidue.ltl.evaluation.evaluationComparison.McNemarTest;
@@ -43,7 +45,7 @@ public class McNemareTestUnitTest {
 		}
 
 		McNemarTest<String> mcNemare = new McNemarTest<String>(evaluation1, evaluation2);
-		System.out.println(mcNemare.computeSignificance());
+		assertEquals(5.25, mcNemare.computeSignificance(),0.001);
 	}
 
 }
