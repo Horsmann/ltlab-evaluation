@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import de.unidue.ltl.evaluation.measure.EvaluationMeasure;
@@ -39,6 +38,10 @@ public class Evaluation<T> {
 	
 	private void init() {
 		this.calculatedMeasures= new HashMap<String, EvaluationResult>();
+	}
+
+	public ConfusionMatrix<T> getConfusionMatrix() {
+		return confusionMatrix;
 	}
 
 	public Collection<EvaluationEntry<T>> getEntries() {
