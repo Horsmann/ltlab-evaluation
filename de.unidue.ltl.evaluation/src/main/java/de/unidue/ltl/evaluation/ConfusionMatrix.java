@@ -103,4 +103,49 @@ public class ConfusionMatrix<T>
         return "0";
     }
 
+    public long getTruePositives(T label)
+    {
+        return cfd.getCount(label, label);
+    }
+
+    public long getFalseNegative(T label)
+    {
+        FrequencyDistribution<T> fd = cfd.getFrequencyDistribution(label);
+        long total = 0L;
+        for (T key : fd.getKeys()) {
+            if (!key.equals(label)) {
+                total += fd.getCount(key);
+            }
+        }
+
+        return total;
+    }
+
+    public long getFalsePositives(T label)
+    {
+        long total = 0L;
+        for (T c : cfd.getConditions()) {
+            if (!c.equals(label)) {
+                total += cfd.getFrequencyDistribution(c).getCount(label);
+            }
+        }
+        return total;
+    }
+
+    public long getTrueNegatives(T label)
+    {
+        long total = 0L;
+        for (T c : cfd.getConditions()) {
+            if (!c.equals(label)) {
+                FrequencyDistribution<T> fd = cfd.getFrequencyDistribution(c);
+                for (T key : fd.getKeys()) {
+                    if (!key.equals(label)) {
+                        total += fd.getCount(key);
+                    }
+                }
+            }
+        }
+        return total;
+    }
+
 }
