@@ -18,54 +18,33 @@
 
 package de.unidue.ltl.evaluation.measure;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-
-import org.dkpro.statistics.correlation.*;
+import java.util.Map;
 
 import de.unidue.ltl.evaluation.EvaluationEntry;
 import de.unidue.ltl.evaluation.EvaluationResult;
+import de.unidue.ltl.evaluation.measure.util.ScaleMeasureUtil;
 
 
-public class PearsonCorrelation 
-	extends EvaluationMeasure
+public class PearsonCorrelation
+	extends EvaluationMeasure<Double>
 {
+	public static final String PEARSON = "PearsonCorrelation";
 
-	public PearsonCorrelation(Collection<EvaluationEntry> entries) {
+	public PearsonCorrelation(Collection<EvaluationEntry<Double>> entries) {
 		super(entries);
 	}
 
-	private List<Double> val1;
-	private List<Double> val2;
-	
+
 	@Override
-	public List<EvaluationResult> calculate() {
-		List <EvaluationResult> evals = new ArrayList<EvaluationResult>();
-		
-		val1 = new ArrayList<Double>();
-		val2 = new ArrayList<Double>(); 
-		
-		for (EvaluationEntry entry : entries) {
-			val1.add((double) entry.getGold());
-			val2.add((double) entry.getPredicted());
-			
-		}
-		
-		double result = org.dkpro.statistics.correlation.PearsonCorrelation.computeCorrelation(val1, val1);
-		
-		EvaluationResult obj = new EvaluationResult();
-		obj.setResult(result);
-		evals.add(obj);
-		
-		return evals;
+	public Map<String, EvaluationResult> calculate() {
+		return ScaleMeasureUtil.computeScaleResults(entries);
 	}
 
 	
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return "PearsonCorrelation";
+		return PEARSON;
 	}
 
 }

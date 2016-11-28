@@ -18,33 +18,40 @@
 
 package de.unidue.ltl.evaluation.measure;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import de.unidue.ltl.evaluation.EvaluationEntry;
 import de.unidue.ltl.evaluation.EvaluationResult;
-import de.unidue.ltl.evaluation.measure.util.ScaleMeasureUtil;
 
 
-public class SpearmanCorrelation
+public abstract class ScaleMeasure_ImplBase 
 	extends EvaluationMeasure<Double>
 {
-	public static final String SPEARMAN = "SpearmanCorrelation";
 
-	public SpearmanCorrelation(Collection<EvaluationEntry<Double>> entries) {
+	protected List<Double> val1;
+	protected List<Double> val2;
+	
+	public ScaleMeasure_ImplBase(Collection<EvaluationEntry<Double>> entries) {
 		super(entries);
+
+		val1 = new ArrayList<Double>();
+		val2 = new ArrayList<Double>(); 
+		
+		for (EvaluationEntry<Double> entry : entries) {
+			val1.add(entry.getGold());
+			val2.add(entry.getPredicted());
+			
+		}
 	}
 
 
 	@Override
-	public Map<String, EvaluationResult> calculate() {
-		return ScaleMeasureUtil.computeScaleResults(entries);
-	}
-
+	public abstract Map<String, EvaluationResult> calculate();
 	
 	@Override
-	public String getName() {
-		return SPEARMAN;
-	}
+	public abstract String getName();
 
 }
