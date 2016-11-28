@@ -25,10 +25,11 @@ import java.util.Set;
 
 import de.unidue.ltl.evaluation.measure.EvaluationMeasure;
 
-public class Evaluation {
+public class Evaluation<T> {
 
-	private Collection<EvaluationEntry> entries;
+	private Collection<EvaluationEntry<T>> entries;
 	private Map<String, EvaluationResult> calculatedMeasures;
+	private ConfusionMatrix<T> confusionMatrix;
 	
 	public Evaluation() {
 		this.init();
@@ -39,17 +40,17 @@ public class Evaluation {
 		this.calculatedMeasures= new HashMap<String, EvaluationResult>();
 	}
 
-	public Collection<EvaluationEntry> getEntries() {
+	public Collection<EvaluationEntry<T>> getEntries() {
 		return entries;
 	}
 
-	public Evaluation(Collection<EvaluationEntry> entries) {
+	public Evaluation(Collection<EvaluationEntry<T>> entries) {
 		this.init();
 		this.entries = entries;
 	}
 	
-	public void register(String gold, String predicted){
-		EvaluationEntry entry= new EvaluationEntry(gold, predicted);
+	public void register(T gold, T predicted){
+		EvaluationEntry<T> entry= new EvaluationEntry<T>(gold, predicted);
 		entries.add(entry);
 		this.update();
 	}
