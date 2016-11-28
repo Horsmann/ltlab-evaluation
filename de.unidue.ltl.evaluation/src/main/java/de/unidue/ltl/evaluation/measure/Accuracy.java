@@ -25,7 +25,8 @@ import de.unidue.ltl.evaluation.EvaluationEntry;
 import de.unidue.ltl.evaluation.EvaluationResult;
 
 public class Accuracy 
-extends EvaluationMeasure {
+	extends EvaluationMeasure
+{
 
 	public Accuracy(Collection<EvaluationEntry> entries) {
 		super(entries);
