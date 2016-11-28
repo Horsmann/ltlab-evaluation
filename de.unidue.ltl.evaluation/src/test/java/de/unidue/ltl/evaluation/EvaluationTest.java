@@ -17,14 +17,19 @@
  ******************************************************************************/
 package de.unidue.ltl.evaluation;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.junit.Test;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.junit.Test;
+
+import de.unidue.ltl.evaluation.measure.EvaluationMeasure;
 
 public class EvaluationTest{
 
@@ -44,4 +49,29 @@ public class EvaluationTest{
 		evaluation.register("B", "B");
 		assertEquals(2,evaluation.getEntries().size());
 	}
+	
+	@Test
+	public void addMeasureTest(){
+		Evaluation evaluation= new Evaluation();
+		evaluation.register("A", "B");
+		evaluation.register("B", "B");
+		
+		EvaluationMeasure mock = Mockito.mock(EvaluationMeasure.class);
+		List<EvaluationResult> evalResults = new ArrayList<>();
+		
+		EvaluationResult r1 = Mockito.mock(EvaluationResult.class);
+		Mockito.when(r1.getName()).thenReturn("Accuracy");
+		evalResults.add(r1);
+		
+        Mockito.when(mock.calculate()).thenReturn(evalResults);
+		
+		evaluation.calculate(mock);
+		Set<String> expectedMeasures = new HashSet<>();
+		expectedMeasures.add("Accuracy");
+		assertEquals(expectedMeasures,evaluation.getCalculatedMeasureNames());
+		evaluation.calculate(mock);
+		assertEquals(expectedMeasures,evaluation.getCalculatedMeasureNames());
+
+	}
+	
 }

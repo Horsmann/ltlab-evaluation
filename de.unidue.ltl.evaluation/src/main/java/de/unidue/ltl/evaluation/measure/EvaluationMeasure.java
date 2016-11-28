@@ -19,13 +19,21 @@
 
 package de.unidue.ltl.evaluation.measure;
 
+import java.util.Collection;
 import java.util.List;
 
+import de.unidue.ltl.evaluation.EvaluationEntry;
 import de.unidue.ltl.evaluation.EvaluationResult;
 
-public interface EvaluationMeasure {
+public abstract class EvaluationMeasure {
 
-	public List<EvaluationResult> calculate();
-	public String getName();
+	private Collection<EvaluationEntry> entries;
+
+	public abstract List<EvaluationResult> calculate();
+	public abstract String getName();
+	
+	public EvaluationMeasure(Collection<EvaluationEntry> entries){
+		this.entries = entries;
+	}
 	
 }
