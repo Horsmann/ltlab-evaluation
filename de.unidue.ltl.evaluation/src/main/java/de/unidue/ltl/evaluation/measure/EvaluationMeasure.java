@@ -20,20 +20,19 @@
 package de.unidue.ltl.evaluation.measure;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.Map;
 
 import de.unidue.ltl.evaluation.EvaluationEntry;
 import de.unidue.ltl.evaluation.EvaluationResult;
 
-public abstract class EvaluationMeasure {
+public abstract class EvaluationMeasure<T> {
 
-	private Collection<EvaluationEntry> entries;
+	protected Collection<EvaluationEntry<T>> entries;
 
-	public abstract List<EvaluationResult> calculate();
+	public abstract Map<String,EvaluationResult> calculate();
 	public abstract String getName();
 	
-	public EvaluationMeasure(Collection<EvaluationEntry> entries){
+	public EvaluationMeasure(Collection<EvaluationEntry<T>> entries) {
 		this.entries = entries;
 	}
-	
 }

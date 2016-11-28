@@ -18,52 +18,54 @@
 
 package de.unidue.ltl.evaluation.measure;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.dkpro.statistics.correlation.PearsonCorrelation;
-import org.dkpro.statistics.correlation.SpearmansRankCorrelation_old;
 
+import de.unidue.ltl.evaluation.EvaluationEntry;
 import de.unidue.ltl.evaluation.EvaluationResult;
 
 
-public class ScaleMeasure {
+public class PearsonCorrelation 
+	extends EvaluationMeasure
+{
+
+	public PearsonCorrelation(Collection<EvaluationEntry> entries) {
+		super(entries);
+	}
 
 	private List<Double> val1;
 	private List<Double> val2;
 	
-	
-	public ScaleMeasure(List<Double> val1, List<Double> val2) {
-		super();
-		this.val1 = val1;
-		this.val2 = val2;
-	}
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-	
-	public EvaluationResult getPearson(){
+	@Override
+	public List<EvaluationResult> calculate() {
+		List <EvaluationResult> evals = new ArrayList<EvaluationResult>();
 		
-		EvaluationResult eval = new EvaluationResult();
+		val1 = new ArrayList<Double>();
+		val2 = new ArrayList<Double>(); 
+		
+		for (EvaluationEntry entry : entries) {
+			val1.add((double) entry.getGold());
+			val2.add((double) entry.getPredicted());
+			
+		}
 		
 		double result = PearsonCorrelation.computeCorrelation(val1, val1);
 		
-		eval.setResult(result);
+		EvaluationResult obj = new EvaluationResult();
+		obj.setResult(result);
+		evals.add(obj);
 		
-		return eval;
+		return evals;
 	}
 
-	public EvaluationResult getSpearman(){
-		
-		EvaluationResult eval = new EvaluationResult();
-		
-		double result = SpearmansRankCorrelation_old.computeCorrelation(val1, val1);
-		
-		eval.setResult(result);
-		
-		return eval;
-
+	
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return "SpearmanCorrelation";
 	}
 
 }
