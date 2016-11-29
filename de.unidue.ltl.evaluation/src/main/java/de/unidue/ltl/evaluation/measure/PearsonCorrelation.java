@@ -29,7 +29,6 @@ import de.unidue.ltl.evaluation.measure.util.ScaleMeasureUtil;
 public class PearsonCorrelation
 	extends EvaluationMeasure<Double>
 {
-	public static final String PEARSON = "PearsonCorrelation";
 
 	public PearsonCorrelation(Collection<EvaluationEntry<Double>> entries) {
 		super(entries);
@@ -37,14 +36,14 @@ public class PearsonCorrelation
 
 
 	@Override
-	public Map<String, EvaluationResult> calculate() {
+	public Map<Class<? extends EvaluationMeasure<Double>>, EvaluationResult> calculate() {
 		return ScaleMeasureUtil.computeScaleResults(entries);
 	}
 
 	
 	@Override
 	public String getName() {
-		return PEARSON;
+		return this.getClass().getSimpleName();
 	}
 
 }

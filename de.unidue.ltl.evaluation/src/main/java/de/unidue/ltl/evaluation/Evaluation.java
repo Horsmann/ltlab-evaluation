@@ -28,7 +28,7 @@ import de.unidue.ltl.evaluation.measure.EvaluationMeasure;
 public class Evaluation<T> {
 
 	private Collection<EvaluationEntry<T>> entries;
-	private Map<String, EvaluationResult> calculatedMeasures;
+	private Map<Class<? extends EvaluationMeasure<T>>, EvaluationResult> calculatedMeasures;
 	private ConfusionMatrix<T> confusionMatrix;
 	
 	public Evaluation() {
@@ -37,7 +37,7 @@ public class Evaluation<T> {
 	}
 	
 	private void init() {
-		this.calculatedMeasures= new HashMap<String, EvaluationResult>();
+		this.calculatedMeasures= new HashMap<>();
 	}
 
 	public ConfusionMatrix<T> getConfusionMatrix() {
@@ -59,7 +59,7 @@ public class Evaluation<T> {
 		this.update();
 	}
 
-	public Set<String> getCalculatedMeasureNames(){
+	public Set<Class<? extends EvaluationMeasure<T>>> getCalculatedMeasureNames(){
 		return this.calculatedMeasures.keySet();
 	}
 
@@ -67,11 +67,11 @@ public class Evaluation<T> {
 	 * update Measures etc. because new entry added
 	 */
 	private void update() {
-		calculatedMeasures= new HashMap<String, EvaluationResult>();
+		calculatedMeasures.clear();
 	}
 	
 	public EvaluationResult calculate(EvaluationMeasure<T> measure){
-		if (!calculatedMeasures.containsKey(measure.getName())) {
+		if (!calculatedMeasures.containsKey(measure.getClass())) {
 			calculatedMeasures.putAll(measure.calculate());
 		}
 

@@ -28,25 +28,18 @@ import de.unidue.ltl.evaluation.measure.util.CategorialMeasuresUtil;
 public class Recall 
 	extends EvaluationMeasure<String>
 {
-
-	public static final String REC_MEASURE = "Recall";
 	
 	public Recall(Collection<EvaluationEntry<String>> entries) {
 		super(entries);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public Map<String, EvaluationResult> calculate() {
+	public Map<Class<? extends EvaluationMeasure<String>>, EvaluationResult> calculate() {
 		return CategorialMeasuresUtil.computeCategorialResults(entries);
 	}
 
 	@Override
 	public String getName() {
-		return REC_MEASURE;
+		return this.getClass().getSimpleName();
 	}
-
-
-
-
 }

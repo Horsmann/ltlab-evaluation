@@ -10,22 +10,18 @@ import de.unidue.ltl.evaluation.measure.util.AgreementMeasureUtil;
 
 public class KrippendorffAlpha 
 	extends EvaluationMeasure<String>
-{
-
-	public static final String KRIPPENDORFF_ALPHA = "KrippendorffAlpha";
-	
+{	
 	public KrippendorffAlpha(Collection<EvaluationEntry<String>> entries) {
 		super(entries);
 	}
 
 	@Override
-	public Map<String, EvaluationResult> calculate() {
+	public Map<Class<? extends EvaluationMeasure<String>>, EvaluationResult> calculate() {
 		return AgreementMeasureUtil.computeAgreementResults(entries);
 	}
 
 	@Override
 	public String getName() {
-		return KRIPPENDORFF_ALPHA;
+		return this.getClass().getSimpleName();
 	}
-
 }

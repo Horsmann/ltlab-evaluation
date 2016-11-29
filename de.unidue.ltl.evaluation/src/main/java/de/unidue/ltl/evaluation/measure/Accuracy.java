@@ -28,25 +28,18 @@ import de.unidue.ltl.evaluation.measure.util.CategorialMeasuresUtil;
 public class Accuracy 
 	extends EvaluationMeasure<String>
 {
-
-	public static final String ACC_MEASURE = "Accuracy";
 	
 	public Accuracy(Collection<EvaluationEntry<String>> entries) {
 		super(entries);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public Map<String, EvaluationResult> calculate() {
+	public Map<Class<? extends EvaluationMeasure<String>>, EvaluationResult> calculate() {
 		return CategorialMeasuresUtil.computeCategorialResults(entries);
 	}
 
 	@Override
 	public String getName() {
-		return ACC_MEASURE;
+		return this.getClass().getSimpleName();
 	}
-
-
-
-
 }

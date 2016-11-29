@@ -29,22 +29,18 @@ import de.unidue.ltl.evaluation.measure.util.ScaleMeasureUtil;
 public class SpearmanCorrelation
 	extends EvaluationMeasure<Double>
 {
-	public static final String SPEARMAN = "SpearmanCorrelation";
-
 	public SpearmanCorrelation(Collection<EvaluationEntry<Double>> entries) {
 		super(entries);
 	}
 
-
 	@Override
-	public Map<String, EvaluationResult> calculate() {
+	public Map<Class<? extends EvaluationMeasure<Double>>, EvaluationResult> calculate() {
 		return ScaleMeasureUtil.computeScaleResults(entries);
 	}
 
 	
 	@Override
 	public String getName() {
-		return SPEARMAN;
+		return this.getClass().getSimpleName();
 	}
-
 }

@@ -26,14 +26,15 @@ import java.util.Set;
 import de.unidue.ltl.evaluation.EvaluationEntry;
 import de.unidue.ltl.evaluation.EvaluationResult;
 import de.unidue.ltl.evaluation.measure.Accuracy;
+import de.unidue.ltl.evaluation.measure.EvaluationMeasure;
 import de.unidue.ltl.evaluation.measure.Fscore;
 import de.unidue.ltl.evaluation.measure.Precision;
 import de.unidue.ltl.evaluation.measure.Recall;
 
 public class CategorialMeasuresUtil {
 
-	public static Map<String, EvaluationResult> computeCategorialResults(Collection<EvaluationEntry<String>> entries) {
-		Map<String, EvaluationResult> results = new HashMap<String, EvaluationResult>();
+	public static Map<Class<? extends EvaluationMeasure<String>>, EvaluationResult> computeCategorialResults(Collection<EvaluationEntry<String>> entries) {
+		Map<Class<? extends EvaluationMeasure<String>>, EvaluationResult> results = new HashMap<>();
 
 		Set<String> categories = listCategories(entries);
 
@@ -110,7 +111,7 @@ public class CategorialMeasuresUtil {
 
 		double acc = (double) tp / n;
 
-		results.put(Accuracy.ACC_MEASURE, new EvaluationResult(acc));
+		results.put(Accuracy.class, new EvaluationResult(acc));
 		return results;
 	}
 

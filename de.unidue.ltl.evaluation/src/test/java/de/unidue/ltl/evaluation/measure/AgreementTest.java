@@ -41,19 +41,19 @@ public class AgreementTest {
 		entries.add(new EvaluationEntry<String>("A", "A"));
 		entries.add(new EvaluationEntry<String>("A", "A"));
 		
-		Map<String, EvaluationResult> results = AgreementMeasureUtil.computeAgreementResults(entries);
+		Map<Class<? extends EvaluationMeasure<String>>, EvaluationResult> results = AgreementMeasureUtil.computeAgreementResults(entries);
 		assertEquals(6, results.size()); 
 		
-		assertEquals(0.5, results.get(CohenKappa.COHEN_KAPPA).getResult(), 0.001);
-		assertEquals(0.533, results.get(KrippendorffAlpha.KRIPPENDORFF_ALPHA).getResult(), 0.001);
+		assertEquals(0.5, results.get(CohenKappa.class).getResult(), 0.001);
+		assertEquals(0.533, results.get(KrippendorffAlpha.class).getResult(), 0.001);
 				
 		EvaluationMeasure<String> kappa = new CohenKappa(entries);
 		assertEquals("CohenKappa", kappa.getName());
 		
-		Map<String, EvaluationResult> kappaResults = kappa.calculate();
+		Map<Class<? extends EvaluationMeasure<String>>, EvaluationResult> kappaResults = kappa.calculate();
 		assertEquals(6, kappaResults.size()); 
 		
-		assertEquals(0.5, kappaResults.get(CohenKappa.COHEN_KAPPA).getResult(), 0.001);
-		assertEquals(0.533, kappaResults.get(KrippendorffAlpha.KRIPPENDORFF_ALPHA).getResult(), 0.001);
+		assertEquals(0.5, kappaResults.get(CohenKappa.class).getResult(), 0.001);
+		assertEquals(0.533, kappaResults.get(KrippendorffAlpha.class).getResult(), 0.001);
 	}
 }

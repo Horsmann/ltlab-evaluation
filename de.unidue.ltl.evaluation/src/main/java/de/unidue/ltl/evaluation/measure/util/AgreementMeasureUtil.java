@@ -32,6 +32,7 @@ import org.dkpro.statistics.agreement.distance.OrdinalDistanceFunction;
 
 import de.unidue.ltl.evaluation.EvaluationEntry;
 import de.unidue.ltl.evaluation.EvaluationResult;
+import de.unidue.ltl.evaluation.measure.EvaluationMeasure;
 import de.unidue.ltl.evaluation.measure.agreement.BennettS;
 import de.unidue.ltl.evaluation.measure.agreement.CohenKappa;
 import de.unidue.ltl.evaluation.measure.agreement.FleissKappa;
@@ -41,8 +42,8 @@ import de.unidue.ltl.evaluation.measure.agreement.ScottPi;
 
 public class AgreementMeasureUtil {
 
-	public static Map<String, EvaluationResult> computeAgreementResults(Collection<EvaluationEntry<String>> entries) {
-		Map<String, EvaluationResult> results = new HashMap<String, EvaluationResult>();
+	public static Map<Class<? extends EvaluationMeasure<String>>, EvaluationResult> computeAgreementResults(Collection<EvaluationEntry<String>> entries) {
+		Map<Class<? extends EvaluationMeasure<String>>, EvaluationResult> results = new HashMap<>();
 		
 		CodingAnnotationStudy study = new CodingAnnotationStudy(2);
 		for (EvaluationEntry<String> entry : entries) {
@@ -57,12 +58,12 @@ public class AgreementMeasureUtil {
 		ScottPiAgreement scottPi                    = new ScottPiAgreement(study);
 
 		
-		results.put(BennettS.BENNETT_S,                   new EvaluationResult(bennetS.calculateAgreement()));
-		results.put(CohenKappa.COHEN_KAPPA,               new EvaluationResult(cohenKappa.calculateAgreement()));
-		results.put(FleissKappa.FLEISS_KAPPA,             new EvaluationResult(fleissKappa.calculateAgreement()));
-		results.put(KrippendorffAlpha.KRIPPENDORFF_ALPHA, new EvaluationResult(krippendorfAlpha.calculateAgreement()));
-		results.put(RandolphKappa.RANDOLPH_KAPPA,         new EvaluationResult(randolphKappa.calculateAgreement()));
-		results.put(ScottPi.SCOTT_PI,                     new EvaluationResult(scottPi.calculateAgreement()));
+		results.put(BennettS.class,          new EvaluationResult(bennetS.calculateAgreement()));
+		results.put(CohenKappa.class,        new EvaluationResult(cohenKappa.calculateAgreement()));
+		results.put(FleissKappa.class,       new EvaluationResult(fleissKappa.calculateAgreement()));
+		results.put(KrippendorffAlpha.class, new EvaluationResult(krippendorfAlpha.calculateAgreement()));
+		results.put(RandolphKappa.class,     new EvaluationResult(randolphKappa.calculateAgreement()));
+		results.put(ScottPi.class,           new EvaluationResult(scottPi.calculateAgreement()));
 		
 		return results;
 	}

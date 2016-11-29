@@ -10,22 +10,18 @@ import de.unidue.ltl.evaluation.measure.util.AgreementMeasureUtil;
 
 public class BennettS 
 	extends EvaluationMeasure<String>
-{
-
-	public static final String BENNETT_S = "BennettS";
-	
+{	
 	public BennettS(Collection<EvaluationEntry<String>> entries) {
 		super(entries);
 	}
 
 	@Override
-	public Map<String, EvaluationResult> calculate() {
+	public Map<Class<? extends EvaluationMeasure<String>>, EvaluationResult> calculate() {
 		return AgreementMeasureUtil.computeAgreementResults(entries);
 	}
 
 	@Override
 	public String getName() {
-		return BENNETT_S;
+		return this.getClass().getSimpleName();
 	}
-
 }

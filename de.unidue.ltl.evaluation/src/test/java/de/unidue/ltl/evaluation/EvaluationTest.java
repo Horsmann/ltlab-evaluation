@@ -30,6 +30,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import de.unidue.ltl.evaluation.measure.Accuracy;
+import de.unidue.ltl.evaluation.measure.EvaluationMeasure;
 
 public class EvaluationTest{
 
@@ -38,13 +39,13 @@ public class EvaluationTest{
 		Collection<EvaluationEntry<String>> entries= new ArrayList<>();
 		entries.add(new EvaluationEntry<String>("A", "B"));
 		entries.add(new EvaluationEntry<String>("A", "A"));
-		Evaluation<String> evaluation= new Evaluation<String>(entries);
+		Evaluation<String> evaluation= new Evaluation<>(entries);
 		assertEquals(2,evaluation.getEntries().size());
 	}
 	
 	@Test
 	public void addEntryTest(){
-		Evaluation<String> evaluation= new Evaluation<String>();
+		Evaluation<String> evaluation= new Evaluation<>();
 		evaluation.register("A", "B");
 		evaluation.register("B", "B");
 		assertEquals(2,evaluation.getEntries().size());
@@ -54,12 +55,12 @@ public class EvaluationTest{
 	@Ignore
 	@Test
 	public void addMeasureTest(){
-		Evaluation<String> evaluation= new Evaluation<String>();
+		Evaluation<String> evaluation= new Evaluation<>();
 		evaluation.register("A", "B");
 		evaluation.register("B", "B");
 		
-		Map<String, EvaluationResult> evalResults = new HashMap<>();
-		evalResults.put(Accuracy.ACC_MEASURE, new EvaluationResult(1.0));
+		Map<Class<? extends EvaluationMeasure<String>>, EvaluationResult> evalResults = new HashMap<>();
+		evalResults.put(Accuracy.class, new EvaluationResult(1.0));
 	
 		Set<String> expectedMeasures = new HashSet<>();
 		expectedMeasures.add("Accuracy");

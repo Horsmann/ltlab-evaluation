@@ -23,21 +23,22 @@ import java.util.Map;
 
 import de.unidue.ltl.evaluation.EvaluationEntry;
 import de.unidue.ltl.evaluation.EvaluationResult;
+import de.unidue.ltl.evaluation.measure.EvaluationMeasure;
 import de.unidue.ltl.evaluation.measure.PearsonCorrelation;
 import de.unidue.ltl.evaluation.measure.SpearmanCorrelation;
 
 public class ScaleMeasureUtil {
 
-	public static Map<String, EvaluationResult> computeScaleResults(Collection<EvaluationEntry<Double>> entries) {
-		Map<String, EvaluationResult> results = new HashMap<String, EvaluationResult>();
+	public static Map<Class<? extends EvaluationMeasure<Double>>, EvaluationResult> computeScaleResults(Collection<EvaluationEntry<Double>> entries) {
+		Map<Class<? extends EvaluationMeasure<Double>>, EvaluationResult> results = new HashMap<>();
 		
 		VectorPair<Double> vectors = new VectorPair<>(entries);
 			
 		double pearson = org.dkpro.statistics.correlation.PearsonCorrelation.computeCorrelation(vectors.getVal1(), vectors.getVal2());
 		double spearman = org.dkpro.statistics.correlation.SpearmansRankCorrelation.computeCorrelation(vectors.getVal1(), vectors.getVal2());
 		
-		results.put(PearsonCorrelation.PEARSON, new EvaluationResult(pearson));
-		results.put(SpearmanCorrelation.SPEARMAN, new EvaluationResult(spearman));
+		results.put(PearsonCorrelation.class, new EvaluationResult(pearson));
+		results.put(SpearmanCorrelation.class, new EvaluationResult(spearman));
 		
 		return results;
 	}
