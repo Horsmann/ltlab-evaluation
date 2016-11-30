@@ -30,43 +30,14 @@ import de.unidue.ltl.evaluation.measure.util.CategorialMeasuresUtil;
 
 public class CalculateMeasuresFromGold2PredictedFile {
 
-	//labelsMapping = {'none': 0, 'favor': 1, 'against': 2}
 	public static void main(String[] args) throws IOException {
-//		File folder= new File("/Users/michael/git/ucsm_git/stance_lstm/result/");
-		File folder= new File("/Users/michael/git/ucsm_git/stance_lstm/result/cv/");
-		Map<String,Double> resultsFSemeval= new HashMap<>();
-		Map<String,Double> resultsF_micro= new HashMap<>();
-		for(File file:folder.listFiles()){
-			if(file.isDirectory())continue;
-			Evaluation<String> evaluation= TextReader.fromTabSeparated(file);
-			Map<String, EvaluationResult> results = CategorialMeasuresUtil.computeCategorialResults(evaluation.getEntries());
-			double f_favor=0;
-			double f_against=0;
-			double f_micro=0;
-			for(String measure:results.keySet()){
-//				System.out.println(measure+" "+results.get(measure).getResult());
-				if(measure.equals("Fscore_1")){
-					f_favor=results.get(measure).getResult();
-				}
-				if(measure.equals("Fscore_2")){
-					f_against=results.get(measure).getResult();
-				}
-				if(measure.equals("Fscore_MICRO")){
-					f_micro=results.get(measure).getResult();
-				}
-				resultsF_micro.put(file.getName(), f_micro);
-				resultsFSemeval.put(file.getName(),(f_against+f_favor)/2);
-			}
+		Evaluation<String> evaluation = TextReader
+				.fromTabSeparated(new File("src/test/resources/io/tab-separated_gold2predicted.txt"));
+		Map<String, EvaluationResult> results = CategorialMeasuresUtil
+				.computeCategorialResults(evaluation.getEntries());
+		for (String measure : results.keySet()) {
+			System.out.println(measure + " " + results.get(measure).getResult());
 		}
-		System.out.println("##### SEMEVAL #####");
-		for(String file:resultsFSemeval.keySet()){
-			System.out.println(file+" : "+resultsFSemeval.get(file));
-		}
-		System.out.println("##### F1 #####");
-		for(String file:resultsF_micro.keySet()){
-			System.out.println(file+" : "+resultsF_micro.get(file));
-		}
-
 	}
 
 }
