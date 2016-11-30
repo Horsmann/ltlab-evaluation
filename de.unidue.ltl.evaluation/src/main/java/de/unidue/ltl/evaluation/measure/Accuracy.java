@@ -34,7 +34,7 @@ public class Accuracy
 	}
 
 	@Override
-	public Map<Class<? extends EvaluationMeasure<String>>, EvaluationResult> calculate() {
+	public Map<String, EvaluationResult> calculate() {
 		return CategorialMeasuresUtil.computeCategorialResults(entries);
 	}
 

@@ -28,7 +28,7 @@ import de.unidue.ltl.evaluation.measure.EvaluationMeasure;
 public class Evaluation<T> {
 
 	private Collection<EvaluationEntry<T>> entries;
-	private Map<Class<? extends EvaluationMeasure<T>>, EvaluationResult> calculatedMeasures;
+	private Map<String, EvaluationResult> calculatedMeasures;
 	private ConfusionMatrix<T> confusionMatrix;
 	
 	public Evaluation() {
@@ -59,7 +59,7 @@ public class Evaluation<T> {
 		this.update();
 	}
 
-	public Set<Class<? extends EvaluationMeasure<T>>> getCalculatedMeasureNames(){
+	public Set<String> getCalculatedMeasureNames(){
 		return this.calculatedMeasures.keySet();
 	}
 

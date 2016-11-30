@@ -26,15 +26,14 @@ import java.util.Set;
 import de.unidue.ltl.evaluation.EvaluationEntry;
 import de.unidue.ltl.evaluation.EvaluationResult;
 import de.unidue.ltl.evaluation.measure.Accuracy;
-import de.unidue.ltl.evaluation.measure.EvaluationMeasure;
 import de.unidue.ltl.evaluation.measure.Fscore;
 import de.unidue.ltl.evaluation.measure.Precision;
 import de.unidue.ltl.evaluation.measure.Recall;
 
 public class CategorialMeasuresUtil {
 
-	public static Map<Class<? extends EvaluationMeasure<String>>, EvaluationResult> computeCategorialResults(Collection<EvaluationEntry<String>> entries) {
-		Map<Class<? extends EvaluationMeasure<String>>, EvaluationResult> results = new HashMap<>();
+	public static Map<String, EvaluationResult> computeCategorialResults(Collection<EvaluationEntry<String>> entries) {
+		Map<String, EvaluationResult> results = new HashMap<>();
 
 		Set<String> categories = listCategories(entries);
 
@@ -80,22 +79,24 @@ public class CategorialMeasuresUtil {
 			fp_sum += fp;
 			tn_sum += tn;
 			fn_sum += fn;
-			results.put(Precision.PREC_MEASURE+"_"+category, new EvaluationResult(precision));
-			results.put(Recall.REC_MEASURE+"_"+category, new EvaluationResult(recall));
-			results.put(Fscore.F_MEASURE+"_"+category, new EvaluationResult(fscore));
+			results.put(Precision.class.getSimpleName() + "_"+category, new EvaluationResult(precision));
+			results.put(Recall.class.getSimpleName() + "_"+category, new EvaluationResult(recall));
+			results.put(Fscore.class.getSimpleName() + "_"+category, new EvaluationResult(fscore));
 		}
+		
 		double precision_macro = precision_sum/categories.size();
 		double recall_macro = recall_sum/categories.size();
 		double fscore_macro = 2.0*precision_macro*recall_macro/(precision_macro+recall_macro);
-		results.put(Precision.PREC_MEASURE+"_MACRO", new EvaluationResult(precision_macro));
-		results.put(Recall.REC_MEASURE+"_MACRO", new EvaluationResult(recall_macro));
-		results.put(Fscore.F_MEASURE+"_MACRO", new EvaluationResult(fscore_macro));
+		results.put(Precision.class.getSimpleName()+"_MACRO", new EvaluationResult(precision_macro));
+		results.put(Recall.class.getSimpleName()+"_MACRO", new EvaluationResult(recall_macro));
+		results.put(Fscore.class.getSimpleName()+"_MACRO", new EvaluationResult(fscore_macro));
+		
 		double precision_micro = (double) tp_sum/(tp_sum+fp_sum);
 		double recall_micro = (double) tp_sum/(tp_sum+fn_sum);
 		double fscore_micro = 2.0*precision_micro*recall_micro/(precision_micro+recall_micro);
-		results.put(Precision.PREC_MEASURE+"_MICRO", new EvaluationResult(precision_micro));
-		results.put(Recall.REC_MEASURE+"_MICRO", new EvaluationResult(recall_micro));
-		results.put(Fscore.F_MEASURE+"_MICRO", new EvaluationResult(fscore_micro));
+		results.put(Precision.class.getSimpleName()+"_MICRO", new EvaluationResult(precision_micro));
+		results.put(Recall.class.getSimpleName()+"_MICRO", new EvaluationResult(recall_micro));
+		results.put(Fscore.class.getSimpleName()+"_MICRO", new EvaluationResult(fscore_micro));
 		
 
 		int tp = 0;
@@ -111,7 +112,7 @@ public class CategorialMeasuresUtil {
 
 		double acc = (double) tp / n;
 
-		results.put(Accuracy.class, new EvaluationResult(acc));
+		results.put(Accuracy.class.getSimpleName(), new EvaluationResult(acc));
 		return results;
 	}
 

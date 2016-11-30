@@ -39,20 +39,20 @@ public class CorrelationTest {
 		entries.add(new EvaluationEntry<Double>(3.0, 4.0));
 		entries.add(new EvaluationEntry<Double>(4.0, 5.0));
 		
-		Map<Class<? extends EvaluationMeasure<Double>>, EvaluationResult> results = ScaleMeasureUtil.computeScaleResults(entries);
+		Map<String, EvaluationResult> results = ScaleMeasureUtil.computeScaleResults(entries);
 		assertEquals(2, results.size()); 
 		
-		assertEquals(1.0, results.get(PearsonCorrelation.class).getResult(), 0.001);
-		assertEquals(1.0, results.get(SpearmanCorrelation.class).getResult(), 0.001);
+		assertEquals(1.0, results.get(PearsonCorrelation.class.getSimpleName()).getResult(), 0.001);
+		assertEquals(1.0, results.get(SpearmanCorrelation.class.getSimpleName()).getResult(), 0.001);
 				
 		EvaluationMeasure<Double> pearson = new PearsonCorrelation(entries);
-		assertEquals("PearsonCorrelation", pearson.getName());
+		assertEquals(PearsonCorrelation.class.getSimpleName(), pearson.getName());
 		
-		Map<Class<? extends EvaluationMeasure<Double>>, EvaluationResult> resultsPearson = pearson.calculate();
+		Map<String, EvaluationResult> resultsPearson = pearson.calculate();
 
 		assertEquals(2, resultsPearson.size()); 
 		
-		assertEquals(1.0, resultsPearson.get(PearsonCorrelation.class).getResult(), 0.001);
-		assertEquals(1.0, resultsPearson.get(SpearmanCorrelation.class).getResult(), 0.001);
+		assertEquals(1.0, resultsPearson.get(PearsonCorrelation.class.getSimpleName()).getResult(), 0.001);
+		assertEquals(1.0, resultsPearson.get(SpearmanCorrelation.class.getSimpleName()).getResult(), 0.001);
 	}
 }

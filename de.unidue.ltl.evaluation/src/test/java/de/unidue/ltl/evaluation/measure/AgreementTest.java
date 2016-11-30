@@ -34,26 +34,26 @@ import de.unidue.ltl.evaluation.measure.util.AgreementMeasureUtil;
 public class AgreementTest {
 	
 	@Test
-	public void correlationTest(){
+	public void agreementTest(){
 		Collection<EvaluationEntry<String>> entries = new ArrayList<EvaluationEntry<String>>();
 		entries.add(new EvaluationEntry<String>("A", "B"));
 		entries.add(new EvaluationEntry<String>("B", "B"));
 		entries.add(new EvaluationEntry<String>("A", "A"));
 		entries.add(new EvaluationEntry<String>("A", "A"));
 		
-		Map<Class<? extends EvaluationMeasure<String>>, EvaluationResult> results = AgreementMeasureUtil.computeAgreementResults(entries);
+		Map<String, EvaluationResult> results = AgreementMeasureUtil.computeAgreementResults(entries);
 		assertEquals(6, results.size()); 
 		
-		assertEquals(0.5, results.get(CohenKappa.class).getResult(), 0.001);
-		assertEquals(0.533, results.get(KrippendorffAlpha.class).getResult(), 0.001);
+		assertEquals(0.5, results.get(CohenKappa.class.getSimpleName()).getResult(), 0.001);
+		assertEquals(0.533, results.get(KrippendorffAlpha.class.getSimpleName()).getResult(), 0.001);
 				
 		EvaluationMeasure<String> kappa = new CohenKappa(entries);
 		assertEquals("CohenKappa", kappa.getName());
 		
-		Map<Class<? extends EvaluationMeasure<String>>, EvaluationResult> kappaResults = kappa.calculate();
+		Map<String, EvaluationResult> kappaResults = kappa.calculate();
 		assertEquals(6, kappaResults.size()); 
 		
-		assertEquals(0.5, kappaResults.get(CohenKappa.class).getResult(), 0.001);
-		assertEquals(0.533, kappaResults.get(KrippendorffAlpha.class).getResult(), 0.001);
+		assertEquals(0.5, kappaResults.get(CohenKappa.class.getSimpleName()).getResult(), 0.001);
+		assertEquals(0.533, kappaResults.get(KrippendorffAlpha.class.getSimpleName()).getResult(), 0.001);
 	}
 }

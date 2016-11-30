@@ -16,12 +16,7 @@ public class KrippendorffAlpha
 	}
 
 	@Override
-	public Map<Class<? extends EvaluationMeasure<String>>, EvaluationResult> calculate() {
+	public Map<String, EvaluationResult> calculate() {
 		return AgreementMeasureUtil.computeAgreementResults(entries);
-	}
-
-	@Override
-	public String getName() {
-		return this.getClass().getSimpleName();
 	}
 }

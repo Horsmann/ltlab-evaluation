@@ -29,10 +29,13 @@ public abstract class EvaluationMeasure<T> {
 
 	protected Collection<EvaluationEntry<T>> entries;
 
-	public abstract Map<Class<? extends EvaluationMeasure<T>>,EvaluationResult> calculate();
-	public abstract String getName();
+	public abstract Map<String,EvaluationResult> calculate();
 	
 	public EvaluationMeasure(Collection<EvaluationEntry<T>> entries) {
 		this.entries = entries;
+	}
+
+	public String getName() {
+		return this.getClass().getSimpleName();
 	}
 }

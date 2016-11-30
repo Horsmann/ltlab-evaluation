@@ -34,13 +34,7 @@ public class SpearmanCorrelation
 	}
 
 	@Override
-	public Map<Class<? extends EvaluationMeasure<Double>>, EvaluationResult> calculate() {
+	public Map<String, EvaluationResult> calculate() {
 		return ScaleMeasureUtil.computeScaleResults(entries);
-	}
-
-	
-	@Override
-	public String getName() {
-		return this.getClass().getSimpleName();
 	}
 }

@@ -147,42 +147,42 @@ public class PRFTest {
 		
 		assertEquals(3, CategorialMeasuresUtil.listCategories(entries).size());
 		
-		EvaluationResult result = results.get(Accuracy.ACC_MEASURE);
+		EvaluationResult result = results.get(Accuracy.class.getSimpleName());
 		assertEquals(0.65, result.getResult(), 0.001);
 		
-		result = results.get(Precision.PREC_MEASURE+"_A");
+		result = results.get(Precision.class.getSimpleName()+"_A");
 		System.out.println(result.getResult());
 		assertEquals(0.75, result.getResult(), 0.001);
 		
-		result = results.get(Recall.REC_MEASURE+"_A");
+		result = results.get(Recall.class.getSimpleName()+"_A");
 		System.out.println(result.getResult());
 		assertEquals(0.6, result.getResult(), 0.001);
 		
-		result = results.get(Fscore.F_MEASURE+"_A");
+		result = results.get(Fscore.class.getSimpleName()+"_A");
 		System.out.println(result.getResult());
 		assertEquals(0.6666, result.getResult(), 0.001);	
 		
-		result = results.get(Precision.PREC_MEASURE+"_B");
+		result = results.get(Precision.class.getSimpleName()+"_B");
 		System.out.println(result.getResult());
 		assertEquals(0.6, result.getResult(), 0.001);
 		
-		result = results.get(Recall.REC_MEASURE+"_B");
+		result = results.get(Recall.class.getSimpleName()+"_B");
 		System.out.println(result.getResult());
 		assertEquals(0.833, result.getResult(), 0.001);
 		
-		result = results.get(Precision.PREC_MEASURE+"_C");
+		result = results.get(Precision.class.getSimpleName()+"_C");
 		System.out.println(result.getResult());
 		assertEquals(0.57143, result.getResult(), 0.001);
 		
-		result = results.get(Recall.REC_MEASURE+"_C");
+		result = results.get(Recall.class.getSimpleName()+"_C");
 		System.out.println(result.getResult());
 		assertEquals(0.625, result.getResult(), 0.001);
 		
-		result = results.get(Precision.PREC_MEASURE+"_MACRO");
+		result = results.get(Precision.class.getSimpleName()+"_MACRO");
 		System.out.println(result.getResult());
 		assertEquals(0.6405, result.getResult(), 0.001);
 	
-		result = results.get(Recall.REC_MEASURE+"_MACRO");
+		result = results.get(Recall.class.getSimpleName()+"_MACRO");
 		System.out.println(result.getResult());
 		assertEquals(0.686, result.getResult(), 0.001);
 		

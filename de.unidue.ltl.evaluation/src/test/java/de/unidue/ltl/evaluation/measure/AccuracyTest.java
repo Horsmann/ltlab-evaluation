@@ -43,7 +43,7 @@ public class AccuracyTest {
 		Map<String, EvaluationResult> results = CategorialMeasuresUtil.computeCategorialResults(entries);
 		assertEquals(13, results.size()); 
 		
-		EvaluationResult result = results.get(Accuracy.ACC_MEASURE);
+		EvaluationResult result = results.get(Accuracy.class.getSimpleName());
 		assertEquals(0.75, result.getResult(), 0.001);
 		
 				
