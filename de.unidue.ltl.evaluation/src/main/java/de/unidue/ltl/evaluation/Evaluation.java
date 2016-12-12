@@ -30,14 +30,15 @@ public class Evaluation<T> {
 	private Collection<EvaluationEntry<T>> entries;
 	private Map<String, EvaluationResult> calculatedMeasures;
 	private ConfusionMatrix<T> confusionMatrix;
-	
+
 	public Evaluation() {
 		this.init();
 		this.entries = new ArrayList<>();
 	}
-	
+
 	private void init() {
 		this.calculatedMeasures= new HashMap<>();
+		this.confusionMatrix = new ConfusionMatrix<T>();
 	}
 
 	public ConfusionMatrix<T> getConfusionMatrix() {
@@ -51,11 +52,17 @@ public class Evaluation<T> {
 	public Evaluation(Collection<EvaluationEntry<T>> entries) {
 		this.init();
 		this.entries = entries;
+		ConfusionMatrix<T> matrix = new ConfusionMatrix<T>();
+		for (EvaluationEntry<T> entry : entries){
+			matrix.register(entry.getGold(), entry.getPredicted());
+		}
+		this.confusionMatrix = matrix;
 	}
-	
+
 	public void register(T gold, T predicted){
 		EvaluationEntry<T> entry= new EvaluationEntry<T>(gold, predicted);
 		entries.add(entry);
+		confusionMatrix.register(gold, predicted);
 		this.update();
 	}
 
@@ -69,12 +76,11 @@ public class Evaluation<T> {
 	private void update() {
 		calculatedMeasures.clear();
 	}
-	
+
 	public EvaluationResult calculate(EvaluationMeasure<T> measure){
 		if (!calculatedMeasures.containsKey(measure.getClass())) {
 			calculatedMeasures.putAll(measure.calculate());
 		}
-
 		return calculatedMeasures.get(measure.getName());
 	}
 }
