@@ -37,5 +37,9 @@ public class EvaluationEntry<T> {
 	public void setPredicted(T predicted) {
 		this.predicted = predicted;
 	}
-
+	
+	@Override
+	public String toString() {
+		return gold.toString() + "\t" + predicted.toString();
+	}
 }

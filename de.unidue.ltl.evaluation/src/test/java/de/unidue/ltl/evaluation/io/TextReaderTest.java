@@ -20,36 +20,56 @@ package de.unidue.ltl.evaluation.io;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 
 import de.unidue.ltl.evaluation.Evaluation;
 import de.unidue.ltl.evaluation.EvaluationEntry;
 
 public class TextReaderTest {
 
+	@Rule
+	public TemporaryFolder folder = new TemporaryFolder();
+	
 	@Test
-	public void fromTabSeparatedTest() throws IOException{
-		File testFile=new File("src/test/resources/io/tab-separated_gold2predicted.txt");
+	public void fromTabSeparatedTest() 
+			throws Exception
+	{
+		File tempFile = new File(folder.newFolder(), "tab-separated_gold2predicted.txt");
+		
 		List<EvaluationEntry<String>> entries= new ArrayList<>();
 		entries.add(new EvaluationEntry<String>("A", "B"));
 		entries.add(new EvaluationEntry<String>("A", "A"));
-		for(EvaluationEntry entry: entries){
-			FileUtils.write(testFile, entry.getGold()+"\t"+entry.getPredicted()+"\n", true);
-		}
+		entries.add(new EvaluationEntry<String>("A", "B"));
+		entries.add(new EvaluationEntry<String>("A", "A"));
 		
-		Evaluation<String> evaluation= TextReader.read(testFile);
+		StringBuilder sb = new StringBuilder();
+		for (EvaluationEntry<String> entry: entries){
+			sb.append(entry);
+			sb.append("\n");
+		}
+		FileUtils.writeStringToFile(tempFile, sb.toString());
+		
+		assertEquals(
+				FileUtils.readFileToString(tempFile),
+				FileUtils.readFileToString(new File("src/test/resources/io/tab-separated_gold2predicted.txt"))
+		);
+		
+		Evaluation<String> evaluation = TextReader.fromTabSeparated(tempFile);
+		Collection<EvaluationEntry<String>> entriesFromFile = evaluation.getEntries();
+		assertEquals(4, entriesFromFile.size());
+		
 		int i=0;
-		for(EvaluationEntry entry: evaluation.getEntries()){
-			assertEquals(entry.getGold(),entries.get(i).getGold());
-			assertEquals(entry.getPredicted(),entries.get(i).getPredicted());
+		for (EvaluationEntry<String> entry: entriesFromFile) {
+			assertEquals(entry.getGold(), entries.get(i).getGold());
+			assertEquals(entry.getPredicted(), entries.get(i).getPredicted());
 			i++;
 		}
-		
 	}
 }
