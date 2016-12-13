@@ -32,7 +32,7 @@ public class CalculateMeasuresFromGold2PredictedFile {
 
 	public static void main(String[] args) throws IOException {
 		Evaluation<String> evaluation = TextReader
-				.fromTabSeparated(new File("src/test/resources/io/tab-separated_gold2predicted.txt"));
+				.read(new File("src/test/resources/io/tab-separated_gold2predicted.txt"));
 		Map<String, EvaluationResult> results = CategorialMeasuresUtil
 				.computeCategorialResults(evaluation.getEntries());
 		for (String measure : results.keySet()) {

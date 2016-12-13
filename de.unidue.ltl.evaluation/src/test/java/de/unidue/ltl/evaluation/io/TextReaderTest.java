@@ -43,7 +43,7 @@ public class TextReaderTest {
 			FileUtils.write(testFile, entry.getGold()+"\t"+entry.getPredicted()+"\n", true);
 		}
 		
-		Evaluation<String> evaluation= TextReader.fromTabSeparated(testFile);
+		Evaluation<String> evaluation= TextReader.read(testFile);
 		int i=0;
 		for(EvaluationEntry entry: evaluation.getEntries()){
 			assertEquals(entry.getGold(),entries.get(i).getGold());

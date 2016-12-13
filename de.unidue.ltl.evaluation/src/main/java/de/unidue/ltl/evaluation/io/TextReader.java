@@ -24,9 +24,9 @@ import org.apache.commons.io.FileUtils;
 
 import de.unidue.ltl.evaluation.Evaluation;
 
-public class TextReader {
+public class TextReader{
 
-	public static Evaluation<String> fromTabSeparated(File txtFile) throws IOException{
+	public static Evaluation<String> read(File txtFile) throws IOException{
 		Evaluation<String> evaluation= new Evaluation<>();
 		for(String line:FileUtils.readLines(txtFile)){
 			String[] toRegister= line.split("\t");
