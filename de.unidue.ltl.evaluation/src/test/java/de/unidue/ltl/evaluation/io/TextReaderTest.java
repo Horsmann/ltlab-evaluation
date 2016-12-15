@@ -61,7 +61,7 @@ public class TextReaderTest {
 				FileUtils.readFileToString(new File("src/test/resources/io/tab-separated_gold2predicted.txt"))
 		);
 		
-		Evaluation<String> evaluation = TextReader.fromTabSeparated(tempFile);
+		Evaluation<String> evaluation = TextReader.read(tempFile);
 		Collection<EvaluationEntry<String>> entriesFromFile = evaluation.getEntries();
 		assertEquals(4, entriesFromFile.size());
 		
