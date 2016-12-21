@@ -17,14 +17,14 @@
  ******************************************************************************/
 package de.unidue.ltl.evaluation.io;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
+
+import org.apache.commons.io.FileUtils;
 
 import de.unidue.ltl.evaluation.Evaluation;
 import de.unidue.ltl.evaluation.EvaluationEntry;
@@ -46,9 +46,7 @@ public class TcId2OutcomeReader {
 		List<String> labels=null;
 		TreeMap<String, EvaluationEntry<String>> id2EvalEntry = new TreeMap<>();
 		
-		BufferedReader br = new BufferedReader(new FileReader(id2OutcomeFile));
-		String line = null;
-		while ((line = br.readLine()) != null) {
+		for (String line : FileUtils.readLines(id2OutcomeFile)) {
 			if (line.startsWith("#labels")) {
 				labels = getLabels(line);
 			}
@@ -74,10 +72,9 @@ public class TcId2OutcomeReader {
 			throws Exception
 	{
 		List<String> labels=null;
-		BufferedReader br = new BufferedReader(new FileReader(id2OutcomeFile));
-		String line = null;
-		while ((line = br.readLine()) != null) {
-			if(line.startsWith("#labels")){
+
+		for (String line : FileUtils.readLines(id2OutcomeFile)) {
+			if (line.startsWith("#labels")) {
 				labels=getLabels(line);
 			}
 			if (!line.startsWith("#")) {

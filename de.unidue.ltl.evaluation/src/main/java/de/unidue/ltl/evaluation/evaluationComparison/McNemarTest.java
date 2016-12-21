@@ -45,10 +45,10 @@ public class McNemarTest<T> {
 				sample2negative++;
 			}
 		}
-		double mcNemare = Math.pow((Math.abs(sample2negative - sample1negative) - 0.5), 2)
+		double mcNemar = Math.pow(Math.abs(sample2negative - sample1negative) - 0.5, 2)
 				/ (sample1negative + sample2negative);
 
-		return mcNemare;
+		return mcNemar;
 
 	}
 

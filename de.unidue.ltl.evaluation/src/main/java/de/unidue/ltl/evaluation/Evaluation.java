@@ -78,7 +78,7 @@ public class Evaluation<T> {
 	}
 
 	public EvaluationResult calculate(EvaluationMeasure<T> measure){
-		if (!calculatedMeasures.containsKey(measure.getClass())) {
+		if (!calculatedMeasures.containsKey(measure.getClass().getName())) {
 			calculatedMeasures.putAll(measure.calculate());
 		}
 		return calculatedMeasures.get(measure.getName());
