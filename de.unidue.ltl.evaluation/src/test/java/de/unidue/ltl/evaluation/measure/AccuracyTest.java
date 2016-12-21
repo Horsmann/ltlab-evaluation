@@ -29,6 +29,7 @@ import de.unidue.ltl.evaluation.EvaluationEntry;
 import de.unidue.ltl.evaluation.EvaluationResult;
 import de.unidue.ltl.evaluation.measure.Accuracy;
 import de.unidue.ltl.evaluation.measure.util.CategorialMeasuresUtil;
+import de.unidue.ltl.evaluation.util.TestUtils;
 
 public class AccuracyTest {
 	
@@ -41,12 +42,18 @@ public class AccuracyTest {
 		entries.add(new EvaluationEntry<String>("A", "A"));
 		
 		Map<String, EvaluationResult> results = CategorialMeasuresUtil.computeCategorialResults(entries);
-		assertEquals(13, results.size()); 
+		assertEquals(16, results.size()); 
 		
 		EvaluationResult result = results.get(Accuracy.class.getSimpleName());
 		assertEquals(0.75, result.getResult(), 0.001);
 		
-				
+		
+		entries = TestUtils.getExample();
+		results = CategorialMeasuresUtil.computeCategorialResults(entries);
+		assertEquals(19, results.size()); 
+		
+		result = results.get(Accuracy.class.getSimpleName());
+		assertEquals(0.65, result.getResult(), 0.001);
 	}
 
 }
