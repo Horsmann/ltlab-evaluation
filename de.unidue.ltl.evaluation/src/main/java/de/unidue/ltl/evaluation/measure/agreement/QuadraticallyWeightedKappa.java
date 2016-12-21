@@ -16,28 +16,31 @@
  * limitations under the License.
  ******************************************************************************/
 
-package de.unidue.ltl.evaluation.measure;
+package de.unidue.ltl.evaluation.measure.agreement;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.dkpro.statistics.agreement.coding.CodingAnnotationStudy;
+import org.dkpro.statistics.agreement.coding.CohenKappaAgreement;
 import org.dkpro.statistics.agreement.coding.WeightedKappaAgreement;
 import org.dkpro.statistics.agreement.distance.IntervalDistanceFunction;
 
 import de.unidue.ltl.evaluation.EvaluationEntry;
 import de.unidue.ltl.evaluation.EvaluationResult;
+import de.unidue.ltl.evaluation.measure.EvaluationMeasure;
+import de.unidue.ltl.evaluation.measure.util.VectorPair;
 
 public class QuadraticallyWeightedKappa 
-	extends EvaluationMeasure<Double>
-{
+extends EvaluationMeasure<Double> {
 
 	public static final String KAPPA_MEASURE_QUADRATIC = "QuadraticallyWeightedKappa";
 
 	public QuadraticallyWeightedKappa(Collection<EvaluationEntry<Double>> entries) {
 		super(entries);
 	}
+
 
 	@Override
 	public Map<String, EvaluationResult> calculate() {
@@ -59,4 +62,6 @@ public class QuadraticallyWeightedKappa
 	public String getName() {
 		return KAPPA_MEASURE_QUADRATIC;
 	}
+
+
 }
