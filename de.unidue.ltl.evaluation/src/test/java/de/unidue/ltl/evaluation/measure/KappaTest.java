@@ -20,6 +20,7 @@ package de.unidue.ltl.evaluation.measure;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
@@ -29,10 +30,12 @@ import de.unidue.ltl.evaluation.EvaluationEntry;
 import de.unidue.ltl.evaluation.EvaluationResult;
 import de.unidue.ltl.evaluation.measure.agreement.LinearlyWeightedKappa;
 import de.unidue.ltl.evaluation.measure.agreement.QuadraticallyWeightedKappa;
+import de.unidue.ltl.evaluation.measure.util.CategorialMeasuresUtil;
 import de.unidue.ltl.evaluation.util.TestUtils;
 
-public class TestKappa {
+public class KappaTest {
 
+	// gold: 50 A, 18 B, 32 C
 	@Test
 	public void kappaTest(){
 		Collection<EvaluationEntry<Double>> entries = TestUtils.getExampleNumeric();
