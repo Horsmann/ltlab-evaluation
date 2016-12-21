@@ -17,59 +17,22 @@
  ******************************************************************************/
 package de.unidue.ltl.evaluation.io;
 
-import static org.junit.Assert.assertEquals;
-
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
 
 import de.unidue.ltl.evaluation.Evaluation;
-import de.unidue.ltl.evaluation.EvaluationEntry;
 
-public class TextReaderTest {
+public class TextReader{
 
-	@Rule
-	public TemporaryFolder folder = new TemporaryFolder();
-	
-	@Test
-	public void fromTabSeparatedTest() 
-			throws Exception
-	{
-		File tempFile = new File(folder.newFolder(), "tab-separated_gold2predicted.txt");
-		
-		List<EvaluationEntry<String>> entries= new ArrayList<>();
-		entries.add(new EvaluationEntry<String>("A", "B"));
-		entries.add(new EvaluationEntry<String>("A", "A"));
-		entries.add(new EvaluationEntry<String>("A", "B"));
-		entries.add(new EvaluationEntry<String>("A", "A"));
-		
-		StringBuilder sb = new StringBuilder();
-		for (EvaluationEntry<String> entry: entries){
-			sb.append(entry);
-			sb.append("\n");
+	public static Evaluation<String> read(File txtFile) throws IOException{
+		Evaluation<String> evaluation= new Evaluation<>();
+		for(String line:FileUtils.readLines(txtFile)){
+			String[] toRegister= line.split("\t");
+			evaluation.register(toRegister[0], toRegister[1]);
 		}
-		FileUtils.writeStringToFile(tempFile, sb.toString());
-		
-		assertEquals(
-				FileUtils.readFileToString(tempFile),
-				FileUtils.readFileToString(new File("src/test/resources/io/tab-separated_gold2predicted.txt"))
-		);
-		
-		Evaluation<String> evaluation = TextReader.read(tempFile);
-		Collection<EvaluationEntry<String>> entriesFromFile = evaluation.getEntries();
-		assertEquals(4, entriesFromFile.size());
-		
-		int i=0;
-		for (EvaluationEntry<String> entry: entriesFromFile) {
-			assertEquals(entry.getGold(), entries.get(i).getGold());
-			assertEquals(entry.getPredicted(), entries.get(i).getPredicted());
-			i++;
-		}
+		return evaluation;
 	}
+	
 }

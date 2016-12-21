@@ -25,11 +25,13 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.unidue.ltl.evaluation.Evaluation;
+import de.unidue.ltl.evaluation.EvaluationEntry;
 
 public class TcId2OutcomeReader {
 	public static Evaluation<String> read(File id2OutcomeFile) throws ResourceInitializationException{
@@ -38,6 +40,34 @@ public class TcId2OutcomeReader {
 		return evaluation;
 	}
 	
+	public static Evaluation<String> readSorted(File id2OutcomeFile) throws ResourceInitializationException{
+		List<String> labels=null;
+		TreeMap<String, EvaluationEntry<String>> id2EvalEntry= new TreeMap<>();
+		try (BufferedReader br = new BufferedReader(new FileReader(id2OutcomeFile))) {
+			String line = null;
+			while ((line = br.readLine()) != null) {
+				if(line.startsWith("#labels")){
+					labels=getLabels(line);
+				}
+				if (!line.startsWith("#")) {
+					String prediction = line.split(";")[0];
+					String id= prediction.split("=")[0];
+					String gold = line.split(";")[1];
+					int indexOfOnePredicted=getIndexOfOne(prediction.split("=")[1]);
+					int indexOfOneGold=getIndexOfOne(gold);
+					String labelPredicted =labels.get(indexOfOnePredicted);
+					String labelGold=labels.get(indexOfOneGold);
+					EvaluationEntry<String> entry= new EvaluationEntry<String>(labelGold, labelPredicted);
+					id2EvalEntry.put(id, entry);
+				}
+			}
+		} catch (Exception e) {
+			throw new ResourceInitializationException(e);
+		}
+		Evaluation<String> evaluation= new Evaluation<>(id2EvalEntry.values());
+		return evaluation;
+	}
+
 	private static Evaluation<String> registerId2OutcomePairs(Evaluation<String> evaluation, File id2OutcomeFile) throws ResourceInitializationException {
 		List<String> labels=null;
 		try (BufferedReader br = new BufferedReader(new FileReader(id2OutcomeFile))) {
