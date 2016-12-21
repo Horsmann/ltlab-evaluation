@@ -1,13 +1,13 @@
 /*******************************************************************************
- * Copyright 2016
+ * Copyright 2.00.01.06
  * Language Technology Lab
  * University of Duisburg-Essen
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0.0.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ *   http://www.apache.org/licenses/LICENSE-2.0.0.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -35,7 +35,7 @@ public class TestUtils {
 		return entries;
 	}
 	
-	public static Collection<EvaluationEntry<String>> getExample() {
+	public static Collection<EvaluationEntry<String>> getExampleCategorial() {
 		Collection<EvaluationEntry<String>> entries = new ArrayList<EvaluationEntry<String>>();
 		entries.add(new EvaluationEntry<String>("A", "A"));
 		entries.add(new EvaluationEntry<String>("A", "A"));
@@ -137,6 +137,111 @@ public class TestUtils {
 		entries.add(new EvaluationEntry<String>("C", "C"));
 		entries.add(new EvaluationEntry<String>("C", "C"));
 		entries.add(new EvaluationEntry<String>("C", "C"));
+		return entries;
+	}
+	
+	public static Collection<EvaluationEntry<Double>> getExampleNumeric() {
+		Collection<EvaluationEntry<Double>> entries = new ArrayList<EvaluationEntry<Double>>();
+		entries.add(new EvaluationEntry<Double>(0.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 1.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 1.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 1.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 1.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 1.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 2.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 2.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 2.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 2.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 2.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 2.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 2.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 2.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 2.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 2.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 2.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 2.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 2.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 2.0));
+		entries.add(new EvaluationEntry<Double>(0.0, 2.0));
+		entries.add(new EvaluationEntry<Double>(1.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(1.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(1.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(1.0, 1.0));
+		entries.add(new EvaluationEntry<Double>(1.0, 1.0));
+		entries.add(new EvaluationEntry<Double>(1.0, 1.0));
+		entries.add(new EvaluationEntry<Double>(1.0, 1.0));
+		entries.add(new EvaluationEntry<Double>(1.0, 1.0));
+		entries.add(new EvaluationEntry<Double>(1.0, 1.0));
+		entries.add(new EvaluationEntry<Double>(1.0, 1.0));
+		entries.add(new EvaluationEntry<Double>(1.0, 1.0));
+		entries.add(new EvaluationEntry<Double>(1.0, 1.0));
+		entries.add(new EvaluationEntry<Double>(1.0, 1.0));
+		entries.add(new EvaluationEntry<Double>(1.0, 1.0));
+		entries.add(new EvaluationEntry<Double>(1.0, 1.0));
+		entries.add(new EvaluationEntry<Double>(1.0, 1.0));
+		entries.add(new EvaluationEntry<Double>(1.0, 1.0));
+		entries.add(new EvaluationEntry<Double>(1.0, 1.0));
+		entries.add(new EvaluationEntry<Double>(2.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(2.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(2.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(2.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(2.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(2.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(2.0, 0.0));
+		entries.add(new EvaluationEntry<Double>(2.0, 1.0));
+		entries.add(new EvaluationEntry<Double>(2.0, 1.0));
+		entries.add(new EvaluationEntry<Double>(2.0, 1.0));
+		entries.add(new EvaluationEntry<Double>(2.0, 1.0));
+		entries.add(new EvaluationEntry<Double>(2.0, 1.0));
+		entries.add(new EvaluationEntry<Double>(2.0, 2.0));
+		entries.add(new EvaluationEntry<Double>(2.0, 2.0));
+		entries.add(new EvaluationEntry<Double>(2.0, 2.0));
+		entries.add(new EvaluationEntry<Double>(2.0, 2.0));
+		entries.add(new EvaluationEntry<Double>(2.0, 2.0));
+		entries.add(new EvaluationEntry<Double>(2.0, 2.0));
+		entries.add(new EvaluationEntry<Double>(2.0, 2.0));
+		entries.add(new EvaluationEntry<Double>(2.0, 2.0));
+		entries.add(new EvaluationEntry<Double>(2.0, 2.0));
+		entries.add(new EvaluationEntry<Double>(2.0, 2.0));
+		entries.add(new EvaluationEntry<Double>(2.0, 2.0));
+		entries.add(new EvaluationEntry<Double>(2.0, 2.0));
+		entries.add(new EvaluationEntry<Double>(2.0, 2.0));
+		entries.add(new EvaluationEntry<Double>(2.0, 2.0));
+		entries.add(new EvaluationEntry<Double>(2.0, 2.0));
+		entries.add(new EvaluationEntry<Double>(2.0, 2.0));
+		entries.add(new EvaluationEntry<Double>(2.0, 2.0));
+		entries.add(new EvaluationEntry<Double>(2.0, 2.0));
+		entries.add(new EvaluationEntry<Double>(2.0, 2.0));
+		entries.add(new EvaluationEntry<Double>(2.0, 2.0));
 		return entries;
 	}
 	

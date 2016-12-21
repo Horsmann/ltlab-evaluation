@@ -18,7 +18,7 @@ public class TestKappa {
 	// gold: 50 A, 18 B, 32 C
 	@Test
 	public void kappaTest(){
-		Collection<EvaluationEntry<String>> entries = TestUtils.getExample();
+		Collection<EvaluationEntry<Double>> entries = TestUtils.getExampleNumeric();
 
 		assertEquals(100, entries.size());
 		//	System.out.println(entries.size());
@@ -31,7 +31,22 @@ public class TestKappa {
 		System.out.println("Kappa: "+result.getResult());
 		assertEquals(0.4557, result.getResult(), 0.001);
 
+		
+		LinearlyWeightedKappa linWeightedKappa = new LinearlyWeightedKappa(entries);
+		results = linWeightedKappa.calculate();
+		
+		result = results.get(LinearlyWeightedKappa.class.getSimpleName());
+		System.out.println("Linearlyly Weighted Kappa: "+result.getResult());
+		assertEquals(0.3975, result.getResult(), 0.001);
+		
+		QuadraticallyWeightedKappa weightedKappa = new QuadraticallyWeightedKappa(entries);
+		results = weightedKappa.calculate();
+		
+		result = results.get(QuadraticallyWeightedKappa.class.getSimpleName());
+		System.out.println("Quadraticaly Weighted Kappa: "+result.getResult());
+		assertEquals(0.3492, result.getResult(), 0.001);
 
+		
 
 	}
 }

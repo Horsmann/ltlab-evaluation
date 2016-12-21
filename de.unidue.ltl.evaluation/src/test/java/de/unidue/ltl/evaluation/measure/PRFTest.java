@@ -39,7 +39,7 @@ public class PRFTest {
 	// gold: 50 A, 18 B, 32 C
 	@Test
 	public void prfTest(){
-		Collection<EvaluationEntry<String>> entries = TestUtils.getExample();
+		Collection<EvaluationEntry<String>> entries = TestUtils.getExampleCategorial();
 		
 		assertEquals(100, entries.size());
 	//	System.out.println(entries.size());

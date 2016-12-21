@@ -48,7 +48,7 @@ public class AccuracyTest {
 		assertEquals(0.75, result.getResult(), 0.001);
 		
 		
-		entries = TestUtils.getExample();
+		entries = TestUtils.getExampleCategorial();
 		results = CategorialMeasuresUtil.computeCategorialResults(entries);
 		assertEquals(19, results.size()); 
 		

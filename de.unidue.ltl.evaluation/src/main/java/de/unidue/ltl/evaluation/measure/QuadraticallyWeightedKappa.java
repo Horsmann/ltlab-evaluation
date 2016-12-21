@@ -6,17 +6,19 @@ import java.util.Map;
 
 import org.dkpro.statistics.agreement.coding.CodingAnnotationStudy;
 import org.dkpro.statistics.agreement.coding.CohenKappaAgreement;
+import org.dkpro.statistics.agreement.coding.WeightedKappaAgreement;
+import org.dkpro.statistics.agreement.distance.IntervalDistanceFunction;
 
 import de.unidue.ltl.evaluation.EvaluationEntry;
 import de.unidue.ltl.evaluation.EvaluationResult;
 import de.unidue.ltl.evaluation.measure.util.VectorPair;
 
-public class CohensKappa 
+public class QuadraticallyWeightedKappa 
 extends EvaluationMeasure<Double> {
 
-	public static final String KAPPA_MEASURE = "CohensKappa";
+	public static final String KAPPA_MEASURE_QUADRATIC = "QuadraticallyWeightedKappa";
 
-	public CohensKappa(Collection<EvaluationEntry<Double>> entries) {
+	public QuadraticallyWeightedKappa(Collection<EvaluationEntry<Double>> entries) {
 		super(entries);
 	}
 
@@ -26,10 +28,11 @@ extends EvaluationMeasure<Double> {
 		Map<String, EvaluationResult> results = new HashMap<>();
 
 		CodingAnnotationStudy study = new CodingAnnotationStudy(2);
-		for (EvaluationEntry entry : entries){
+		for (EvaluationEntry<Double> entry : entries){
 			study.addItem(entry.getGold(), entry.getPredicted());
 		}
-		CohenKappaAgreement kappa = new CohenKappaAgreement(study);
+		IntervalDistanceFunction  dist = new IntervalDistanceFunction();
+		WeightedKappaAgreement kappa = new WeightedKappaAgreement(study, dist);
 		double kappaValue = kappa.calculateAgreement();
 		results.put(this.getClass().getSimpleName(), new EvaluationResult(kappaValue));
 
@@ -38,7 +41,7 @@ extends EvaluationMeasure<Double> {
 
 	@Override
 	public String getName() {
-		return KAPPA_MEASURE;
+		return KAPPA_MEASURE_QUADRATIC;
 	}
 
 
