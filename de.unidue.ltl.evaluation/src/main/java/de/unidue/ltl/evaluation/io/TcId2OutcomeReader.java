@@ -20,82 +20,86 @@ package de.unidue.ltl.evaluation.io;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.uima.resource.ResourceInitializationException;
-
 import de.unidue.ltl.evaluation.Evaluation;
 import de.unidue.ltl.evaluation.EvaluationEntry;
 
 public class TcId2OutcomeReader {
-	public static Evaluation<String> read(File id2OutcomeFile) throws ResourceInitializationException{
+	
+	public static Evaluation<String> read(File id2OutcomeFile) 
+			throws Exception
+	{
 		Evaluation<String> evaluation= new Evaluation<>();
-		evaluation=registerId2OutcomePairs(evaluation,id2OutcomeFile);
+		evaluation = registerId2OutcomePairs(evaluation,id2OutcomeFile);
+		
 		return evaluation;
 	}
 	
-	public static Evaluation<String> readSorted(File id2OutcomeFile) throws ResourceInitializationException{
+	public static Evaluation<String> readSorted(File id2OutcomeFile) 
+			throws Exception
+	{
 		List<String> labels=null;
-		TreeMap<String, EvaluationEntry<String>> id2EvalEntry= new TreeMap<>();
-		try (BufferedReader br = new BufferedReader(new FileReader(id2OutcomeFile))) {
-			String line = null;
-			while ((line = br.readLine()) != null) {
-				if(line.startsWith("#labels")){
-					labels=getLabels(line);
-				}
-				if (!line.startsWith("#")) {
-					String prediction = line.split(";")[0];
-					String id= prediction.split("=")[0];
-					String gold = line.split(";")[1];
-					int indexOfOnePredicted=getIndexOfOne(prediction.split("=")[1]);
-					int indexOfOneGold=getIndexOfOne(gold);
-					String labelPredicted =labels.get(indexOfOnePredicted);
-					String labelGold=labels.get(indexOfOneGold);
-					EvaluationEntry<String> entry= new EvaluationEntry<String>(labelGold, labelPredicted);
-					id2EvalEntry.put(id, entry);
-				}
+		TreeMap<String, EvaluationEntry<String>> id2EvalEntry = new TreeMap<>();
+		
+		BufferedReader br = new BufferedReader(new FileReader(id2OutcomeFile));
+		String line = null;
+		while ((line = br.readLine()) != null) {
+			if (line.startsWith("#labels")) {
+				labels = getLabels(line);
 			}
-		} catch (Exception e) {
-			throw new ResourceInitializationException(e);
+			
+			if (!line.startsWith("#")) {
+				String prediction = line.split(";")[0];
+				String id= prediction.split("=")[0];
+				String gold = line.split(";")[1];
+				int indexOfOnePredicted=getIndexOfOne(prediction.split("=")[1]);
+				int indexOfOneGold=getIndexOfOne(gold);
+				String labelPredicted =labels.get(indexOfOnePredicted);
+				String labelGold=labels.get(indexOfOneGold);
+				EvaluationEntry<String> entry= new EvaluationEntry<String>(labelGold, labelPredicted);
+				id2EvalEntry.put(id, entry);
+			}
 		}
+		
 		Evaluation<String> evaluation= new Evaluation<>(id2EvalEntry.values());
 		return evaluation;
 	}
 
-	private static Evaluation<String> registerId2OutcomePairs(Evaluation<String> evaluation, File id2OutcomeFile) throws ResourceInitializationException {
+	private static Evaluation<String> registerId2OutcomePairs(Evaluation<String> evaluation, File id2OutcomeFile)
+			throws Exception
+	{
 		List<String> labels=null;
-		try (BufferedReader br = new BufferedReader(new FileReader(id2OutcomeFile))) {
-			String line = null;
-			while ((line = br.readLine()) != null) {
-				if(line.startsWith("#labels")){
-					labels=getLabels(line);
-				}
-				if (!line.startsWith("#")) {
-					String prediction = line.split(";")[0];
-					String gold = line.split(";")[1];
-					int indexOfOnePredicted=getIndexOfOne(prediction.split("=")[1]);
-					int indexOfOneGold=getIndexOfOne(gold);
-					String labelPredicted =labels.get(indexOfOnePredicted);
-					String labelGold=labels.get(indexOfOneGold);
-					evaluation.register(labelGold, labelPredicted);
-				}
+		BufferedReader br = new BufferedReader(new FileReader(id2OutcomeFile));
+		String line = null;
+		while ((line = br.readLine()) != null) {
+			if(line.startsWith("#labels")){
+				labels=getLabels(line);
 			}
-		} catch (Exception e) {
-			throw new ResourceInitializationException(e);
+			if (!line.startsWith("#")) {
+				String prediction = line.split(";")[0];
+				String gold = line.split(";")[1];
+				int indexOfOnePredicted=getIndexOfOne(prediction.split("=")[1]);
+				int indexOfOneGold=getIndexOfOne(gold);
+				String labelPredicted =labels.get(indexOfOnePredicted);
+				String labelGold=labels.get(indexOfOneGold);
+				evaluation.register(labelGold, labelPredicted);
+			}
 		}
+		
 		return evaluation;
 	}
 
-	public static Evaluation<String> readMultipleFiles(List<File> id2OutcomeFiles) throws ResourceInitializationException{
+	public static Evaluation<String> readMultipleFiles(List<File> id2OutcomeFiles)
+			throws Exception
+	{
 		Evaluation<String> evaluation = new Evaluation<>();
 		for (File id2OutcomeFile : id2OutcomeFiles) {
-			evaluation=registerId2OutcomePairs(evaluation,id2OutcomeFile);
+			evaluation = registerId2OutcomePairs(evaluation,id2OutcomeFile);
 		}
 		return evaluation;
 	}
@@ -128,14 +132,17 @@ public class TcId2OutcomeReader {
      * @return
      * @throws Exception
      */
-    private static int getIndexOfOne(String resultVector) throws Exception {
+    private static int getIndexOfOne(String resultVector)
+    		throws Exception
+    {
 		int i=0;
-		for(String dim:resultVector.split(",")){
-			if(dim.equals("1")){
+		for (String dim:resultVector.split(",")) {
+			if (dim.equals("1")) {
 				return i;
 			}
 			i++;
 		}
+		
 		throw new Exception(resultVector+"does not contain a 1");
 	}
 

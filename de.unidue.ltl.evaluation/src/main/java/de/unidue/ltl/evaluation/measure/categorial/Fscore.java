@@ -16,25 +16,31 @@
  * limitations under the License.
  ******************************************************************************/
 
-package de.unidue.ltl.evaluation.measure;
+package de.unidue.ltl.evaluation.measure.categorial;
 
 import java.util.Collection;
 import java.util.Map;
 
 import de.unidue.ltl.evaluation.EvaluationEntry;
 import de.unidue.ltl.evaluation.EvaluationResult;
+import de.unidue.ltl.evaluation.measure.EvaluationMeasure;
 import de.unidue.ltl.evaluation.measure.util.CategorialMeasuresUtil;
 
-public class Precision 
+public class Fscore 
 	extends EvaluationMeasure<String>
 {
 	
-	public Precision(Collection<EvaluationEntry<String>> entries) {
+	public Fscore(Collection<EvaluationEntry<String>> entries) {
 		super(entries);
 	}
 
 	@Override
 	public Map<String, EvaluationResult> calculate() {
 		return CategorialMeasuresUtil.computeCategorialResults(entries);
+	}
+
+	@Override
+	public String getName() {
+		return this.getClass().getSimpleName();
 	}
 }

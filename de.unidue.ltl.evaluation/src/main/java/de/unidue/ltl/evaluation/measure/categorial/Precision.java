@@ -16,20 +16,21 @@
  * limitations under the License.
  ******************************************************************************/
 
-package de.unidue.ltl.evaluation.measure;
+package de.unidue.ltl.evaluation.measure.categorial;
 
 import java.util.Collection;
 import java.util.Map;
 
 import de.unidue.ltl.evaluation.EvaluationEntry;
 import de.unidue.ltl.evaluation.EvaluationResult;
+import de.unidue.ltl.evaluation.measure.EvaluationMeasure;
 import de.unidue.ltl.evaluation.measure.util.CategorialMeasuresUtil;
 
-public class Recall 
+public class Precision 
 	extends EvaluationMeasure<String>
 {
 	
-	public Recall(Collection<EvaluationEntry<String>> entries) {
+	public Precision(Collection<EvaluationEntry<String>> entries) {
 		super(entries);
 	}
 

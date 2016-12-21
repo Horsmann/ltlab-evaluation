@@ -27,10 +27,10 @@ import org.dkpro.statistics.agreement.coding.CohenKappaAgreement;
 
 import de.unidue.ltl.evaluation.EvaluationEntry;
 import de.unidue.ltl.evaluation.EvaluationResult;
-import de.unidue.ltl.evaluation.measure.util.VectorPair;
 
 public class CohensKappa 
-extends EvaluationMeasure<Double> {
+	extends EvaluationMeasure<Double>
+{
 
 	public static final String KAPPA_MEASURE = "CohensKappa";
 
@@ -44,7 +44,7 @@ extends EvaluationMeasure<Double> {
 		Map<String, EvaluationResult> results = new HashMap<>();
 
 		CodingAnnotationStudy study = new CodingAnnotationStudy(2);
-		for (EvaluationEntry entry : entries){
+		for (EvaluationEntry<Double> entry : entries){
 			study.addItem(entry.getGold(), entry.getPredicted());
 		}
 		CohenKappaAgreement kappa = new CohenKappaAgreement(study);

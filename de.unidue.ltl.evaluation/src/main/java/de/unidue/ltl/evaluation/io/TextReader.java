@@ -26,13 +26,15 @@ import de.unidue.ltl.evaluation.Evaluation;
 
 public class TextReader{
 
-	public static Evaluation<String> read(File txtFile) throws IOException{
+	public static Evaluation<String> read(File txtFile) 
+			throws IOException
+	{
 		Evaluation<String> evaluation= new Evaluation<>();
-		for(String line:FileUtils.readLines(txtFile)){
+		for (String line : FileUtils.readLines(txtFile)) {
 			String[] toRegister= line.split("\t");
 			evaluation.register(toRegister[0], toRegister[1]);
 		}
+		
 		return evaluation;
 	}
-	
 }

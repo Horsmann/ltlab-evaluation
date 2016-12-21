@@ -140,6 +140,7 @@ public class TestUtils {
 		return entries;
 	}
 	
+	// TODO if all the doubles are exactly the same, this is more like a categorial example
 	public static Collection<EvaluationEntry<Double>> getExampleNumeric() {
 		Collection<EvaluationEntry<Double>> entries = new ArrayList<EvaluationEntry<Double>>();
 		entries.add(new EvaluationEntry<Double>(0.0, 0.0));
