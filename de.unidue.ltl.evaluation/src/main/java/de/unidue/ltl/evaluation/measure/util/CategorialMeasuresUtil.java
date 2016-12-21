@@ -39,6 +39,8 @@ public class CategorialMeasuresUtil {
 
 		double recall_sum = 0d;
 		double precision_sum = 0d;
+		double precision_weighted = 0d;
+		double recall_weighted = 0d;
 		int tp_sum = 0;
 		int fp_sum = 0;
 		int fn_sum = 0;
@@ -75,6 +77,9 @@ public class CategorialMeasuresUtil {
 			double fscore = 2.0*precision*recall/(precision+recall);
 			precision_sum += precision;
 			recall_sum += recall;
+			precision_weighted += precision*(1.0*(tp+fn)/(tp+fp+tn+fn));
+			recall_weighted += recall*(1.0*(tp+fn)/(tp+fp+tn+fn));
+			
 			tp_sum += tp;
 			fp_sum += fp;
 			tn_sum += tn;
@@ -97,6 +102,12 @@ public class CategorialMeasuresUtil {
 		results.put(Precision.class.getSimpleName()+"_MICRO", new EvaluationResult(precision_micro));
 		results.put(Recall.class.getSimpleName()+"_MICRO", new EvaluationResult(recall_micro));
 		results.put(Fscore.class.getSimpleName()+"_MICRO", new EvaluationResult(fscore_micro));
+		
+		// weighted by class size (as is done e.g. in WEKA)
+		double fscore_weighted = 2.0*precision_weighted*recall_weighted/(precision_weighted+recall_weighted);
+		results.put(Precision.class.getSimpleName()+"_WEIGHTED", new EvaluationResult(precision_weighted));
+		results.put(Recall.class.getSimpleName()+"_WEIGHTED", new EvaluationResult(recall_weighted));
+		results.put(Fscore.class.getSimpleName()+"_WEIGHTED", new EvaluationResult(fscore_weighted));
 		
 
 		int tp = 0;

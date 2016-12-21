@@ -34,6 +34,8 @@ import de.unidue.ltl.evaluation.measure.util.CategorialMeasuresUtil;
 
 public class PRFTest {
 	
+	
+	// gold: 50 A, 18 B, 32 C
 	@Test
 	public void prfTest(){
 		Collection<EvaluationEntry<String>> entries = new ArrayList<EvaluationEntry<String>>();
@@ -105,7 +107,6 @@ public class PRFTest {
 		entries.add(new EvaluationEntry<String>("B", "B"));
 		entries.add(new EvaluationEntry<String>("B", "B"));
 		entries.add(new EvaluationEntry<String>("B", "B"));
-		//entries.add(new EvaluationEntry<String>("B", "C"));
 		entries.add(new EvaluationEntry<String>("C", "A"));
 		entries.add(new EvaluationEntry<String>("C", "A"));
 		entries.add(new EvaluationEntry<String>("C", "A"));
@@ -143,7 +144,7 @@ public class PRFTest {
 	//	System.out.println(entries.size());
 		
 		Map<String, EvaluationResult> results = CategorialMeasuresUtil.computeCategorialResults(entries);
-		assertEquals(16, results.size()); 
+		assertEquals(19, results.size()); 
 		
 		assertEquals(3, CategorialMeasuresUtil.listCategories(entries).size());
 		
@@ -151,40 +152,48 @@ public class PRFTest {
 		assertEquals(0.65, result.getResult(), 0.001);
 		
 		result = results.get(Precision.class.getSimpleName()+"_A");
-		System.out.println(result.getResult());
+		System.out.println("Precision A: "+result.getResult());
 		assertEquals(0.75, result.getResult(), 0.001);
 		
 		result = results.get(Recall.class.getSimpleName()+"_A");
-		System.out.println(result.getResult());
+		System.out.println("Recall A: "+result.getResult());
 		assertEquals(0.6, result.getResult(), 0.001);
 		
 		result = results.get(Fscore.class.getSimpleName()+"_A");
-		System.out.println(result.getResult());
+		System.out.println("F-Score A: "+result.getResult());
 		assertEquals(0.6666, result.getResult(), 0.001);	
 		
 		result = results.get(Precision.class.getSimpleName()+"_B");
-		System.out.println(result.getResult());
+		System.out.println("Precision B: "+result.getResult());
 		assertEquals(0.6, result.getResult(), 0.001);
 		
 		result = results.get(Recall.class.getSimpleName()+"_B");
-		System.out.println(result.getResult());
+		System.out.println("Recall B: "+result.getResult());
 		assertEquals(0.833, result.getResult(), 0.001);
 		
 		result = results.get(Precision.class.getSimpleName()+"_C");
-		System.out.println(result.getResult());
+		System.out.println("Precision C: "+result.getResult());
 		assertEquals(0.57143, result.getResult(), 0.001);
 		
 		result = results.get(Recall.class.getSimpleName()+"_C");
-		System.out.println(result.getResult());
+		System.out.println("Recall C: "+result.getResult());
 		assertEquals(0.625, result.getResult(), 0.001);
 		
 		result = results.get(Precision.class.getSimpleName()+"_MACRO");
-		System.out.println(result.getResult());
+		System.out.println("Precision macro: "+result.getResult());
 		assertEquals(0.6405, result.getResult(), 0.001);
 	
 		result = results.get(Recall.class.getSimpleName()+"_MACRO");
-		System.out.println(result.getResult());
+		System.out.println("Recall macro: "+result.getResult());
 		assertEquals(0.686, result.getResult(), 0.001);
+		
+		result = results.get(Precision.class.getSimpleName()+"_WEIGHTED");
+		System.out.println("Precision weighted: "+result.getResult());
+		assertEquals(0.665857, result.getResult(), 0.001);
+		
+		result = results.get(Recall.class.getSimpleName()+"_WEIGHTED");
+		System.out.println("Recall weighted: "+result.getResult());
+		assertEquals(0.649994, result.getResult(), 0.001);
 		
 	}
 	
