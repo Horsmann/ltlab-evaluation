@@ -24,7 +24,7 @@ import org.junit.Test;
 public class ConfusionMatrixTest
 {
     @Test
-    public void getValues()
+    public void testConfusionMatrix()
     {
         ConfusionMatrix<String> matrix = new ConfusionMatrix<>();
         matrix.register("A", "B");
@@ -44,29 +44,30 @@ public class ConfusionMatrixTest
         assertEquals(4, matrix.getTrueNegatives("A"));        
         assertEquals(3, matrix.getFalsePositives("A"));
         assertEquals(1, matrix.getFalseNegative("A"));
-    }
-
-    @Test
-    public void getValues2()
-    {
-        ConfusionMatrix<String> matrix = new ConfusionMatrix<>();
-        matrix.register("Z", "B");
-        matrix.register("A", "A");
-        matrix.register("A", "A");
-        matrix.register("Z", "B");
-        matrix.register("B", "B");
-        matrix.register("B", "Z");
-        matrix.register("B", "B");
-        matrix.register("B", "A");
-        matrix.register("B", "Z");
-        matrix.register("B", "A");
-
-        System.out.println(matrix.toString());
         
-        assertEquals(2, matrix.getTruePositives("A"));
-        assertEquals(2, matrix.getFalsePositives("A"));
-        assertEquals(0, matrix.getFalseNegative("A"));
-        assertEquals(6, matrix.getTrueNegatives("A")); 
+        assertEquals(4, matrix.getTruePositives("B"));
+        assertEquals(2, matrix.getTrueNegatives("B"));        
+        assertEquals(1, matrix.getFalsePositives("B"));
+        assertEquals(3, matrix.getFalseNegative("B"));
+    
+        ConfusionMatrix<String> matrix2 = new ConfusionMatrix<>();
+        matrix2.register("Z", "B");
+        matrix2.register("A", "A");
+        matrix2.register("A", "A");
+        matrix2.register("Z", "B");
+        matrix2.register("B", "B");
+        matrix2.register("B", "Z");
+        matrix2.register("B", "B");
+        matrix2.register("B", "A");
+        matrix2.register("B", "Z");
+        matrix2.register("B", "A");
+
+        System.out.println(matrix2.toString());
+        
+        assertEquals(2, matrix2.getTruePositives("A"));
+        assertEquals(2, matrix2.getFalsePositives("A"));
+        assertEquals(0, matrix2.getFalseNegative("A"));
+        assertEquals(6, matrix2.getTrueNegatives("A")); 
     }
     
     

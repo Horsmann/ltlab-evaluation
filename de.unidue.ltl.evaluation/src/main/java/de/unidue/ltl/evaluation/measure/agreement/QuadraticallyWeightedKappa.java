@@ -23,14 +23,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.dkpro.statistics.agreement.coding.CodingAnnotationStudy;
-import org.dkpro.statistics.agreement.coding.CohenKappaAgreement;
 import org.dkpro.statistics.agreement.coding.WeightedKappaAgreement;
 import org.dkpro.statistics.agreement.distance.IntervalDistanceFunction;
 
 import de.unidue.ltl.evaluation.EvaluationEntry;
 import de.unidue.ltl.evaluation.EvaluationResult;
 import de.unidue.ltl.evaluation.measure.EvaluationMeasure;
-import de.unidue.ltl.evaluation.measure.util.VectorPair;
 
 public class QuadraticallyWeightedKappa 
 extends EvaluationMeasure<Double> {

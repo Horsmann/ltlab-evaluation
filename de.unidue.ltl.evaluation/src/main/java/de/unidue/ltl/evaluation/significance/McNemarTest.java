@@ -15,26 +15,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
+package de.unidue.ltl.evaluation.significance;
 
-package de.unidue.ltl.evaluation.measure;
-
-import java.util.Collection;
-import java.util.Map;
-
+import de.unidue.ltl.evaluation.Evaluation;
 import de.unidue.ltl.evaluation.EvaluationEntry;
-import de.unidue.ltl.evaluation.EvaluationResult;
-import de.unidue.ltl.evaluation.measure.util.ScaleMeasureUtil;
 
+public class McNemarTest {
 
-public class SpearmanCorrelation
-	extends EvaluationMeasure<Double>
-{
-	public SpearmanCorrelation(Collection<EvaluationEntry<Double>> entries) {
-		super(entries);
+	public static double computeSignificance(Evaluation<String> e1, Evaluation<String> e2) {
+
+		double sample1negative = 0;
+		double sample2negative = 0;
+		
+		for (EvaluationEntry<String> entry : e1.getEntries()) {
+			if (!positive(entry)) {
+				sample1negative++;
+			}
+		}
+
+		for (EvaluationEntry<String> entry : e2.getEntries()) {
+			if (!positive(entry)) {
+				sample2negative++;
+			}
+		}
+		double mcNemar = Math.pow(Math.abs(sample2negative - sample1negative) - 0.5, 2)
+				/ (sample1negative + sample2negative);
+
+		return mcNemar;
 	}
 
-	@Override
-	public Map<String, EvaluationResult> calculate() {
-		return ScaleMeasureUtil.computeScaleResults(entries);
+	private static boolean positive(EvaluationEntry<String> entry) {
+		return entry.getGold().equals(entry.getPredicted());
 	}
 }

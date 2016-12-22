@@ -23,8 +23,8 @@ import java.util.Map;
 
 import de.unidue.ltl.evaluation.EvaluationEntry;
 import de.unidue.ltl.evaluation.EvaluationResult;
-import de.unidue.ltl.evaluation.measure.PearsonCorrelation;
-import de.unidue.ltl.evaluation.measure.SpearmanCorrelation;
+import de.unidue.ltl.evaluation.measure.correlation.PearsonCorrelation;
+import de.unidue.ltl.evaluation.measure.correlation.SpearmanCorrelation;
 
 public class ScaleMeasureUtil {
 

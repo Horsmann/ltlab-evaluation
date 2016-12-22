@@ -16,21 +16,21 @@
  * limitations under the License.
  ******************************************************************************/
 
-package de.unidue.ltl.evaluation.measure;
+package de.unidue.ltl.evaluation.measure.correlation;
 
 import java.util.Collection;
 import java.util.Map;
 
 import de.unidue.ltl.evaluation.EvaluationEntry;
 import de.unidue.ltl.evaluation.EvaluationResult;
+import de.unidue.ltl.evaluation.measure.EvaluationMeasure;
 import de.unidue.ltl.evaluation.measure.util.ScaleMeasureUtil;
 
 
-public class PearsonCorrelation
+public class SpearmanCorrelation
 	extends EvaluationMeasure<Double>
 {
-
-	public PearsonCorrelation(Collection<EvaluationEntry<Double>> entries) {
+	public SpearmanCorrelation(Collection<EvaluationEntry<Double>> entries) {
 		super(entries);
 	}
 
