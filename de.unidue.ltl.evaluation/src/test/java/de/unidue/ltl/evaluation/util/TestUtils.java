@@ -26,7 +26,7 @@ import de.unidue.ltl.evaluation.EvaluationEntry;
 
 public class TestUtils {
 
-	public static Collection<EvaluationEntry<Double>> getRandomEntries(int n) {
+	public static Collection<EvaluationEntry<Double>> getRandomGaussianEntries(int n) {
 		Random rand = new Random();
 		List<EvaluationEntry<Double>> entries = new ArrayList<EvaluationEntry<Double>>();
 		for (int i=0; i<n; i++) {
@@ -34,6 +34,18 @@ public class TestUtils {
 		}
 		return entries;
 	}
+	
+	public static Collection<EvaluationEntry<String>> getRandomCategorialEntries(int n, int k) {
+		Random rand = new Random();
+		List<EvaluationEntry<String>> entries = new ArrayList<EvaluationEntry<String>>();
+		for (int i=0; i<n; i++) {
+			String label1 = new Integer(rand.nextInt(k)).toString();
+			String label2 = new Integer(rand.nextInt(k)).toString();
+			entries.add(new EvaluationEntry<String>(label1, label2));
+		}
+		return entries;
+	}
+	
 	
 	public static Collection<EvaluationEntry<String>> getExampleCategorial() {
 		Collection<EvaluationEntry<String>> entries = new ArrayList<EvaluationEntry<String>>();

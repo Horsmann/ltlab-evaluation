@@ -71,7 +71,7 @@ public class ScatterPlotTest {
 	{
         @SuppressWarnings("unchecked")
 		Evaluation<Double> mock = (Evaluation<Double>) Mockito.mock(Evaluation.class);
-        Mockito.when(mock.getEntries()).thenReturn(TestUtils.getRandomEntries(100));
+        Mockito.when(mock.getEntries()).thenReturn(TestUtils.getRandomGaussianEntries(100));
 
 		ScatterPlot.writePlot(mock, new File("target/testRandom.png"));
 	}

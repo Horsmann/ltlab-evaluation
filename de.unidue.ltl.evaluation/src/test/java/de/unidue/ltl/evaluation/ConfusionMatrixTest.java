@@ -40,16 +40,28 @@ public class ConfusionMatrixTest
 
         System.out.println(matrix.toString());
         
+        assertEquals(2, matrix.getLabels().size());
+        assertTrue(matrix.getLabels().contains("A"));
+        assertTrue(matrix.getLabels().contains("B"));
+        
         assertEquals(2, matrix.getTruePositives("A"));
         assertEquals(4, matrix.getTrueNegatives("A"));        
         assertEquals(3, matrix.getFalsePositives("A"));
-        assertEquals(1, matrix.getFalseNegative("A"));
+        assertEquals(1, matrix.getFalseNegatives("A"));
         
         assertEquals(4, matrix.getTruePositives("B"));
         assertEquals(2, matrix.getTrueNegatives("B"));        
         assertEquals(1, matrix.getFalsePositives("B"));
-        assertEquals(3, matrix.getFalseNegative("B"));
+        assertEquals(3, matrix.getFalseNegatives("B"));
     
+        int[][] array2d = matrix.getTwoDimensionalArray();
+        assertEquals(2, array2d.length);
+        assertEquals(2, array2d[0].length);
+        assertEquals(2, array2d[0][0]);
+        assertEquals(1, array2d[0][1]);
+        assertEquals(3, array2d[1][0]);
+        assertEquals(4, array2d[1][1]);
+        
         ConfusionMatrix<String> matrix2 = new ConfusionMatrix<>();
         matrix2.register("Z", "B");
         matrix2.register("A", "A");
@@ -66,7 +78,7 @@ public class ConfusionMatrixTest
         
         assertEquals(2, matrix2.getTruePositives("A"));
         assertEquals(2, matrix2.getFalsePositives("A"));
-        assertEquals(0, matrix2.getFalseNegative("A"));
+        assertEquals(0, matrix2.getFalseNegatives("A"));
         assertEquals(6, matrix2.getTrueNegatives("A")); 
     }
     
