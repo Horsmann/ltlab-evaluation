@@ -90,4 +90,19 @@ public class EvaluationMetaDataTest {
 		System.out.println(evaluation.getEvalMetaData().getStats());
 	}
 	
+	@Test
+	public void evaluationMetaDataPieChartStatsTest(){
+		Collection<EvaluationEntry<String>> entries= new ArrayList<>();
+		entries.add(new EvaluationEntry<String>("A", "B"));
+		entries.add(new EvaluationEntry<String>("A", "A"));
+		entries.add(new EvaluationEntry<String>("A", "B"));
+		entries.add(new EvaluationEntry<String>("A", "A"));
+		entries.add(new EvaluationEntry<String>("C", "C"));
+		entries.add(new EvaluationEntry<String>("A", "A"));
+		entries.add(new EvaluationEntry<String>("A", "B"));
+		entries.add(new EvaluationEntry<String>("A", "A"));
+		Evaluation<String> evaluation= new Evaluation<>(entries,"NamedEvaluation");
+		evaluation.getEvalMetaData().getPieChart();
+	}
+	
 }

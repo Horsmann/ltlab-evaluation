@@ -17,10 +17,21 @@
  ******************************************************************************/
 package de.unidue.ltl.evaluation;
 
+import java.awt.Color;
+import java.io.File;
+import java.text.DecimalFormat;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartUtilities;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.labels.PieSectionLabelGenerator;
+import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.data.general.DefaultPieDataset;
 
 public class EvaluationMetaData<T> {
 
@@ -44,12 +55,46 @@ public class EvaluationMetaData<T> {
 		this.entries=entries;		
 	}
 
-	/**
-	 * distribution characteristics*
-	 * ordinal or scale measures
-	 * @return
-	 */
+	public void getPieChart(){
+		getPieChart(true);
+		getPieChart(false);
+	}
+	
+	public void getPieChart(boolean isPredicted){
+		DefaultPieDataset dataset = new DefaultPieDataset();
+		if(isPredicted){
+			for(T label:distributionsPerLabelPredicted.keySet()){
+				dataset.setValue(String.valueOf(label), distributionsPerLabelPredicted.get(label));
+			}
+		}else{
+			for(T label:distributionsPerLabelGold.keySet()){
+				dataset.setValue(String.valueOf(label), distributionsPerLabelGold.get(label));
+			}
+		}
+		JFreeChart someChart = null;
+		if (isPredicted) {
+			someChart = ChartFactory.createPieChart(name + " predicted label distribution", dataset, true, true, false);
+		} else {
+			someChart = ChartFactory.createPieChart(name + " gold label distribution", dataset, true, true, false);
+		}
 
+		PiePlot plot4 = (PiePlot) someChart.getPlot();
+		plot4.setSimpleLabels(true);
+
+		PieSectionLabelGenerator generator = new StandardPieSectionLabelGenerator("{0} = {2}", new DecimalFormat("0"),new DecimalFormat("0.00%"));
+		plot4.setLabelGenerator(generator);
+
+		try {
+			if (isPredicted) {
+				ChartUtilities.saveChartAsJPEG(new File("target/pieChart_predicted.jpeg"), someChart, 1200, 1000);
+			}else{
+				ChartUtilities.saveChartAsJPEG(new File("target/pieChart_gold.jpeg"), someChart, 1200, 1000);
+			}
+		} catch (Exception e) {
+			System.err.println("couldn't write chart");
+		}
+	}
+	
 	public String getStats(){
 		
 		StringBuilder sb= new StringBuilder();
