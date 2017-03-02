@@ -53,7 +53,7 @@ public class ConfusionMatrix<T>
         V2_AsciiTable at = new V2_AsciiTable();
 
 		at.addStrongRule();
-        at.addRow(getTableHeader("Gold"));
+        at.addRow(getTableHeader("Predicted"));
         at.addRow(getLabelHeader(labels));
 		at.addStrongRule();
 
