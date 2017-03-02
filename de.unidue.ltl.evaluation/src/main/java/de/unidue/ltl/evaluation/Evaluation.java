@@ -31,6 +31,7 @@ public class Evaluation<T> {
 	private Map<String, EvaluationResult> calculatedMeasures;
 	private ConfusionMatrix<T> confusionMatrix;
 	private EvaluationMetaData evalMetaData;
+	private String name;
 
 	public Evaluation() {
 		this.entries = new ArrayList<>();
@@ -61,6 +62,7 @@ public class Evaluation<T> {
 	}
 
 	public Evaluation(Collection<EvaluationEntry<T>> entries, String experimentName) {
+		this.name= experimentName;
 		this.entries = entries;
 		ConfusionMatrix<T> matrix = new ConfusionMatrix<T>();
 		for (EvaluationEntry<T> entry : entries){
@@ -88,6 +90,7 @@ public class Evaluation<T> {
 	 */
 	private void update() {
 		calculatedMeasures.clear();
+		this.evalMetaData= new EvaluationMetaData<>(name, this.confusionMatrix.getLabels(), this.getEntries());
 	}
 
 	public EvaluationResult calculate(EvaluationMeasure<T> measure){

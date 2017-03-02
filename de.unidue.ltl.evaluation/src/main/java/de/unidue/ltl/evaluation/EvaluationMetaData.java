@@ -29,6 +29,7 @@ public class EvaluationMetaData<T> {
 	private Collection<EvaluationEntry<T>> entries;
 	private Map<T,Integer> distributionsPerLabelPredicted;
 	private Map<T,Integer> distributionsPerLabelGold;
+	private int numberOfInstances;
 	
 	public EvaluationMetaData(String name, List<T> labels, Collection<EvaluationEntry<T>> entries) {
 		this.setName(name);
@@ -36,6 +37,7 @@ public class EvaluationMetaData<T> {
 		this.setEntries(entries);
 		this.distributionsPerLabelPredicted = getDistributionsPerLabel(true);
 		this.distributionsPerLabelGold = getDistributionsPerLabel(false);
+		this.numberOfInstances=entries.size();
 	}
 	
 	private void setEntries(Collection<EvaluationEntry<T>> entries) {
@@ -43,7 +45,6 @@ public class EvaluationMetaData<T> {
 	}
 
 	/**
-	 * labels distribution (predicted, gold)
 	 * distribution characteristics*
 	 * # of registered instances
 	 * ordinal or scale measures
@@ -120,5 +121,21 @@ public class EvaluationMetaData<T> {
 
 	public Map<T, Integer> getDistributionsPerLabelGold() {
 		return distributionsPerLabelGold;
+	}
+
+	public int getNumberOfInstances() {
+		return numberOfInstances;
+	}
+
+	public void setNumberOfInstances(int numberOfInstances) {
+		this.numberOfInstances = numberOfInstances;
+	}
+
+	public void setDistributionsPerLabelPredicted(Map<T, Integer> distributionsPerLabelPredicted) {
+		this.distributionsPerLabelPredicted = distributionsPerLabelPredicted;
+	}
+
+	public void setDistributionsPerLabelGold(Map<T, Integer> distributionsPerLabelGold) {
+		this.distributionsPerLabelGold = distributionsPerLabelGold;
 	}
 }
