@@ -43,4 +43,25 @@ public class EvaluationMetaDataTest {
 		Evaluation<String> evaluation= new Evaluation<>(entries,"NamedEvaluation");
 		assertEquals(StringUtils.join(Arrays.asList("A","B"), " "),StringUtils.join(evaluation.getEvalMetaData().getLabels()," "));
 	}
+	
+	@Test
+	public void evaluationMetaDataLabelDistributionTest(){
+		Collection<EvaluationEntry<String>> entries= new ArrayList<>();
+		entries.add(new EvaluationEntry<String>("A", "B"));
+		entries.add(new EvaluationEntry<String>("A", "A"));
+		entries.add(new EvaluationEntry<String>("A", "B"));
+		entries.add(new EvaluationEntry<String>("A", "A"));
+		entries.add(new EvaluationEntry<String>("C", "C"));
+		entries.add(new EvaluationEntry<String>("A", "A"));
+		entries.add(new EvaluationEntry<String>("A", "B"));
+		entries.add(new EvaluationEntry<String>("A", "A"));
+		Evaluation<String> evaluation= new Evaluation<>(entries,"NamedEvaluation");
+		System.out.println(evaluation.getEvalMetaData().getDistributionsPerLabelGold());
+		System.out.println(evaluation.getEvalMetaData().getDistributionsPerLabelPredicted());
+		assertEquals(0,evaluation.getEvalMetaData().getDistributionsPerLabelGold().get("B"));
+		assertEquals(3,evaluation.getEvalMetaData().getDistributionsPerLabelPredicted().get("B"));
+		assertEquals(7,evaluation.getEvalMetaData().getDistributionsPerLabelGold().get("A"));
+		assertEquals(4,evaluation.getEvalMetaData().getDistributionsPerLabelPredicted().get("A"));
+	}
+	
 }

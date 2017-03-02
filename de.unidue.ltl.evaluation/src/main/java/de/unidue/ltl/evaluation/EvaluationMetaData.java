@@ -17,32 +17,72 @@
  ******************************************************************************/
 package de.unidue.ltl.evaluation;
 
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class EvaluationMetaData<T> {
 
 	private String name;
 	private List<T> labels;
+	private Collection<EvaluationEntry<T>> entries;
+	private Map<T,Integer> distributionsPerLabelPredicted;
+	private Map<T,Integer> distributionsPerLabelGold;
 	
-	public EvaluationMetaData(String name, List<T> labels) {
+	public EvaluationMetaData(String name, List<T> labels, Collection<EvaluationEntry<T>> entries) {
 		this.setName(name);
 		this.setLabels(labels);
+		this.setEntries(entries);
+		this.distributionsPerLabelPredicted = getDistributionsPerLabel(true);
+		this.distributionsPerLabelGold = getDistributionsPerLabel(false);
 	}
 	
+	private void setEntries(Collection<EvaluationEntry<T>> entries) {
+		this.entries=entries;		
+	}
+
 	/**
-	 * labels distribution 
+	 * labels distribution (predicted, gold)
 	 * distribution characteristics*
 	 * # of registered instances
 	 * ordinal or scale measures
 	 * @return
 	 */
+
 	public String getStats(){
+		
 		StringBuilder sb= new StringBuilder();
+		
 		
 		// add stats
 		
 		
 		return sb.toString();
+	}
+
+	private Map<T, Integer> getDistributionsPerLabel(boolean isPredicted) {
+		Map<T,Integer> distributionsPerLabel= new HashMap<>();
+		
+		for(T label:labels){
+			int count =getCount4label(label,isPredicted);
+			distributionsPerLabel.put(label, count);
+		}
+		return distributionsPerLabel;
+	}
+
+	private int getCount4label(T label, boolean isPredicted) {
+		int counter = 0;
+		for (EvaluationEntry<T> entry : entries) {
+			if (isPredicted) {
+				if (entry.getPredicted().equals(label))
+					counter++;
+			} else {
+				if (entry.getGold().equals(label))
+					counter++;
+			}
+		}
+		return counter;
 	}
 
 	@Override
@@ -68,5 +108,17 @@ public class EvaluationMetaData<T> {
 
 	public void setLabels(List<T> labels) {
 		this.labels = labels;
+	}
+
+	public Collection<EvaluationEntry<T>> getEntries() {
+		return entries;
+	}
+
+	public Map<T, Integer> getDistributionsPerLabelPredicted() {
+		return distributionsPerLabelPredicted;
+	}
+
+	public Map<T, Integer> getDistributionsPerLabelGold() {
+		return distributionsPerLabelGold;
 	}
 }
