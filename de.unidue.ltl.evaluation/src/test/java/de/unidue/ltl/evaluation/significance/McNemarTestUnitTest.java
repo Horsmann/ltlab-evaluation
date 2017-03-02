@@ -25,7 +25,7 @@ import org.junit.Test;
 import de.unidue.ltl.evaluation.Evaluation;
 import de.unidue.ltl.evaluation.significance.McNemarTest;
 
-public class McNemareTestUnitTest {
+public class McNemarTestUnitTest {
 
 	@Test
 	public void mcnemareSignificanceTest() {
