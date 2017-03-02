@@ -26,6 +26,8 @@ import de.unidue.ltl.evaluation.EvaluationEntry;
 
 public class McNemarTest {
 
+	
+
 	@SuppressWarnings("unchecked")
 	public static double computeSignificance(Evaluation<String> e1, Evaluation<String> e2, String correctionType) throws Exception {
 
