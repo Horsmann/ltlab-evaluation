@@ -46,7 +46,6 @@ public class EvaluationMetaData<T> {
 
 	/**
 	 * distribution characteristics*
-	 * # of registered instances
 	 * ordinal or scale measures
 	 * @return
 	 */
@@ -54,10 +53,20 @@ public class EvaluationMetaData<T> {
 	public String getStats(){
 		
 		StringBuilder sb= new StringBuilder();
-		
-		
-		// add stats
-		
+		sb.append("Name:"+"\t"+name+System.lineSeparator());
+		sb.append("Labels:"+"\t"+labels+System.lineSeparator());
+		sb.append("# of Instances:"+"\t"+numberOfInstances+System.lineSeparator());
+		sb.append(System.lineSeparator());
+		sb.append("Distribution of Gold Labels:"+System.lineSeparator());
+		sb.append("\t"+"L : #"+System.lineSeparator());
+		for(T key: distributionsPerLabelGold.keySet()){
+			sb.append("\t"+key+" : "+distributionsPerLabelGold.get(key)+System.lineSeparator());
+		}
+		sb.append("Distribution of Predicted Labels:"+System.lineSeparator());
+		sb.append("\t"+"L : #"+System.lineSeparator());
+		for(T key: distributionsPerLabelPredicted.keySet()){
+			sb.append("\t"+key+" : "+distributionsPerLabelPredicted.get(key)+System.lineSeparator());
+		}
 		
 		return sb.toString();
 	}
