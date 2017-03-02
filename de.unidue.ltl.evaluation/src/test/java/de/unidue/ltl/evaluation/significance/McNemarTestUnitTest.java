@@ -25,27 +25,36 @@ import org.junit.Test;
 import de.unidue.ltl.evaluation.Evaluation;
 import de.unidue.ltl.evaluation.significance.McNemarTest;
 
-public class McNemareTestUnitTest {
+public class McNemarTestUnitTest {
 
 	@Test
 	public void mcnemareSignificanceTest() {
 		Evaluation<String> evaluation1 = new Evaluation<String>();
-		for (int i = 0; i < 8; i++) {
-			evaluation1.register("A", "A");
-		}
-		for (int i = 0; i < 16; i++) {
-			evaluation1.register("A", "B");
-		}
-
 		Evaluation<String> evaluation2 = new Evaluation<String>();
-		for (int i = 0; i < 11; i++) {
+		
+		for(int i=0; i< 8; i++){
+			evaluation1.register("A", "A");
 			evaluation2.register("A", "A");
 		}
-		for (int i = 0; i < 5; i++) {
+		
+		for(int i=0; i< 11; i++){
+			evaluation1.register("A", "B");
 			evaluation2.register("A", "B");
 		}
-
+		
+		for(int i=0; i< 16; i++){
+			evaluation1.register("A", "B");
+			evaluation2.register("A", "A");
+		}
+		
+		for(int i=0; i< 5; i++){
+			evaluation1.register("A", "A");
+			evaluation2.register("A", "B");
+		}
+		
+		System.out.println(McNemarTest.computeSignificance(evaluation1, evaluation2));
 		assertEquals(5.25, McNemarTest.computeSignificance(evaluation1, evaluation2), 0.001);
+		
 	}
 
 }
