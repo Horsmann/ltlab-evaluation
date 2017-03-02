@@ -19,8 +19,10 @@ package de.unidue.ltl.evaluation;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 public class EvaluationMetaDataTest {
 	
@@ -31,5 +33,14 @@ public class EvaluationMetaDataTest {
 		entries.add(new EvaluationEntry<String>("A", "A"));
 		Evaluation<String> evaluation= new Evaluation<>(entries,"NamedEvaluation");
 		assertEquals("NamedEvaluation",evaluation.getEvalMetaData().getName());
+	}
+	
+	@Test
+	public void evaluationMetaDataLabelTest(){
+		Collection<EvaluationEntry<String>> entries= new ArrayList<>();
+		entries.add(new EvaluationEntry<String>("A", "B"));
+		entries.add(new EvaluationEntry<String>("A", "A"));
+		Evaluation<String> evaluation= new Evaluation<>(entries,"NamedEvaluation");
+		assertEquals(StringUtils.join(Arrays.asList("A","B"), " "),StringUtils.join(evaluation.getEvalMetaData().getLabels()," "));
 	}
 }

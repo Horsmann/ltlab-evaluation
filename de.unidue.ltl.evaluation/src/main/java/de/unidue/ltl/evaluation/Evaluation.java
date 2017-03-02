@@ -33,15 +33,13 @@ public class Evaluation<T> {
 	private EvaluationMetaData evalMetaData;
 
 	public Evaluation() {
-		this.init(null);
 		this.entries = new ArrayList<>();
-	}
-
-	private void init(String experimentName) {
 		this.calculatedMeasures= new HashMap<>();
 		this.confusionMatrix = new ConfusionMatrix<T>();
-		this.evalMetaData= new EvaluationMetaData<>(experimentName, this.confusionMatrix.getLabels());
+		this.evalMetaData= new EvaluationMetaData<T>(null, this.confusionMatrix.getLabels());
+
 	}
+
 
 	public ConfusionMatrix<T> getConfusionMatrix() {
 		return confusionMatrix;
@@ -52,23 +50,25 @@ public class Evaluation<T> {
 	}
 
 	public Evaluation(Collection<EvaluationEntry<T>> entries) {
-		this.init(null);
 		this.entries = entries;
 		ConfusionMatrix<T> matrix = new ConfusionMatrix<T>();
 		for (EvaluationEntry<T> entry : entries){
 			matrix.register(entry.getGold(), entry.getPredicted());
 		}
 		this.confusionMatrix = matrix;
+		this.calculatedMeasures= new HashMap<>();
+		this.evalMetaData= new EvaluationMetaData<T>(null, this.confusionMatrix.getLabels());
 	}
 
 	public Evaluation(Collection<EvaluationEntry<T>> entries, String experimentName) {
-		this.init(experimentName);
 		this.entries = entries;
 		ConfusionMatrix<T> matrix = new ConfusionMatrix<T>();
 		for (EvaluationEntry<T> entry : entries){
 			matrix.register(entry.getGold(), entry.getPredicted());
 		}
 		this.confusionMatrix = matrix;
+		this.calculatedMeasures= new HashMap<>();
+		this.evalMetaData= new EvaluationMetaData<T>(experimentName, matrix.getLabels());
 	}
 
 
