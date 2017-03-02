@@ -52,7 +52,6 @@ public class McNemarTestUnitTest {
 			evaluation2.register("A", "B");
 		}
 		
-		System.out.println(McNemarTest.computeSignificance(evaluation1, evaluation2));
 		assertEquals(5.25, McNemarTest.computeSignificance(evaluation1, evaluation2), 0.001);
 		
 	}

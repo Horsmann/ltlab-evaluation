@@ -17,27 +17,50 @@
  ******************************************************************************/
 package de.unidue.ltl.evaluation.significance;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import de.unidue.ltl.evaluation.Evaluation;
 import de.unidue.ltl.evaluation.EvaluationEntry;
 
 public class McNemarTest {
 
+	@SuppressWarnings("unchecked")
 	public static double computeSignificance(Evaluation<String> e1, Evaluation<String> e2) {
 
 		double sample1negative = 0;
 		double sample2negative = 0;
+
+		Collection<EvaluationEntry<String>> c1 = e1.getEntries();
+		ArrayList<EvaluationEntry<String>> list1 = null;
+		Collection<EvaluationEntry<String>> c2 = e2.getEntries();
+		ArrayList<EvaluationEntry<String>> list2 = null;
+		if (c1 instanceof ArrayList && c2 instanceof ArrayList){
+			list1 = (ArrayList<EvaluationEntry<String>>) c1;
+			list2 = (ArrayList<EvaluationEntry<String>>) c2;
+		} else {
+			// TODO : raise proper exception
+			System.err.println("Can compute McNemar only on lists");
+			System.exit(-1);
+		}
 		
-		for (EvaluationEntry<String> entry : e1.getEntries()) {
-			if (!positive(entry)) {
+		if (list1.size() != list2.size()){
+			System.err.println("Lists must have the same length!");
+			System.exit(-1);
+		}
+		
+		for (int i=0; i< list1.size(); i++) {
+			EvaluationEntry<String> entry1 = list1.get(i);
+			EvaluationEntry<String> entry2 = list2.get(i);
+			if (positive(entry1)&&!positive(entry2)) {
 				sample1negative++;
 			}
-		}
-
-		for (EvaluationEntry<String> entry : e2.getEntries()) {
-			if (!positive(entry)) {
+			if (!positive(entry1)&&positive(entry2)) {
 				sample2negative++;
 			}
 		}
+
 		double mcNemar = Math.pow(Math.abs(sample2negative - sample1negative) - 0.5, 2)
 				/ (sample1negative + sample2negative);
 
