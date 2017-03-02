@@ -27,7 +27,7 @@ import de.unidue.ltl.evaluation.EvaluationEntry;
 public class McNemarTest {
 
 	@SuppressWarnings("unchecked")
-	public static double computeSignificance(Evaluation<String> e1, Evaluation<String> e2) {
+	public static double computeSignificance(Evaluation<String> e1, Evaluation<String> e2, String correctionType) throws Exception {
 
 		double sample1negative = 0;
 		double sample2negative = 0;
@@ -61,10 +61,20 @@ public class McNemarTest {
 			}
 		}
 
-		double mcNemar = Math.pow(Math.abs(sample2negative - sample1negative) - 0.5, 2)
+		double mcNemarYates = Math.pow(Math.abs(sample2negative - sample1negative) - 0.5, 2)
+				/ (sample1negative + sample2negative);
+		double mcNemarEdwards = Math.pow(Math.abs(sample2negative - sample1negative) - 1, 2)
 				/ (sample1negative + sample2negative);
 
-		return mcNemar;
+		if(correctionType.equals("Yates")){
+		return mcNemarYates;
+		}
+		else if(correctionType.equals("Edwards")){
+			return mcNemarEdwards;
+		}
+		else{
+			throw new Exception("Unknown correction Type for McNemar test. Only Yates and Edwards known.");
+		}
 	}
 
 	private static boolean positive(EvaluationEntry<String> entry) {

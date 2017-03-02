@@ -28,7 +28,7 @@ import de.unidue.ltl.evaluation.significance.McNemarTest;
 public class McNemarTestUnitTest {
 
 	@Test
-	public void mcnemareSignificanceTest() {
+	public void mcnemareSignificanceTest() throws Exception {
 		Evaluation<String> evaluation1 = new Evaluation<String>();
 		Evaluation<String> evaluation2 = new Evaluation<String>();
 		
@@ -52,7 +52,7 @@ public class McNemarTestUnitTest {
 			evaluation2.register("A", "B");
 		}
 		
-		assertEquals(5.25, McNemarTest.computeSignificance(evaluation1, evaluation2), 0.001);
+		assertEquals(5.25, McNemarTest.computeSignificance(evaluation1, evaluation2, "Yates"), 0.001);
 		
 	}
 
