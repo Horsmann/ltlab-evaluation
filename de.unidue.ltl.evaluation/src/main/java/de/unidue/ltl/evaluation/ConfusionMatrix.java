@@ -112,6 +112,9 @@ public class ConfusionMatrix<T>
     {
         FrequencyDistribution<T> fd = cfd.getFrequencyDistribution(label);
         long total = 0L;
+        if(fd == null){
+        	return total;
+        }
         for (T key : fd.getKeys()) {
             if (!key.equals(label)) {
                 total += fd.getCount(key);
