@@ -15,27 +15,85 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-
 package de.unidue.ltl.evaluation.measure.categorial;
 
-import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
-import de.unidue.ltl.evaluation.EvaluationEntry;
-import de.unidue.ltl.evaluation.EvaluationResult;
-import de.unidue.ltl.evaluation.measure.EvaluationMeasure;
-import de.unidue.ltl.evaluation.measure.util.CategorialMeasuresUtil;
+import de.unidue.ltl.evaluation.EvaluationData;
 
-public class Precision 
-	extends EvaluationMeasure<String>
+public class Precision<T>
+    extends CategoricalMeasure<T>
 {
-	
-	public Precision(Collection<EvaluationEntry<String>> entries) {
-		super(entries);
-	}
+    Map<T, Double> precisionMeasures = new HashMap<>();
+    double macro_precision;
+    double micro_precision;
+    double weighted_precision;
 
-	@Override
-	public Map<String, EvaluationResult> calculate() {
-		return CategorialMeasuresUtil.computeCategorialResults(entries);
-	}
+    private boolean didCalculate = false;
+
+    public Precision(EvaluationData<T> data)
+    {
+        super(data);
+    }
+
+    @Override
+    public void calculate()
+    {
+
+        if (didCalculate) {
+            return;
+        }
+
+        Set<T> labels = getDistinctLabels(data);
+
+        double precision_sum = 0d;
+        int tp_sum = 0;
+        int fp_sum = 0;
+
+        for (T label : labels) {
+            
+            Category cbv = getCategoryBaseValues(label);
+
+            double precision = (double) cbv.tp / (cbv.tp + cbv.fp);
+            precision_sum += precision;
+            weighted_precision += precision * (1.0 * (cbv.tp + cbv.fn) / (cbv.tp + cbv.fp + cbv.tn + cbv.fn));
+
+            tp_sum += cbv.tp;
+            fp_sum += cbv.fp;
+            precisionMeasures.put(label, precision);
+        }
+
+        macro_precision = precision_sum / labels.size();
+        micro_precision = (double) tp_sum / (tp_sum + fp_sum);
+
+        didCalculate = true;
+    }
+
+    public double getPrecisionForLabel(T label)
+    {
+        if (!didCalculate) {
+            calculate();
+        }
+        verifyLabelKnown(label, precisionMeasures);
+        return precisionMeasures.get(label);
+    }
+
+    public double getMacro_precision()
+    {
+        if (!didCalculate) {
+            calculate();
+        }
+        return macro_precision;
+    }
+
+    public double getMicro_precision()
+    {
+        if (!didCalculate) {
+            calculate();
+        }
+        return micro_precision;
+    }
+
 }

@@ -18,29 +18,60 @@
 
 package de.unidue.ltl.evaluation.measure.categorial;
 
-import java.util.Collection;
-import java.util.Map;
-
+import de.unidue.ltl.evaluation.EvaluationData;
 import de.unidue.ltl.evaluation.EvaluationEntry;
-import de.unidue.ltl.evaluation.EvaluationResult;
-import de.unidue.ltl.evaluation.measure.EvaluationMeasure;
-import de.unidue.ltl.evaluation.measure.util.CategorialMeasuresUtil;
+import de.unidue.ltl.evaluation.measure.EvaluationMeasureNeu;
 
-public class Accuracy 
-	extends EvaluationMeasure<String>
+public class Accuracy<T>
+    extends EvaluationMeasureNeu<T>
 {
-	
-	public Accuracy(Collection<EvaluationEntry<String>> entries) {
-		super(entries);
-	}
+    boolean didCalculate = false;
+    long numberInstances;
+    long correct;
+    long incorrect;
 
-	@Override
-	public Map<String, EvaluationResult> calculate() {
-		return CategorialMeasuresUtil.computeCategorialResults(entries);
-	}
+    public Accuracy(EvaluationData<T> data)
+    {
+        super(data);
+    }
 
-	@Override
-	public String getName() {
-		return this.getClass().getSimpleName();
-	}
+    @Override
+    public void calculate()
+    {
+        if (didCalculate) {
+            return;
+        }
+
+        for (EvaluationEntry<T> e : data) {
+            if (e.getGold().equals(e.getPredicted())) {
+                correct++;
+            }
+            else {
+                incorrect++;
+            }
+            numberInstances++;
+        }
+
+        didCalculate = true;
+    }
+
+    public double getAccuracy()
+    {
+        return (double) correct / numberInstances;
+    }
+
+    public long getNumberInstances()
+    {
+        return numberInstances;
+    }
+
+    public long getCorrect()
+    {
+        return correct;
+    }
+
+    public long getIncorrect()
+    {
+        return incorrect;
+    }
 }
