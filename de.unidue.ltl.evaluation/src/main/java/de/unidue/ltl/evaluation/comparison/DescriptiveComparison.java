@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2016
+ * Copyright 2017
  * Language Technology Lab
  * University of Duisburg-Essen
  *
@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.unidue.ltl.evaluation.evaluationComparison;
+package de.unidue.ltl.evaluation.comparison;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2016
+ * Copyright 2017
  * Language Technology Lab
  * University of Duisburg-Essen
  *
@@ -27,6 +27,10 @@ import java.util.Set;
 
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.ConditionalFrequencyDistribution;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyDistribution;
+import de.vandermeer.asciitable.v2.V2_AsciiTable;
+import de.vandermeer.asciitable.v2.render.V2_AsciiTableRenderer;
+import de.vandermeer.asciitable.v2.render.WidthLongestWord;
+import de.vandermeer.asciitable.v2.themes.V2_E_TableThemes;
 
 public class ConfusionMatrix<T>
 {
@@ -43,72 +47,68 @@ public class ConfusionMatrix<T>
 
     public String toString()
     {
-        int width = 10;
+        List<T> labels = getLabels();
+        int[][] array = getTwoDimensionalArray();
+        
+        V2_AsciiTable at = new V2_AsciiTable();
 
-        List<T> conditions = new ArrayList<T>(allLabels);
-        Collections.sort(conditions, new Comparator<T>()
-        {
+		at.addStrongRule();
+        at.addRow(getTableHeader("Gold"));
+        at.addRow(getLabelHeader(labels));
+		at.addStrongRule();
 
-            @Override
-            public int compare(T o1, T o2)
-            {
-                if (o1.equals(o2)) {
-                    return 0;
-                }
-                return o1.toString().compareTo(o2.toString());
-            }
-        });
+        for (int i=0; i<labels.size(); i++) {
+        	T label = labels.get(i);
+			Object[] values = new Object[labels.size()+1];
+			values[0] = label;
+	        for (int j=0; j<labels.size(); j++) {
+	        	values[j+1] = array[i][j];
+	        }
+			at.addRow(values);
+			at.addRule();
+		}
+		at.addStrongRule();
+		
+        V2_AsciiTableRenderer rend = new V2_AsciiTableRenderer();
+        rend.setTheme(V2_E_TableThemes.NO_BORDERS.get());
+		rend.setWidth(new WidthLongestWord());
 
-        StringBuilder sb = new StringBuilder();
-
-        sb.append("Gold (row) / Prediction (col)\n\n");
-
-        boolean first = true;
-        for (T c : conditions) {
-            if (first) {
-                sb.append(String.format("%" + (width * 2 - 1) + "s\t", c));
-                first = false;
-            }
-            else {
-                sb.append(String.format("%" + width + "s\t", c));
-            }
-        }
-
-        sb.append("\n");
-
-        for (T key : conditions) {
-            FrequencyDistribution<T> fd = cfd.getFrequencyDistribution(key);
-            sb.append(String.format("%" + width + "s", key));
-            first = true;
-            for (T t : conditions) {
-                if (first) {
-                    sb.append(String.format("%" + (width - 1) + "s\t", getCount(fd, t)));
-                    first = false;
-                }
-                else {
-                    sb.append(String.format("%" + (width) + "s\t", getCount(fd, t)));
-                }
-            }
-            sb.append("\n");
-        }
-
-        return sb.toString();
+        return rend.render(at).toString();
+    }
+    
+    private Object[] getTableHeader(String title) {
+    	Object[] header = new Object[allLabels.size()+1];
+    	for (int i=0; i<header.length; i++) {
+    			header[i] = null;
+    	}
+    	header[0] = "";
+    	header[header.length-1] = title;
+    	
+    	return header;
+    }
+    
+    private Object[] getLabelHeader(List<T> labels) {
+    	List<Object> values = new ArrayList<>();
+    	values.add("");
+    	values.addAll(labels);
+    	
+    	return values.toArray();
+    }
+    
+    public long getNumberOfEntries() {
+    	return cfd.getN();
     }
 
-    private String getCount(FrequencyDistribution<T> fd, T t)
-    {
-        if (fd != null) {
-            return String.valueOf(fd.getCount(t));
-        }
-        return "0";
+    public long getNumberOfConfusions(T goldLabel, T confusedLabel) {
+    	return cfd.getCount(goldLabel, confusedLabel);
     }
-
+    
     public long getTruePositives(T label)
     {
         return cfd.getCount(label, label);
     }
 
-    public long getFalseNegative(T label)
+    public long getFalseNegatives(T label)
     {
         FrequencyDistribution<T> fd = cfd.getFrequencyDistribution(label);
         long total = 0L;
@@ -150,5 +150,49 @@ public class ConfusionMatrix<T>
         }
         return total;
     }
+    
+    /**
+     * @return A list of the alphabetically sorted labels that are registered in this ConfusionMatrix.
+     */
+    public List<T> getLabels() {
+        List<T> labels = new ArrayList<T>(allLabels);
+        Collections.sort(labels, new Comparator<T>()
+        {
 
+            @Override
+            public int compare(T o1, T o2)
+            {
+                if (o1.equals(o2)) {
+                    return 0;
+                }
+                return o1.toString().compareTo(o2.toString());
+            }
+        });
+        return labels;
+    }
+    
+    public int[][] getTwoDimensionalArray() {
+    	List<T> labels = getLabels();
+    	int n = labels.size();
+    	
+        int[][] array =  new int[n][n];
+
+        int i=0;
+        for (T key : labels) {
+            FrequencyDistribution<T> fd = cfd.getFrequencyDistribution(key);
+            int j=0;
+            for (T t : labels) {
+            	if (fd != null) {
+                	array[i][j] = Long.valueOf(fd.getCount(t)).intValue();
+            	}
+            	else {
+                	array[i][j] = 0;
+            	}
+                j++;
+            }
+        	i++;
+        }
+        
+        return array;
+    }
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2016
+ * Copyright 2017
  * Language Technology Lab
  * University of Duisburg-Essen
  *
@@ -78,7 +78,7 @@ public class Evaluation<T> {
 	}
 
 	public EvaluationResult calculate(EvaluationMeasure<T> measure){
-		if (!calculatedMeasures.containsKey(measure.getClass())) {
+		if (!calculatedMeasures.containsKey(measure.getClass().getName())) {
 			calculatedMeasures.putAll(measure.calculate());
 		}
 		return calculatedMeasures.get(measure.getName());

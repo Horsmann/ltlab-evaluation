@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2016
+ * Copyright 2017
  * Language Technology Lab
  * University of Duisburg-Essen
  *
@@ -15,37 +15,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
+package de.unidue.ltl.evaluation.visualization;
 
-package de.unidue.ltl.evaluation;
-
-import static org.junit.Assert.*;
+import java.io.File;
+import java.io.IOException;
 
 import org.junit.Test;
 
-import de.unidue.ltl.evaluation.evaluationComparison.McNemarTest;
+import de.unidue.ltl.evaluation.Evaluation;
+import de.unidue.ltl.evaluation.util.TestUtils;
 
-public class McNemareTestUnitTest {
+public class ConfusionMatrixHeatmapTest {
 
 	@Test
-	public void mcnemareSignificanceTest() {
-		Evaluation<String> evaluation1 = new Evaluation<String>();
-		for (int i = 0; i < 8; i++) {
-			evaluation1.register("A", "A");
-		}
-		for (int i = 0; i < 16; i++) {
-			evaluation1.register("A", "B");
-		}
-
-		Evaluation<String> evaluation2 = new Evaluation<String>();
-		for (int i = 0; i < 11; i++) {
-			evaluation2.register("A", "A");
-		}
-		for (int i = 0; i < 5; i++) {
-			evaluation2.register("A", "B");
-		}
-
-		McNemarTest<String> mcNemare = new McNemarTest<String>(evaluation1, evaluation2);
-		assertEquals(5.25, mcNemare.computeSignificance(),0.001);
+	public void confusionMatrixHeatmapTest() 
+			throws IOException
+	{
+		Evaluation<String> eval = new Evaluation<>(TestUtils.getRandomCategorialEntries(100, 6));
+		
+		ConfusionMatrixHeatmap cmh = new ConfusionMatrixHeatmap(eval.getConfusionMatrix());
+		cmh.writePlot(new File("target/test.png"));
 	}
-
 }

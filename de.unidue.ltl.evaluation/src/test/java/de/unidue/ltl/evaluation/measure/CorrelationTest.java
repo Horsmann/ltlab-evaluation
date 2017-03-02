@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2016
+ * Copyright 2017
  * Language Technology Lab
  * University of Duisburg-Essen
  *
@@ -27,6 +27,8 @@ import org.junit.Test;
 
 import de.unidue.ltl.evaluation.EvaluationEntry;
 import de.unidue.ltl.evaluation.EvaluationResult;
+import de.unidue.ltl.evaluation.measure.correlation.PearsonCorrelation;
+import de.unidue.ltl.evaluation.measure.correlation.SpearmanCorrelation;
 import de.unidue.ltl.evaluation.measure.util.ScaleMeasureUtil;
 
 public class CorrelationTest {

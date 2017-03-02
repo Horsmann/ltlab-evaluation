@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2016
+ * Copyright 2017
  * Language Technology Lab
  * University of Duisburg-Essen
  *
@@ -24,7 +24,7 @@ import java.util.Collection;
 
 import org.junit.Test;
 /*******************************************************************************
- * Copyright 2016
+ * Copyright 2017
  * Language Technology Lab
  * University of Duisburg-Essen
  *
@@ -71,7 +71,7 @@ public class ScatterPlotTest {
 	{
         @SuppressWarnings("unchecked")
 		Evaluation<Double> mock = (Evaluation<Double>) Mockito.mock(Evaluation.class);
-        Mockito.when(mock.getEntries()).thenReturn(TestUtils.getRandomEntries(100));
+        Mockito.when(mock.getEntries()).thenReturn(TestUtils.getRandomGaussianEntries(100));
 
 		ScatterPlot.writePlot(mock, new File("target/testRandom.png"));
 	}

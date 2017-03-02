@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2016
+ * Copyright 2017
  * Language Technology Lab
  * University of Duisburg-Essen
  *
@@ -15,52 +15,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.unidue.ltl.evaluation.evaluationComparison;
-
-import java.util.ArrayList;
-import java.util.List;
+package de.unidue.ltl.evaluation.significance;
 
 import de.unidue.ltl.evaluation.Evaluation;
 import de.unidue.ltl.evaluation.EvaluationEntry;
 
-public class McNemarTest<T> {
+public class McNemarTest {
 
-	Evaluation<T> evaluation1;
-	Evaluation<T> evaluation2;
-
-	public double computeSignificance() {
-		List<EvaluationEntry<T>> c1 = new ArrayList<>(evaluation1.getEntries());
-		List<EvaluationEntry<T>> c2 = new ArrayList<>(evaluation2.getEntries());
+	public static double computeSignificance(Evaluation<String> e1, Evaluation<String> e2) {
 
 		double sample1negative = 0;
 		double sample2negative = 0;
-		for (EvaluationEntry<T> entry : c1) {
+		
+		for (EvaluationEntry<String> entry : e1.getEntries()) {
 			if (!positive(entry)) {
 				sample1negative++;
 			}
 		}
 
-		for (EvaluationEntry<T> entry : c2) {
+		for (EvaluationEntry<String> entry : e2.getEntries()) {
 			if (!positive(entry)) {
 				sample2negative++;
 			}
 		}
-		double mcNemare = Math.pow((Math.abs(sample2negative - sample1negative) - 0.5), 2)
+		double mcNemar = Math.pow(Math.abs(sample2negative - sample1negative) - 0.5, 2)
 				/ (sample1negative + sample2negative);
 
-		return mcNemare;
-
+		return mcNemar;
 	}
 
-	private boolean positive(EvaluationEntry<T> entry) {
-		if (entry.getGold().equals(entry.getPredicted())) {
-			return true;
-		}
-		return false;
-	}
-
-	public McNemarTest(Evaluation<T> evaluation1, Evaluation<T> evaluation2) {
-		this.evaluation1 = evaluation1;
-		this.evaluation2 = evaluation2;
+	private static boolean positive(EvaluationEntry<String> entry) {
+		return entry.getGold().equals(entry.getPredicted());
 	}
 }

@@ -16,27 +16,36 @@
  * limitations under the License.
  ******************************************************************************/
 
-package de.unidue.ltl.evaluation.examples;
+package de.unidue.ltl.evaluation.significance;
 
-import java.io.File;
-import java.util.Map;
+import static org.junit.Assert.*;
+
+import org.junit.Test;
 
 import de.unidue.ltl.evaluation.Evaluation;
-import de.unidue.ltl.evaluation.EvaluationResult;
-import de.unidue.ltl.evaluation.io.TcId2OutcomeReader;
-import de.unidue.ltl.evaluation.measure.util.CategorialMeasuresUtil;
+import de.unidue.ltl.evaluation.significance.McNemarTest;
 
-public class CalculateMeasureFromId2OutcomeFile {
-	
-	// TODO shouldn't that be a test
-	public static void main(String[] args)
-			throws Exception
-	{
-		Evaluation<String> evaluation = TcId2OutcomeReader.read(new File("src/test/resources/io/id2Outcome_gunshot.txt"));
-		Map<String, EvaluationResult> results = CategorialMeasuresUtil
-				.computeCategorialResults(evaluation.getEntries());
-		for (String measure : results.keySet()) {
-			System.out.println(measure + " " + results.get(measure).getResult());
+public class McNemareTestUnitTest {
+
+	@Test
+	public void mcnemareSignificanceTest() {
+		Evaluation<String> evaluation1 = new Evaluation<String>();
+		for (int i = 0; i < 8; i++) {
+			evaluation1.register("A", "A");
 		}
+		for (int i = 0; i < 16; i++) {
+			evaluation1.register("A", "B");
+		}
+
+		Evaluation<String> evaluation2 = new Evaluation<String>();
+		for (int i = 0; i < 11; i++) {
+			evaluation2.register("A", "A");
+		}
+		for (int i = 0; i < 5; i++) {
+			evaluation2.register("A", "B");
+		}
+
+		assertEquals(5.25, McNemarTest.computeSignificance(evaluation1, evaluation2), 0.001);
 	}
+
 }

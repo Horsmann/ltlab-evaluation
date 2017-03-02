@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2016
+ * Copyright 2017
  * Language Technology Lab
  * University of Duisburg-Essen
  *
@@ -19,18 +19,19 @@ package de.unidue.ltl.evaluation.examples;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 import de.unidue.ltl.evaluation.Evaluation;
 import de.unidue.ltl.evaluation.EvaluationResult;
 import de.unidue.ltl.evaluation.io.TextReader;
-import de.unidue.ltl.evaluation.measure.EvaluationMeasure;
 import de.unidue.ltl.evaluation.measure.util.CategorialMeasuresUtil;
 
 public class CalculateMeasuresFromGold2PredictedFile {
 
-	public static void main(String[] args) throws IOException {
+	// TODO shouldn't that be a test
+	public static void main(String[] args)
+			throws IOException
+	{
 		Evaluation<String> evaluation = TextReader
 				.read(new File("src/test/resources/io/tab-separated_gold2predicted.txt"));
 		Map<String, EvaluationResult> results = CategorialMeasuresUtil

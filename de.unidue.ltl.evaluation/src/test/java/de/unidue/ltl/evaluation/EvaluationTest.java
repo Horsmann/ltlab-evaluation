@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2016
+ * Copyright 2017
  * Language Technology Lab
  * University of Duisburg-Essen
  *
@@ -29,8 +29,8 @@ import java.util.Set;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import de.unidue.ltl.evaluation.measure.Accuracy;
 import de.unidue.ltl.evaluation.measure.EvaluationMeasure;
+import de.unidue.ltl.evaluation.measure.categorial.Accuracy;
 
 public class EvaluationTest{
 

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2016
+ * Copyright 2017
  * Language Technology Lab
  * University of Duisburg-Essen
  *
@@ -27,7 +27,7 @@ import org.junit.Test;
 
 import de.unidue.ltl.evaluation.EvaluationEntry;
 import de.unidue.ltl.evaluation.EvaluationResult;
-import de.unidue.ltl.evaluation.measure.Accuracy;
+import de.unidue.ltl.evaluation.measure.categorial.Accuracy;
 import de.unidue.ltl.evaluation.measure.util.CategorialMeasuresUtil;
 import de.unidue.ltl.evaluation.util.TestUtils;
 
