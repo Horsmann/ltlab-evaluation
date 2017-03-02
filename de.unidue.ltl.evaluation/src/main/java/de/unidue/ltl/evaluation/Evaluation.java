@@ -41,6 +41,7 @@ public class Evaluation<T> {
 	}
 
 	public Evaluation(String experimentName) {
+		this.name = experimentName;
 		this.entries = new ArrayList<>();
 		this.calculatedMeasures= new HashMap<>();
 		this.confusionMatrix = new ConfusionMatrix<T>();

@@ -19,14 +19,13 @@ package de.unidue.ltl.evaluation.significance;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import de.unidue.ltl.evaluation.Evaluation;
 import de.unidue.ltl.evaluation.EvaluationEntry;
 
 public class McNemarTest {
 
-	@SuppressWarnings("unchecked")
+	
 	public static double computeSignificance(Evaluation<String> e1, Evaluation<String> e2, String correctionType) throws Exception {
 
 		double sample1negative = 0;
@@ -61,6 +60,9 @@ public class McNemarTest {
 			}
 		}
 
+		if (sample1negative==0&&sample2negative==0){
+			return 0.0;
+		}
 		double mcNemarYates = Math.pow(Math.abs(sample2negative - sample1negative) - 0.5, 2)
 				/ (sample1negative + sample2negative);
 		double mcNemarEdwards = Math.pow(Math.abs(sample2negative - sample1negative) - 1, 2)
