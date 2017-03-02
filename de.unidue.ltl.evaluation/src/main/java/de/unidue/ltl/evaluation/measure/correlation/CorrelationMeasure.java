@@ -15,42 +15,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-
 package de.unidue.ltl.evaluation.measure.correlation;
 
 import de.unidue.ltl.evaluation.EvaluationData;
-import de.unidue.ltl.evaluation.measure.util.VectorPair;
+import de.unidue.ltl.evaluation.measure.EvaluationMeasureNeu;
 
-public class PearsonCorrelation extends CorrelationMeasure<Double>
+public abstract class CorrelationMeasure<T>
+    extends EvaluationMeasureNeu<T>
 {
-    
-    boolean didCalculate=false;
-    double computeCorrelation;
 
-    public PearsonCorrelation(EvaluationData<Double> data)
+    public CorrelationMeasure(EvaluationData<T> data)
     {
         super(data);
     }
 
-    @Override
-    public double getCorrelation()
-    {
-        if(!didCalculate){
-            calculate();
-        }
-        
-        return computeCorrelation;
-    }
-
-    @Override
-    public void calculate()
-    {
-        if(didCalculate){
-            return;
-        }
-        VectorPair<Double> vectors = new VectorPair<>(data);
-        
-        computeCorrelation = org.dkpro.statistics.correlation.PearsonCorrelation.computeCorrelation(vectors.getVal1(), vectors.getVal2());
-    }
+    public abstract double getCorrelation();
 
 }

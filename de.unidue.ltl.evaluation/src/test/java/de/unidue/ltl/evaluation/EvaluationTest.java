@@ -52,20 +52,20 @@ public class EvaluationTest{
 	}
 	
 	// enable later when everything is implemented
-	@Ignore
-	@Test
-	public void addMeasureTest(){
-		Evaluation<String> evaluation= new Evaluation<>();
-		evaluation.register("A", "B");
-		evaluation.register("B", "B");
-		
-		Map<Class<? extends EvaluationMeasure<String>>, EvaluationResult> evalResults = new HashMap<>();
-		evalResults.put(Accuracy.class, new EvaluationResult(1.0));
-	
-		Set<String> expectedMeasures = new HashSet<>();
-		expectedMeasures.add("Accuracy");
-		assertEquals(expectedMeasures, evaluation.getCalculatedMeasureNames());
-
-	}
+//	@Ignore
+//	@Test
+//	public void addMeasureTest(){
+//		Evaluation<String> evaluation= new Evaluation<>();
+//		evaluation.register("A", "B");
+//		evaluation.register("B", "B");
+//		
+//		Map<Class<? extends EvaluationMeasure<String>>, EvaluationResult> evalResults = new HashMap<>();
+//		evalResults.put(Accuracy.class, new EvaluationResult(1.0));
+//	
+//		Set<String> expectedMeasures = new HashSet<>();
+//		expectedMeasures.add("Accuracy");
+//		assertEquals(expectedMeasures, evaluation.getCalculatedMeasureNames());
+//
+//	}
 	
 }

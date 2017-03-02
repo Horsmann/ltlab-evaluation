@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import de.unidue.ltl.evaluation.EvaluationData;
 import de.unidue.ltl.evaluation.EvaluationEntry;
 
 public class VectorPair<T> {
@@ -43,6 +44,16 @@ public class VectorPair<T> {
 			
 		}
 	}
+	
+	public VectorPair(EvaluationData<T> data) {
+        this.val1 = new ArrayList<>();
+        this.val2 = new ArrayList<>();
+        
+        for (EvaluationEntry<T> entry : data) {
+            val1.add(entry.getGold());
+            val2.add(entry.getPredicted());
+        }
+    }
 
 	public List<T> getVal1() {
 		return val1;
