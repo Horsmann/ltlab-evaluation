@@ -2,6 +2,7 @@ package de.unidue.ltl.evaluation.significance;
 
 import static org.junit.Assert.*;
 
+import java.util.Iterator;
 import java.util.Map;
 
 import org.junit.Test;
@@ -40,7 +41,14 @@ public class McNemarBulkTestUnitTest {
 		McNemarBulkTest test = new McNemarBulkTest();
 		test.register(evaluation1);
 		test.register(evaluation2);
-		Map<String, Map<String, Double>> table = test.computeBulkTable();	
+		Map<String, Map<String, Double>> table = test.computeBulkTable();
+		System.out.println("McNemarBulk p-values");
+		for (String row : table.keySet()) {
+			for (String column : table.get(row).keySet()) {
+				System.out.print(table.get(row).get(column)+"\t");
+			}
+			System.out.print("\n");
+		}
 		assertEquals(0.025, table.get(evaluation1.getEvalMetaData().getName())
 				.get(evaluation2.getEvalMetaData().getName()), 0.001);
 		

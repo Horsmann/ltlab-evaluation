@@ -63,6 +63,9 @@ public class McNemarTest {
 			}
 		}
 
+		if (sample1negative==0&&sample2negative==0){
+			return 0.0;
+		}
 		double mcNemarYates = Math.pow(Math.abs(sample2negative - sample1negative) - 0.5, 2)
 				/ (sample1negative + sample2negative);
 		double mcNemarEdwards = Math.pow(Math.abs(sample2negative - sample1negative) - 1, 2)

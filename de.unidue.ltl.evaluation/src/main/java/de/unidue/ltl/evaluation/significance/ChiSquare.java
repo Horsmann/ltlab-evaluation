@@ -27,17 +27,14 @@ public class ChiSquare {
 		Map<Double, Double> pvalues = chiSquareTable.get(degreesOfFreedom);
 		Iterator<Double> iter =pvalues.keySet().iterator();
 		double lowestP = 1.0;
-		System.out.println("get p value for "+chiSquare);
 		while (iter.hasNext()){
 			double threshold = iter.next();
 			if (chiSquare > threshold){
 				if (pvalues.get(threshold) < lowestP){
 					lowestP = pvalues.get(threshold);
-					System.out.println("New lowest p: "+lowestP+"\tthreshold: "+threshold);
 				}
 			}
 		}
-		System.out.println(lowestP);
 		return lowestP;
 	}
 	
