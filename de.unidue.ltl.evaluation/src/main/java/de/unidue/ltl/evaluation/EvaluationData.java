@@ -10,7 +10,7 @@ public class EvaluationData<T>
 {
 
     private List<EvaluationEntry<T>> entries;
-    private String name = "<no-name-set>";
+    private EvaluationMetaData<T> meta=null;
 
     public EvaluationData()
     {
@@ -22,21 +22,14 @@ public class EvaluationData<T>
         this.entries = new ArrayList<>(entries);
     }
 
-    public EvaluationData(Collection<EvaluationEntry<T>> entries, String name)
-    {
-        this.name = name;
-        this.entries = new ArrayList<>(entries);
-    }
-
-    public EvaluationData(String name)
-    {
-        this.name = name;
-    }
-
     public void register(T gold, T predicted)
     {
         EvaluationEntry<T> entry = new EvaluationEntry<T>(gold, predicted);
         entries.add(entry);
+    }
+    
+    public void setMetaData(EvaluationMetaData<T> meta){
+        this.meta = meta;
     }
 
     @Override
@@ -62,11 +55,6 @@ public class EvaluationData<T>
         };
     }
 
-    public String getName()
-    {
-        return name;
-    }
-
     public long size()
     {
         return entries.size();
@@ -79,6 +67,6 @@ public class EvaluationData<T>
 
     public EvaluationMetaData<T> getMetaData()
     {
-        return null;
+        return meta;
     }
 }

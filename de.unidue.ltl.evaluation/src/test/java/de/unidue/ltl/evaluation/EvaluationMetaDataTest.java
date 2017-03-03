@@ -31,7 +31,7 @@ public class EvaluationMetaDataTest {
 		Collection<EvaluationEntry<String>> entries= new ArrayList<>();
 		entries.add(new EvaluationEntry<String>("A", "B"));
 		entries.add(new EvaluationEntry<String>("A", "A"));
-		EvaluationData<String> evaluation= new EvaluationData<>(entries,"NamedEvaluation");
+		EvaluationData<String> evaluation= new EvaluationData<>(entries);
 		assertEquals("NamedEvaluation",evaluation.getMetaData().getName());
 	}
 	
@@ -40,7 +40,7 @@ public class EvaluationMetaDataTest {
 		Collection<EvaluationEntry<String>> entries= new ArrayList<>();
 		entries.add(new EvaluationEntry<String>("A", "B"));
 		entries.add(new EvaluationEntry<String>("A", "A"));
-		EvaluationData<String> evaluation= new EvaluationData<>(entries,"NamedEvaluation");
+		EvaluationData<String> evaluation= new EvaluationData<>(entries);
 		assertEquals(StringUtils.join(Arrays.asList("A","B"), " "),StringUtils.join(evaluation.getMetaData().getLabels()," "));
 	}
 	
@@ -55,28 +55,16 @@ public class EvaluationMetaDataTest {
 		entries.add(new EvaluationEntry<String>("A", "A"));
 		entries.add(new EvaluationEntry<String>("A", "B"));
 		entries.add(new EvaluationEntry<String>("A", "A"));
-		EvaluationData<String> evaluation= new EvaluationData<>(entries,"NamedEvaluation");
+		EvaluationData<String> evaluation= new EvaluationData<>(entries);
 		assertEquals(0,evaluation.getMetaData().getDistributionsPerLabelGold().get("B").intValue());
 		assertEquals(3,evaluation.getMetaData().getDistributionsPerLabelPredicted().get("B").intValue());
 		assertEquals(7,evaluation.getMetaData().getDistributionsPerLabelGold().get("A").intValue());
 		assertEquals(4,evaluation.getMetaData().getDistributionsPerLabelPredicted().get("A").intValue());
 	}
 	
-	@Test
-	public void evaluationMetaDataLabelUpdateTest(){
-		Collection<EvaluationEntry<String>> entries= new ArrayList<>();
-		entries.add(new EvaluationEntry<String>("A", "B"));
-		entries.add(new EvaluationEntry<String>("A", "A"));
-		EvaluationData<String> evaluation= new EvaluationData<>(entries,"NamedEvaluation");
-		assertEquals(2,evaluation.getMetaData().getNumberOfInstances());
-		
-		evaluation.register("A", "A");
-		assertEquals(3,evaluation.getMetaData().getNumberOfInstances());
-
-	}
 	
 	@Test
-	public void evaluationMetaDataPieChartStatsTest(){
+	public void evaluationMetaDataPieChartStatsTest() throws Exception{
 		Collection<EvaluationEntry<String>> entries= new ArrayList<>();
 		entries.add(new EvaluationEntry<String>("A", "B"));
 		entries.add(new EvaluationEntry<String>("A", "A"));
@@ -86,7 +74,7 @@ public class EvaluationMetaDataTest {
 		entries.add(new EvaluationEntry<String>("A", "A"));
 		entries.add(new EvaluationEntry<String>("A", "B"));
 		entries.add(new EvaluationEntry<String>("A", "A"));
-		EvaluationData<String> evaluation= new EvaluationData<>(entries,"NamedEvaluation");
+		EvaluationData<String> evaluation= new EvaluationData<>(entries);
 		evaluation.getMetaData().getPieChart();
 	}
 	

@@ -19,10 +19,12 @@ package de.unidue.ltl.evaluation;
 
 import java.io.File;
 import java.text.DecimalFormat;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
@@ -34,36 +36,39 @@ import org.jfree.data.general.DefaultPieDataset;
 
 public class EvaluationMetaData<T>
 {
-
-    private String name;
     private List<T> labels;
-    private Collection<EvaluationEntry<T>> entries;
     private Map<T, Integer> distributionsPerLabelPredicted;
     private Map<T, Integer> distributionsPerLabelGold;
-    private int numberOfInstances;
+    private long numberOfInstances;
+    private String name;
 
-    public EvaluationMetaData(String name, List<T> labels, Collection<EvaluationEntry<T>> entries)
+    public EvaluationMetaData(String name, EvaluationData<T> data)
     {
-        this.setName(name);
-        this.setLabels(labels);
-        this.setEntries(entries);
-        this.distributionsPerLabelPredicted = getDistributionsPerLabel(true);
-        this.distributionsPerLabelGold = getDistributionsPerLabel(false);
-        this.numberOfInstances = entries.size();
+        this.name = name;
+        this.labels = getDistinctLabels(data);
+        
+        this.distributionsPerLabelPredicted = getDistributionsPerLabel(data,true);
+        this.distributionsPerLabelGold = getDistributionsPerLabel(data,false);
+        this.numberOfInstances = data.size();
     }
 
-    private void setEntries(Collection<EvaluationEntry<T>> entries)
+    private List<T> getDistinctLabels(EvaluationData<T> data)
     {
-        this.entries = entries;
+        Set<T> labels = new HashSet<>();
+        for(EvaluationEntry<T> e : data){
+            labels.add(e.getGold());
+        }
+        
+        return new ArrayList<T>(labels);
     }
 
-    public void getPieChart()
+    public void getPieChart() throws Exception
     {
         getPieChart(true);
         getPieChart(false);
     }
 
-    public void getPieChart(boolean isPredicted)
+    public void getPieChart(boolean isPredicted) throws Exception
     {
         DefaultPieDataset dataset = new DefaultPieDataset();
         if (isPredicted) {
@@ -104,7 +109,7 @@ public class EvaluationMetaData<T>
             }
         }
         catch (Exception e) {
-            System.err.println("couldn't write chart");
+           throw new Exception("couldn't write chart");
         }
     }
 
@@ -132,21 +137,21 @@ public class EvaluationMetaData<T>
         return sb.toString();
     }
 
-    private Map<T, Integer> getDistributionsPerLabel(boolean isPredicted)
+    private Map<T, Integer> getDistributionsPerLabel(EvaluationData<T> data, boolean isPredicted)
     {
         Map<T, Integer> distributionsPerLabel = new HashMap<>();
 
         for (T label : labels) {
-            int count = getCount4label(label, isPredicted);
+            int count = getCount4label(data, label, isPredicted);
             distributionsPerLabel.put(label, count);
         }
         return distributionsPerLabel;
     }
 
-    private int getCount4label(T label, boolean isPredicted)
+    private int getCount4label(EvaluationData<T> data, T label, boolean isPredicted)
     {
         int counter = 0;
-        for (EvaluationEntry<T> entry : entries) {
+        for (EvaluationEntry<T> entry : data) {
             if (isPredicted) {
                 if (entry.getPredicted().equals(label))
                     counter++;
@@ -174,26 +179,11 @@ public class EvaluationMetaData<T>
         return name;
     }
 
-    public void setName(String name)
-    {
-        this.name = name;
-    }
-
     public List<T> getLabels()
     {
         return labels;
     }
-
-    public void setLabels(List<T> labels)
-    {
-        this.labels = labels;
-    }
-
-    public Collection<EvaluationEntry<T>> getEntries()
-    {
-        return entries;
-    }
-
+    
     public Map<T, Integer> getDistributionsPerLabelPredicted()
     {
         return distributionsPerLabelPredicted;
@@ -204,23 +194,4 @@ public class EvaluationMetaData<T>
         return distributionsPerLabelGold;
     }
 
-    public int getNumberOfInstances()
-    {
-        return numberOfInstances;
-    }
-
-    public void setNumberOfInstances(int numberOfInstances)
-    {
-        this.numberOfInstances = numberOfInstances;
-    }
-
-    public void setDistributionsPerLabelPredicted(Map<T, Integer> distributionsPerLabelPredicted)
-    {
-        this.distributionsPerLabelPredicted = distributionsPerLabelPredicted;
-    }
-
-    public void setDistributionsPerLabelGold(Map<T, Integer> distributionsPerLabelGold)
-    {
-        this.distributionsPerLabelGold = distributionsPerLabelGold;
-    }
 }

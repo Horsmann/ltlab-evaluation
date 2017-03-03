@@ -21,7 +21,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import de.unidue.ltl.evaluation.Evaluation;
 import de.unidue.ltl.evaluation.EvaluationData;
 
 public class DescriptiveComparisonTest {

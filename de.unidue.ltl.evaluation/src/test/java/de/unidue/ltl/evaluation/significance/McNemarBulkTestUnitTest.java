@@ -29,8 +29,8 @@ public class McNemarBulkTestUnitTest {
 
 	@Test
 	public void mcnemareSignificanceTest() throws Exception {
-		EvaluationData<String> evaluation1 = new EvaluationData<String>("eval_a");
-		EvaluationData<String> evaluation2 = new EvaluationData<String>("eval_b");
+		EvaluationData<String> evaluation1 = new EvaluationData<String>();
+		EvaluationData<String> evaluation2 = new EvaluationData<String>();
 		
 		
 		for(int i=0; i< 8; i++){
