@@ -36,27 +36,48 @@ import org.jfree.data.general.DefaultPieDataset;
 
 public class EvaluationMetaData<T>
 {
+    public static final String DEFAULT_NAME = "no-name-set";
     private List<T> labels;
     private Map<T, Integer> distributionsPerLabelPredicted;
     private Map<T, Integer> distributionsPerLabelGold;
-    private long numberOfInstances;
+    private long numberOfEntries;
     private String name;
 
-    public EvaluationMetaData(String name, EvaluationData<T> data)
+    public EvaluationMetaData(String name, Iterable<EvaluationEntry<T>> data)
     {
         this.name = name;
         this.labels = getDistinctLabels(data);
-        
         this.distributionsPerLabelPredicted = getDistributionsPerLabel(data,true);
         this.distributionsPerLabelGold = getDistributionsPerLabel(data,false);
-        this.numberOfInstances = data.size();
+        this.numberOfEntries = getEntryCount(data);
+    }
+    
+    private long getEntryCount(Iterable<EvaluationEntry<T>> data)
+    {
+        int count=0;
+        for (EvaluationEntry<T> e : data){
+            count++;
+        }
+        return count;
     }
 
-    private List<T> getDistinctLabels(EvaluationData<T> data)
+    public EvaluationMetaData()
+    {
+        this.name = DEFAULT_NAME;
+        
+        List<EvaluationEntry<T>> emptyList = new ArrayList<>();
+        this.labels = getDistinctLabels(emptyList);
+        this.distributionsPerLabelPredicted = getDistributionsPerLabel(emptyList,true);
+        this.distributionsPerLabelGold = getDistributionsPerLabel(emptyList,false);
+        this.numberOfEntries = emptyList.size();
+    }
+
+    private List<T> getDistinctLabels(Iterable<EvaluationEntry<T>> data)
     {
         Set<T> labels = new HashSet<>();
         for(EvaluationEntry<T> e : data){
             labels.add(e.getGold());
+            labels.add(e.getPredicted());
         }
         
         return new ArrayList<T>(labels);
@@ -119,7 +140,7 @@ public class EvaluationMetaData<T>
         StringBuilder sb = new StringBuilder();
         sb.append("Name:" + "\t" + name + System.lineSeparator());
         sb.append("Labels:" + "\t" + labels + System.lineSeparator());
-        sb.append("# of Instances:" + "\t" + numberOfInstances + System.lineSeparator());
+        sb.append("# of Instances:" + "\t" + numberOfEntries + System.lineSeparator());
         sb.append(System.lineSeparator());
         sb.append("Distribution of Gold Labels:" + System.lineSeparator());
         sb.append("\t" + "L : #" + System.lineSeparator());
@@ -137,7 +158,7 @@ public class EvaluationMetaData<T>
         return sb.toString();
     }
 
-    private Map<T, Integer> getDistributionsPerLabel(EvaluationData<T> data, boolean isPredicted)
+    private Map<T, Integer> getDistributionsPerLabel(Iterable<EvaluationEntry<T>> data, boolean isPredicted)
     {
         Map<T, Integer> distributionsPerLabel = new HashMap<>();
 
@@ -148,10 +169,10 @@ public class EvaluationMetaData<T>
         return distributionsPerLabel;
     }
 
-    private int getCount4label(EvaluationData<T> data, T label, boolean isPredicted)
+    private int getCount4label(Iterable<EvaluationEntry<T>> entries, T label, boolean isPredicted)
     {
         int counter = 0;
-        for (EvaluationEntry<T> entry : data) {
+        for (EvaluationEntry<T> entry : entries) {
             if (isPredicted) {
                 if (entry.getPredicted().equals(label))
                     counter++;
@@ -176,6 +197,9 @@ public class EvaluationMetaData<T>
 
     public String getName()
     {
+        if(name==null){
+            return "no-name-set";
+        }
         return name;
     }
 

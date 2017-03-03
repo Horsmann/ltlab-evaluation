@@ -32,7 +32,7 @@ public class EvaluationMetaDataTest {
 		entries.add(new EvaluationEntry<String>("A", "B"));
 		entries.add(new EvaluationEntry<String>("A", "A"));
 		EvaluationData<String> evaluation= new EvaluationData<>(entries);
-		assertEquals("NamedEvaluation",evaluation.getMetaData().getName());
+		assertEquals(EvaluationMetaData.DEFAULT_NAME,evaluation.getMetaData().getName());
 	}
 	
 	@Test

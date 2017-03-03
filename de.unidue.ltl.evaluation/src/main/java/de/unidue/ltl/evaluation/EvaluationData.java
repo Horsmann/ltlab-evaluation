@@ -10,16 +10,18 @@ public class EvaluationData<T>
 {
 
     private List<EvaluationEntry<T>> entries;
-    private EvaluationMetaData<T> meta=null;
+    private EvaluationMetaData<T> meta = null;
 
     public EvaluationData()
     {
         this.entries = new ArrayList<>();
+        this.meta = new EvaluationMetaData<T>();
     }
 
     public EvaluationData(Collection<EvaluationEntry<T>> entries)
     {
         this.entries = new ArrayList<>(entries);
+        this.meta = new EvaluationMetaData<>(EvaluationMetaData.DEFAULT_NAME, entries);
     }
 
     public void register(T gold, T predicted)
@@ -27,8 +29,9 @@ public class EvaluationData<T>
         EvaluationEntry<T> entry = new EvaluationEntry<T>(gold, predicted);
         entries.add(entry);
     }
-    
-    public void setMetaData(EvaluationMetaData<T> meta){
+
+    public void setMetaData(EvaluationMetaData<T> meta)
+    {
         this.meta = meta;
     }
 
@@ -69,4 +72,5 @@ public class EvaluationData<T>
     {
         return meta;
     }
+
 }
