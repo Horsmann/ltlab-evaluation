@@ -36,13 +36,16 @@ public class ConfusionMatrix<T>
 {
     Set<T> allLabels = new HashSet<>();
     ConditionalFrequencyDistribution<T, T> cfd = new ConditionalFrequencyDistribution<>();
+    
+    public ConfusionMatrix(EvaluationData<T> data){
+        for(EvaluationEntry<T> e : data){
+            T gold = e.getGold();
+            T predicted = e.getPredicted();
+            cfd.addSample(gold, predicted, 1);
 
-    public void register(T gold, T predicted)
-    {
-        cfd.addSample(gold, predicted, 1);
-
-        allLabels.add(gold);
-        allLabels.add(predicted);
+            allLabels.add(gold);
+            allLabels.add(predicted);
+        }
     }
 
     public String toString()

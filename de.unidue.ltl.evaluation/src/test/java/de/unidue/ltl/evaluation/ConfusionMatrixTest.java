@@ -26,17 +26,19 @@ public class ConfusionMatrixTest
     @Test
     public void testConfusionMatrix()
     {
-        ConfusionMatrix<String> matrix = new ConfusionMatrix<>();
-        matrix.register("A", "B");
-        matrix.register("A", "A");
-        matrix.register("A", "A");
-        matrix.register("B", "B");
-        matrix.register("B", "B");
-        matrix.register("B", "B");
-        matrix.register("B", "B");
-        matrix.register("B", "A");
-        matrix.register("B", "A");
-        matrix.register("B", "A");
+        EvaluationData<String> data = new EvaluationData<String>();
+        data.register("A", "B");
+        data.register("A", "A");
+        data.register("A", "A");
+        data.register("B", "B");
+        data.register("B", "B");
+        data.register("B", "B");
+        data.register("B", "B");
+        data.register("B", "A");
+        data.register("B", "A");
+        data.register("B", "A");
+        
+        ConfusionMatrix<String> matrix = new ConfusionMatrix<>(data);
 
         System.out.println(matrix.toString());
         
@@ -62,17 +64,20 @@ public class ConfusionMatrixTest
         assertEquals(3, array2d[1][0]);
         assertEquals(4, array2d[1][1]);
         
-        ConfusionMatrix<String> matrix2 = new ConfusionMatrix<>();
-        matrix2.register("Z", "B");
-        matrix2.register("A", "A");
-        matrix2.register("A", "A");
-        matrix2.register("Z", "B");
-        matrix2.register("B", "B");
-        matrix2.register("B", "Z");
-        matrix2.register("B", "B");
-        matrix2.register("B", "A");
-        matrix2.register("B", "Z");
-        matrix2.register("B", "A");
+        
+        data = new EvaluationData<String>();
+        data.register("Z", "B");
+        data.register("A", "A");
+        data.register("A", "A");
+        data.register("Z", "B");
+        data.register("B", "B");
+        data.register("B", "Z");
+        data.register("B", "B");
+        data.register("B", "A");
+        data.register("B", "Z");
+        data.register("B", "A");
+        
+        ConfusionMatrix<String> matrix2 = new ConfusionMatrix<>(data);
 
         System.out.println(matrix2.toString());
         
