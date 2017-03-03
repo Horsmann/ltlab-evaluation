@@ -29,6 +29,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 import de.unidue.ltl.evaluation.Evaluation;
+import de.unidue.ltl.evaluation.EvaluationData;
 import de.unidue.ltl.evaluation.EvaluationEntry;
 
 public class ErrorDistributionChart<T> {
@@ -39,7 +40,7 @@ public class ErrorDistributionChart<T> {
 	 * @param targetFile
 	 * @throws IOException
 	 */
-	public void plotDistribution(Evaluation<T> evaluation, File targetFile) throws IOException{
+	public void plotDistribution(EvaluationData<T> evaluation, File targetFile) throws IOException{
 //		DefaultCategoryDataset data = new DefaultCategoryDataset();
 //		Collection<EvaluationEntry<T>> entries=evaluation.getEntries();
 //		for(EvaluationEntry<T> entry: entries){

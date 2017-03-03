@@ -21,14 +21,14 @@ import java.io.File;
 import java.io.IOException;
 
 import org.junit.Test;
-import de.unidue.ltl.evaluation.Evaluation;
-import de.unidue.ltl.evaluation.util.TestUtils;
+
+import de.unidue.ltl.evaluation.EvaluationData;
 
 public class ErrorDistributionChartTest {
 
 	@Test
 	public void errorDistributionTest() throws IOException {
-		Evaluation<String> eval = new Evaluation<>("My Stuff");
+		EvaluationData<String> eval = new EvaluationData<>();
 		eval.register("A", "C");
 		eval.register("B", "A");
 		eval.register("B", "B");

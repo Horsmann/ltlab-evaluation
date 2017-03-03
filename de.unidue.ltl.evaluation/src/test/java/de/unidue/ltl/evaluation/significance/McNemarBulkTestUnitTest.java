@@ -23,14 +23,14 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import de.unidue.ltl.evaluation.Evaluation;
+import de.unidue.ltl.evaluation.EvaluationData;
 
 public class McNemarBulkTestUnitTest {
 
 	@Test
 	public void mcnemareSignificanceTest() throws Exception {
-		Evaluation<String> evaluation1 = new Evaluation<String>("eval_a");
-		Evaluation<String> evaluation2 = new Evaluation<String>("eval_b");
+		EvaluationData<String> evaluation1 = new EvaluationData<String>("eval_a");
+		EvaluationData<String> evaluation2 = new EvaluationData<String>("eval_b");
 		
 		
 		for(int i=0; i< 8; i++){
@@ -64,8 +64,8 @@ public class McNemarBulkTestUnitTest {
 			}
 			System.out.print("\n");
 		}
-		assertEquals(0.025, table.get(evaluation1.getEvalMetaData().getName())
-				.get(evaluation2.getEvalMetaData().getName()), 0.001);
+		assertEquals(0.025, table.get(evaluation1.getMetaData().getName())
+				.get(evaluation2.getMetaData().getName()), 0.001);
 		
 	}
 	

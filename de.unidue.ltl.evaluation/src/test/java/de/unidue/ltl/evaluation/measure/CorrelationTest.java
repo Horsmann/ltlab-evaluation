@@ -20,10 +20,8 @@ package de.unidue.ltl.evaluation.measure;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import de.unidue.ltl.evaluation.EvaluationData;
-import de.unidue.ltl.evaluation.EvaluationMetaData;
 import de.unidue.ltl.evaluation.measure.correlation.PearsonCorrelation;
 import de.unidue.ltl.evaluation.measure.correlation.SpearmanCorrelation;
 
@@ -31,8 +29,7 @@ public class CorrelationTest {
 	
 	@Test
 	public void correlationTest(){
-		@SuppressWarnings("unchecked")
-        EvaluationData<Double> data = new EvaluationData<>(Mockito.mock(EvaluationMetaData.class));
+        EvaluationData<Double> data = new EvaluationData<>();
 		data.register(1.0, 2.0);
 		data.register(2.0, 3.0);
 		data.register(3.0, 4.0);

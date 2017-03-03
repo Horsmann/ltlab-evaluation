@@ -15,29 +15,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.unidue.ltl.evaluation.examples;
+
+package de.unidue.ltl.evaluation.io;
+
+import static org.junit.Assert.*;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.Map;
 
-import de.unidue.ltl.evaluation.Evaluation;
-import de.unidue.ltl.evaluation.EvaluationResult;
-import de.unidue.ltl.evaluation.io.TextReader;
+import org.junit.Test;
 
-public class CalculateMeasuresFromGold2PredictedFile {
+import de.unidue.ltl.evaluation.EvaluationData;
+import de.unidue.ltl.evaluation.io.TcId2OutcomeReader;
 
-//	// TODO shouldn't that be a test
-//	public static void main(String[] args)
-//			throws IOException
-//	{
-//		Evaluation<String> evaluation = TextReader
-//				.read(new File("src/test/resources/io/tab-separated_gold2predicted.txt"));
-//		Map<String, EvaluationResult> results = CategorialMeasuresUtil
-//				.computeCategorialResults(evaluation.getEntries());
-//		for (String measure : results.keySet()) {
-//			System.out.println(measure + " " + results.get(measure).getResult());
-//		}
-//	}
-
+public class Id2OutcomeReaderTest {
+	
+    @Test
+	public void testReadFile()
+			throws Exception
+	{
+	    EvaluationData<String> evaluation = TcId2OutcomeReader.read(new File("src/test/resources/io/id2Outcome_gunshot.txt"));
+	    assertEquals(821, evaluation.size());
+	}
 }

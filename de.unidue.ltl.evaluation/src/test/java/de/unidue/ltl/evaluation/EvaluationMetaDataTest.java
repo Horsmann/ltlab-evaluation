@@ -31,8 +31,8 @@ public class EvaluationMetaDataTest {
 		Collection<EvaluationEntry<String>> entries= new ArrayList<>();
 		entries.add(new EvaluationEntry<String>("A", "B"));
 		entries.add(new EvaluationEntry<String>("A", "A"));
-		Evaluation<String> evaluation= new Evaluation<>(entries,"NamedEvaluation");
-		assertEquals("NamedEvaluation",evaluation.getEvalMetaData().getName());
+		EvaluationData<String> evaluation= new EvaluationData<>(entries,"NamedEvaluation");
+		assertEquals("NamedEvaluation",evaluation.getMetaData().getName());
 	}
 	
 	@Test
@@ -40,8 +40,8 @@ public class EvaluationMetaDataTest {
 		Collection<EvaluationEntry<String>> entries= new ArrayList<>();
 		entries.add(new EvaluationEntry<String>("A", "B"));
 		entries.add(new EvaluationEntry<String>("A", "A"));
-		Evaluation<String> evaluation= new Evaluation<>(entries,"NamedEvaluation");
-		assertEquals(StringUtils.join(Arrays.asList("A","B"), " "),StringUtils.join(evaluation.getEvalMetaData().getLabels()," "));
+		EvaluationData<String> evaluation= new EvaluationData<>(entries,"NamedEvaluation");
+		assertEquals(StringUtils.join(Arrays.asList("A","B"), " "),StringUtils.join(evaluation.getMetaData().getLabels()," "));
 	}
 	
 	@Test
@@ -55,11 +55,11 @@ public class EvaluationMetaDataTest {
 		entries.add(new EvaluationEntry<String>("A", "A"));
 		entries.add(new EvaluationEntry<String>("A", "B"));
 		entries.add(new EvaluationEntry<String>("A", "A"));
-		Evaluation<String> evaluation= new Evaluation<>(entries,"NamedEvaluation");
-		assertEquals(0,evaluation.getEvalMetaData().getDistributionsPerLabelGold().get("B"));
-		assertEquals(3,evaluation.getEvalMetaData().getDistributionsPerLabelPredicted().get("B"));
-		assertEquals(7,evaluation.getEvalMetaData().getDistributionsPerLabelGold().get("A"));
-		assertEquals(4,evaluation.getEvalMetaData().getDistributionsPerLabelPredicted().get("A"));
+		EvaluationData<String> evaluation= new EvaluationData<>(entries,"NamedEvaluation");
+		assertEquals(0,evaluation.getMetaData().getDistributionsPerLabelGold().get("B").intValue());
+		assertEquals(3,evaluation.getMetaData().getDistributionsPerLabelPredicted().get("B").intValue());
+		assertEquals(7,evaluation.getMetaData().getDistributionsPerLabelGold().get("A").intValue());
+		assertEquals(4,evaluation.getMetaData().getDistributionsPerLabelPredicted().get("A").intValue());
 	}
 	
 	@Test
@@ -67,27 +67,12 @@ public class EvaluationMetaDataTest {
 		Collection<EvaluationEntry<String>> entries= new ArrayList<>();
 		entries.add(new EvaluationEntry<String>("A", "B"));
 		entries.add(new EvaluationEntry<String>("A", "A"));
-		Evaluation<String> evaluation= new Evaluation<>(entries,"NamedEvaluation");
-		assertEquals(2,evaluation.getEvalMetaData().getNumberOfInstances());
+		EvaluationData<String> evaluation= new EvaluationData<>(entries,"NamedEvaluation");
+		assertEquals(2,evaluation.getMetaData().getNumberOfInstances());
 		
 		evaluation.register("A", "A");
-		assertEquals(3,evaluation.getEvalMetaData().getNumberOfInstances());
+		assertEquals(3,evaluation.getMetaData().getNumberOfInstances());
 
-	}
-	
-	@Test
-	public void evaluationMetaDataLabelStatsTest(){
-		Collection<EvaluationEntry<String>> entries= new ArrayList<>();
-		entries.add(new EvaluationEntry<String>("A", "B"));
-		entries.add(new EvaluationEntry<String>("A", "A"));
-		entries.add(new EvaluationEntry<String>("A", "B"));
-		entries.add(new EvaluationEntry<String>("A", "A"));
-		entries.add(new EvaluationEntry<String>("C", "C"));
-		entries.add(new EvaluationEntry<String>("A", "A"));
-		entries.add(new EvaluationEntry<String>("A", "B"));
-		entries.add(new EvaluationEntry<String>("A", "A"));
-		Evaluation<String> evaluation= new Evaluation<>(entries,"NamedEvaluation");
-		System.out.println(evaluation.getEvalMetaData().getStats());
 	}
 	
 	@Test
@@ -101,8 +86,8 @@ public class EvaluationMetaDataTest {
 		entries.add(new EvaluationEntry<String>("A", "A"));
 		entries.add(new EvaluationEntry<String>("A", "B"));
 		entries.add(new EvaluationEntry<String>("A", "A"));
-		Evaluation<String> evaluation= new Evaluation<>(entries,"NamedEvaluation");
-		evaluation.getEvalMetaData().getPieChart();
+		EvaluationData<String> evaluation= new EvaluationData<>(entries,"NamedEvaluation");
+		evaluation.getMetaData().getPieChart();
 	}
 	
 }
