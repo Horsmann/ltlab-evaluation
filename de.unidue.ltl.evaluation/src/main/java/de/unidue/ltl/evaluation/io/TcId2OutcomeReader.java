@@ -26,21 +26,21 @@ import java.util.TreeMap;
 
 import org.apache.commons.io.FileUtils;
 
-import de.unidue.ltl.evaluation.Evaluation;
+import de.unidue.ltl.evaluation.EvaluationData;
 import de.unidue.ltl.evaluation.EvaluationEntry;
 
 public class TcId2OutcomeReader {
 	
-	public static Evaluation<String> read(File id2OutcomeFile) 
+	public static EvaluationData<String> read(File id2OutcomeFile) 
 			throws Exception
 	{
-		Evaluation<String> evaluation= new Evaluation<>();
+	    EvaluationData<String> evaluation= new EvaluationData<>();
 		evaluation = registerId2OutcomePairs(evaluation,id2OutcomeFile);
 		
 		return evaluation;
 	}
 	
-	public static Evaluation<String> readSorted(File id2OutcomeFile) 
+	public static EvaluationData<String> readSorted(File id2OutcomeFile) 
 			throws Exception
 	{
 		List<String> labels=null;
@@ -64,11 +64,11 @@ public class TcId2OutcomeReader {
 			}
 		}
 		
-		Evaluation<String> evaluation= new Evaluation<>(id2EvalEntry.values());
+		EvaluationData<String> evaluation= new EvaluationData<>(id2EvalEntry.values());
 		return evaluation;
 	}
 
-	private static Evaluation<String> registerId2OutcomePairs(Evaluation<String> evaluation, File id2OutcomeFile)
+	private static EvaluationData<String> registerId2OutcomePairs(EvaluationData<String> evaluation, File id2OutcomeFile)
 			throws Exception
 	{
 		List<String> labels=null;
@@ -91,10 +91,10 @@ public class TcId2OutcomeReader {
 		return evaluation;
 	}
 
-	public static Evaluation<String> readMultipleFiles(List<File> id2OutcomeFiles)
+	public static EvaluationData<String> readMultipleFiles(List<File> id2OutcomeFiles)
 			throws Exception
 	{
-		Evaluation<String> evaluation = new Evaluation<>();
+	    EvaluationData<String> evaluation = new EvaluationData<>();
 		for (File id2OutcomeFile : id2OutcomeFiles) {
 			evaluation = registerId2OutcomePairs(evaluation,id2OutcomeFile);
 		}
