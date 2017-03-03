@@ -27,16 +27,16 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.DefaultXYDataset;
 
-import de.unidue.ltl.evaluation.Evaluation;
+import de.unidue.ltl.evaluation.EvaluationData;
 import de.unidue.ltl.evaluation.measure.correlation.VectorPair;
 
 public class ScatterPlot {
 
-	public static void writePlot(Evaluation<Double> evaluation, File targetFile) 
+	public static void writePlot(EvaluationData<Double> evaluation, File targetFile) 
 			throws IOException 
 	{
 		   
-		VectorPair<Double> vp = new VectorPair<>(evaluation.getEntries());
+		VectorPair<Double> vp = new VectorPair<>(evaluation);
 		
 		DefaultXYDataset dataset = new DefaultXYDataset();
         double[][] data = new double[2][vp.getVal1().size()];

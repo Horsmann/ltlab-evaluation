@@ -19,7 +19,12 @@ public class EvaluationData<T> implements Iterable<EvaluationEntry<T>>{
 		this.entries = entries;
 	}
 	
-	public void register(T gold, T predicted) {
+	public EvaluationData()
+	{
+	    this.entries = new ArrayList<>();
+    }
+
+    public void register(T gold, T predicted) {
 			EvaluationEntry<T> entry = new EvaluationEntry<T>(gold, predicted);
 			entries.add(entry);
 		}

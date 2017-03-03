@@ -22,14 +22,14 @@ import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
 
-import de.unidue.ltl.evaluation.Evaluation;
+import de.unidue.ltl.evaluation.EvaluationData;
 
 public class TextReader{
 
-	public static Evaluation<String> read(File txtFile) 
+	public static EvaluationData<String> read(File txtFile) 
 			throws IOException
 	{
-		Evaluation<String> evaluation= new Evaluation<>();
+		EvaluationData<String> evaluation= new EvaluationData<>();
 		for (String line : FileUtils.readLines(txtFile)) {
 			String[] toRegister= line.split("\t");
 			evaluation.register(toRegister[0], toRegister[1]);

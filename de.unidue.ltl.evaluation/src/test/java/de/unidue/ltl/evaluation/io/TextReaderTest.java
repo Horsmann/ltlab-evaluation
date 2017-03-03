@@ -21,7 +21,6 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
@@ -29,7 +28,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import de.unidue.ltl.evaluation.Evaluation;
+import de.unidue.ltl.evaluation.EvaluationData;
 import de.unidue.ltl.evaluation.EvaluationEntry;
 
 public class TextReaderTest {
@@ -61,12 +60,11 @@ public class TextReaderTest {
 				FileUtils.readFileToString(new File("src/test/resources/io/tab-separated_gold2predicted.txt"))
 		);
 		
-		Evaluation<String> evaluation = TextReader.read(tempFile);
-		Collection<EvaluationEntry<String>> entriesFromFile = evaluation.getEntries();
-		assertEquals(4, entriesFromFile.size());
+		EvaluationData<String> data = TextReader.read(tempFile);
+		assertEquals(4, data.size());
 		
 		int i=0;
-		for (EvaluationEntry<String> entry: entriesFromFile) {
+		for (EvaluationEntry<String> entry: data) {
 			assertEquals(entry.getGold(), entries.get(i).getGold());
 			assertEquals(entry.getPredicted(), entries.get(i).getPredicted());
 			i++;

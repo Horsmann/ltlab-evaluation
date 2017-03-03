@@ -22,7 +22,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import de.unidue.ltl.evaluation.Evaluation;
+import de.unidue.ltl.evaluation.EvaluationData;
 import de.unidue.ltl.evaluation.EvaluationEntry;
 
 /**
@@ -37,13 +37,13 @@ public class EvaluationTransformer {
 	 * @param labels A list of labels to be deleted.
 	 * @return A new evaluation object without the selected labels
 	 */
-	public static <T> Evaluation<T> deleteLabels(Evaluation<T> eval, T ... labels) {
+	public static <T> EvaluationData<T> deleteLabels(EvaluationData<T> eval, T ... labels) {
 		
-		Evaluation<T> transformed = new Evaluation<T>();		
+	    EvaluationData<T> transformed = new EvaluationData<T>();		
 		
 		Set<T> labelSet = new HashSet<T>(Arrays.asList(labels));
 				
-		for (EvaluationEntry<T> entry : eval.getEntries()) {
+		for (EvaluationEntry<T> entry : eval) {
 			
 			if (!labelSet.contains(entry.getGold()) && !labelSet.contains(entry.getPredicted())) {
 				transformed.register(entry.getGold(), entry.getPredicted());				
@@ -59,11 +59,11 @@ public class EvaluationTransformer {
 	 * @param mapping A mapping from gold values to be changed to new gold values
 	 * @return An evaluation with changed gold labels
 	 */
-	public static <T> Evaluation<T> changeGoldLabel(Evaluation<T> eval, Map<T,T> mapping) {
+	public static <T> EvaluationData<T> changeGoldLabel(EvaluationData<T> data, Map<T,T> mapping) {
 		
-		Evaluation<T> transformed = new Evaluation<T>();		
+	    EvaluationData<T> transformed = new EvaluationData<T>();		
 						
-		for (EvaluationEntry<T> entry : eval.getEntries()) {			
+		for (EvaluationEntry<T> entry : data) {			
 			if (mapping.containsKey(entry.getGold())) {
 				transformed.register(mapping.get(entry.getGold()), entry.getPredicted());				
 			}
@@ -76,15 +76,15 @@ public class EvaluationTransformer {
 	}
 	
 	/**
-	 * @param eval An evaluation
+	 * @param data An evaluation
 	 * @param mapping A mapping from predicted values to be changed to new predicted values
 	 * @return An evaluation with changed predicted labels
 	 */
-	public static <T> Evaluation<T> changePredictedLabel(Evaluation<T> eval, Map<T,T> mapping) {
+	public static <T> EvaluationData<T> changePredictedLabel(EvaluationData<T> data, Map<T,T> mapping) {
 		
-		Evaluation<T> transformed = new Evaluation<T>();		
+	    EvaluationData<T> transformed = new EvaluationData<T>();		
 						
-		for (EvaluationEntry<T> entry : eval.getEntries()) {			
+		for (EvaluationEntry<T> entry : data) {			
 			if (mapping.containsKey(entry.getPredicted())) {
 				transformed.register(entry.getGold(), mapping.get(entry.getPredicted()));				
 			}
