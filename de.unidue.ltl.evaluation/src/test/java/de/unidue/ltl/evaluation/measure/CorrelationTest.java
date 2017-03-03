@@ -31,7 +31,8 @@ public class CorrelationTest {
 	
 	@Test
 	public void correlationTest(){
-		EvaluationData<Double> data = new EvaluationData<>(Mockito.mock(EvaluationMetaData.class));
+		@SuppressWarnings("unchecked")
+        EvaluationData<Double> data = new EvaluationData<>(Mockito.mock(EvaluationMetaData.class));
 		data.register(1.0, 2.0);
 		data.register(2.0, 3.0);
 		data.register(3.0, 4.0);

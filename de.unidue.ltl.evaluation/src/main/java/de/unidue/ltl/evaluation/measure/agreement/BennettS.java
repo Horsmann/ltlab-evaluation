@@ -23,41 +23,42 @@ import org.dkpro.statistics.agreement.coding.CodingAnnotationStudy;
 import de.unidue.ltl.evaluation.EvaluationData;
 import de.unidue.ltl.evaluation.EvaluationEntry;
 
-public class BennettS<T> 
-	extends AgreementMeasure<T>
-{	
-    boolean didCalculate=false;
+public class BennettS<T>
+    extends AgreementMeasure<T>
+{
+    boolean didCalculate = false;
     double calculateAgreement;
-    
-	public BennettS(EvaluationData<T> data) {
-		super(data);
-	}
+
+    public BennettS(EvaluationData<T> data)
+    {
+        super(data);
+    }
 
     @Override
     public void calculate()
     {
-        if(didCalculate){
+        if (didCalculate) {
             return;
         }
-        
+
         CodingAnnotationStudy study = new CodingAnnotationStudy(2);
         for (EvaluationEntry<T> entry : data) {
             study.addItem(entry.getGold(), entry.getPredicted());
         }
-        
+
         BennettSAgreement bennetS = new BennettSAgreement(study);
         calculateAgreement = bennetS.calculateAgreement();
-        
-        didCalculate=true;
+
+        didCalculate = true;
     }
 
     @Override
     public double getAgreement()
     {
-        if(!didCalculate){
+        if (!didCalculate) {
             calculate();
         }
-        
+
         return calculateAgreement;
     }
 

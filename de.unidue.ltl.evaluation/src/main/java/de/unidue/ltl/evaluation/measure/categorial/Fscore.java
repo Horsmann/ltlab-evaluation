@@ -34,7 +34,6 @@ public class Fscore<T> extends CategoricalMeasure<T> {
 	double weighted_fscore;
 
 	private boolean didCalculate = false;
-	private EvaluationData<T> data;
 
 	public Fscore(EvaluationData<T> data) {
 		super(data);
@@ -69,7 +68,7 @@ public class Fscore<T> extends CategoricalMeasure<T> {
 		didCalculate = true;
 	}
 
-	public double getF1ForLabel(T category) {
+	public double getScoreForLabel(T category) {
 		if (!didCalculate) {
 			calculate();
 		}

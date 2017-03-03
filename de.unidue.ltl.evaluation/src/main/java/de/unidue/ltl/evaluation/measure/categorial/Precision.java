@@ -80,7 +80,7 @@ public class Precision<T>
         return precisionMeasures.get(label);
     }
 
-    public double getMacro_precision()
+    public double getMacroPrecision()
     {
         if (!didCalculate) {
             calculate();

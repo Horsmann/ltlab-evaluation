@@ -31,7 +31,6 @@ public class Recall<T>
     double micro_recall;
 
     private boolean didCalculate = false;
-    private EvaluationData<T> data;
     private double weighted_recall;
 
     public Recall(EvaluationData<T> data)
@@ -83,7 +82,7 @@ public class Recall<T>
         return recallMeasures.get(label);
     }
 
-    public double getMacro_recall()
+    public double getMacroRecall()
     {
         if (!didCalculate) {
             calculate();

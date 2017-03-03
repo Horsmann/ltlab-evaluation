@@ -17,23 +17,51 @@
  ******************************************************************************/
 package de.unidue.ltl.evaluation.measure.agreement;
 
-import java.util.Collection;
-import java.util.Map;
+import org.dkpro.statistics.agreement.coding.CodingAnnotationStudy;
+import org.dkpro.statistics.agreement.coding.CohenKappaAgreement;
+import org.dkpro.statistics.agreement.coding.KrippendorffAlphaAgreement;
+import org.dkpro.statistics.agreement.distance.OrdinalDistanceFunction;
 
+import de.unidue.ltl.evaluation.EvaluationData;
 import de.unidue.ltl.evaluation.EvaluationEntry;
-import de.unidue.ltl.evaluation.EvaluationResult;
-import de.unidue.ltl.evaluation.measure.EvaluationMeasure;
-import de.unidue.ltl.evaluation.measure.util.AgreementMeasureUtil;
 
-public class KrippendorffAlpha 
-	extends EvaluationMeasure<String>
-{	
-	public KrippendorffAlpha(Collection<EvaluationEntry<String>> entries) {
-		super(entries);
-	}
+public class KrippendorffAlpha<T>
+    extends AgreementMeasure<T>
+{
+    boolean didCalculate = false;
+    double calculateAgreement;
 
-	@Override
-	public Map<String, EvaluationResult> calculate() {
-		return AgreementMeasureUtil.computeAgreementResults(entries);
-	}
+    public KrippendorffAlpha(EvaluationData<T> data)
+    {
+        super(data);
+    }
+
+    @Override
+    public void calculate()
+    {
+        if (didCalculate) {
+            return;
+        }
+
+        CodingAnnotationStudy study = new CodingAnnotationStudy(2);
+        for (EvaluationEntry<T> entry : data) {
+            study.addItem(entry.getGold(), entry.getPredicted());
+        }
+
+        KrippendorffAlphaAgreement agreement = new KrippendorffAlphaAgreement(study,
+                new OrdinalDistanceFunction());
+        calculateAgreement = agreement.calculateAgreement();
+
+        didCalculate = true;
+    }
+
+    @Override
+    public double getAgreement()
+    {
+        if (!didCalculate) {
+            calculate();
+        }
+
+        return calculateAgreement;
+    }
 }

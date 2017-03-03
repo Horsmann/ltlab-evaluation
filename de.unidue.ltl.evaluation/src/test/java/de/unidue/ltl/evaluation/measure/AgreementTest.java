@@ -21,15 +21,13 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Map;
 
 import org.junit.Test;
 
+import de.unidue.ltl.evaluation.EvaluationData;
 import de.unidue.ltl.evaluation.EvaluationEntry;
-import de.unidue.ltl.evaluation.EvaluationResult;
 import de.unidue.ltl.evaluation.measure.agreement.CohenKappa;
 import de.unidue.ltl.evaluation.measure.agreement.KrippendorffAlpha;
-import de.unidue.ltl.evaluation.measure.util.AgreementMeasureUtil;
 
 public class AgreementTest {
 	
@@ -40,20 +38,10 @@ public class AgreementTest {
 		entries.add(new EvaluationEntry<String>("B", "B"));
 		entries.add(new EvaluationEntry<String>("A", "A"));
 		entries.add(new EvaluationEntry<String>("A", "A"));
+		EvaluationData<String> data = new EvaluationData<>(entries);
 		
-		Map<String, EvaluationResult> results = AgreementMeasureUtil.computeAgreementResults(entries);
-		assertEquals(6, results.size()); 
-		
-		assertEquals(0.5, results.get(CohenKappa.class.getSimpleName()).getResult(), 0.001);
-		assertEquals(0.533, results.get(KrippendorffAlpha.class.getSimpleName()).getResult(), 0.001);
+		assertEquals(0.5, new CohenKappa<String>(data).getAgreement(), 0.001);
+		assertEquals(0.533, new KrippendorffAlpha<String>(data).getAgreement(), 0.001);
 				
-		EvaluationMeasure<String> kappa = new CohenKappa(entries);
-		assertEquals("CohenKappa", kappa.getName());
-		
-		Map<String, EvaluationResult> kappaResults = kappa.calculate();
-		assertEquals(6, kappaResults.size()); 
-		
-		assertEquals(0.5, kappaResults.get(CohenKappa.class.getSimpleName()).getResult(), 0.001);
-		assertEquals(0.533, kappaResults.get(KrippendorffAlpha.class.getSimpleName()).getResult(), 0.001);
 	}
 }

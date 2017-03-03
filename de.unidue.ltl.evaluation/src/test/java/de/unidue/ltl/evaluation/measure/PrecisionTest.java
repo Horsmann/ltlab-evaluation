@@ -19,27 +19,24 @@ package de.unidue.ltl.evaluation.measure;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import org.junit.Test;
 
 import de.unidue.ltl.evaluation.EvaluationData;
-import de.unidue.ltl.evaluation.EvaluationEntry;
-import de.unidue.ltl.evaluation.measure.categorial.Accuracy;
+import de.unidue.ltl.evaluation.measure.categorial.Precision;
+import de.unidue.ltl.evaluation.util.TestUtils;
 
-public class AccuracyTest {
+public class PrecisionTest {
 	
+	
+	// gold: 50 A, 18 B, 32 C
 	@Test
-	public void accuracyTest(){
-		Collection<EvaluationEntry<String>> entries = new ArrayList<EvaluationEntry<String>>();
-		entries.add(new EvaluationEntry<String>("A", "B"));
-		entries.add(new EvaluationEntry<String>("B", "B"));
-		entries.add(new EvaluationEntry<String>("A", "A"));
-		entries.add(new EvaluationEntry<String>("A", "A"));
-		
-		EvaluationData<String> data = new EvaluationData<>(entries);
-		assertEquals(0.75, new Accuracy<>(data).getAccuracy(), 0.001);
+	public void prfTest(){
+		EvaluationData<String> data = new EvaluationData<>(TestUtils.getExampleCategorial());
+		assertEquals(0.75, new Precision<>(data).getPrecisionForLabel("A"), 0.001);
+		assertEquals(0.6, new Precision<>(data).getPrecisionForLabel("B"), 0.001);
+        assertEquals(0.57143, new Precision<>(data).getPrecisionForLabel("C"), 0.001);
+        assertEquals(0.6405, new Precision<>(data).getMacroPrecision(), 0.001);
 	}
+	
 
 }

@@ -19,7 +19,6 @@
 package de.unidue.ltl.evaluation.measure.correlation;
 
 import de.unidue.ltl.evaluation.EvaluationData;
-import de.unidue.ltl.evaluation.measure.util.VectorPair;
 
 
 public class SpearmanCorrelation

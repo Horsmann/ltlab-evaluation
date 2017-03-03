@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.unidue.ltl.evaluation.measure.util;
+package de.unidue.ltl.evaluation.measure.correlation;
 
 import java.util.ArrayList;
 import java.util.Collection;

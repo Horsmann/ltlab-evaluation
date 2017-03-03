@@ -42,4 +42,9 @@ public class EvaluationData<T> implements Iterable<EvaluationEntry<T>>{
 			}
 		};
 	}
+
+    public long size()
+    {
+        return entries.size();
+    }
 }
