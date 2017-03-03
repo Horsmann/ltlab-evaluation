@@ -18,10 +18,10 @@
 package de.unidue.ltl.evaluation.measure.agreement;
 
 import de.unidue.ltl.evaluation.EvaluationData;
-import de.unidue.ltl.evaluation.measure.EvaluationMeasureNeu;
+import de.unidue.ltl.evaluation.measure.EvaluationMeasure;
 
 public abstract class AgreementMeasure<T>
-    extends EvaluationMeasureNeu<T>
+    extends EvaluationMeasure<T>
 {
 
     public AgreementMeasure(EvaluationData<T> data)

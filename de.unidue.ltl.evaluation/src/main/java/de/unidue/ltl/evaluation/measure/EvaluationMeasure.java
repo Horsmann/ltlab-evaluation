@@ -19,23 +19,16 @@
 
 package de.unidue.ltl.evaluation.measure;
 
-import java.util.Collection;
-import java.util.Map;
-
-import de.unidue.ltl.evaluation.EvaluationEntry;
-import de.unidue.ltl.evaluation.EvaluationResult;
+import de.unidue.ltl.evaluation.EvaluationData;
 
 public abstract class EvaluationMeasure<T> {
 
-	protected Collection<EvaluationEntry<T>> entries;
-
-	public abstract Map<String,EvaluationResult> calculate();
+	protected EvaluationData<T> data;
 	
-	public EvaluationMeasure(Collection<EvaluationEntry<T>> entries) {
-		this.entries = entries;
-	}
-
-	public String getName() {
-		return this.getClass().getSimpleName();
-	}
+	public abstract void calculate();
+	
+    public EvaluationMeasure(EvaluationData<T> data)
+    {
+        this.data = data;
+    }
 }

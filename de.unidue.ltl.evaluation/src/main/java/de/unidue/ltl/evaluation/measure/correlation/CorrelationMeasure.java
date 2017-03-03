@@ -18,10 +18,10 @@
 package de.unidue.ltl.evaluation.measure.correlation;
 
 import de.unidue.ltl.evaluation.EvaluationData;
-import de.unidue.ltl.evaluation.measure.EvaluationMeasureNeu;
+import de.unidue.ltl.evaluation.measure.EvaluationMeasure;
 
 public abstract class CorrelationMeasure<T>
-    extends EvaluationMeasureNeu<T>
+    extends EvaluationMeasure<T>
 {
 
     public CorrelationMeasure(EvaluationData<T> data)

@@ -23,10 +23,10 @@ import java.util.Set;
 
 import de.unidue.ltl.evaluation.EvaluationData;
 import de.unidue.ltl.evaluation.EvaluationEntry;
-import de.unidue.ltl.evaluation.measure.EvaluationMeasureNeu;
+import de.unidue.ltl.evaluation.measure.EvaluationMeasure;
 
 public abstract class CategoricalMeasure<T>
-    extends EvaluationMeasureNeu<T>
+    extends EvaluationMeasure<T>
 {
 
     public CategoricalMeasure(EvaluationData<T> data)

@@ -20,10 +20,10 @@ package de.unidue.ltl.evaluation.measure.categorial;
 
 import de.unidue.ltl.evaluation.EvaluationData;
 import de.unidue.ltl.evaluation.EvaluationEntry;
-import de.unidue.ltl.evaluation.measure.EvaluationMeasureNeu;
+import de.unidue.ltl.evaluation.measure.EvaluationMeasure;
 
 public class Accuracy<T>
-    extends EvaluationMeasureNeu<T>
+    extends EvaluationMeasure<T>
 {
     boolean didCalculate = false;
     long numberInstances;
