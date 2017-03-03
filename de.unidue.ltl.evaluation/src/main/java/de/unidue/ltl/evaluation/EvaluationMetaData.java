@@ -218,4 +218,8 @@ public class EvaluationMetaData<T>
         return distributionsPerLabelGold;
     }
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
 }

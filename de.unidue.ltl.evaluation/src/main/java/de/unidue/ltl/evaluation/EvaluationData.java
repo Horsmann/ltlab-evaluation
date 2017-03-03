@@ -34,6 +34,11 @@ public class EvaluationData<T>
     {
         this.meta = meta;
     }
+    
+    
+    public void setName(String name){
+    	this.meta.setName(name);
+    }
 
     @Override
     public Iterator<EvaluationEntry<T>> iterator()

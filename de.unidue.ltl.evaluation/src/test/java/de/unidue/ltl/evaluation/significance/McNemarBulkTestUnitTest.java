@@ -31,6 +31,8 @@ public class McNemarBulkTestUnitTest {
 	public void mcnemareSignificanceTest() throws Exception {
 		EvaluationData<String> evaluation1 = new EvaluationData<String>();
 		EvaluationData<String> evaluation2 = new EvaluationData<String>();
+		evaluation1.setName("eval_a");
+		evaluation2.setName("eval_b");
 		
 		
 		for(int i=0; i< 8; i++){
