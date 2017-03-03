@@ -56,4 +56,9 @@ public class EvaluationData<T> implements Iterable<EvaluationEntry<T>>{
     public EvaluationEntry<T> get(int idx){
         return entries.get(idx);
     }
+
+    public EvaluationMetaData<T> getMetaData()
+    {
+        return metaData;
+    }
 }

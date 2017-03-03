@@ -19,33 +19,34 @@ package de.unidue.ltl.evaluation.significance;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import de.unidue.ltl.evaluation.Evaluation;
+import de.unidue.ltl.evaluation.EvaluationData;
 
 public class McNemarBulkTest {
 
-	private ArrayList<Evaluation<String>> evalObjects;
+	private List<EvaluationData<String>> evalObjects;
 	
 	public McNemarBulkTest(){
-		evalObjects = new ArrayList<Evaluation<String>>();
+		evalObjects = new ArrayList<EvaluationData<String>>();
 	}
 	
-	public McNemarBulkTest(ArrayList<Evaluation<String>> evaluations){
+	public McNemarBulkTest(ArrayList<EvaluationData<String>> evaluations){
 		evalObjects = evaluations;
 	}
 	
-	public void register (Evaluation<String> eval){
+	public void register (EvaluationData<String> eval){
 		evalObjects.add(eval);
 	}	
 	
 	public Map<String, Map<String, Double>> computeBulkTable() throws Exception{
 		Map<String, Map<String, Double>> resultTable = new HashMap<String, Map<String, Double>>();
-		for (Evaluation<String> eval1 : this.evalObjects){
-			resultTable.put(eval1.getEvalMetaData().getName(), new HashMap<String, Double>());
-			for (Evaluation<String> eval2 : this.evalObjects){
-				 resultTable.get(eval1.getEvalMetaData().getName())
-				 .put(eval2.getEvalMetaData().getName(), 
+		for (EvaluationData<String> eval1 : this.evalObjects){
+			resultTable.put(eval1.getMetaData().getName(), new HashMap<String, Double>());
+			for (EvaluationData<String> eval2 : this.evalObjects){
+				 resultTable.get(eval1.getMetaData().getName())
+				 .put(eval2.getMetaData().getName(), 
 						 ChiSquare.getPvalue(
 								 McNemarTest.computeSignificance(eval1, eval2, "Yates"), 1));
 			}	
