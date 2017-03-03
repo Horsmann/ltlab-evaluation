@@ -18,14 +18,6 @@
 
 package de.unidue.ltl.evaluation.examples;
 
-import java.io.File;
-import java.util.Map;
-
-import de.unidue.ltl.evaluation.Evaluation;
-import de.unidue.ltl.evaluation.EvaluationResult;
-import de.unidue.ltl.evaluation.io.TcId2OutcomeReader;
-import de.unidue.ltl.evaluation.measure.util.CategorialMeasuresUtil;
-
 public class CalculateMeasureFromId2OutcomeFile {
 	
 //	// TODO shouldn't that be a test
