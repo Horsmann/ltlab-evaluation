@@ -18,19 +18,18 @@
 
 package de.unidue.ltl.evaluation.significance;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import de.unidue.ltl.evaluation.Evaluation;
-import de.unidue.ltl.evaluation.significance.McNemarTest;
+import de.unidue.ltl.evaluation.EvaluationData;
 
 public class McNemarTestUnitTest {
 
 	@Test
 	public void mcnemareSignificanceTest() throws Exception {
-		Evaluation<String> evaluation1 = new Evaluation<String>();
-		Evaluation<String> evaluation2 = new Evaluation<String>();
+	    EvaluationData<String> evaluation1 = new EvaluationData<String>();
+	    EvaluationData<String> evaluation2 = new EvaluationData<String>();
 		
 		for(int i=0; i< 8; i++){
 			evaluation1.register("A", "A");
