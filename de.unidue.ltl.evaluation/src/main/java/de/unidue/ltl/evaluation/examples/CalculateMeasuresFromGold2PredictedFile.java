@@ -24,21 +24,20 @@ import java.util.Map;
 import de.unidue.ltl.evaluation.Evaluation;
 import de.unidue.ltl.evaluation.EvaluationResult;
 import de.unidue.ltl.evaluation.io.TextReader;
-import de.unidue.ltl.evaluation.measure.util.CategorialMeasuresUtil;
 
 public class CalculateMeasuresFromGold2PredictedFile {
 
-	// TODO shouldn't that be a test
-	public static void main(String[] args)
-			throws IOException
-	{
-		Evaluation<String> evaluation = TextReader
-				.read(new File("src/test/resources/io/tab-separated_gold2predicted.txt"));
-		Map<String, EvaluationResult> results = CategorialMeasuresUtil
-				.computeCategorialResults(evaluation.getEntries());
-		for (String measure : results.keySet()) {
-			System.out.println(measure + " " + results.get(measure).getResult());
-		}
-	}
+//	// TODO shouldn't that be a test
+//	public static void main(String[] args)
+//			throws IOException
+//	{
+//		Evaluation<String> evaluation = TextReader
+//				.read(new File("src/test/resources/io/tab-separated_gold2predicted.txt"));
+//		Map<String, EvaluationResult> results = CategorialMeasuresUtil
+//				.computeCategorialResults(evaluation.getEntries());
+//		for (String measure : results.keySet()) {
+//			System.out.println(measure + " " + results.get(measure).getResult());
+//		}
+//	}
 
 }

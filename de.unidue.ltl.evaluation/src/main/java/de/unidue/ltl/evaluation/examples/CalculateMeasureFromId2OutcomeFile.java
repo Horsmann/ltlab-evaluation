@@ -28,15 +28,15 @@ import de.unidue.ltl.evaluation.measure.util.CategorialMeasuresUtil;
 
 public class CalculateMeasureFromId2OutcomeFile {
 	
-	// TODO shouldn't that be a test
-	public static void main(String[] args)
-			throws Exception
-	{
-		Evaluation<String> evaluation = TcId2OutcomeReader.read(new File("src/test/resources/io/id2Outcome_gunshot.txt"));
-		Map<String, EvaluationResult> results = CategorialMeasuresUtil
-				.computeCategorialResults(evaluation.getEntries());
-		for (String measure : results.keySet()) {
-			System.out.println(measure + " " + results.get(measure).getResult());
-		}
-	}
+//	// TODO shouldn't that be a test
+//	public static void main(String[] args)
+//			throws Exception
+//	{
+//		Evaluation<String> evaluation = TcId2OutcomeReader.read(new File("src/test/resources/io/id2Outcome_gunshot.txt"));
+//		Map<String, EvaluationResult> results = CategorialMeasuresUtil
+//				.computeCategorialResults(evaluation.getEntries());
+//		for (String measure : results.keySet()) {
+//			System.out.println(measure + " " + results.get(measure).getResult());
+//		}
+//	}
 }
