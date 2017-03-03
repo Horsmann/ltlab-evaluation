@@ -20,15 +20,10 @@ package de.unidue.ltl.evaluation.measure;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.Collection;
-import java.util.Map;
-
 import org.junit.Test;
 
-import de.unidue.ltl.evaluation.EvaluationEntry;
-import de.unidue.ltl.evaluation.EvaluationResult;
+import de.unidue.ltl.evaluation.EvaluationData;
 import de.unidue.ltl.evaluation.measure.agreement.LinearlyWeightedKappa;
-import de.unidue.ltl.evaluation.measure.agreement.QuadraticallyWeightedKappa;
 import de.unidue.ltl.evaluation.util.TestUtils;
 
 public class KappaTest {
@@ -36,26 +31,8 @@ public class KappaTest {
 	// gold: 50 A, 18 B, 32 C
 	@Test
 	public void kappaTest(){
-		Collection<EvaluationEntry<Double>> entries = TestUtils.getExampleNumeric();
-
-		assertEquals(100, entries.size());
-		//	System.out.println(entries.size());
-
+		EvaluationData<Double> entries = new EvaluationData<>(TestUtils.getExampleNumeric());
 		LinearlyWeightedKappa linWeightedKappa = new LinearlyWeightedKappa(entries);
-		Map<String, EvaluationResult> results = linWeightedKappa.calculate();
-		
-		EvaluationResult result = results.get(LinearlyWeightedKappa.class.getSimpleName());
-		System.out.println("Linearlyly Weighted Kappa: "+result.getResult());
-		assertEquals(0.3975, result.getResult(), 0.001);
-		
-		QuadraticallyWeightedKappa weightedKappa = new QuadraticallyWeightedKappa(entries);
-		results = weightedKappa.calculate();
-		
-		result = results.get(QuadraticallyWeightedKappa.class.getSimpleName());
-		System.out.println("Quadraticaly Weighted Kappa: "+result.getResult());
-		assertEquals(0.3492, result.getResult(), 0.001);
-
-		
-
+		assertEquals(0.3975, linWeightedKappa.getAgreement(), 0.001);
 	}
 }

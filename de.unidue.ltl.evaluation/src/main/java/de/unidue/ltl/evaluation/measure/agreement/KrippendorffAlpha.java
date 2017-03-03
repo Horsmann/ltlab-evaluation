@@ -18,7 +18,6 @@
 package de.unidue.ltl.evaluation.measure.agreement;
 
 import org.dkpro.statistics.agreement.coding.CodingAnnotationStudy;
-import org.dkpro.statistics.agreement.coding.CohenKappaAgreement;
 import org.dkpro.statistics.agreement.coding.KrippendorffAlphaAgreement;
 import org.dkpro.statistics.agreement.distance.OrdinalDistanceFunction;
 

@@ -20,13 +20,12 @@ package de.unidue.ltl.evaluation.transformation;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Test;
 
-import de.unidue.ltl.evaluation.Evaluation;
+import de.unidue.ltl.evaluation.EvaluationData;
 import de.unidue.ltl.evaluation.EvaluationEntry;
 
 public class EvaluationTransformerTest {
@@ -35,7 +34,7 @@ public class EvaluationTransformerTest {
 	public void deleteLabelsTest() 
 	{
 		
-		Evaluation<String> eval= new Evaluation<>();
+		EvaluationData<String> eval= new EvaluationData<>();
 		
 		eval.register("A", "B");
 		eval.register("B", "B");
@@ -44,12 +43,10 @@ public class EvaluationTransformerTest {
 		eval.register("C", "C");
 		
 				
-		Evaluation<String> transformed  = EvaluationTransformer.deleteLabels(eval, "C" );
-						
-		Collection<EvaluationEntry<String>> entries = transformed.getEntries();
-		assertEquals(2, entries.size());
+		EvaluationData<String> transformed  = EvaluationTransformer.deleteLabels(eval, "C" );
+		assertEquals(2, transformed.size());
 	
-		for (EvaluationEntry<String> entry : entries) {
+		for (EvaluationEntry<String> entry : transformed) {
 			assertNotEquals("C", entry.getGold());
 			assertNotEquals("C", entry.getPredicted());
 		}
@@ -58,8 +55,7 @@ public class EvaluationTransformerTest {
 	@Test
 	public void changeGoldLabelTest() 
 	{	
-		Evaluation<String> eval= new Evaluation<>();
-		
+	    EvaluationData<String> eval= new EvaluationData<>();
 		eval.register("A", "B");
 		eval.register("B", "B");
 		eval.register("A", "C");
@@ -69,14 +65,11 @@ public class EvaluationTransformerTest {
 		Map<String, String> mapping = new HashMap<String, String>();
 		mapping.put("A", "B");
 
-		Evaluation<String> transformed  = EvaluationTransformer.changeGoldLabel(eval, mapping);
+		EvaluationData<String> transformed  = EvaluationTransformer.changeGoldLabel(eval, mapping);
 		
-		Collection<EvaluationEntry<String>> entries = transformed.getEntries();
-		assertEquals(5, entries.size());
+		assertEquals(5, transformed.size());
 		
-		System.out.println(transformed.getConfusionMatrix());
-
-		for (EvaluationEntry<String> entry : entries) {
+		for (EvaluationEntry<String> entry : transformed) {
 			assertNotEquals("A", entry.getGold());
 		}		
 	}
@@ -84,8 +77,7 @@ public class EvaluationTransformerTest {
 	@Test
 	public void changePredictedLabelTest() 
 	{	
-		Evaluation<String> eval= new Evaluation<>();
-		
+	    EvaluationData<String> eval= new EvaluationData<>();
 		eval.register("A", "B");
 		eval.register("B", "B");
 		eval.register("A", "C");
@@ -95,14 +87,11 @@ public class EvaluationTransformerTest {
 		Map<String, String> mapping = new HashMap<String, String>();
 		mapping.put("A", "B");
 
-		Evaluation<String> transformed  = EvaluationTransformer.changePredictedLabel(eval, mapping);
+		EvaluationData<String> transformed  = EvaluationTransformer.changePredictedLabel(eval, mapping);
 		
-		Collection<EvaluationEntry<String>> entries = transformed.getEntries();
-		assertEquals(5, entries.size());
+		assertEquals(5, transformed.size());
 		
-		System.out.println(transformed.getConfusionMatrix());
-
-		for (EvaluationEntry<String> entry : entries) {
+		for (EvaluationEntry<String> entry : transformed) {
 			assertNotEquals("A", entry.getPredicted());
 		}		
 	}
