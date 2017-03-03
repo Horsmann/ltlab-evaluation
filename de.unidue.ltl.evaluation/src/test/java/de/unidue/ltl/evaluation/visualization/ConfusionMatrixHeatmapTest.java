@@ -22,7 +22,7 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-import de.unidue.ltl.evaluation.Evaluation;
+import de.unidue.ltl.evaluation.EvaluationData;
 import de.unidue.ltl.evaluation.util.TestUtils;
 
 public class ConfusionMatrixHeatmapTest {
@@ -31,9 +31,9 @@ public class ConfusionMatrixHeatmapTest {
 	public void confusionMatrixHeatmapTest() 
 			throws IOException
 	{
-		Evaluation<String> eval = new Evaluation<>(TestUtils.getRandomCategorialEntries(100, 6));
+		EvaluationData<String> eval = new EvaluationData<>(TestUtils.getRandomCategorialEntries(100, 6));
 		
-		ConfusionMatrixHeatmap cmh = new ConfusionMatrixHeatmap(eval.getConfusionMatrix());
+		ConfusionMatrixHeatmap cmh = new ConfusionMatrixHeatmap(eval);
 		cmh.writePlot(new File("target/test.png"));
 	}
 }

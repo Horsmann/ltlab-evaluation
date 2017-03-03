@@ -37,16 +37,23 @@ import org.jfree.data.xy.DefaultXYZDataset;
 import org.jfree.data.xy.XYZDataset;
 
 import de.unidue.ltl.evaluation.ConfusionMatrix;
+import de.unidue.ltl.evaluation.EvaluationData;
 
 public class ConfusionMatrixHeatmap {
 
 	private ConfusionMatrix<String> cf;
 	private List<String> labels;
 	
-	public ConfusionMatrixHeatmap(ConfusionMatrix<String> confusionMatrix) {
+	public ConfusionMatrixHeatmap(EvaluationData<String> data) {
+	    ConfusionMatrix<String> confusionMatrix = new ConfusionMatrix<>(data);
 		cf = confusionMatrix;
 		labels = cf.getLabels();
 	}
+	
+	public ConfusionMatrixHeatmap(ConfusionMatrix<String> confusionMatrix) {
+        cf = confusionMatrix;
+        labels = cf.getLabels();
+    }
 
 	public void writePlot(File targetFile) 
 			throws IOException 
