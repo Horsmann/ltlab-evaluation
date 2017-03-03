@@ -18,24 +18,39 @@
 
 package de.unidue.ltl.evaluation.measure.correlation;
 
-import java.util.Collection;
-import java.util.Map;
-
-import de.unidue.ltl.evaluation.EvaluationEntry;
-import de.unidue.ltl.evaluation.EvaluationResult;
-import de.unidue.ltl.evaluation.measure.EvaluationMeasure;
-import de.unidue.ltl.evaluation.measure.util.ScaleMeasureUtil;
+import de.unidue.ltl.evaluation.EvaluationData;
+import de.unidue.ltl.evaluation.measure.util.VectorPair;
 
 
 public class SpearmanCorrelation
-	extends EvaluationMeasure<Double>
+	extends CorrelationMeasure<Double>
 {
-	public SpearmanCorrelation(Collection<EvaluationEntry<Double>> entries) {
-		super(entries);
-	}
+    boolean didCalculate=false;
+    double computeCorrelation;
 
-	@Override
-	public Map<String, EvaluationResult> calculate() {
-		return ScaleMeasureUtil.computeScaleResults(entries);
-	}
+    public SpearmanCorrelation(EvaluationData<Double> data)
+    {
+        super(data);
+    }
+
+    @Override
+    public double getCorrelation()
+    {
+        if(!didCalculate){
+            calculate();
+        }
+        
+        return computeCorrelation;
+    }
+
+    @Override
+    public void calculate()
+    {
+        if(didCalculate){
+            return;
+        }
+        VectorPair<Double> vectors = new VectorPair<>(data);
+        
+        computeCorrelation = org.dkpro.statistics.correlation.SpearmansRankCorrelation.computeCorrelation(vectors.getVal1(), vectors.getVal2());
+    }
 }

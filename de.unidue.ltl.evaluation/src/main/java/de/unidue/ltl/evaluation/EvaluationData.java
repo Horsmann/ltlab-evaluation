@@ -9,7 +9,7 @@ public class EvaluationData<T> implements Iterable<EvaluationEntry<T>>{
 
 	private Collection<EvaluationEntry<T>> entries;
     private EvaluationMetaData<T> metaData;
-
+    
 	public EvaluationData(EvaluationMetaData<T> metaData) {
 		this.metaData = metaData;
         this.entries = new ArrayList<>();
