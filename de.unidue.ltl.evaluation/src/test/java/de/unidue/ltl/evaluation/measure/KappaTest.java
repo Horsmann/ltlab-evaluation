@@ -24,6 +24,7 @@ import org.junit.Test;
 
 import de.unidue.ltl.evaluation.EvaluationData;
 import de.unidue.ltl.evaluation.measure.agreement.LinearlyWeightedKappa;
+import de.unidue.ltl.evaluation.measure.agreement.QuadraticallyWeightedKappa;
 import de.unidue.ltl.evaluation.util.TestUtils;
 
 public class KappaTest {
@@ -34,5 +35,9 @@ public class KappaTest {
 		EvaluationData<Double> entries = new EvaluationData<>(TestUtils.getExampleNumeric());
 		LinearlyWeightedKappa linWeightedKappa = new LinearlyWeightedKappa(entries);
 		assertEquals(0.3975, linWeightedKappa.getAgreement(), 0.001);
+		
+		QuadraticallyWeightedKappa weightedKappa = new QuadraticallyWeightedKappa(entries);
+		assertEquals(0.3492, weightedKappa.getAgreement(), 0.001);
+		
 	}
 }
