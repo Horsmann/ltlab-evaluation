@@ -22,13 +22,13 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import de.unidue.ltl.evaluation.Evaluation;
-import de.unidue.ltl.evaluation.comparison.DescriptiveComparison;
+import de.unidue.ltl.evaluation.EvaluationData;
 
 public class DescriptiveComparisonTest {
 
 	@Test
 	public void descriptiveComparisonTest() throws Exception {
-		Evaluation<String> evaluation1 = new Evaluation<String>();
+	    EvaluationData<String> evaluation1 = new EvaluationData<String>();
 		for (int i = 0; i < 5; i++) {
 			evaluation1.register("A", "A");
 		}
@@ -42,7 +42,7 @@ public class DescriptiveComparisonTest {
 			evaluation1.register("A", "B");
 		}
 
-		Evaluation<String> evaluation2 = new Evaluation<String>();
+		EvaluationData<String> evaluation2 = new EvaluationData<String>();
 		for (int i = 0; i < 5; i++) {
 			evaluation2.register("A", "A");
 		}

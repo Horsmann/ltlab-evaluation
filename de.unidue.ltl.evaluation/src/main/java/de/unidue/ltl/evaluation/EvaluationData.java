@@ -7,7 +7,7 @@ import java.util.List;
 
 public class EvaluationData<T> implements Iterable<EvaluationEntry<T>>{
 
-	private Collection<EvaluationEntry<T>> entries;
+	private List<EvaluationEntry<T>> entries;
     private EvaluationMetaData<T> metaData;
     
 	public EvaluationData(EvaluationMetaData<T> metaData) {
@@ -16,7 +16,7 @@ public class EvaluationData<T> implements Iterable<EvaluationEntry<T>>{
 	}
 	
 	public EvaluationData(Collection<EvaluationEntry<T>> entries) {
-		this.entries = entries;
+		this.entries = new ArrayList<>(entries);
 	}
 	
 	public EvaluationData()
@@ -51,5 +51,9 @@ public class EvaluationData<T> implements Iterable<EvaluationEntry<T>>{
     public long size()
     {
         return entries.size();
+    }
+    
+    public EvaluationEntry<T> get(int idx){
+        return entries.get(idx);
     }
 }
