@@ -31,13 +31,7 @@ import de.unidue.ltl.evaluation.EvaluationEntry;
  */
 public class EvaluationTransformer {
 
-	/**
-	 * Delete selected labels from evaluation
-	 * @param eval An evaluation
-	 * @param labels A list of labels to be deleted.
-	 * @return A new evaluation object without the selected labels
-	 */
-	public static <T> EvaluationData<T> deleteLabels(EvaluationData<T> eval, T ... labels) {
+    public static <T> EvaluationData<T> deleteLabels(EvaluationData<T> eval, T ... labels) {
 		
 	    EvaluationData<T> transformed = new EvaluationData<T>();		
 		
@@ -54,11 +48,6 @@ public class EvaluationTransformer {
 	}
 	
 	
-	/**
-	 * @param eval An evaluation
-	 * @param mapping A mapping from gold values to be changed to new gold values
-	 * @return An evaluation with changed gold labels
-	 */
 	public static <T> EvaluationData<T> changeGoldLabel(EvaluationData<T> data, Map<T,T> mapping) {
 		
 	    EvaluationData<T> transformed = new EvaluationData<T>();		
@@ -75,11 +64,6 @@ public class EvaluationTransformer {
 		return transformed;
 	}
 	
-	/**
-	 * @param data An evaluation
-	 * @param mapping A mapping from predicted values to be changed to new predicted values
-	 * @return An evaluation with changed predicted labels
-	 */
 	public static <T> EvaluationData<T> changePredictedLabel(EvaluationData<T> data, Map<T,T> mapping) {
 		
 	    EvaluationData<T> transformed = new EvaluationData<T>();		
