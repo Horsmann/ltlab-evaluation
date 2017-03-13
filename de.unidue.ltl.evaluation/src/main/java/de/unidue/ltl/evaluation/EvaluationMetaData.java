@@ -22,6 +22,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -55,8 +56,10 @@ public class EvaluationMetaData<T>
     private long getEntryCount(Iterable<EvaluationEntry<T>> data)
     {
         int count=0;
-        for (EvaluationEntry<T> e : data){
+        Iterator<EvaluationEntry<T>> iterator = data.iterator();
+        while(iterator.hasNext()){
             count++;
+            iterator.next();
         }
         return count;
     }
@@ -183,16 +186,6 @@ public class EvaluationMetaData<T>
             }
         }
         return counter;
-    }
-
-    @Override
-    public String toString()
-    {
-        StringBuilder sb = new StringBuilder();
-        sb.append(this.name);
-        sb.append(this.labels);
-        sb.append(getStats());
-        return sb.toString();
     }
 
     public String getName()
