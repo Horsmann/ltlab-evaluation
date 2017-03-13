@@ -26,14 +26,14 @@ import org.dkpro.statistics.agreement.distance.IDistanceFunction;
 import de.unidue.ltl.evaluation.EvaluationData;
 import de.unidue.ltl.evaluation.EvaluationEntry;
 
-public class LinearlyWeightedKappa
-    extends AgreementMeasure<Double>
+public class LinearlyWeightedKappa<T extends Number>
+    extends AgreementMeasure<T>
 {
 
     boolean didCalculate = false;
     double calculateAgreement;
 
-    public LinearlyWeightedKappa(EvaluationData<Double> data)
+    public LinearlyWeightedKappa(EvaluationData<T> data)
     {
         super(data);
     }
@@ -45,7 +45,7 @@ public class LinearlyWeightedKappa
         }
 
         CodingAnnotationStudy study = new CodingAnnotationStudy(2);
-        for (EvaluationEntry<Double> entry : data) {
+        for (EvaluationEntry<T> entry : data) {
             study.addItem(entry.getGold(), entry.getPredicted());
         }
         LinearDistanceFunction dist = new LinearDistanceFunction();

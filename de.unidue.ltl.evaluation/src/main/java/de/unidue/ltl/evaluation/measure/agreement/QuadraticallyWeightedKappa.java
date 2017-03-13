@@ -25,14 +25,14 @@ import org.dkpro.statistics.agreement.distance.IntervalDistanceFunction;
 import de.unidue.ltl.evaluation.EvaluationData;
 import de.unidue.ltl.evaluation.EvaluationEntry;
 
-public class QuadraticallyWeightedKappa
-    extends AgreementMeasure<Double>
+public class QuadraticallyWeightedKappa<T extends Number>
+    extends AgreementMeasure<T>
 {
 
     boolean didCalculate = false;
     double calculateAgreement;
 
-    public QuadraticallyWeightedKappa(EvaluationData<Double> data)
+    public QuadraticallyWeightedKappa(EvaluationData<T> data)
     {
         super(data);
     }
@@ -43,7 +43,7 @@ public class QuadraticallyWeightedKappa
             return;
         }
         CodingAnnotationStudy study = new CodingAnnotationStudy(2);
-        for (EvaluationEntry<Double> entry : data){
+        for (EvaluationEntry<T> entry : data){
             study.addItem(entry.getGold(), entry.getPredicted());
         }
         IntervalDistanceFunction  dist = new IntervalDistanceFunction();

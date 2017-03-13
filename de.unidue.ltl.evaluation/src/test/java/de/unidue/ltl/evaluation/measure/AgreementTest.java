@@ -27,7 +27,13 @@ import org.junit.Test;
 import de.unidue.ltl.evaluation.EvaluationData;
 import de.unidue.ltl.evaluation.EvaluationEntry;
 import de.unidue.ltl.evaluation.measure.agreement.CohenKappa;
+import de.unidue.ltl.evaluation.measure.agreement.FleissKappa;
 import de.unidue.ltl.evaluation.measure.agreement.KrippendorffAlpha;
+import de.unidue.ltl.evaluation.measure.agreement.LinearlyWeightedKappa;
+import de.unidue.ltl.evaluation.measure.agreement.QuadraticallyWeightedKappa;
+import de.unidue.ltl.evaluation.measure.agreement.RandolphKappa;
+import de.unidue.ltl.evaluation.measure.agreement.ScottPi;
+import de.unidue.ltl.evaluation.util.TestUtils;
 
 public class AgreementTest {
 	
@@ -44,4 +50,15 @@ public class AgreementTest {
 		assertEquals(0.533, new KrippendorffAlpha<String>(data).getAgreement(), 0.001);
 				
 	}
+	
+	@Test
+    public void kappaTest(){
+        EvaluationData<Double> entries = new EvaluationData<>(TestUtils.getExampleNumeric());
+        
+        assertEquals(0.3975, new LinearlyWeightedKappa<Double>(entries).getAgreement(), 0.001);
+        assertEquals(0.3492, new QuadraticallyWeightedKappa<Double>(entries).getAgreement(), 0.001);
+        assertEquals(0.4523, new FleissKappa<Double>(entries).getAgreement(), 0.001);
+        assertEquals(0.4750, new RandolphKappa<Double>(entries).getAgreement(), 0.001);
+        assertEquals(0.4523, new ScottPi<Double>(entries).getAgreement(), 0.001);
+    }
 }
