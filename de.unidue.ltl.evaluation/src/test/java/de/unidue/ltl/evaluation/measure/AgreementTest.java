@@ -26,6 +26,7 @@ import org.junit.Test;
 
 import de.unidue.ltl.evaluation.EvaluationData;
 import de.unidue.ltl.evaluation.EvaluationEntry;
+import de.unidue.ltl.evaluation.measure.agreement.BennettS;
 import de.unidue.ltl.evaluation.measure.agreement.CohenKappa;
 import de.unidue.ltl.evaluation.measure.agreement.FleissKappa;
 import de.unidue.ltl.evaluation.measure.agreement.KrippendorffAlpha;
@@ -60,5 +61,6 @@ public class AgreementTest {
         assertEquals(0.4523, new FleissKappa<Double>(entries).getAgreement(), 0.001);
         assertEquals(0.4750, new RandolphKappa<Double>(entries).getAgreement(), 0.001);
         assertEquals(0.4523, new ScottPi<Double>(entries).getAgreement(), 0.001);
+        assertEquals(0.4750, new BennettS<Double>(entries).getAgreement(), 0.001);
     }
 }
