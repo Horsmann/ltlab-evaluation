@@ -38,8 +38,7 @@ public class Recall<T>
         super(data);
     }
 
-    @Override
-    public void calculate()
+    void calculate()
     {
 
         if (didCalculate) {

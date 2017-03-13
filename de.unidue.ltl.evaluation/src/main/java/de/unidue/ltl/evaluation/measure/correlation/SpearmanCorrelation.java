@@ -42,8 +42,7 @@ public class SpearmanCorrelation
         return computeCorrelation;
     }
 
-    @Override
-    public void calculate()
+    void calculate()
     {
         if(didCalculate){
             return;

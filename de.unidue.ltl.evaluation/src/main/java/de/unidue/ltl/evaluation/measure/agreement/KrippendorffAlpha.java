@@ -35,8 +35,7 @@ public class KrippendorffAlpha<T>
         super(data);
     }
 
-    @Override
-    public void calculate()
+    void calculate()
     {
         if (didCalculate) {
             return;

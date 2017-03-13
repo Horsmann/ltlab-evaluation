@@ -39,8 +39,7 @@ public class Fscore<T> extends CategoricalMeasure<T> {
 		super(data);
 	}
 
-	@Override
-	public void calculate() {
+	void calculate() {
 
 		if (didCalculate) {
 			return;

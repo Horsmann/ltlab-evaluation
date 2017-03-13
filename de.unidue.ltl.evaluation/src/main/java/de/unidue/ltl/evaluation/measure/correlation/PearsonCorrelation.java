@@ -41,8 +41,7 @@ public class PearsonCorrelation extends CorrelationMeasure<Double>
         return computeCorrelation;
     }
 
-    @Override
-    public void calculate()
+    void calculate()
     {
         if(didCalculate){
             return;

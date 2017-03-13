@@ -38,8 +38,7 @@ public class LinearlyWeightedKappa
         super(data);
     }
 
-    @Override
-    public void calculate()
+    void calculate()
     {
         if (didCalculate) {
             return;

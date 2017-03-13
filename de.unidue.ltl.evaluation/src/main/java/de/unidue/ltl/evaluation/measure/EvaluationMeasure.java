@@ -25,8 +25,6 @@ public abstract class EvaluationMeasure<T> {
 
 	protected EvaluationData<T> data;
 	
-	public abstract void calculate();
-	
     public EvaluationMeasure(EvaluationData<T> data)
     {
         this.data = data;
