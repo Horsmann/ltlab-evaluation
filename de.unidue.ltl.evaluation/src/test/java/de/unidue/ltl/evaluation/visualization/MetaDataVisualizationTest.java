@@ -17,22 +17,39 @@
  ******************************************************************************/
 package de.unidue.ltl.evaluation.visualization;
 
+import static org.junit.Assert.*;
+
+import java.io.File;
 import java.util.Collection;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import de.unidue.ltl.evaluation.EvaluationEntry;
 import de.unidue.ltl.evaluation.EvaluationMetaData;
-import de.unidue.ltl.evaluation.MetaVisualizer;
 import de.unidue.ltl.evaluation.util.TestUtils;
 
 public class MetaDataVisualizationTest
 {
+    private EvaluationMetaData<String> meta;
+
+    @Before
+    public void setup(){
+        Collection<EvaluationEntry<String>> exampleCategorial = TestUtils.getExampleCategorial();
+        meta = new EvaluationMetaData<>("meta", exampleCategorial);
+        new File("target/", MetaDataVisualizer.PREDICTED_FILE).delete();
+        new File("target/", MetaDataVisualizer.GOLD_FILE).delete();
+    }
+    
     @Test
     public void testPlotCreation() throws Exception{
-        Collection<EvaluationEntry<String>> exampleCategorial = TestUtils.getExampleCategorial();
-        EvaluationMetaData<String> meta = new EvaluationMetaData<>("meta", exampleCategorial);
-        MetaVisualizer.getPieChart(meta, "target/");
         
+        assertTrue(!new File("target/", MetaDataVisualizer.PREDICTED_FILE).exists());
+        assertTrue(!new File("target/", MetaDataVisualizer.GOLD_FILE).exists());
+        
+        MetaDataVisualizer.getPieChart(meta, "target/");
+        
+        assertTrue(new File("target/", MetaDataVisualizer.PREDICTED_FILE).exists());
+        assertTrue(new File("target/", MetaDataVisualizer.GOLD_FILE).exists());
     }
 }

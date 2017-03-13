@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.unidue.ltl.evaluation;
+package de.unidue.ltl.evaluation.visualization;
 
 import java.io.File;
 import java.text.DecimalFormat;
@@ -28,16 +28,23 @@ import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
 import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.general.DefaultPieDataset;
 
-public class MetaVisualizer<T>
+import de.unidue.ltl.evaluation.EvaluationMetaData;
+
+public class MetaDataVisualizer<T>
 {
-    public static <T> void getPieChart(EvaluationMetaData<T> meta, String outputFolder)
+    static final String PREDICTED_FILE = "pieChart_predicted.jpeg";
+    static final String GOLD_FILE = "pieChart_gold.jpeg";
+
+    public static <T> File[] getPieChart(EvaluationMetaData<T> meta, String outputFolder)
         throws Exception
     {
         getPieChart(meta, true, outputFolder);
         getPieChart(meta, false, outputFolder);
+        
+        return new File[] {getPieChart(meta, true, outputFolder), getPieChart(meta, true, outputFolder)};
     }
 
-    public static <T> void getPieChart(EvaluationMetaData<T> meta, boolean isPredicted,
+    public static <T> File getPieChart(EvaluationMetaData<T> meta, boolean isPredicted,
             String outputFolder)
                 throws Exception
     {
@@ -73,12 +80,14 @@ public class MetaVisualizer<T>
 
         try {
             if (isPredicted) {
-                ChartUtilities.saveChartAsJPEG(new File(outputFolder, "pieChart_predicted.jpeg"),
-                        someChart, 1200, 1000);
+                File target = new File(outputFolder, PREDICTED_FILE);
+                ChartUtilities.saveChartAsJPEG(target, someChart, 1200, 1000);
+                return target;
             }
             else {
-                ChartUtilities.saveChartAsJPEG(new File(outputFolder, "pieChart_gold.jpeg"),
-                        someChart, 1200, 1000);
+                File target = new File(outputFolder, GOLD_FILE);
+                ChartUtilities.saveChartAsJPEG(target, someChart, 1200, 1000);
+                return target;
             }
         }
         catch (Exception e) {
