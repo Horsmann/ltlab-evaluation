@@ -62,20 +62,4 @@ public class EvaluationMetaDataTest {
 		assertEquals(4,evaluation.getMetaData().getDistributionsPerLabelPredicted().get("A").intValue());
 	}
 	
-	
-	@Test
-	public void evaluationMetaDataPieChartStatsTest() throws Exception{
-		Collection<EvaluationEntry<String>> entries= new ArrayList<>();
-		entries.add(new EvaluationEntry<String>("A", "B"));
-		entries.add(new EvaluationEntry<String>("A", "A"));
-		entries.add(new EvaluationEntry<String>("A", "B"));
-		entries.add(new EvaluationEntry<String>("A", "A"));
-		entries.add(new EvaluationEntry<String>("C", "C"));
-		entries.add(new EvaluationEntry<String>("A", "A"));
-		entries.add(new EvaluationEntry<String>("A", "B"));
-		entries.add(new EvaluationEntry<String>("A", "A"));
-		EvaluationData<String> evaluation= new EvaluationData<>(entries);
-		evaluation.getMetaData().getPieChart();
-	}
-	
 }
