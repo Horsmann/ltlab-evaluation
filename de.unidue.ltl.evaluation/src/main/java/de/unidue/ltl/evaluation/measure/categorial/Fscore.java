@@ -65,6 +65,10 @@ public class Fscore<T> extends CategoricalMeasure<T> {
 			double recall = (double) cvb.tp / (cvb.tp + cvb.fn);
 			double fscore = 2.0 * precision * recall / (precision + recall);
 			
+			if(Double.isNaN(fscore)){
+			    fscore=0.0;
+			}
+			
 			precision_sum += precision;
 			recall_sum += recall;
 			precision_weighted += precision*(1.0*(cvb.tp+cvb.fn)/(cvb.tp+cvb.fp+cvb.tn+cvb.fn));
@@ -80,9 +84,7 @@ public class Fscore<T> extends CategoricalMeasure<T> {
 
 		macro_precision = precision_sum/categories.size();
 		macro_recall = recall_sum/categories.size();
-		macro_fscore = 2.0*macro_precision*macro_recall/(macro_precision+macro_recall);
-		macro_fscore = 2.0 * macro_recall * macro_recall / (macro_recall + macro_recall);
-		micro_fscore = 2.0 * micro_precision * micro_recall / (micro_precision + micro_recall);
+		macro_fscore = 2.0* macro_precision*macro_recall/(macro_precision+macro_recall);
 		weighted_fscore = 2.0 * weighted_precision * weighted_recall / (weighted_precision + weighted_recall);
 		
 		micro_precision = (double) tp_sum/(tp_sum+fp_sum);

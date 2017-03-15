@@ -19,11 +19,14 @@ package de.unidue.ltl.evaluation.measure;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import org.junit.Test;
 
 import de.unidue.ltl.evaluation.EvaluationData;
+import de.unidue.ltl.evaluation.EvaluationEntry;
 import de.unidue.ltl.evaluation.measure.categorial.Fscore;
-import de.unidue.ltl.evaluation.util.TestUtils;
 
 public class FscoreTest {
 	
@@ -31,10 +34,22 @@ public class FscoreTest {
 	// gold: 50 A, 18 B, 32 C
 	@Test
 	public void fscoreTest(){
-		EvaluationData<String> data = new EvaluationData<>(TestUtils.getExampleCategorial());
-		assertEquals(0.6666, new Fscore<>(data).getScoreForLabel("A"), 0.001);
-        assertEquals(0.69767, new Fscore<>(data).getScoreForLabel("B"), 0.001);
-        assertEquals(0.59701, new Fscore<>(data).getScoreForLabel("C"), 0.001);
+	    Collection<EvaluationEntry<String>> entries = new ArrayList<EvaluationEntry<String>>();
+        entries.add(new EvaluationEntry<String>("A", "B"));
+        entries.add(new EvaluationEntry<String>("B", "C"));
+        entries.add(new EvaluationEntry<String>("C", "A"));
+        entries.add(new EvaluationEntry<String>("A", "A"));
+        entries.add(new EvaluationEntry<String>("B", "A"));
+        entries.add(new EvaluationEntry<String>("C", "C"));
+        
+        EvaluationData<String> data = new EvaluationData<>(entries);
+    
+        assertEquals(0.3333, new Fscore<>(data).getMicro_fscore(), 0.0001);
+        assertEquals(0.3030, new Fscore<>(data).getMacro_fscore(), 0.0001);
+        assertEquals(0.3030, new Fscore<>(data).getWeighted_fscore(), 0.0001);
+		assertEquals(0.4000, new Fscore<>(data).getScoreForLabel("A"), 0.001);
+        assertEquals(0.0000, new Fscore<>(data).getScoreForLabel("B"), 0.001);
+        assertEquals(0.5000, new Fscore<>(data).getScoreForLabel("C"), 0.001);
 	}
 	
 
