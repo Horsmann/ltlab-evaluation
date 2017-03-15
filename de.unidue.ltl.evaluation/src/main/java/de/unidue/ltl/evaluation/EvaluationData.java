@@ -18,81 +18,74 @@
 package de.unidue.ltl.evaluation;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-public class EvaluationData<T>
-    implements Iterable<EvaluationEntry<T>>
-{
+public class EvaluationData<T> implements Iterable<EvaluationEntry<T>> {
 
-    private List<EvaluationEntry<T>> entries;
-    private EvaluationMetaData<T> meta = null;
+	private List<EvaluationEntry<T>> entries;
+	private EvaluationMetaData<T> meta = null;
 
-    public EvaluationData()
-    {
-        this.entries = new ArrayList<>();
-        this.meta = new EvaluationMetaData<T>();
-    }
+	public EvaluationData() {
+		this.entries = new ArrayList<>();
+		this.meta = new EvaluationMetaData<T>();
+	}
 
-    public EvaluationData(Collection<EvaluationEntry<T>> entries)
-    {
-        this.entries = new ArrayList<>(entries);
-        this.meta = new EvaluationMetaData<>(EvaluationMetaData.DEFAULT_NAME, entries);
-    }
+	@SafeVarargs
+	public EvaluationData(Iterable<EvaluationEntry<T>>... entries) {
+		this.entries = new ArrayList<>();
 
-    public void register(T gold, T predicted)
-    {
-        EvaluationEntry<T> entry = new EvaluationEntry<T>(gold, predicted);
-        entries.add(entry);
-    }
+		for (Iterable<EvaluationEntry<T>> e : entries) {
+			Iterator<EvaluationEntry<T>> iterator = e.iterator();
+			while (iterator.hasNext()) {
+				this.entries.add(iterator.next());
+			}
+		}
+		this.meta = new EvaluationMetaData<>(EvaluationMetaData.DEFAULT_NAME, this);
+	}
 
-    public void setMetaData(EvaluationMetaData<T> meta)
-    {
-        this.meta = meta;
-    }
-    
-    
-    public void setName(String name){
-    	this.meta.setName(name);
-    }
+	public void register(T gold, T predicted) {
+		EvaluationEntry<T> entry = new EvaluationEntry<T>(gold, predicted);
+		entries.add(entry);
+	}
 
-    @Override
-    public Iterator<EvaluationEntry<T>> iterator()
-    {
-        return new Iterator<EvaluationEntry<T>>()
-        {
+	public void setMetaData(EvaluationMetaData<T> meta) {
+		this.meta = meta;
+	}
 
-            List<EvaluationEntry<T>> data = new ArrayList<>(entries);
-            int idx = 0;
+	public void setName(String name) {
+		this.meta.setName(name);
+	}
 
-            @Override
-            public boolean hasNext()
-            {
-                return idx < data.size();
-            }
+	@Override
+	public Iterator<EvaluationEntry<T>> iterator() {
+		return new Iterator<EvaluationEntry<T>>() {
 
-            @Override
-            public EvaluationEntry<T> next()
-            {
-                return data.get(idx++);
-            }
-        };
-    }
+			List<EvaluationEntry<T>> data = new ArrayList<>(entries);
+			int idx = 0;
 
-    public long size()
-    {
-        return entries.size();
-    }
+			@Override
+			public boolean hasNext() {
+				return idx < data.size();
+			}
 
-    public EvaluationEntry<T> get(int idx)
-    {
-        return entries.get(idx);
-    }
+			@Override
+			public EvaluationEntry<T> next() {
+				return data.get(idx++);
+			}
+		};
+	}
 
-    public EvaluationMetaData<T> getMetaData()
-    {
-        return meta;
-    }
+	public long size() {
+		return entries.size();
+	}
+
+	public EvaluationEntry<T> get(int idx) {
+		return entries.get(idx);
+	}
+
+	public EvaluationMetaData<T> getMetaData() {
+		return meta;
+	}
 
 }
