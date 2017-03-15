@@ -40,6 +40,9 @@ public class AccuracyTest {
 		
 		EvaluationData<String> data = new EvaluationData<>(entries);
 		assertEquals(0.75, new Accuracy<>(data).getAccuracy(), 0.001);
+		assertEquals(3, new Accuracy<>(data).getCorrect());
+		assertEquals(1, new Accuracy<>(data).getIncorrect());
+		assertEquals(4, new Accuracy<>(data).getNumberInstances());
 	}
 
 }

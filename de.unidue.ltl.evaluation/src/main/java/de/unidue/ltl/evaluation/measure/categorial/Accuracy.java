@@ -56,7 +56,7 @@ public class Accuracy<T>
 
     public double getAccuracy()
     {
-        if(!didCalculate){
+        if (!didCalculate) {
             calculate();
         }
         return (double) correct / numberInstances;
@@ -64,16 +64,25 @@ public class Accuracy<T>
 
     public long getNumberInstances()
     {
+        if (!didCalculate) {
+            calculate();
+        }
         return numberInstances;
     }
 
     public long getCorrect()
     {
+        if (!didCalculate) {
+            calculate();
+        }
         return correct;
     }
 
     public long getIncorrect()
     {
+        if (!didCalculate) {
+            calculate();
+        }
         return incorrect;
     }
 }
