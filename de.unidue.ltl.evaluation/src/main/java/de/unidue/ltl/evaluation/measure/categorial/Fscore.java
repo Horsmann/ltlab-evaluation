@@ -34,6 +34,14 @@ public class Fscore<T> extends CategoricalMeasure<T> {
 	double weighted_fscore;
 
 	private boolean didCalculate = false;
+    private double precision_sum;
+    private double recall_sum;
+    private double precision_weighted;
+    private double recall_weighted;
+    private long tp_sum;
+    private long fp_sum;
+    private long tn_sum;
+    private long fn_sum;
 
 	public Fscore(EvaluationData<T> data) {
 		super(data);
@@ -56,13 +64,31 @@ public class Fscore<T> extends CategoricalMeasure<T> {
 			double precision = (double) cvb.tp / (cvb.tp + cvb.fp);
 			double recall = (double) cvb.tp / (cvb.tp + cvb.fn);
 			double fscore = 2.0 * precision * recall / (precision + recall);
+			
+			precision_sum += precision;
+			recall_sum += recall;
+			precision_weighted += precision*(1.0*(cvb.tp+cvb.fn)/(cvb.tp+cvb.fp+cvb.tn+cvb.fn));
+			recall_weighted += recall*(1.0*(cvb.tp+cvb.fn)/(cvb.tp+cvb.fp+cvb.tn+cvb.fn));
 
+			tp_sum += cvb.tp;
+			fp_sum += cvb.fp;
+			tn_sum += cvb.tn;
+			fn_sum += cvb.fn;
+			
 			f1Measures.put(category, fscore);
 		}
 
+		macro_precision = precision_sum/categories.size();
+		macro_recall = recall_sum/categories.size();
+		macro_fscore = 2.0*macro_precision*macro_recall/(macro_precision+macro_recall);
 		macro_fscore = 2.0 * macro_recall * macro_recall / (macro_recall + macro_recall);
 		micro_fscore = 2.0 * micro_precision * micro_recall / (micro_precision + micro_recall);
 		weighted_fscore = 2.0 * weighted_precision * weighted_recall / (weighted_precision + weighted_recall);
+		
+		micro_precision = (double) tp_sum/(tp_sum+fp_sum);
+		micro_recall = (double) tp_sum/(tp_sum+fn_sum);
+		micro_fscore = 2.0*micro_precision*micro_recall/(micro_precision+micro_recall);
+		weighted_fscore = 2.0*precision_weighted*recall_weighted/(precision_weighted+recall_weighted);
 
 		didCalculate = true;
 	}
