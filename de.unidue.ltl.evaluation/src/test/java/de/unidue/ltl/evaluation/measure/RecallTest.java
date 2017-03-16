@@ -27,10 +27,8 @@ import de.unidue.ltl.evaluation.util.TestUtils;
 
 public class RecallTest {
 	
-	
-	// gold: 50 A, 18 B, 32 C
 	@Test
-	public void prfTest(){
+	public void recallTest(){
 		EvaluationData<String> data = new EvaluationData<>(TestUtils.getExampleCategorial());
 		assertEquals(0.6, new Recall<>(data).getRecallForLabel("A"), 0.001);
         assertEquals(0.833, new Recall<>(data).getRecallForLabel("B"), 0.001);

@@ -59,10 +59,10 @@ public class FscoreTest {
 	
 	@Test
 	public void crossEvaluation(){
-	    
 	    double p = new Precision<String>(data).getMicroPrecision();
 	    double r = new Recall<String>(data).getMicroRecall();
-	    
+	    double fmicro = 2 * p * r /(p+r);
+	    assertEquals(new Fscore<>(data).getMicroFscore(), fmicro, 0.001);
 	}
 	
 

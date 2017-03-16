@@ -26,10 +26,6 @@ import de.unidue.ltl.evaluation.EvaluationData;
 public class Fscore<T> extends CategoricalMeasure<T> {
 	Map<T, Double> f1Measures = new HashMap<>();
 	double macro_fscore;
-	double macro_recall;
-	double macro_precision;
-	double micro_precision;
-	double micro_recall;
 	double micro_fscore;
 	double weighted_fscore;
 
@@ -55,9 +51,6 @@ public class Fscore<T> extends CategoricalMeasure<T> {
 
 		Set<T> categories = getDistinctLabels(data);
 
-		double weighted_precision = 0d;
-		double weighted_recall = 0d;
-
 		for (T category : categories) {
 			Category cvb = getCategoryBaseValues(category);
  
@@ -82,13 +75,12 @@ public class Fscore<T> extends CategoricalMeasure<T> {
 			f1Measures.put(category, fscore);
 		}
 
-		macro_precision = precision_sum/categories.size();
-		macro_recall = recall_sum/categories.size();
+		double macro_precision = precision_sum/categories.size();
+		double macro_recall = recall_sum/categories.size();
 		macro_fscore = 2.0* macro_precision*macro_recall/(macro_precision+macro_recall);
-		weighted_fscore = 2.0 * weighted_precision * weighted_recall / (weighted_precision + weighted_recall);
 		
-		micro_precision = (double) tp_sum/(tp_sum+fp_sum);
-		micro_recall = (double) tp_sum/(tp_sum+fn_sum);
+		double micro_precision = (double) tp_sum/(tp_sum+fp_sum);
+		double micro_recall = (double) tp_sum/(tp_sum+fn_sum);
 		micro_fscore = 2.0*micro_precision*micro_recall/(micro_precision+micro_recall);
 		weighted_fscore = 2.0*precision_weighted*recall_weighted/(precision_weighted+recall_weighted);
 
@@ -108,34 +100,6 @@ public class Fscore<T> extends CategoricalMeasure<T> {
 			calculate();
 		}
 		return macro_fscore;
-	}
-
-	public double getMacro_recall() {
-		if (!didCalculate) {
-			calculate();
-		}
-		return macro_recall;
-	}
-
-	public double getMacro_precision() {
-		if (!didCalculate) {
-			calculate();
-		}
-		return macro_precision;
-	}
-
-	public double getMicro_precision() {
-		if (!didCalculate) {
-			calculate();
-		}
-		return micro_precision;
-	}
-
-	public double getMicro_recall() {
-		if (!didCalculate) {
-			calculate();
-		}
-		return micro_recall;
 	}
 
 	public double getMicroFscore() {

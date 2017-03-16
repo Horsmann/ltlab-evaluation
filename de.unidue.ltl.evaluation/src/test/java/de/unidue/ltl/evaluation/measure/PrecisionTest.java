@@ -27,10 +27,8 @@ import de.unidue.ltl.evaluation.util.TestUtils;
 
 public class PrecisionTest {
 	
-	
-	// gold: 50 A, 18 B, 32 C
 	@Test
-	public void prfTest(){
+	public void precisionTest(){
 		EvaluationData<String> data = new EvaluationData<>(TestUtils.getExampleCategorial());
 		assertEquals(0.75, new Precision<>(data).getPrecisionForLabel("A"), 0.001);
 		assertEquals(0.6, new Precision<>(data).getPrecisionForLabel("B"), 0.001);
