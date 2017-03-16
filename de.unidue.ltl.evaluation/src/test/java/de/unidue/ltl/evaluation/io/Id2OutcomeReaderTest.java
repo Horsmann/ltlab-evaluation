@@ -28,12 +28,22 @@ import de.unidue.ltl.evaluation.EvaluationData;
 import de.unidue.ltl.evaluation.io.TcId2OutcomeReader;
 
 public class Id2OutcomeReaderTest {
+    
+    File datafile = new File("src/test/resources/io/id2Outcome_gunshot.txt");
 	
     @Test
 	public void testReadFile()
 			throws Exception
 	{
-	    EvaluationData<String> evaluation = TcId2OutcomeReader.read(new File("src/test/resources/io/id2Outcome_gunshot.txt"));
+	    EvaluationData<String> evaluation = TcId2OutcomeReader.read(datafile);
 	    assertEquals(821, evaluation.size());
 	}
+    
+    @Test
+    public void testReadMultipleFile()
+            throws Exception
+    {
+        EvaluationData<String> evaluation = TcId2OutcomeReader.readMultipleFiles(datafile,datafile,datafile);
+        assertEquals(821*3, evaluation.size());
+    }
 }

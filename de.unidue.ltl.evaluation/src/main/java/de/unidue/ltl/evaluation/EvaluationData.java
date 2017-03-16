@@ -94,4 +94,13 @@ public class EvaluationData<T>
         return id;
     }
 
+    public void registerBulk(EvaluationData<T> data)
+    {
+        Iterator<EvaluationEntry<T>> iterator = data.iterator();
+        while (iterator.hasNext()) {
+            EvaluationEntry<T> next = iterator.next();
+            register(next.getGold(), next.getPredicted());
+        }
+    }
+
 }

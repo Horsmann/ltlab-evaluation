@@ -29,79 +29,81 @@ import org.apache.commons.io.FileUtils;
 import de.unidue.ltl.evaluation.EvaluationData;
 import de.unidue.ltl.evaluation.EvaluationEntry;
 
-public class TcId2OutcomeReader {
-	
-	public static EvaluationData<String> read(File id2OutcomeFile) 
-			throws Exception
-	{
-	    EvaluationData<String> evaluation= new EvaluationData<>();
-		evaluation = registerId2OutcomePairs(evaluation,id2OutcomeFile);
-		
-		return evaluation;
-	}
-	
-	public static EvaluationData<String> readSorted(File id2OutcomeFile) 
-			throws Exception
-	{
-		List<String> labels=null;
-		TreeMap<String, EvaluationEntry<String>> id2EvalEntry = new TreeMap<>();
-		
-		for (String line : FileUtils.readLines(id2OutcomeFile)) {
-			if (line.startsWith("#labels")) {
-				labels = getLabels(line);
-			}
-			
-			if (!line.startsWith("#")) {
-				String prediction = line.split(";")[0];
-				String id= prediction.split("=")[0];
-				String gold = line.split(";")[1];
-				int indexOfOnePredicted=getIndexOfOne(prediction.split("=")[1]);
-				int indexOfOneGold=getIndexOfOne(gold);
-				String labelPredicted =labels.get(indexOfOnePredicted);
-				String labelGold=labels.get(indexOfOneGold);
-				EvaluationEntry<String> entry= new EvaluationEntry<String>(labelGold, labelPredicted);
-				id2EvalEntry.put(id, entry);
-			}
-		}
-		
-		EvaluationData<String> evaluation= new EvaluationData<>(id2EvalEntry.values());
-		return evaluation;
-	}
+public class TcId2OutcomeReader
+{
 
-	private static EvaluationData<String> registerId2OutcomePairs(EvaluationData<String> evaluation, File id2OutcomeFile)
-			throws Exception
-	{
-		List<String> labels=null;
+    public static EvaluationData<String> read(File id2OutcomeFile)
+        throws Exception
+    {
+        EvaluationData<String> evaluation = new EvaluationData<>();
+        evaluation = createEvaluationFrom(id2OutcomeFile);
 
-		for (String line : FileUtils.readLines(id2OutcomeFile)) {
-			if (line.startsWith("#labels")) {
-				labels=getLabels(line);
-			}
-			if (!line.startsWith("#")) {
-				String prediction = line.split(";")[0];
-				String gold = line.split(";")[1];
-				int indexOfOnePredicted=getIndexOfOne(prediction.split("=")[1]);
-				int indexOfOneGold=getIndexOfOne(gold);
-				String labelPredicted =labels.get(indexOfOnePredicted);
-				String labelGold=labels.get(indexOfOneGold);
-				evaluation.register(labelGold, labelPredicted);
-			}
-		}
-		
-		return evaluation;
-	}
+        return evaluation;
+    }
 
-	public static EvaluationData<String> readMultipleFiles(List<File> id2OutcomeFiles)
-			throws Exception
-	{
-	    EvaluationData<String> evaluation = new EvaluationData<>();
-		for (File id2OutcomeFile : id2OutcomeFiles) {
-			evaluation = registerId2OutcomePairs(evaluation,id2OutcomeFile);
-		}
-		return evaluation;
-	}
-	
-	/**
+    public static EvaluationData<String> readSorted(File id2OutcomeFile)
+        throws Exception
+    {
+        List<String> labels = null;
+        TreeMap<String, EvaluationEntry<String>> id2EvalEntry = new TreeMap<>();
+
+        for (String line : FileUtils.readLines(id2OutcomeFile)) {
+            if (line.startsWith("#labels")) {
+                labels = getLabels(line);
+            }
+
+            if (!line.startsWith("#")) {
+                String prediction = line.split(";")[0];
+                String id = prediction.split("=")[0];
+                String gold = line.split(";")[1];
+                int indexOfOnePredicted = getIndexOfOne(prediction.split("=")[1]);
+                int indexOfOneGold = getIndexOfOne(gold);
+                String labelPredicted = labels.get(indexOfOnePredicted);
+                String labelGold = labels.get(indexOfOneGold);
+                EvaluationEntry<String> entry = new EvaluationEntry<String>(labelGold,
+                        labelPredicted);
+                id2EvalEntry.put(id, entry);
+            }
+        }
+
+        EvaluationData<String> evaluation = new EvaluationData<>(id2EvalEntry.values());
+        return evaluation;
+    }
+
+    private static EvaluationData<String> createEvaluationFrom(File id2OutcomeFile)
+                throws Exception
+    {
+        List<String> labels = null;
+        EvaluationData<String> evaluation = new EvaluationData<>();
+        for (String line : FileUtils.readLines(id2OutcomeFile)) {
+            if (line.startsWith("#labels")) {
+                labels = getLabels(line);
+            }
+            if (!line.startsWith("#")) {
+                String prediction = line.split(";")[0];
+                String gold = line.split(";")[1];
+                int indexOfOnePredicted = getIndexOfOne(prediction.split("=")[1]);
+                int indexOfOneGold = getIndexOfOne(gold);
+                String labelPredicted = labels.get(indexOfOnePredicted);
+                String labelGold = labels.get(indexOfOneGold);
+                evaluation.register(labelGold, labelPredicted);
+            }
+        }
+
+        return evaluation;
+    }
+
+    public static EvaluationData<String> readMultipleFiles(File... id2OutcomeFiles)
+        throws Exception
+    {
+        EvaluationData<String> evaluation = new EvaluationData<>();
+        for (File id2OutcomeFile : id2OutcomeFiles) {
+            evaluation.registerBulk(createEvaluationFrom(id2OutcomeFile));
+        }
+        return evaluation;
+    }
+
+    /**
      * Retrieves the list of labels from the respective header line of the id2outcome file, sorted
      * according to their index.
      * 
@@ -122,25 +124,26 @@ public class TcId2OutcomeReader {
         }
         return labels;
     }
-    
+
     /**
      * returns the first position in the vector that is marked with a on
+     * 
      * @param resultVector
      * @return
      * @throws Exception
      */
     private static int getIndexOfOne(String resultVector)
-    		throws Exception
+        throws Exception
     {
-		int i=0;
-		for (String dim:resultVector.split(",")) {
-			if (dim.equals("1")) {
-				return i;
-			}
-			i++;
-		}
-		
-		throw new Exception(resultVector+"does not contain a 1");
-	}
+        int i = 0;
+        for (String dim : resultVector.split(",")) {
+            if (dim.equals("1")) {
+                return i;
+            }
+            i++;
+        }
+
+        throw new Exception(resultVector + "does not contain a 1");
+    }
 
 }

@@ -65,4 +65,8 @@ public class EvaluationMetaDataTest
         assertEquals(1, meta.getDistributionsPerLabelPredicted().get("A").intValue());
     }
 
+    @Test
+    public void testStats(){
+        assertTrue(meta.getStats() != null);
+    }
 }

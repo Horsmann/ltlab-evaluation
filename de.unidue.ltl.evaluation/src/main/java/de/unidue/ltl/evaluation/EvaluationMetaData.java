@@ -54,17 +54,6 @@ public class EvaluationMetaData<T>
         return count;
     }
 
-    public EvaluationMetaData()
-    {
-        this.name = DEFAULT_NAME;
-        
-        List<EvaluationEntry<T>> emptyList = new ArrayList<>();
-        this.labels = getDistinctLabels(emptyList);
-        this.distributionsPerLabelPredicted = getDistributionsPerLabel(emptyList,true);
-        this.distributionsPerLabelGold = getDistributionsPerLabel(emptyList,false);
-        this.numberOfEntries = emptyList.size();
-    }
-
     private List<T> getDistinctLabels(Iterable<EvaluationEntry<T>> data)
     {
         Set<T> labels = new HashSet<>();
@@ -80,7 +69,6 @@ public class EvaluationMetaData<T>
 
     public String getStats()
     {
-
         StringBuilder sb = new StringBuilder();
         sb.append("Name:" + "\t" + name + System.lineSeparator());
         sb.append("Labels:" + "\t" + labels + System.lineSeparator());
