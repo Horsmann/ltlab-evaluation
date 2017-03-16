@@ -40,7 +40,7 @@ public class McNemarBulkTest {
 		evalObjects.add(eval);
 	}	
 	
-	public Map<String, Map<String, Double>> computeBulkTable() throws Exception{
+	public Map<String, Map<String, Double>> computeBulkTable(McNemarType type) throws Exception{
 		Map<String, Map<String, Double>> resultTable = new HashMap<String, Map<String, Double>>();
 		for (EvaluationData<String> eval1 : this.evalObjects){
 			resultTable.put(eval1.getId().toString(), new HashMap<String, Double>());
@@ -48,7 +48,7 @@ public class McNemarBulkTest {
 				 resultTable.get(eval1.getId().toString())
 				 .put(eval2.getId().toString(), 
 						 ChiSquare.getPvalue(
-								 McNemarTest.computeSignificance(eval1, eval2, "Yates"), 1));
+								 McNemarTest.computeSignificance(eval1, eval2, type), 1));
 			}	
 		}
 		return resultTable;

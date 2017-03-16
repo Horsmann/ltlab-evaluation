@@ -56,7 +56,7 @@ public class McNemarBulkTestUnitTest {
 		McNemarBulkTest test = new McNemarBulkTest();
 		test.register(evaluation1);
 		test.register(evaluation2);
-		Map<String, Map<String, Double>> table = test.computeBulkTable();
+		Map<String, Map<String, Double>> table = test.computeBulkTable(McNemarType.YATES);
 		System.out.println("McNemarBulk p-values");
 		for (String row : table.keySet()) {
 			for (String column : table.get(row).keySet()) {

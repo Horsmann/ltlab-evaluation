@@ -51,7 +51,7 @@ public class McNemarTestUnitTest {
 			evaluation2.register("A", "B");
 		}
 		
-		assertEquals(5.25, McNemarTest.computeSignificance(evaluation1, evaluation2, "Yates"), 0.001);
+		assertEquals(5.25, McNemarTest.computeSignificance(evaluation1, evaluation2, McNemarType.YATES), 0.001);
 		
 	}
 
