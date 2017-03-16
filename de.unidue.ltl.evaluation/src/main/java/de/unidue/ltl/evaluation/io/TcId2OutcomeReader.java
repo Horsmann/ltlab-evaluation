@@ -32,7 +32,7 @@ import de.unidue.ltl.evaluation.EvaluationEntry;
 public class TcId2OutcomeReader
 {
 
-    public static EvaluationData<String> read(File id2OutcomeFile)
+    public static EvaluationData<String> convertFile(File id2OutcomeFile)
         throws Exception
     {
         EvaluationData<String> evaluation = new EvaluationData<>();
@@ -93,7 +93,7 @@ public class TcId2OutcomeReader
         return evaluation;
     }
 
-    public static EvaluationData<String> readMultipleFiles(File... id2OutcomeFiles)
+    public static EvaluationData<String> convertMultipleFiles(File... id2OutcomeFiles)
         throws Exception
     {
         EvaluationData<String> evaluation = new EvaluationData<>();

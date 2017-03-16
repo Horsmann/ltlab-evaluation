@@ -35,7 +35,7 @@ public class Id2OutcomeReaderTest {
 	public void testReadFile()
 			throws Exception
 	{
-	    EvaluationData<String> evaluation = TcId2OutcomeReader.read(datafile);
+	    EvaluationData<String> evaluation = TcId2OutcomeReader.convertFile(datafile);
 	    assertEquals(821, evaluation.size());
 	}
     
@@ -43,7 +43,7 @@ public class Id2OutcomeReaderTest {
     public void testReadMultipleFile()
             throws Exception
     {
-        EvaluationData<String> evaluation = TcId2OutcomeReader.readMultipleFiles(datafile,datafile,datafile);
+        EvaluationData<String> evaluation = TcId2OutcomeReader.convertMultipleFiles(datafile,datafile,datafile);
         assertEquals(821*3, evaluation.size());
     }
 }
