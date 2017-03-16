@@ -31,8 +31,6 @@ public class McNemarBulkTestUnitTest {
 	public void mcnemareSignificanceTest() throws Exception {
 		EvaluationData<String> evaluation1 = new EvaluationData<String>();
 		EvaluationData<String> evaluation2 = new EvaluationData<String>();
-		evaluation1.setName("eval_a");
-		evaluation2.setName("eval_b");
 		
 		
 		for(int i=0; i< 8; i++){
@@ -66,8 +64,8 @@ public class McNemarBulkTestUnitTest {
 			}
 			System.out.print("\n");
 		}
-		assertEquals(0.025, table.get(evaluation1.getMetaData().getName())
-				.get(evaluation2.getMetaData().getName()), 0.001);
+		assertEquals(0.025, table.get(evaluation1.getId().toString())
+				.get(evaluation2.getId().toString()), 0.001);
 		
 	}
 	

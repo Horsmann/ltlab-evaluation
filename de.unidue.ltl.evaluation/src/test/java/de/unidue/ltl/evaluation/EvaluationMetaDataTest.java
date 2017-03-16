@@ -16,6 +16,7 @@
  * limitations under the License.
  ******************************************************************************/
 package de.unidue.ltl.evaluation;
+
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
@@ -23,43 +24,45 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import org.apache.commons.lang.StringUtils;
+import org.junit.Before;
 import org.junit.Test;
-public class EvaluationMetaDataTest {
-	
-	@Test
-	public void evaluationMetaDataNameTest(){
-		Collection<EvaluationEntry<String>> entries= new ArrayList<>();
-		entries.add(new EvaluationEntry<String>("A", "B"));
-		entries.add(new EvaluationEntry<String>("A", "A"));
-		EvaluationData<String> evaluation= new EvaluationData<>(entries);
-		assertEquals(EvaluationMetaData.DEFAULT_NAME,evaluation.getMetaData().getName());
-	}
-	
-	@Test
-	public void evaluationMetaDataLabelTest(){
-		Collection<EvaluationEntry<String>> entries= new ArrayList<>();
-		entries.add(new EvaluationEntry<String>("A", "B"));
-		entries.add(new EvaluationEntry<String>("A", "A"));
-		EvaluationData<String> evaluation= new EvaluationData<>(entries);
-		assertEquals(StringUtils.join(Arrays.asList("A","B"), " "),StringUtils.join(evaluation.getMetaData().getLabels()," "));
-	}
-	
-	@Test
-	public void evaluationMetaDataLabelDistributionTest(){
-		Collection<EvaluationEntry<String>> entries= new ArrayList<>();
-		entries.add(new EvaluationEntry<String>("A", "B"));
-		entries.add(new EvaluationEntry<String>("A", "A"));
-		entries.add(new EvaluationEntry<String>("A", "B"));
-		entries.add(new EvaluationEntry<String>("A", "A"));
-		entries.add(new EvaluationEntry<String>("C", "C"));
-		entries.add(new EvaluationEntry<String>("A", "A"));
-		entries.add(new EvaluationEntry<String>("A", "B"));
-		entries.add(new EvaluationEntry<String>("A", "A"));
-		EvaluationData<String> evaluation= new EvaluationData<>(entries);
-		assertEquals(0,evaluation.getMetaData().getDistributionsPerLabelGold().get("B").intValue());
-		assertEquals(3,evaluation.getMetaData().getDistributionsPerLabelPredicted().get("B").intValue());
-		assertEquals(7,evaluation.getMetaData().getDistributionsPerLabelGold().get("A").intValue());
-		assertEquals(4,evaluation.getMetaData().getDistributionsPerLabelPredicted().get("A").intValue());
-	}
-	
+
+public class EvaluationMetaDataTest
+{
+
+    EvaluationData<String> evaluation;
+    EvaluationMetaData<String> meta;
+
+    @Before
+    public void setup()
+    {
+        Collection<EvaluationEntry<String>> entries = new ArrayList<>();
+        entries.add(new EvaluationEntry<String>("A", "B"));
+        entries.add(new EvaluationEntry<String>("A", "A"));
+        evaluation = new EvaluationData<>(entries);
+        meta = new EvaluationMetaData<>("name", evaluation);
+    }
+
+    @Test
+    public void evaluationMetaDataNameTest()
+    {
+        assertNotNull(evaluation.getId().toString());
+    }
+
+    @Test
+    public void evaluationMetaDataLabelTest()
+    {
+        assertEquals(StringUtils.join(Arrays.asList("A", "B"), " "),
+                StringUtils.join(meta.getLabels(), " "));
+    }
+
+    @Test
+    public void evaluationMetaDataLabelDistributionTest()
+    {
+        assertEquals(0, meta.getDistributionsPerLabelGold().get("B").intValue());
+        assertEquals(1, meta.getDistributionsPerLabelPredicted().get("B").intValue());
+        assertEquals(2, meta.getDistributionsPerLabelGold().get("A").intValue());
+        assertEquals(1, meta.getDistributionsPerLabelPredicted().get("A").intValue());
+    }
+
 }

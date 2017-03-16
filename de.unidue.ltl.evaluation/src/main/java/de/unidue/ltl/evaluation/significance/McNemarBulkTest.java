@@ -43,10 +43,10 @@ public class McNemarBulkTest {
 	public Map<String, Map<String, Double>> computeBulkTable() throws Exception{
 		Map<String, Map<String, Double>> resultTable = new HashMap<String, Map<String, Double>>();
 		for (EvaluationData<String> eval1 : this.evalObjects){
-			resultTable.put(eval1.getMetaData().getName(), new HashMap<String, Double>());
+			resultTable.put(eval1.getId().toString(), new HashMap<String, Double>());
 			for (EvaluationData<String> eval2 : this.evalObjects){
-				 resultTable.get(eval1.getMetaData().getName())
-				 .put(eval2.getMetaData().getName(), 
+				 resultTable.get(eval1.getId().toString())
+				 .put(eval2.getId().toString(), 
 						 ChiSquare.getPvalue(
 								 McNemarTest.computeSignificance(eval1, eval2, "Yates"), 1));
 			}	
