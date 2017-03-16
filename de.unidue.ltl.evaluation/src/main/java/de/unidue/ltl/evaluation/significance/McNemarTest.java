@@ -24,7 +24,7 @@ public class McNemarTest
 {
 
     public static double computeSignificance(EvaluationData<String> e1, EvaluationData<String> e2,
-            String correctionType)
+            McNemarType type)
                 throws Exception
     {
 
@@ -32,8 +32,8 @@ public class McNemarTest
         double sample2negative = 0;
 
         if (e1.size() != e2.size()) {
-            System.err.println("Lists must have the same length!");
-            System.exit(-1);
+            throw new IllegalStateException(
+                    "Data sets are not of equal size [" + e1.size() + "] vs [" + e2.size() + "]");
         }
 
         for (int i = 0; i < e1.size(); i++) {
@@ -50,21 +50,18 @@ public class McNemarTest
         if (sample1negative == 0 && sample2negative == 0) {
             return 0.0;
         }
-        double mcNemarYates = Math.pow(Math.abs(sample2negative - sample1negative) - 0.5, 2)
-                / (sample1negative + sample2negative);
-        double mcNemarEdwards = Math.pow(Math.abs(sample2negative - sample1negative) - 1, 2)
-                / (sample1negative + sample2negative);
 
-        if (correctionType.equals("Yates")) {
-            return mcNemarYates;
+        if (type == McNemarType.YATES) {
+            return Math.pow(Math.abs(sample2negative - sample1negative) - 0.5, 2)
+                    / (sample1negative + sample2negative);
         }
-        else if (correctionType.equals("Edwards")) {
-            return mcNemarEdwards;
+        else if (type == McNemarType.EDWARDS) {
+            return Math.pow(Math.abs(sample2negative - sample1negative) - 1, 2)
+                    / (sample1negative + sample2negative);
         }
-        else {
-            throw new Exception(
-                    "Unknown correction Type for McNemar test. Only Yates and Edwards known.");
-        }
+
+        throw new IllegalStateException(
+                "Unknown McNemarTest Type encounted [" + type.toString() + "]");
     }
 
     private static boolean positive(EvaluationEntry<String> entry)
