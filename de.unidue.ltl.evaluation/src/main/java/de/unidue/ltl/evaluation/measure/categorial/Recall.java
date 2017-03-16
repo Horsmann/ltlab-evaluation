@@ -89,7 +89,7 @@ public class Recall<T>
         return macro_recall;
     }
 
-    public double getMicro_recall()
+    public double getMicroRecall()
     {
         if (!didCalculate) {
             calculate();

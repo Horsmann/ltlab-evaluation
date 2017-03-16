@@ -22,34 +22,47 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import de.unidue.ltl.evaluation.EvaluationData;
 import de.unidue.ltl.evaluation.EvaluationEntry;
 import de.unidue.ltl.evaluation.measure.categorial.Fscore;
+import de.unidue.ltl.evaluation.measure.categorial.Precision;
+import de.unidue.ltl.evaluation.measure.categorial.Recall;
 
 public class FscoreTest {
 	
-	
-	// gold: 50 A, 18 B, 32 C
-	@Test
-	public void fscoreTest(){
-	    Collection<EvaluationEntry<String>> entries = new ArrayList<EvaluationEntry<String>>();
+    EvaluationData<String> data;
+    @Before
+    public void setup(){
+        Collection<EvaluationEntry<String>> entries = new ArrayList<EvaluationEntry<String>>();
         entries.add(new EvaluationEntry<String>("A", "B"));
         entries.add(new EvaluationEntry<String>("B", "C"));
         entries.add(new EvaluationEntry<String>("C", "A"));
         entries.add(new EvaluationEntry<String>("A", "A"));
         entries.add(new EvaluationEntry<String>("B", "A"));
         entries.add(new EvaluationEntry<String>("C", "C"));
-        
-        EvaluationData<String> data = new EvaluationData<>(entries);
+        data = new EvaluationData<>(entries);
+    }
     
-        assertEquals(0.3333, new Fscore<>(data).getMicro_fscore(), 0.0001);
-        assertEquals(0.3030, new Fscore<>(data).getMacro_fscore(), 0.0001);
-        assertEquals(0.3030, new Fscore<>(data).getWeighted_fscore(), 0.0001);
+	@Test
+	public void fscoreTest(){
+	    
+        assertEquals(0.3333, new Fscore<>(data).getMicroFscore(), 0.0001);
+        assertEquals(0.3030, new Fscore<>(data).getMacroFscore(), 0.0001);
+        assertEquals(0.3030, new Fscore<>(data).getWeightedFscore(), 0.0001);
 		assertEquals(0.4000, new Fscore<>(data).getScoreForLabel("A"), 0.001);
         assertEquals(0.0000, new Fscore<>(data).getScoreForLabel("B"), 0.001);
         assertEquals(0.5000, new Fscore<>(data).getScoreForLabel("C"), 0.001);
+	}
+	
+	@Test
+	public void crossEvaluation(){
+	    
+	    double p = new Precision<String>(data).getMicroPrecision();
+	    double r = new Recall<String>(data).getMicroRecall();
+	    
 	}
 	
 

@@ -103,7 +103,7 @@ public class Fscore<T> extends CategoricalMeasure<T> {
 		return f1Measures.get(category);
 	}
 
-	public double getMacro_fscore() {
+	public double getMacroFscore() {
 		if (!didCalculate) {
 			calculate();
 		}
@@ -138,14 +138,14 @@ public class Fscore<T> extends CategoricalMeasure<T> {
 		return micro_recall;
 	}
 
-	public double getMicro_fscore() {
+	public double getMicroFscore() {
 		if (!didCalculate) {
 			calculate();
 		}
 		return micro_fscore;
 	}
 
-	public double getWeighted_fscore() {
+	public double getWeightedFscore() {
 		if (!didCalculate) {
 			calculate();
 		}

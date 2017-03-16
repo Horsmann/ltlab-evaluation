@@ -87,7 +87,7 @@ public class Precision<T>
         return macro_precision;
     }
 
-    public double getMicro_precision()
+    public double getMicroPrecision()
     {
         if (!didCalculate) {
             calculate();
