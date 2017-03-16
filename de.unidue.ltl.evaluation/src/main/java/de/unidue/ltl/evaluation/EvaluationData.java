@@ -94,7 +94,7 @@ public class EvaluationData<T>
         return id;
     }
 
-    public void registerBulk(EvaluationData<T> data)
+    public void registerBulk(Iterable<EvaluationEntry<T>> data)
     {
         Iterator<EvaluationEntry<T>> iterator = data.iterator();
         while (iterator.hasNext()) {
