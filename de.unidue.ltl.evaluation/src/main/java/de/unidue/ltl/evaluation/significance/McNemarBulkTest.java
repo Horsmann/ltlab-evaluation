@@ -24,35 +24,41 @@ import java.util.Map;
 
 import de.unidue.ltl.evaluation.EvaluationData;
 
-public class McNemarBulkTest {
+public class McNemarBulkTest
+{
 
-	private List<EvaluationData<String>> evalObjects;
-	
-	public McNemarBulkTest(){
-		evalObjects = new ArrayList<EvaluationData<String>>();
-	}
-	
-	public McNemarBulkTest(ArrayList<EvaluationData<String>> evaluations){
-		evalObjects = evaluations;
-	}
-	
-	public void register (EvaluationData<String> eval){
-		evalObjects.add(eval);
-	}	
-	
-	public Map<String, Map<String, Double>> computeBulkTable(McNemarType type) throws Exception{
-		Map<String, Map<String, Double>> resultTable = new HashMap<String, Map<String, Double>>();
-		for (EvaluationData<String> eval1 : this.evalObjects){
-			resultTable.put(eval1.getId().toString(), new HashMap<String, Double>());
-			for (EvaluationData<String> eval2 : this.evalObjects){
-				 resultTable.get(eval1.getId().toString())
-				 .put(eval2.getId().toString(), 
-						 ChiSquare.getPvalue(
-								 McNemarTest.computeSignificance(eval1, eval2, type), 1));
-			}	
-		}
-		return resultTable;
-	}
-	
-	
+    private List<EvaluationData<String>> evalObjects;
+
+    public McNemarBulkTest()
+    {
+        evalObjects = new ArrayList<EvaluationData<String>>();
+    }
+
+    public McNemarBulkTest(ArrayList<EvaluationData<String>> evaluations)
+    {
+        evalObjects = evaluations;
+    }
+
+    public void register(EvaluationData<String> eval)
+    {
+        evalObjects.add(eval);
+    }
+
+    public Map<String, Map<String, Double>> computeBulkTable(McNemarType type)
+        throws Exception
+    {
+        Map<String, Map<String, Double>> resultTable = new HashMap<String, Map<String, Double>>();
+        for (EvaluationData<String> eval1 : this.evalObjects) {
+            resultTable.put(eval1.getId().toString(), new HashMap<String, Double>());
+            for (EvaluationData<String> eval2 : this.evalObjects) {
+                Map<String, Double> map = resultTable.get(eval1.getId().toString());
+                String id = eval2.getId().toString();
+                double computeSignificance = McNemarTest.computeSignificance(eval1, eval2, type);
+                double pvalue = ChiSquare.getPvalue(computeSignificance, 1);
+                map.put(id, pvalue);
+            }
+        }
+        return resultTable;
+    }
+
 }
