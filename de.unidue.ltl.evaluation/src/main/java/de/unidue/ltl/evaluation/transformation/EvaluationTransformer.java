@@ -25,12 +25,9 @@ import java.util.Set;
 import de.unidue.ltl.evaluation.EvaluationData;
 import de.unidue.ltl.evaluation.EvaluationEntry;
 
-/**
- * @author zesch
- *
- */
 public class EvaluationTransformer {
 
+    @SafeVarargs
     public static <T> EvaluationData<T> deleteLabels(EvaluationData<T> eval, T ... labels) {
 		
 	    EvaluationData<T> transformed = new EvaluationData<T>();		
