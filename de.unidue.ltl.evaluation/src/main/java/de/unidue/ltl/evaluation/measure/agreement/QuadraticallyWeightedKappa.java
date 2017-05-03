@@ -18,12 +18,22 @@
 
 package de.unidue.ltl.evaluation.measure.agreement;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
+import org.dkpro.statistics.agreement.InsufficientDataException;
 import org.dkpro.statistics.agreement.coding.CodingAnnotationStudy;
 import org.dkpro.statistics.agreement.coding.WeightedKappaAgreement;
 import org.dkpro.statistics.agreement.distance.IntervalDistanceFunction;
 
+import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyDistribution;
 import de.unidue.ltl.evaluation.EvaluationData;
 import de.unidue.ltl.evaluation.EvaluationEntry;
+import de.unidue.ltl.evaluation.measure.categorial.Accuracy;
 
 public class QuadraticallyWeightedKappa<T extends Number>
     extends AgreementMeasure<T>
@@ -42,13 +52,18 @@ public class QuadraticallyWeightedKappa<T extends Number>
         if (didCalculate) {
             return;
         }
-        CodingAnnotationStudy study = new CodingAnnotationStudy(2);
-        for (EvaluationEntry<T> entry : data){
-            study.addItem(entry.getGold(), entry.getPredicted());
+        ArrayList<Integer> gold = new ArrayList<Integer>();
+        ArrayList<Integer> predictions = new ArrayList<Integer>();
+        Set<Integer> labels = new HashSet<Integer>();
+        Iterator<EvaluationEntry<T>> iter = data.iterator();
+        while (iter.hasNext()) {
+        	EvaluationEntry<T> e = iter.next();
+        	gold.add((int) Math.round((double)e.getGold()));
+        	predictions.add((int) Math.round((double) e.getPredicted()));
+        	labels.add((int) Math.round((double) e.getGold()));
+        	labels.add((int) Math.round((double) e.getPredicted()));
         }
-        IntervalDistanceFunction  dist = new IntervalDistanceFunction();
-        WeightedKappaAgreement kappa = new WeightedKappaAgreement(study, dist);
-        calculateAgreement = kappa.calculateAgreement();
+        calculateAgreement = getKappa(gold.toArray(new Integer[gold.size()]), predictions.toArray(new Integer[predictions.size()]), labels.toArray(new Integer[0]));
 
         didCalculate = true;
     }
@@ -62,5 +77,48 @@ public class QuadraticallyWeightedKappa<T extends Number>
 
         return calculateAgreement;
     }
+    
+  
+
+    public static double getKappa(Integer[] ratingsA, Integer[] ratingsB, Integer... categories) {
+        if (ratingsA.length != ratingsB.length) {
+            throw new IllegalArgumentException("Rating vectors need to be of equal size.");
+        }
+        
+        if (Arrays.equals(ratingsA,ratingsB)) {
+        	return 1.0;
+        }
+    
+        ConfusionMatrix confMatrix = new ConfusionMatrix(ratingsA, ratingsB, categories);
+
+        int nrofRatings = categories.length;
+        int nrofScoredItems = ratingsA.length;
+
+        FrequencyDistribution<Integer> freqDistA = new FrequencyDistribution<Integer>(Arrays.asList(ratingsA));
+        FrequencyDistribution<Integer> freqDistB = new FrequencyDistribution<Integer>(Arrays.asList(ratingsB));
+        
+        double numerator = 0.0;
+        double denominator = 0.0;
+
+        for (int outerCategory : categories) {
+            for (int innerCategory : categories) {
+                int nMinusOne = nrofRatings - 1;
+                int distance = outerCategory - innerCategory;
+                double weight = (double) (distance*distance) / (nMinusOne*nMinusOne);
+                
+                double expectedCount = (double) (freqDistA.getCount(outerCategory) * freqDistB.getCount(innerCategory)) / nrofScoredItems;
+                numerator += weight * confMatrix.getElement(outerCategory, innerCategory) / nrofScoredItems;
+                denominator += weight * expectedCount / nrofScoredItems;
+            }
+        }
+        return 1.0 - numerator / denominator;
+    }
+    
+    
+    
+    
+    
+    
+    
 }
 
