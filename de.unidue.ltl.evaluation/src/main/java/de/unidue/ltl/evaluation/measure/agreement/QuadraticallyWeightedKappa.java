@@ -58,10 +58,10 @@ public class QuadraticallyWeightedKappa<T extends Number>
         Iterator<EvaluationEntry<T>> iter = data.iterator();
         while (iter.hasNext()) {
         	EvaluationEntry<T> e = iter.next();
-        	gold.add((int) Math.round((double)e.getGold()));
-        	predictions.add((int) Math.round((double) e.getPredicted()));
-        	labels.add((int) Math.round((double) e.getGold()));
-        	labels.add((int) Math.round((double) e.getPredicted()));
+        	gold.add((int) Math.round(e.getGold().doubleValue()));
+        	predictions.add((int) Math.round(e.getPredicted().doubleValue()));
+        	labels.add((int) Math.round(e.getGold().doubleValue()));
+        	labels.add((int) Math.round(e.getPredicted().doubleValue()));
         }
         calculateAgreement = getKappa(gold.toArray(new Integer[gold.size()]), predictions.toArray(new Integer[predictions.size()]), labels.toArray(new Integer[0]));
 

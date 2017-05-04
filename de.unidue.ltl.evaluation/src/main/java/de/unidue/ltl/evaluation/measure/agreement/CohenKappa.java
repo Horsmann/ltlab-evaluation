@@ -17,6 +17,7 @@
  ******************************************************************************/
 package de.unidue.ltl.evaluation.measure.agreement;
 
+import org.dkpro.statistics.agreement.InsufficientDataException;
 import org.dkpro.statistics.agreement.coding.CodingAnnotationStudy;
 import org.dkpro.statistics.agreement.coding.CohenKappaAgreement;
 
@@ -46,8 +47,14 @@ public class CohenKappa<T>
         }
 
         CohenKappaAgreement cohenKappa = new CohenKappaAgreement(study);
+        
+        // We get an InsufficientDataException when there is only one gold category (which can happen e.g. in cross-validation)
+        try {
         calculateAgreement = cohenKappa.calculateAgreement();
-
+        } catch (InsufficientDataException e){
+        	calculateAgreement = 0.0;
+        }
+        
         didCalculate = true;
     }
 
