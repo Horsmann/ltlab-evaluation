@@ -25,6 +25,7 @@ import de.unidue.ltl.evaluation.EvaluationData;
 
 public class CategoricalAccuracy<T> extends CategoricalMeasure<T> {
 	Map<T, Double> accuracies = new HashMap<>();
+	Map<T, Category> category2BaseValues = new HashMap<>();
 	private boolean didCalculate = false;
 
 	public CategoricalAccuracy(EvaluationData<T> data) {
@@ -42,26 +43,40 @@ public class CategoricalAccuracy<T> extends CategoricalMeasure<T> {
 		for (T category : categories) {
 			Category cvb = getCategoryBaseValues(category);
 
-			double positive = (double) cvb.tp +cvb.tn;
+			double positive = (double) cvb.tp + cvb.tn;
 			double all = (double) positive + cvb.tn + cvb.fn;
-			double accuracy =(double) positive / all;
+			double accuracy = (double) positive / all;
 
 			if (Double.isNaN(accuracy)) {
 				accuracy = 0.0;
 			}
-
+			category2BaseValues.put(category, cvb);
 			accuracies.put(category, accuracy);
 		}
 
 		didCalculate = true;
 	}
 
+	
 	public double getScoreForLabel(T category) {
 		if (!didCalculate) {
 			calculate();
 		}
 		verifyLabelKnown(category, accuracies);
 		return accuracies.get(category);
+	}
+
+	/**
+	 * returns a category wrapper for accessing true positive, true negative,...
+	 * @param category
+	 * @return
+	 */
+	public Category getBaseValuesForLabel(T category) {
+		if (!didCalculate) {
+			calculate();
+		}
+		verifyLabelKnown(category, accuracies);
+		return category2BaseValues.get(category);
 	}
 
 }
