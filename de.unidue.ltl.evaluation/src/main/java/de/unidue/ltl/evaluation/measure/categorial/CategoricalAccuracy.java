@@ -25,7 +25,10 @@ import de.unidue.ltl.evaluation.EvaluationData;
 
 public class CategoricalAccuracy<T> extends CategoricalMeasure<T> {
 	Map<T, Double> accuracies = new HashMap<>();
-	Map<T, Category> category2BaseValues = new HashMap<>();
+	Map<T, Double> fns = new HashMap<>();
+	Map<T, Double> tns = new HashMap<>();
+	Map<T, Double> tps = new HashMap<>();
+	Map<T, Double> fps = new HashMap<>();
 	private boolean didCalculate = false;
 
 	public CategoricalAccuracy(EvaluationData<T> data) {
@@ -50,7 +53,10 @@ public class CategoricalAccuracy<T> extends CategoricalMeasure<T> {
 			if (Double.isNaN(accuracy)) {
 				accuracy = 0.0;
 			}
-			category2BaseValues.put(category, cvb);
+			fns.put(category, (double) cvb.fn);
+			tns.put(category, (double) cvb.tn);
+			tps.put(category, (double) cvb.tp);
+			fps.put(category, (double) cvb.fp);
 			accuracies.put(category, accuracy);
 		}
 
@@ -66,17 +72,37 @@ public class CategoricalAccuracy<T> extends CategoricalMeasure<T> {
 		return accuracies.get(category);
 	}
 
-	/**
-	 * returns a category wrapper for accessing true positive, true negative,...
-	 * @param category
-	 * @return
-	 */
-	public Category getBaseValuesForLabel(T category) {
+	public double getFN(T category) {
 		if (!didCalculate) {
 			calculate();
 		}
 		verifyLabelKnown(category, accuracies);
-		return category2BaseValues.get(category);
+		return fns.get(category);
 	}
+
+	public double getTP(T category) {
+		if (!didCalculate) {
+			calculate();
+		}
+		verifyLabelKnown(category, accuracies);
+		return tps.get(category);
+	}
+
+	public double getTN(T category) {
+		if (!didCalculate) {
+			calculate();
+		}
+		verifyLabelKnown(category, accuracies);
+		return tns.get(category);
+	}
+
+	public double getFP(T category) {
+		if (!didCalculate) {
+			calculate();
+		}
+		verifyLabelKnown(category, accuracies);
+		return fps.get(category);
+	}
+	
 
 }
