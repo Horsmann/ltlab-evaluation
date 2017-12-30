@@ -19,14 +19,10 @@ package de.unidue.ltl.evaluation.measure;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import org.junit.Before;
 import org.junit.Test;
 
 import de.unidue.ltl.evaluation.EvaluationData;
-import de.unidue.ltl.evaluation.EvaluationEntry;
 import de.unidue.ltl.evaluation.measure.categorial.Fscore;
 import de.unidue.ltl.evaluation.measure.categorial.Precision;
 import de.unidue.ltl.evaluation.measure.categorial.Recall;
@@ -36,14 +32,13 @@ public class FscoreTest {
     EvaluationData<String> data;
     @Before
     public void setup(){
-        Collection<EvaluationEntry<String>> entries = new ArrayList<EvaluationEntry<String>>();
-        entries.add(new EvaluationEntry<String>("A", "B"));
-        entries.add(new EvaluationEntry<String>("B", "C"));
-        entries.add(new EvaluationEntry<String>("C", "A"));
-        entries.add(new EvaluationEntry<String>("A", "A"));
-        entries.add(new EvaluationEntry<String>("B", "A"));
-        entries.add(new EvaluationEntry<String>("C", "C"));
-        data = new EvaluationData<>(entries);
+        data = new EvaluationData<>();
+        data.register("A", "B");
+        data.register("B", "C");
+        data.register("C", "A");
+        data.register("A", "A");
+        data.register("B", "A");
+        data.register("C", "C");
     }
     
 	@Test

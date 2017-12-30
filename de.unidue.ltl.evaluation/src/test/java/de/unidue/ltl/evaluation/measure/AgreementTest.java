@@ -19,13 +19,9 @@ package de.unidue.ltl.evaluation.measure;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import org.junit.Test;
 
 import de.unidue.ltl.evaluation.EvaluationData;
-import de.unidue.ltl.evaluation.EvaluationEntry;
 import de.unidue.ltl.evaluation.measure.agreement.BennettS;
 import de.unidue.ltl.evaluation.measure.agreement.CohenKappa;
 import de.unidue.ltl.evaluation.measure.agreement.FleissKappa;
@@ -40,12 +36,12 @@ public class AgreementTest {
 	
 	@Test
 	public void agreementTest(){
-		Collection<EvaluationEntry<String>> entries = new ArrayList<EvaluationEntry<String>>();
-		entries.add(new EvaluationEntry<String>("A", "B"));
-		entries.add(new EvaluationEntry<String>("B", "B"));
-		entries.add(new EvaluationEntry<String>("A", "A"));
-		entries.add(new EvaluationEntry<String>("A", "A"));
-		EvaluationData<String> data = new EvaluationData<>(entries);
+
+		EvaluationData<String> data = new EvaluationData<>();
+		data.register("A", "B");
+		data.register("B", "B");
+		data.register("A", "A");
+		data.register("A", "A");
 		
 		assertEquals(0.5, new CohenKappa<String>(data).getAgreement(), 0.001);
 		assertEquals(0.533, new KrippendorffAlpha<String>(data).getAgreement(), 0.001);
