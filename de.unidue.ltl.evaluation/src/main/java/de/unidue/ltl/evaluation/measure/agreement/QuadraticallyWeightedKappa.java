@@ -25,15 +25,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.dkpro.statistics.agreement.InsufficientDataException;
-import org.dkpro.statistics.agreement.coding.CodingAnnotationStudy;
-import org.dkpro.statistics.agreement.coding.WeightedKappaAgreement;
-import org.dkpro.statistics.agreement.distance.IntervalDistanceFunction;
-
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyDistribution;
 import de.unidue.ltl.evaluation.EvaluationData;
 import de.unidue.ltl.evaluation.EvaluationEntry;
-import de.unidue.ltl.evaluation.measure.categorial.Accuracy;
 
 public class QuadraticallyWeightedKappa<T extends Number>
     extends AgreementMeasure<T>
@@ -52,18 +46,23 @@ public class QuadraticallyWeightedKappa<T extends Number>
         if (didCalculate) {
             return;
         }
-        ArrayList<Integer> gold = new ArrayList<Integer>();
-        ArrayList<Integer> predictions = new ArrayList<Integer>();
+        
+        List<Integer> gold = new ArrayList<Integer>();
+        List<Integer> predictions = new ArrayList<Integer>();
         Set<Integer> labels = new HashSet<Integer>();
-        Iterator<EvaluationEntry<T>> iter = data.iterator();
-        while (iter.hasNext()) {
-        	EvaluationEntry<T> e = iter.next();
+        
+        for (EvaluationEntry<T> e : data) {
+        	
         	gold.add((int) Math.round(e.getGold().doubleValue()));
         	predictions.add((int) Math.round(e.getPredicted().doubleValue()));
         	labels.add((int) Math.round(e.getGold().doubleValue()));
         	labels.add((int) Math.round(e.getPredicted().doubleValue()));
         }
-        calculateAgreement = getKappa(gold.toArray(new Integer[gold.size()]), predictions.toArray(new Integer[predictions.size()]), labels.toArray(new Integer[0]));
+        calculateAgreement = getKappa(
+        		gold.toArray(new Integer[gold.size()]),
+        		predictions.toArray(new Integer[predictions.size()]),
+        		labels.toArray(new Integer[0])
+        );
 
         didCalculate = true;
     }
@@ -113,12 +112,4 @@ public class QuadraticallyWeightedKappa<T extends Number>
         }
         return 1.0 - numerator / denominator;
     }
-    
-    
-    
-    
-    
-    
-    
 }
-
