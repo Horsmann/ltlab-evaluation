@@ -104,7 +104,7 @@
 								<configuration>
 									<excludes>
 										<!-- release generated artifact -->
-										<exclude>release.properties</exclude>
+										<exclude>*.properties</exclude>
 										<!-- informational files -->
 										<exclude>CHANGES.txt</exclude>
 										<exclude>NOTICE.txt</exclude>
