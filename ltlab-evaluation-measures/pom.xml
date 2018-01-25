@@ -1,0 +1,29 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>de.unidue.ltl</groupId>
+    <artifactId>ltlab-evaluation</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>ltlab-evaluation-measures</artifactId>
+  <dependencies>
+  	<dependency>
+  		<groupId>de.unidue.ltl</groupId>
+  		<artifactId>ltlab-evaluation-core</artifactId>
+  	</dependency>
+ 	<dependency>
+        <groupId>org.dkpro.statistics</groupId>
+        <artifactId>dkpro-statistics-agreement</artifactId>
+    </dependency>
+    <dependency>
+    	<groupId>org.dkpro.statistics</groupId>
+    	<artifactId>dkpro-statistics-correlation</artifactId>
+    </dependency>  	
+	<dependency>
+    	<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+    	<artifactId>
+    		de.tudarmstadt.ukp.dkpro.core.api.frequency-asl
+    	</artifactId>
+    </dependency>    
+  </dependencies>
+</project>
