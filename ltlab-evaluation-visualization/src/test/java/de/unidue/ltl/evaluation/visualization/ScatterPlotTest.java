@@ -17,6 +17,8 @@
  ******************************************************************************/
 package de.unidue.ltl.evaluation.visualization;
 
+import static org.junit.Assert.*;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -43,7 +45,10 @@ public class ScatterPlotTest {
 		
 		EvaluationData<Double> eval = new EvaluationData<>(entries);
 		
-		ScatterPlot.writePlot(eval, new File("target/test.png"));
+		File file = new File("target/test.png");
+		ScatterPlot.writePlot(eval, file);
+		
+		assertTrue(file.exists());
 	}
 	
 	@Test
@@ -51,6 +56,10 @@ public class ScatterPlotTest {
 			throws IOException
 	{
         EvaluationData<Double> evaluationData = new EvaluationData<Double>(TestUtils.getRandomGaussianEntries(100));
-		ScatterPlot.writePlot(evaluationData, new File("target/testRandom.png"));
+        
+        File file = new File("target/testRandom.png");
+		ScatterPlot.writePlot(evaluationData, file);
+		
+		assertTrue(file.exists());
 	}
 }

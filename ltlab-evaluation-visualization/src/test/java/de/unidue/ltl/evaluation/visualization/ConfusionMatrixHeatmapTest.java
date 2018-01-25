@@ -17,6 +17,8 @@
  ******************************************************************************/
 package de.unidue.ltl.evaluation.visualization;
 
+import static org.junit.Assert.*;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -34,6 +36,9 @@ public class ConfusionMatrixHeatmapTest {
 		EvaluationData<String> eval = new EvaluationData<>(TestUtils.getRandomCategorialEntries(100, 6));
 		
 		ConfusionMatrixHeatmap cmh = new ConfusionMatrixHeatmap(eval);
-		cmh.writePlot(new File("target/test.png"));
+		
+		File file = new File("target/test.png");
+		cmh.writePlot(file);
+		assertTrue(file.exists());
 	}
 }
