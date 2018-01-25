@@ -1,11 +1,40 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>de.unidue.ltl</groupId>
-    <artifactId>ltlab-evaluation</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-  </parent>
-  <groupId>de.unidue.ltl</groupId>
-  <artifactId>ltlab-evaluation-visualization</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>de.unidue.ltl</groupId>
+		<artifactId>ltlab-evaluation</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>ltlab-evaluation-visualization</artifactId>
+	<dependencies>
+	<dependency>
+		<groupId>commons-lang</groupId>
+		<artifactId>commons-lang</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>jfree</groupId>
+		<artifactId>jfreechart</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>de.unidue.ltl</groupId>
+		<artifactId>ltlab-evaluation-measures</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+		<artifactId>
+	    	de.tudarmstadt.ukp.dkpro.core.api.frequency-asl
+	    </artifactId>
+	</dependency>
+	<dependency>
+		<groupId>de.vandermeer</groupId>
+		<artifactId>asciitable</artifactId>
+		<version>0.2.5</version>
+	</dependency>
+	    <dependency>
+      	<groupId>junit</groupId>
+      	<artifactId>junit</artifactId>
+      	<scope>test</scope>
+    </dependency>
+	</dependencies>
 </project>
