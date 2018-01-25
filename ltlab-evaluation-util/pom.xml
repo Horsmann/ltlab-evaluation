@@ -5,6 +5,11 @@
     <artifactId>ltlab-evaluation</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>ltlab-evaluation-io</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <artifactId>ltlab-evaluation-util</artifactId>
+  <dependencies>
+  	<dependency>
+  		<groupId>de.unidue.ltl</groupId>
+  		<artifactId>ltlab-evaluation-core</artifactId>
+  	</dependency>
+  </dependencies>
 </project>

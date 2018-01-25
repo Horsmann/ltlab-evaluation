@@ -14,11 +14,12 @@
 	<modules>
   	
   	<module>ltlab-evaluation-core</module>
-  	<module>ltlab-evaluation-io</module>
+  	
   	<module>ltlab-evaluation-visualization</module>
   	
   	<module>ltlab-evaluation-measures</module>
-  </modules>
+  	<module>ltlab-evaluation-util</module>
+	</modules>
 <profiles>
     <profile>
       <id>license-check</id>
