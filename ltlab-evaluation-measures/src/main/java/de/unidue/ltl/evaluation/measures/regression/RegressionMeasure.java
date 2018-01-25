@@ -15,26 +15,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.unidue.ltl.evaluation.measures;
-
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Test;
+package de.unidue.ltl.evaluation.measures.regression;
 
 import de.unidue.ltl.evaluation.core.EvaluationData;
-import de.unidue.ltl.evaluation.measures.categorial.Recall;
-import de.unidue.ltl.evaluation.testing.TestUtils;
+import de.unidue.ltl.evaluation.measures.EvaluationMeasure;
 
-public class RecallTest {
-	
-	@Test
-	public void recallTest(){
-		EvaluationData<String> data = new EvaluationData<>(TestUtils.getExampleCategorial());
-		assertEquals(0.6, new Recall<>(data).getRecallForLabel("A"), 0.001);
-        assertEquals(0.833, new Recall<>(data).getRecallForLabel("B"), 0.001);
-        assertEquals(0.625, new Recall<>(data).getRecallForLabel("C"), 0.001);
-        assertEquals(0.686, new Recall<>(data).getMacroRecall(), 0.001);
-	}
-	
+public abstract class RegressionMeasure<T>
+    extends EvaluationMeasure<T>
+{
 
+    public RegressionMeasure(EvaluationData<T> data)
+    {
+        super(data);
+    }
+    
+    public abstract double getResult();
 }

@@ -15,26 +15,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.unidue.ltl.evaluation.measures;
+package de.unidue.ltl.evaluation.measures.regression;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import de.unidue.ltl.evaluation.core.EvaluationData;
-import de.unidue.ltl.evaluation.measures.categorial.Recall;
-import de.unidue.ltl.evaluation.testing.TestUtils;
 
-public class RecallTest {
+public class MeanSquaredErrorTest {
 	
-	@Test
-	public void recallTest(){
-		EvaluationData<String> data = new EvaluationData<>(TestUtils.getExampleCategorial());
-		assertEquals(0.6, new Recall<>(data).getRecallForLabel("A"), 0.001);
-        assertEquals(0.833, new Recall<>(data).getRecallForLabel("B"), 0.001);
-        assertEquals(0.625, new Recall<>(data).getRecallForLabel("C"), 0.001);
-        assertEquals(0.686, new Recall<>(data).getMacroRecall(), 0.001);
+	EvaluationData<Double> data;
+
+	@Before
+	public void setup(){
+		data = new EvaluationData<>();
+		data.register(43.6, 41.0);
+		data.register(44.4, 43.8);
+		data.register(45.2, 41.4);
+		data.register(46.0, 45.0);
+		data.register(46.8, 44.0);
 	}
 	
-
+	@Test
+	public void runTest(){
+		MeanSquaredError mse = new MeanSquaredError(data);
+		assertEquals(6.08, mse.getResult(), 0.0001);
+	}
+	
 }
