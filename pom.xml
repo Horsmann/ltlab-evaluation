@@ -1,20 +1,11 @@
-<!--
-    Copyright 2018
-    Language Technology Lab
-    University of Duisburg-Essen
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
--->
+<!-- Copyright 2018 Language Technology Lab University of Duisburg-Essen 
+	Licensed under the Apache License, Version 2.0 (the "License"); you may not 
+	use this file except in compliance with the License. You may obtain a copy 
+	of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required 
+	by applicable law or agreed to in writing, software distributed under the 
+	License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS 
+	OF ANY KIND, either express or implied. See the License for the specific 
+	language governing permissions and limitations under the License. -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -26,6 +17,12 @@
 		<name>Language Technology Lab</name>
 		<url>http://www.ltl.uni-due.de</url>
 	</organization>
+	<developers>
+		<developer>
+			<organization>LTL-Team</organization>
+			<organizationUrl>http://www.ltl.uni-due.de</organizationUrl>
+		</developer>
+	</developers>
 	<name>LTL-Evaluation</name>
 	<inceptionYear>2017</inceptionYear>
 	<modules>
@@ -34,6 +31,68 @@
 		<module>ltlab-evaluation-measures</module>
 		<module>ltlab-evaluation-util</module>
 	</modules>
+	<parent>
+		<artifactId>dkpro-parent-pom</artifactId>
+		<groupId>org.dkpro</groupId>
+		<version>17</version>
+	</parent>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>de.unidue.ltl</groupId>
+				<artifactId>ltlab-evaluation-core</artifactId>
+				<version>${ltlab.eval.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>de.unidue.ltl</groupId>
+				<artifactId>ltlab-evaluation-io</artifactId>
+				<version>${ltlab.eval.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>de.unidue.ltl</groupId>
+				<artifactId>ltlab-evaluation-measures</artifactId>
+				<version>${ltlab.eval.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>de.unidue.ltl</groupId>
+				<artifactId>ltlab-evaluation-visualization</artifactId>
+				<version>${ltlab.eval.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.dkpro.statistics</groupId>
+				<artifactId>dkpro-statistics-agreement</artifactId>
+				<version>2.1.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.dkpro.statistics</groupId>
+				<artifactId>dkpro-statistics-correlation</artifactId>
+				<version>2.1.0</version>
+			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<scope>test</scope>
+				<version>4.12</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>
+    				de.tudarmstadt.ukp.dkpro.core.api.frequency-asl
+    			</artifactId>
+				<version>1.9.0</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-lang</groupId>
+				<artifactId>commons-lang</artifactId>
+				<version>2.6</version>
+			</dependency>
+			<dependency>
+				<groupId>jfree</groupId>
+				<artifactId>jfreechart</artifactId>
+				<version>1.0.13</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	<profiles>
 		<profile>
 			<id>license-check</id>
@@ -55,7 +114,7 @@
 							<strictCheck>true</strictCheck>
 							<properties>
 								<inceptionYear>${project.inceptionYear}</inceptionYear>
-								<currentYear>2018</currentYear>
+								<currentYear>2078</currentYear>
 							</properties>
 							<excludes>
 								<exclude>release.properties</exclude>
@@ -104,7 +163,7 @@
 								<configuration>
 									<excludes>
 										<!-- release generated artifact -->
-										<exclude>*.properties</exclude>
+										<exclude>release.properties</exclude>
 										<!-- informational files -->
 										<exclude>CHANGES.txt</exclude>
 										<exclude>NOTICE.txt</exclude>
@@ -197,68 +256,6 @@
 			</build>
 		</profile>
 	</profiles>
-	<parent>
-		<artifactId>dkpro-parent-pom</artifactId>
-		<groupId>org.dkpro</groupId>
-		<version>17</version>
-	</parent>
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>de.unidue.ltl</groupId>
-				<artifactId>ltlab-evaluation-core</artifactId>
-				<version>${ltlab.eval.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>de.unidue.ltl</groupId>
-				<artifactId>ltlab-evaluation-io</artifactId>
-				<version>${ltlab.eval.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>de.unidue.ltl</groupId>
-				<artifactId>ltlab-evaluation-measures</artifactId>
-				<version>${ltlab.eval.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>de.unidue.ltl</groupId>
-				<artifactId>ltlab-evaluation-visualization</artifactId>
-				<version>${ltlab.eval.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.dkpro.statistics</groupId>
-				<artifactId>dkpro-statistics-agreement</artifactId>
-				<version>2.1.0</version>
-			</dependency>
-			<dependency>
-				<groupId>org.dkpro.statistics</groupId>
-				<artifactId>dkpro-statistics-correlation</artifactId>
-				<version>2.1.0</version>
-			</dependency>
-			<dependency>
-				<groupId>junit</groupId>
-				<artifactId>junit</artifactId>
-				<scope>test</scope>
-				<version>4.12</version>
-			</dependency>
-			<dependency>
-				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>
-    				de.tudarmstadt.ukp.dkpro.core.api.frequency-asl
-    			</artifactId>
-				<version>1.9.0</version>
-			</dependency>
-			<dependency>
-				<groupId>commons-lang</groupId>
-				<artifactId>commons-lang</artifactId>
-				<version>2.6</version>
-			</dependency>
-			<dependency>
-				<groupId>jfree</groupId>
-				<artifactId>jfreechart</artifactId>
-				<version>1.0.13</version>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 	<properties>
 		<ltlab.eval.version>0.0.1-SNAPSHOT</ltlab.eval.version>
 	</properties>
