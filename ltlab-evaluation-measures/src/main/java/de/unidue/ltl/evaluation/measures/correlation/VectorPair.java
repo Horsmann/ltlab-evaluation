@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2017
+ * Copyright 2018
  * Language Technology Lab
  * University of Duisburg-Essen
  *
@@ -15,50 +15,42 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.unidue.ltl.evaluation.measures.agreement;
+package de.unidue.ltl.evaluation.measures.correlation;
 
-import org.dkpro.statistics.agreement.coding.BennettSAgreement;
-import org.dkpro.statistics.agreement.coding.CodingAnnotationStudy;
+import java.util.ArrayList;
+import java.util.List;
 
 import de.unidue.ltl.evaluation.core.EvaluationData;
 import de.unidue.ltl.evaluation.core.EvaluationEntry;
 
-public class BennettS<T>
-    extends AgreementMeasure<T>
-{
-    boolean didCalculate = false;
-    double calculateAgreement;
-
-    public BennettS(EvaluationData<T> data)
-    {
-        super(data);
-    }
-
-    void calculate()
-    {
-        if (didCalculate) {
-            return;
-        }
-
-        CodingAnnotationStudy study = new CodingAnnotationStudy(2);
+public class VectorPair<T> {
+	
+	private List<T> val1;
+	private List<T> val2;
+	
+	public VectorPair(EvaluationData<T> data) {
+        this.val1 = new ArrayList<>();
+        this.val2 = new ArrayList<>();
+        
         for (EvaluationEntry<T> entry : data) {
-            study.addItem(entry.getGold(), entry.getPredicted());
+            val1.add(entry.getGold());
+            val2.add(entry.getPredicted());
         }
-
-        BennettSAgreement bennetS = new BennettSAgreement(study);
-        calculateAgreement = bennetS.calculateAgreement();
-
-        didCalculate = true;
     }
 
-    @Override
-    public double getAgreement()
-    {
-        if (!didCalculate) {
-            calculate();
-        }
+	public List<T> getVal1() {
+		return val1;
+	}
 
-        return calculateAgreement;
-    }
+	public void setVal1(List<T> val1) {
+		this.val1 = val1;
+	}
 
+	public List<T> getVal2() {
+		return val2;
+	}
+
+	public void setVal2(List<T> val2) {
+		this.val2 = val2;
+	}
 }

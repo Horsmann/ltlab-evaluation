@@ -21,8 +21,8 @@ import org.dkpro.statistics.agreement.coding.CodingAnnotationStudy;
 import org.dkpro.statistics.agreement.coding.KrippendorffAlphaAgreement;
 import org.dkpro.statistics.agreement.distance.OrdinalDistanceFunction;
 
-import de.unidue.ltl.core.EvaluationData;
-import de.unidue.ltl.core.EvaluationEntry;
+import de.unidue.ltl.evaluation.core.EvaluationData;
+import de.unidue.ltl.evaluation.core.EvaluationEntry;
 
 public class KrippendorffAlpha<T>
     extends AgreementMeasure<T>

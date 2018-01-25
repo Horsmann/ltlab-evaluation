@@ -15,20 +15,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.unidue.ltl.evaluation.measures.agreement;
+package de.unidue.ltl.evaluation.measures;
+
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
 
 import de.unidue.ltl.evaluation.core.EvaluationData;
-import de.unidue.ltl.evaluation.measures.EvaluationMeasure;
+import de.unidue.ltl.evaluation.measures.correlation.PearsonCorrelation;
+import de.unidue.ltl.evaluation.measures.correlation.SpearmanCorrelation;
 
-public abstract class AgreementMeasure<T>
-    extends EvaluationMeasure<T>
-{
-
-    public AgreementMeasure(EvaluationData<T> data)
-    {
-        super(data);
-    }
-
-    public abstract double getAgreement();
-
+public class CorrelationTest {
+	
+	@Test
+	public void correlationTest(){
+        EvaluationData<Double> data = new EvaluationData<>();
+		data.register(1.0, 2.0);
+		data.register(2.0, 3.0);
+		data.register(3.0, 4.0);
+		data.register(4.0, 5.0);
+		
+		assertEquals(1.0, new PearsonCorrelation(data).getCorrelation(), 0.001);
+		assertEquals(1.0, new SpearmanCorrelation(data).getCorrelation(), 0.001);
+	}
 }

@@ -21,8 +21,8 @@ import org.dkpro.statistics.agreement.InsufficientDataException;
 import org.dkpro.statistics.agreement.coding.CodingAnnotationStudy;
 import org.dkpro.statistics.agreement.coding.CohenKappaAgreement;
 
-import de.unidue.ltl.core.EvaluationData;
-import de.unidue.ltl.core.EvaluationEntry;
+import de.unidue.ltl.evaluation.core.EvaluationData;
+import de.unidue.ltl.evaluation.core.EvaluationEntry;
 
 public class CohenKappa<T>
     extends AgreementMeasure<T>

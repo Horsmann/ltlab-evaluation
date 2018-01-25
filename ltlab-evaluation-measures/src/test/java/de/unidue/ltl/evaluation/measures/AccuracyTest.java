@@ -15,20 +15,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.unidue.ltl.evaluation.measures.agreement;
+package de.unidue.ltl.evaluation.measures;
+
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
 
 import de.unidue.ltl.evaluation.core.EvaluationData;
-import de.unidue.ltl.evaluation.measures.EvaluationMeasure;
+import de.unidue.ltl.evaluation.measures.categorial.Accuracy;
 
-public abstract class AgreementMeasure<T>
-    extends EvaluationMeasure<T>
-{
-
-    public AgreementMeasure(EvaluationData<T> data)
-    {
-        super(data);
-    }
-
-    public abstract double getAgreement();
+public class AccuracyTest {
+	
+	@Test
+	public void accuracyTest(){
+		
+		EvaluationData<String> data = new EvaluationData<>();
+		data.register("A", "B");
+		data.register("B", "B");
+		data.register("A", "A");
+		data.register("A", "A");
+		
+		assertEquals(0.75, new Accuracy<>(data).getAccuracy(), 0.001);
+		assertEquals(3, new Accuracy<>(data).getCorrect());
+		assertEquals(1, new Accuracy<>(data).getIncorrect());
+		assertEquals(4, new Accuracy<>(data).getNumberInstances());
+	}
 
 }

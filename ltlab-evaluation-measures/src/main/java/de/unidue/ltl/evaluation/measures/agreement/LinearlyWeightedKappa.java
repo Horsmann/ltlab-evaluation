@@ -23,8 +23,8 @@ import org.dkpro.statistics.agreement.coding.CodingAnnotationStudy;
 import org.dkpro.statistics.agreement.coding.WeightedKappaAgreement;
 import org.dkpro.statistics.agreement.distance.IDistanceFunction;
 
-import de.unidue.ltl.core.EvaluationData;
-import de.unidue.ltl.core.EvaluationEntry;
+import de.unidue.ltl.evaluation.core.EvaluationData;
+import de.unidue.ltl.evaluation.core.EvaluationEntry;
 
 public class LinearlyWeightedKappa<T extends Number>
     extends AgreementMeasure<T>

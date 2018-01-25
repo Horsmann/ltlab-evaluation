@@ -15,20 +15,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.unidue.ltl.evaluation.measures.agreement;
+package de.unidue.ltl.evaluation.core;
 
-import de.unidue.ltl.evaluation.core.EvaluationData;
-import de.unidue.ltl.evaluation.measures.EvaluationMeasure;
-
-public abstract class AgreementMeasure<T>
-    extends EvaluationMeasure<T>
-{
-
-    public AgreementMeasure(EvaluationData<T> data)
-    {
-        super(data);
-    }
-
-    public abstract double getAgreement();
-
+public class EvaluationEntry<T> {
+	private T gold;
+	private T predicted;
+	
+	public EvaluationEntry(T gold, T predicted) {
+		this.gold = gold;
+		this.predicted = predicted;
+	}
+	public T getGold() {
+		return gold;
+	}
+	public void setGold(T gold) {
+		this.gold = gold;
+	}
+	public T getPredicted() {
+		return predicted;
+	}
+	public void setPredicted(T predicted) {
+		this.predicted = predicted;
+	}
+	
+	@Override
+	public String toString() {
+		return gold.toString() + "\t" + predicted.toString();
+	}
 }

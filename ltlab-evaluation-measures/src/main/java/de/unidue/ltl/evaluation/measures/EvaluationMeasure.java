@@ -19,7 +19,7 @@
 
 package de.unidue.ltl.evaluation.measures;
 
-import de.unidue.ltl.core.EvaluationData;
+import de.unidue.ltl.evaluation.core.EvaluationData;
 
 public abstract class EvaluationMeasure<T> {
 

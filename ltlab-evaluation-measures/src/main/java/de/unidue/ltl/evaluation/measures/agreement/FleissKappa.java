@@ -20,8 +20,8 @@ package de.unidue.ltl.evaluation.measures.agreement;
 import org.dkpro.statistics.agreement.coding.CodingAnnotationStudy;
 import org.dkpro.statistics.agreement.coding.FleissKappaAgreement;
 
-import de.unidue.ltl.core.EvaluationData;
-import de.unidue.ltl.core.EvaluationEntry;
+import de.unidue.ltl.evaluation.core.EvaluationData;
+import de.unidue.ltl.evaluation.core.EvaluationEntry;
 
 public class FleissKappa<T>
 	extends AgreementMeasure<T>

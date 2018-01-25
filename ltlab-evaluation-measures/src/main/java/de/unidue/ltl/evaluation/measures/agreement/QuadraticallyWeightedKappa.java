@@ -25,8 +25,8 @@ import java.util.List;
 import java.util.Set;
 
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyDistribution;
-import de.unidue.ltl.core.EvaluationData;
-import de.unidue.ltl.core.EvaluationEntry;
+import de.unidue.ltl.evaluation.core.EvaluationData;
+import de.unidue.ltl.evaluation.core.EvaluationEntry;
 
 public class QuadraticallyWeightedKappa<T extends Number>
     extends AgreementMeasure<T>

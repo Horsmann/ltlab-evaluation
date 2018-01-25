@@ -15,20 +15,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.unidue.ltl.evaluation.measures.agreement;
+package de.unidue.ltl.evaluation.significance;
 
-import de.unidue.ltl.evaluation.core.EvaluationData;
-import de.unidue.ltl.evaluation.measures.EvaluationMeasure;
+import static org.junit.Assert.assertEquals;
 
-public abstract class AgreementMeasure<T>
-    extends EvaluationMeasure<T>
-{
+import org.junit.Test;
 
-    public AgreementMeasure(EvaluationData<T> data)
-    {
-        super(data);
-    }
+public class ChiSquareTestUnitTest {
 
-    public abstract double getAgreement();
+	@Test
+	public void chiSquareTest() {
+		assertEquals(0.005, ChiSquare.getPvalue(8.0, 1), 0.0001);
+		assertEquals(0.05, ChiSquare.getPvalue(4.0, 1), 0.0001);
+		assertEquals(1.00, ChiSquare.getPvalue(0.01, 1), 0.0001);
+	}
 
 }

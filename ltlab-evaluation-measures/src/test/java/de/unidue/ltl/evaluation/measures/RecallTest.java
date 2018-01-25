@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2018
+ * Copyright 2017
  * Language Technology Lab
  * University of Duisburg-Essen
  *
@@ -15,20 +15,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.unidue.ltl.evaluation.measures.agreement;
+package de.unidue.ltl.evaluation.measures;
+
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
 
 import de.unidue.ltl.evaluation.core.EvaluationData;
-import de.unidue.ltl.evaluation.measures.EvaluationMeasure;
+import de.unidue.ltl.evaluation.measures.categorial.Recall;
+import de.unidue.ltl.evaluation.measures.util.TestUtils;
 
-public abstract class AgreementMeasure<T>
-    extends EvaluationMeasure<T>
-{
-
-    public AgreementMeasure(EvaluationData<T> data)
-    {
-        super(data);
-    }
-
-    public abstract double getAgreement();
+public class RecallTest {
+	
+	@Test
+	public void recallTest(){
+		EvaluationData<String> data = new EvaluationData<>(TestUtils.getExampleCategorial());
+		assertEquals(0.6, new Recall<>(data).getRecallForLabel("A"), 0.001);
+        assertEquals(0.833, new Recall<>(data).getRecallForLabel("B"), 0.001);
+        assertEquals(0.625, new Recall<>(data).getRecallForLabel("C"), 0.001);
+        assertEquals(0.686, new Recall<>(data).getMacroRecall(), 0.001);
+	}
+	
 
 }

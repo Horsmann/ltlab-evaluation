@@ -15,20 +15,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.unidue.ltl.evaluation.measures.agreement;
+package de.unidue.ltl.evaluation.measures.categorial;
 
-import de.unidue.ltl.evaluation.core.EvaluationData;
-import de.unidue.ltl.evaluation.measures.EvaluationMeasure;
-
-public abstract class AgreementMeasure<T>
-    extends EvaluationMeasure<T>
+class Category
 {
+    long tp;
+    long fp;
+    long fn;
+    long tn;
 
-    public AgreementMeasure(EvaluationData<T> data)
-    {
-        super(data);
+    Category(long tp, long fp, long fn, long tn){
+        this.tp = tp;
+        this.fp = fp;
+        this.fn = fn;
+        this.tn = tn;
     }
-
-    public abstract double getAgreement();
 
 }

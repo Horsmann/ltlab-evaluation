@@ -15,20 +15,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.unidue.ltl.evaluation.measures.agreement;
+package de.unidue.ltl.evaluation.significance;
 
-import de.unidue.ltl.evaluation.core.EvaluationData;
-import de.unidue.ltl.evaluation.measures.EvaluationMeasure;
-
-public abstract class AgreementMeasure<T>
-    extends EvaluationMeasure<T>
+public enum McNemarType
 {
-
-    public AgreementMeasure(EvaluationData<T> data)
+    YATES
     {
-        super(data);
+        @Override
+        public String toString()
+        {
+            return "McNemar-Yates";
+        }
+    },
+    EDWARDS
+    {
+        @Override
+        public String toString()
+        {
+            return "McNemar-Edwards";
+        };
     }
-
-    public abstract double getAgreement();
-
 }
