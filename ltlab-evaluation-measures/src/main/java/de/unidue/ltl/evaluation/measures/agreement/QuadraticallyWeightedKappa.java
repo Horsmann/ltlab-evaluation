@@ -27,9 +27,10 @@ import java.util.Set;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyDistribution;
 import de.unidue.ltl.evaluation.core.EvaluationData;
 import de.unidue.ltl.evaluation.core.EvaluationEntry;
+import de.unidue.ltl.evaluation.measures.EvaluationMeasure;
 
 public class QuadraticallyWeightedKappa<T extends Number>
-    extends AgreementMeasure<T>
+    extends EvaluationMeasure<T>
 {
 
     boolean didCalculate = false;

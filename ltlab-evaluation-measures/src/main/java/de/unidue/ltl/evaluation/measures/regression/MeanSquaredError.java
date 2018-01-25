@@ -19,8 +19,9 @@ package de.unidue.ltl.evaluation.measures.regression;
 
 import de.unidue.ltl.evaluation.core.EvaluationData;
 import de.unidue.ltl.evaluation.core.EvaluationEntry;
+import de.unidue.ltl.evaluation.measures.EvaluationMeasure;
 
-public class MeanSquaredError extends RegressionMeasure<Double> {
+public class MeanSquaredError extends EvaluationMeasure<Double> {
 
 	double result=0.0;
 	boolean didCalculate=false;
@@ -48,12 +49,11 @@ public class MeanSquaredError extends RegressionMeasure<Double> {
 	@Override
 	public double getResult() {
 		
-		if(didCalculate){
-			return result;
-		}
-		calculate();
-		
-		return result;
+        if (!didCalculate) {
+            calculate();
+        }
+        
+        return result;
 	}
 	
 	

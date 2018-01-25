@@ -55,11 +55,9 @@ public class ExactMatchRatio<T> extends EvaluationMeasure<T> {
 	@Override
 	public double getResult() {
 
-		if (didCalculate) {
-			return result;
-		}
-
-		calculate();
+        if (!didCalculate) {
+            calculate();
+        }
 
 		return result;
 	}

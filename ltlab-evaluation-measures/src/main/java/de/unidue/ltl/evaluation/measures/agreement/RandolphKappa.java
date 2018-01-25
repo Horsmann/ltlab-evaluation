@@ -22,9 +22,10 @@ import org.dkpro.statistics.agreement.coding.RandolphKappaAgreement;
 
 import de.unidue.ltl.evaluation.core.EvaluationData;
 import de.unidue.ltl.evaluation.core.EvaluationEntry;
+import de.unidue.ltl.evaluation.measures.EvaluationMeasure;
 
 public class RandolphKappa<T>
-    extends AgreementMeasure<T>
+    extends EvaluationMeasure<T>
 {
     boolean didCalculate = false;
     double calculateAgreement;

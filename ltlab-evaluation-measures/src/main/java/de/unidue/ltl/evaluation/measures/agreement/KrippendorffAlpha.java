@@ -23,9 +23,10 @@ import org.dkpro.statistics.agreement.distance.OrdinalDistanceFunction;
 
 import de.unidue.ltl.evaluation.core.EvaluationData;
 import de.unidue.ltl.evaluation.core.EvaluationEntry;
+import de.unidue.ltl.evaluation.measures.EvaluationMeasure;
 
 public class KrippendorffAlpha<T>
-    extends AgreementMeasure<T>
+    extends EvaluationMeasure<T>
 {
     boolean didCalculate = false;
     double calculateAgreement;

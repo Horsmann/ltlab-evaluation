@@ -16,73 +16,52 @@
  * limitations under the License.
  ******************************************************************************/
 
-package de.unidue.ltl.evaluation.measures.categorial;
+package de.unidue.ltl.evaluation.measures.categorial.single;
 
 import de.unidue.ltl.evaluation.core.EvaluationData;
 import de.unidue.ltl.evaluation.core.EvaluationEntry;
 import de.unidue.ltl.evaluation.measures.EvaluationMeasure;
 
-public class Accuracy<T>
-    extends EvaluationMeasure<T>
+public class BinaryLogLoss<T extends Number>
+    extends EvaluationMeasure<Double>
 {
-    boolean didCalculate = false;
-    long numberInstances;
-    long correct;
-    long incorrect;
+	private static final double EPS = 1e-15;
 
-    public Accuracy(EvaluationData<T> data)
+    boolean didCalculate = false;
+    double binaryLogLoss;
+
+    public BinaryLogLoss(EvaluationData<Double> data)
     {
         super(data);
     }
-
+    
     void calculate()
     {
         if (didCalculate) {
             return;
         }
+    
+        double sum = 0.0;
+        for (EvaluationEntry<Double> e : data) {
+        	Double prediction = e.getPredicted();
+        	Double gold = e.getGold();
 
-        for (EvaluationEntry<T> e : data) {
-            if (e.getGold().equals(e.getPredicted())) {
-                correct++;
-            }
-            else {
-                incorrect++;
-            }
-            numberInstances++;
+        	prediction = Math.min(Math.max(prediction, EPS), 1 - EPS);
+        	
+        	sum += - gold * Math.log(prediction) + (1-gold) * Math.log(1 - prediction);
         }
+        
+        binaryLogLoss = sum / data.size();
 
         didCalculate = true;
     }
 
-    public long getNumberInstances()
-    {
-        if (!didCalculate) {
-            calculate();
-        }
-        return numberInstances;
-    }
-
-    public long getCorrect()
-    {
-        if (!didCalculate) {
-            calculate();
-        }
-        return correct;
-    }
-
-    public long getIncorrect()
-    {
-        if (!didCalculate) {
-            calculate();
-        }
-        return incorrect;
-    }
-
 	@Override
 	public double getResult() {
-        if (!didCalculate) {
-            calculate();
-        }
-        return (double) correct / numberInstances;
+		if (!didCalculate) {
+			calculate();
+		}
+
+		return binaryLogLoss;
 	}
 }

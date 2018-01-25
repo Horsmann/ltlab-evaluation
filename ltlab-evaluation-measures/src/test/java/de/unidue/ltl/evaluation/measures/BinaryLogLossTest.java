@@ -22,7 +22,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import de.unidue.ltl.evaluation.core.EvaluationData;
-import de.unidue.ltl.evaluation.measures.categorial.BinaryLogLoss;
+import de.unidue.ltl.evaluation.measures.categorial.single.BinaryLogLoss;
 
 public class BinaryLogLossTest {
 	
