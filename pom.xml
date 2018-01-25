@@ -34,7 +34,7 @@
 	<parent>
 		<artifactId>dkpro-parent-pom</artifactId>
 		<groupId>org.dkpro</groupId>
-		<version>17</version>
+		<version>14</version>
 	</parent>
 	<dependencyManagement>
 		<dependencies>

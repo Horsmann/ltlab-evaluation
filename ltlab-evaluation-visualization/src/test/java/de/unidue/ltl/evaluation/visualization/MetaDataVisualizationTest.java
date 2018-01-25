@@ -27,7 +27,6 @@ import org.junit.Test;
 
 import de.unidue.ltl.evaluation.core.EvaluationEntry;
 import de.unidue.ltl.evaluation.core.EvaluationMetaData;
-import de.unidue.ltl.evaluation.measures.util.TestUtils;
 
 public class MetaDataVisualizationTest
 {

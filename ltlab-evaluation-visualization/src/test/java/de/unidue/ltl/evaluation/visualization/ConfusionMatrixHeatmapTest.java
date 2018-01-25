@@ -23,7 +23,6 @@ import java.io.IOException;
 import org.junit.Test;
 
 import de.unidue.ltl.evaluation.core.EvaluationData;
-import de.unidue.ltl.evaluation.measures.util.TestUtils;
 
 public class ConfusionMatrixHeatmapTest {
 

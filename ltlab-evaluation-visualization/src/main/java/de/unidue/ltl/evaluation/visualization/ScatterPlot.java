@@ -28,7 +28,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.DefaultXYDataset;
 
 import de.unidue.ltl.evaluation.core.EvaluationData;
-import de.unidue.ltl.evaluation.measures.correlation.VectorPair;
+import de.unidue.ltl.evaluation.core.VectorPair;
 
 public class ScatterPlot {
 

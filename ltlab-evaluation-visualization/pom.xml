@@ -34,10 +34,6 @@
 		<artifactId>jfreechart</artifactId>
 	</dependency>
 	<dependency>
-		<groupId>de.unidue.ltl</groupId>
-		<artifactId>ltlab-evaluation-measures</artifactId>
-	</dependency>
-	<dependency>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 		<artifactId>
 	    	de.tudarmstadt.ukp.dkpro.core.api.frequency-asl
@@ -53,5 +49,9 @@
       	<artifactId>junit</artifactId>
       	<scope>test</scope>
     </dependency>
+	    <dependency>
+	    	<groupId>de.unidue.ltl</groupId>
+	    	<artifactId>ltlab-evaluation-core</artifactId>
+	    </dependency>
 	</dependencies>
 </project>

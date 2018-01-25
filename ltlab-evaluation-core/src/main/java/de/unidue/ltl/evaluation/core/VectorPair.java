@@ -15,13 +15,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.unidue.ltl.evaluation.measures.correlation;
+package de.unidue.ltl.evaluation.core;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import de.unidue.ltl.evaluation.core.EvaluationData;
-import de.unidue.ltl.evaluation.core.EvaluationEntry;
 
 public class VectorPair<T> {
 	

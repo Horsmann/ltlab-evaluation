@@ -19,6 +19,7 @@
 package de.unidue.ltl.evaluation.measures.correlation;
 
 import de.unidue.ltl.evaluation.core.EvaluationData;
+import de.unidue.ltl.evaluation.core.VectorPair;
 
 public class PearsonCorrelation extends CorrelationMeasure<Double>
 {
