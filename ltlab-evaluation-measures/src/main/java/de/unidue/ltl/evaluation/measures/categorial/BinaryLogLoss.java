@@ -20,12 +20,10 @@ package de.unidue.ltl.evaluation.measures.categorial;
 
 import de.unidue.ltl.evaluation.core.EvaluationData;
 import de.unidue.ltl.evaluation.core.EvaluationEntry;
-import de.unidue.ltl.evaluation.measures.agreement.AgreementMeasure;
 
 public class BinaryLogLoss<T extends Number>
-    extends AgreementMeasure<Double>
+    extends CategoricalMeasure<Double>
 {
-	
 	private static final double EPS = 1e-15;
 
     boolean didCalculate = false;
@@ -57,13 +55,12 @@ public class BinaryLogLoss<T extends Number>
         didCalculate = true;
     }
 
-    @Override
-    public double getAgreement()
-    {
-        if (!didCalculate) {
-            calculate();
-        }
+	@Override
+	public double getResult() {
+		if (!didCalculate) {
+			calculate();
+		}
 
-        return binaryLogLoss;
-    }
+		return binaryLogLoss;
+	}
 }

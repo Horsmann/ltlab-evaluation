@@ -53,13 +53,12 @@ public class KrippendorffAlpha<T>
         didCalculate = true;
     }
 
-    @Override
-    public double getAgreement()
-    {
-        if (!didCalculate) {
-            calculate();
-        }
+	@Override
+	public double getResult() {
+		if (!didCalculate) {
+			calculate();
+		}
 
-        return calculateAgreement;
-    }
+		return calculateAgreement;
+	}
 }

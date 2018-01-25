@@ -32,16 +32,6 @@ public class PearsonCorrelation extends CorrelationMeasure<Double>
         super(data);
     }
 
-    @Override
-    public double getCorrelation()
-    {
-        if(!didCalculate){
-            calculate();
-        }
-        
-        return computeCorrelation;
-    }
-
     void calculate()
     {
         if(didCalculate){
@@ -51,5 +41,14 @@ public class PearsonCorrelation extends CorrelationMeasure<Double>
         
         computeCorrelation = org.dkpro.statistics.correlation.PearsonCorrelation.computeCorrelation(vectors.getVal1(), vectors.getVal2());
     }
+
+	@Override
+	public double getResult() {
+        if(!didCalculate){
+            calculate();
+        }
+        
+        return computeCorrelation;
+	}
 
 }

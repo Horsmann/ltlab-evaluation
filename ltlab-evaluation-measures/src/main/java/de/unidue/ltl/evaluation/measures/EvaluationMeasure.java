@@ -29,4 +29,6 @@ public abstract class EvaluationMeasure<T> {
     {
         this.data = data;
     }
+    
+    public abstract double getResult(); 
 }

@@ -55,15 +55,14 @@ public class LinearlyWeightedKappa<T extends Number>
         didCalculate = true;
     }
 
-    @Override
-    public double getAgreement()
-    {
-        if (!didCalculate) {
-            calculate();
-        }
+	@Override
+	public double getResult() {
+		if (!didCalculate) {
+			calculate();
+		}
 
-        return calculateAgreement;
-    }
+		return calculateAgreement;
+	}
 }
 
 class LinearDistanceFunction

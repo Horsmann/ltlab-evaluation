@@ -29,6 +29,4 @@ public abstract class AgreementMeasure<T>
         super(data);
     }
 
-    public abstract double getAgreement();
-
 }

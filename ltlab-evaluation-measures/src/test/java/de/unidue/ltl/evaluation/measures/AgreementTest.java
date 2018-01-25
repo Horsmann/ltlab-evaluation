@@ -43,8 +43,8 @@ public class AgreementTest {
 		data.register("A", "A");
 		data.register("A", "A");
 		
-		assertEquals(0.5, new CohenKappa<String>(data).getAgreement(), 0.001);
-		assertEquals(0.533, new KrippendorffAlpha<String>(data).getAgreement(), 0.001);
+		assertEquals(0.5, new CohenKappa<String>(data).getResult(), 0.001);
+		assertEquals(0.533, new KrippendorffAlpha<String>(data).getResult(), 0.001);
 				
 	}
 	
@@ -52,11 +52,11 @@ public class AgreementTest {
     public void kappaTest(){
         EvaluationData<Double> entries = new EvaluationData<>(TestUtils.getExampleNumeric());
         
-        assertEquals(0.3975, new LinearlyWeightedKappa<Double>(entries).getAgreement(), 0.001);
-        assertEquals(0.3492, new QuadraticallyWeightedKappa<Double>(entries).getAgreement(), 0.001);
-        assertEquals(0.4523, new FleissKappa<Double>(entries).getAgreement(), 0.001);
-        assertEquals(0.4750, new RandolphKappa<Double>(entries).getAgreement(), 0.001);
-        assertEquals(0.4523, new ScottPi<Double>(entries).getAgreement(), 0.001);
-        assertEquals(0.4750, new BennettS<Double>(entries).getAgreement(), 0.001);
+        assertEquals(0.3975, new LinearlyWeightedKappa<Double>(entries).getResult(), 0.001);
+        assertEquals(0.3492, new QuadraticallyWeightedKappa<Double>(entries).getResult(), 0.001);
+        assertEquals(0.4523, new FleissKappa<Double>(entries).getResult(), 0.001);
+        assertEquals(0.4750, new RandolphKappa<Double>(entries).getResult(), 0.001);
+        assertEquals(0.4523, new ScottPi<Double>(entries).getResult(), 0.001);
+        assertEquals(0.4750, new BennettS<Double>(entries).getResult(), 0.001);
     }
 }

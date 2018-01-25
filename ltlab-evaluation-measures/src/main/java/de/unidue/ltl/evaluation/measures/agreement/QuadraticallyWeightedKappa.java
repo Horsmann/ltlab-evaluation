@@ -66,17 +66,6 @@ public class QuadraticallyWeightedKappa<T extends Number>
         didCalculate = true;
     }
 
-    @Override
-    public double getAgreement()
-    {
-        if (!didCalculate) {
-            calculate();
-        }
-
-        return calculateAgreement;
-    }
-    
-  
 
     public static double getKappa(Integer[] ratingsA, Integer[] ratingsB, Integer... categories) {
         if (ratingsA.length != ratingsB.length) {
@@ -111,4 +100,13 @@ public class QuadraticallyWeightedKappa<T extends Number>
         }
         return 1.0 - numerator / denominator;
     }
+
+	@Override
+	public double getResult() {
+		if (!didCalculate) {
+			calculate();
+		}
+
+		return calculateAgreement;
+	}
 }

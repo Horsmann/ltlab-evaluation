@@ -35,7 +35,7 @@ public class CorrelationTest {
 		data.register(3.0, 4.0);
 		data.register(4.0, 5.0);
 		
-		assertEquals(1.0, new PearsonCorrelation(data).getCorrelation(), 0.001);
-		assertEquals(1.0, new SpearmanCorrelation(data).getCorrelation(), 0.001);
+		assertEquals(1.0, new PearsonCorrelation(data).getResult(), 0.001);
+		assertEquals(1.0, new SpearmanCorrelation(data).getResult(), 0.001);
 	}
 }

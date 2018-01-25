@@ -28,7 +28,4 @@ public abstract class CorrelationMeasure<T>
     {
         super(data);
     }
-
-    public abstract double getCorrelation();
-
 }

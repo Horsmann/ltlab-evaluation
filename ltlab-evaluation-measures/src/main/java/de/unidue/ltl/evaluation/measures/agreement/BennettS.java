@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2017
+ * Copyright 2018
  * Language Technology Lab
  * University of Duisburg-Essen
  *
@@ -51,14 +51,14 @@ public class BennettS<T>
         didCalculate = true;
     }
 
-    @Override
-    public double getAgreement()
-    {
-        if (!didCalculate) {
-            calculate();
-        }
 
-        return calculateAgreement;
-    }
+	@Override
+	public double getResult() {
+		if (!didCalculate) {
+			calculate();
+		}
+
+		return calculateAgreement;
+	}
 
 }

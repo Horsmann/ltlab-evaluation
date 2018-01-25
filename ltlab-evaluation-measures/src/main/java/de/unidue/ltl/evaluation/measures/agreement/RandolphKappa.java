@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2017
+ * Copyright 2018
  * Language Technology Lab
  * University of Duisburg-Essen
  *
@@ -51,13 +51,12 @@ public class RandolphKappa<T>
         didCalculate = true;
     }
 
-    @Override
-    public double getAgreement()
-    {
-        if (!didCalculate) {
-            calculate();
-        }
+	@Override
+	public double getResult() {
+		if (!didCalculate) {
+			calculate();
+		}
 
-        return calculateAgreement;
-    }
+		return calculateAgreement;
+	}
 }

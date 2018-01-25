@@ -95,4 +95,9 @@ public class Precision<T>
         return micro_precision;
     }
 
+	@Override
+	public double getResult() {
+		throw new UnsupportedOperationException("This method is not implemented");
+	}
+
 }

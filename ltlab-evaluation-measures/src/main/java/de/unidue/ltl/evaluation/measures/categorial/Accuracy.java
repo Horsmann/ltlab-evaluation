@@ -54,14 +54,6 @@ public class Accuracy<T>
         didCalculate = true;
     }
 
-    public double getAccuracy()
-    {
-        if (!didCalculate) {
-            calculate();
-        }
-        return (double) correct / numberInstances;
-    }
-
     public long getNumberInstances()
     {
         if (!didCalculate) {
@@ -85,4 +77,12 @@ public class Accuracy<T>
         }
         return incorrect;
     }
+
+	@Override
+	public double getResult() {
+        if (!didCalculate) {
+            calculate();
+        }
+        return (double) correct / numberInstances;
+	}
 }

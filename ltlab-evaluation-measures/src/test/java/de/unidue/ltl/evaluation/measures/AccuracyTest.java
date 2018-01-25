@@ -35,7 +35,7 @@ public class AccuracyTest {
 		data.register("A", "A");
 		data.register("A", "A");
 		
-		assertEquals(0.75, new Accuracy<>(data).getAccuracy(), 0.001);
+		assertEquals(0.75, new Accuracy<>(data).getResult(), 0.001);
 		assertEquals(3, new Accuracy<>(data).getCorrect());
 		assertEquals(1, new Accuracy<>(data).getIncorrect());
 		assertEquals(4, new Accuracy<>(data).getNumberInstances());

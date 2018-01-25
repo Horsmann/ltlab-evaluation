@@ -21,35 +21,30 @@ package de.unidue.ltl.evaluation.measures.correlation;
 import de.unidue.ltl.evaluation.core.EvaluationData;
 import de.unidue.ltl.evaluation.core.VectorPair;
 
+public class SpearmanCorrelation extends CorrelationMeasure<Double> {
+	boolean didCalculate = false;
+	double computeCorrelation;
 
-public class SpearmanCorrelation
-	extends CorrelationMeasure<Double>
-{
-    boolean didCalculate=false;
-    double computeCorrelation;
+	public SpearmanCorrelation(EvaluationData<Double> data) {
+		super(data);
+	}
 
-    public SpearmanCorrelation(EvaluationData<Double> data)
-    {
-        super(data);
-    }
+	void calculate() {
+		if (didCalculate) {
+			return;
+		}
+		VectorPair<Double> vectors = new VectorPair<>(data);
 
-    @Override
-    public double getCorrelation()
-    {
-        if(!didCalculate){
-            calculate();
-        }
-        
-        return computeCorrelation;
-    }
+		computeCorrelation = org.dkpro.statistics.correlation.SpearmansRankCorrelation
+				.computeCorrelation(vectors.getVal1(), vectors.getVal2());
+	}
 
-    void calculate()
-    {
-        if(didCalculate){
-            return;
-        }
-        VectorPair<Double> vectors = new VectorPair<>(data);
-        
-        computeCorrelation = org.dkpro.statistics.correlation.SpearmansRankCorrelation.computeCorrelation(vectors.getVal1(), vectors.getVal2());
-    }
+	@Override
+	public double getResult() {
+		if (!didCalculate) {
+			calculate();
+		}
+
+		return computeCorrelation;
+	}
 }

@@ -24,47 +24,43 @@ import org.dkpro.statistics.agreement.coding.CohenKappaAgreement;
 import de.unidue.ltl.evaluation.core.EvaluationData;
 import de.unidue.ltl.evaluation.core.EvaluationEntry;
 
-public class CohenKappa<T>
-    extends AgreementMeasure<T>
-{
-    boolean didCalculate = false;
-    double calculateAgreement;
+public class CohenKappa<T> extends AgreementMeasure<T> {
+	boolean didCalculate = false;
+	double calculateAgreement;
 
-    public CohenKappa(EvaluationData<T> data)
-    {
-        super(data);
-    }
+	public CohenKappa(EvaluationData<T> data) {
+		super(data);
+	}
 
-    void calculate()
-    {
-        if (didCalculate) {
-            return;
-        }
+	void calculate() {
+		if (didCalculate) {
+			return;
+		}
 
-        CodingAnnotationStudy study = new CodingAnnotationStudy(2);
-        for (EvaluationEntry<T> entry : data) {
-            study.addItem(entry.getGold(), entry.getPredicted());
-        }
+		CodingAnnotationStudy study = new CodingAnnotationStudy(2);
+		for (EvaluationEntry<T> entry : data) {
+			study.addItem(entry.getGold(), entry.getPredicted());
+		}
 
-        CohenKappaAgreement cohenKappa = new CohenKappaAgreement(study);
-        
-        // We get an InsufficientDataException when there is only one gold category (which can happen e.g. in cross-validation)
-        try {
-        calculateAgreement = cohenKappa.calculateAgreement();
-        } catch (InsufficientDataException e){
-        	calculateAgreement = 0.0;
-        }
-        
-        didCalculate = true;
-    }
+		CohenKappaAgreement cohenKappa = new CohenKappaAgreement(study);
 
-    @Override
-    public double getAgreement()
-    {
-        if (!didCalculate) {
-            calculate();
-        }
+		// We get an InsufficientDataException when there is only one gold
+		// category (which can happen e.g. in cross-validation)
+		try {
+			calculateAgreement = cohenKappa.calculateAgreement();
+		} catch (InsufficientDataException e) {
+			calculateAgreement = 0.0;
+		}
 
-        return calculateAgreement;
-    }
+		didCalculate = true;
+	}
+
+	@Override
+	public double getResult() {
+		if (!didCalculate) {
+			calculate();
+		}
+
+		return calculateAgreement;
+	}
 }
