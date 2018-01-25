@@ -53,5 +53,11 @@
 	    	<groupId>de.unidue.ltl</groupId>
 	    	<artifactId>ltlab-evaluation-core</artifactId>
 	    </dependency>
+	    <dependency>
+	    	<groupId>de.unidue.ltl</groupId>
+	    	<artifactId>ltlab-evaluation-testing</artifactId>
+	    	<version>0.0.1-SNAPSHOT</version>
+	    	<scope>test</scope>
+	    </dependency>
 	</dependencies>
 </project>

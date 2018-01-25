@@ -22,40 +22,11 @@
     <artifactId>ltlab-evaluation</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>ltlab-evaluation-measures</artifactId>
+  <artifactId>ltlab-evaluation-testing</artifactId>
   <dependencies>
   	<dependency>
   		<groupId>de.unidue.ltl</groupId>
   		<artifactId>ltlab-evaluation-core</artifactId>
   	</dependency>
- 	<dependency>
-        <groupId>org.dkpro.statistics</groupId>
-        <artifactId>dkpro-statistics-agreement</artifactId>
-    </dependency>
-    <dependency>
-    	<groupId>org.dkpro.statistics</groupId>
-    	<artifactId>dkpro-statistics-correlation</artifactId>
-    </dependency>  	
-	<dependency>
-    	<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-    	<artifactId>
-    		de.tudarmstadt.ukp.dkpro.core.api.frequency-asl
-    	</artifactId>
-    </dependency>    
-	<dependency>
-		<groupId>commons-lang</groupId>
-		<artifactId>commons-lang</artifactId>
-	</dependency>    
-    <dependency>
-      	<groupId>junit</groupId>
-      	<artifactId>junit</artifactId>
-      	<scope>test</scope>
-    </dependency>
-    <dependency>
-    	<groupId>de.unidue.ltl</groupId>
-    	<artifactId>ltlab-evaluation-testing</artifactId>
-    	<version>0.0.1-SNAPSHOT</version>
-    	<scope>test</scope>
-    </dependency>
   </dependencies>
 </project>

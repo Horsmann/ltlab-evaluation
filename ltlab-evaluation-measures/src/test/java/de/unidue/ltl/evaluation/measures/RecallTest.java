@@ -23,7 +23,7 @@ import org.junit.Test;
 
 import de.unidue.ltl.evaluation.core.EvaluationData;
 import de.unidue.ltl.evaluation.measures.categorial.Recall;
-import de.unidue.ltl.evaluation.measures.util.TestUtils;
+import de.unidue.ltl.evaluation.testing.TestUtils;
 
 public class RecallTest {
 	

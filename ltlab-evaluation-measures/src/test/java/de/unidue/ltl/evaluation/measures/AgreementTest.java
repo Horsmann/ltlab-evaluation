@@ -30,7 +30,7 @@ import de.unidue.ltl.evaluation.measures.agreement.LinearlyWeightedKappa;
 import de.unidue.ltl.evaluation.measures.agreement.QuadraticallyWeightedKappa;
 import de.unidue.ltl.evaluation.measures.agreement.RandolphKappa;
 import de.unidue.ltl.evaluation.measures.agreement.ScottPi;
-import de.unidue.ltl.evaluation.measures.util.TestUtils;
+import de.unidue.ltl.evaluation.testing.TestUtils;
 
 public class AgreementTest {
 	

@@ -26,6 +26,7 @@ import org.junit.Test;
 
 import de.unidue.ltl.evaluation.core.EvaluationData;
 import de.unidue.ltl.evaluation.core.EvaluationEntry;
+import de.unidue.ltl.evaluation.testing.TestUtils;
 
 public class ScatterPlotTest {
 
