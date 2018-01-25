@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.unidue.ltl.evaluation.transformation;
+package de.unidue.ltl.evaluation.util.transformation;
 
 import static org.junit.Assert.*;
 
