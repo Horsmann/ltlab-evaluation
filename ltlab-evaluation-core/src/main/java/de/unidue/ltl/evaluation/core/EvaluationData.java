@@ -18,89 +18,87 @@
 package de.unidue.ltl.evaluation.core;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
-public class EvaluationData<T>
-    implements Iterable<EvaluationEntry<T>>
-{
+public class EvaluationData<T> implements Iterable<EvaluationEntry<T>> {
 
-    private List<EvaluationEntry<T>> entries;
-    private UUID id;
+	private List<EvaluationEntry<T>> entries;
+	private UUID id;
 
-    public EvaluationData()
-    {
-        this.entries = new ArrayList<>();
-    }
+	public EvaluationData() {
+		this.entries = new ArrayList<>();
+	}
 
-    @SafeVarargs
-    public EvaluationData(Iterable<EvaluationEntry<T>>... entries)
-    {
-        this.entries = new ArrayList<>();
+	@SafeVarargs
+	public EvaluationData(Iterable<EvaluationEntry<T>>... entries) {
+		this.entries = new ArrayList<>();
 
-        for (Iterable<EvaluationEntry<T>> e : entries) {
-            Iterator<EvaluationEntry<T>> iterator = e.iterator();
-            while (iterator.hasNext()) {
-                this.entries.add(iterator.next());
-            }
-        }
-    }
+		for (Iterable<EvaluationEntry<T>> e : entries) {
+			Iterator<EvaluationEntry<T>> iterator = e.iterator();
+			while (iterator.hasNext()) {
+				this.entries.add(iterator.next());
+			}
+		}
+	}
 
-    public void register(T gold, T predicted)
-    {
-        EvaluationEntry<T> entry = new EvaluationEntry<T>(gold, predicted);
-        entries.add(entry);
-    }
+	public void register(T gold, T predicted) {
+		EvaluationEntry<T> entry = new EvaluationEntry<T>(gold, predicted);
+		entries.add(entry);
+	}
 
-    @Override
-    public Iterator<EvaluationEntry<T>> iterator()
-    {
-        return new Iterator<EvaluationEntry<T>>()
-        {
+	public void registerMultiLabel(Collection<T> gold, Collection<T> predicted) {
+		EvaluationEntry<T> entry = new EvaluationEntry<T>(gold, predicted);
+		entries.add(entry);
+	}
 
-            List<EvaluationEntry<T>> data = new ArrayList<>(entries);
-            int idx = 0;
+	public void registerMultiLabel(T[] gold, T[] predicted) {
+		EvaluationEntry<T> entry = new EvaluationEntry<T>(gold, predicted);
+		entries.add(entry);
+	}
 
-            @Override
-            public boolean hasNext()
-            {
-                return idx < data.size();
-            }
+	@Override
+	public Iterator<EvaluationEntry<T>> iterator() {
+		return new Iterator<EvaluationEntry<T>>() {
 
-            @Override
-            public EvaluationEntry<T> next()
-            {
-                return data.get(idx++);
-            }
-        };
-    }
+			List<EvaluationEntry<T>> data = new ArrayList<>(entries);
+			int idx = 0;
 
-    public long size()
-    {
-        return entries.size();
-    }
+			@Override
+			public boolean hasNext() {
+				return idx < data.size();
+			}
 
-    public EvaluationEntry<T> get(int idx)
-    {
-        return entries.get(idx);
-    }
+			@Override
+			public EvaluationEntry<T> next() {
+				return data.get(idx++);
+			}
+		};
+	}
 
-    public UUID getId()
-    {
-        if (id == null) {
-            id = UUID.randomUUID();
-        }
-        return id;
-    }
+	public long size() {
+		return entries.size();
+	}
 
-    public void registerBulk(Iterable<EvaluationEntry<T>> data)
-    {
-        Iterator<EvaluationEntry<T>> iterator = data.iterator();
-        while (iterator.hasNext()) {
-            EvaluationEntry<T> next = iterator.next();
-            register(next.getGold(), next.getPredicted());
-        }
-    }
+	public EvaluationEntry<T> get(int idx) {
+		return entries.get(idx);
+	}
+
+	public UUID getId() {
+		if (id == null) {
+			id = UUID.randomUUID();
+		}
+		return id;
+	}
+
+	public void registerBulk(Iterable<EvaluationEntry<T>> data) {
+		Iterator<EvaluationEntry<T>> iterator = data.iterator();
+		while (iterator.hasNext()) {
+			EvaluationEntry<T> next = iterator.next();
+			register(next.getGold(), next.getPredicted());
+		}
+	}
 
 }

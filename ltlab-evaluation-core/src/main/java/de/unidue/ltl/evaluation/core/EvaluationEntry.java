@@ -17,27 +17,86 @@
  ******************************************************************************/
 package de.unidue.ltl.evaluation.core;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+
 public class EvaluationEntry<T> {
-	private T gold;
-	private T predicted;
-	
+	private List<T> gold;
+	private List<T> predicted;
+
+	/**
+	 * A single label/value entry
+	 * @param gold
+	 * 			the gold labels
+	 * @param predicted	
+	 * 			the predicted labels
+	 */
 	public EvaluationEntry(T gold, T predicted) {
-		this.gold = gold;
-		this.predicted = predicted;
-	}
-	public T getGold() {
-		return gold;
-	}
-	public void setGold(T gold) {
-		this.gold = gold;
-	}
-	public T getPredicted() {
-		return predicted;
-	}
-	public void setPredicted(T predicted) {
-		this.predicted = predicted;
+		this.gold = new ArrayList<T>();
+		this.predicted = new ArrayList<T>();
+
+		this.gold.add(gold);
+		this.predicted.add(predicted);
 	}
 	
+	/**
+	 * A multi label entry, gold and result values are provided as collection
+	 * @param gold
+	 * 			the gold labels
+	 * @param predicted	
+	 * 			the predicted labels
+	 */
+	public EvaluationEntry(Collection<T> gold, Collection<T> predicted) {
+		this.gold = new ArrayList<T>(gold);
+		this.predicted = new ArrayList<T>(predicted);
+	}
+	
+	/**
+	 * A multi label entry, gold and result values are provided as collection
+	 * @param gold
+	 * 			the gold labels
+	 * @param predicted	
+	 * 			the predicted labels
+	 */
+	public EvaluationEntry(T [] gold, T [] predicted) {
+		this.gold = new ArrayList<T>(Arrays.asList(gold));
+		this.predicted = new ArrayList<T>(Arrays.asList(predicted));
+	}
+
+	public T getGold() {
+		return gold.get(0);
+	}
+
+	public List<T> getGoldMultiLabel() {
+		return new ArrayList<T>(gold);
+	}
+
+	public void setGold(T gold) {
+		this.gold.set(0, gold);
+	}
+
+	public void setGoldMultiLabel(Collection<T> gold) {
+		this.gold = new ArrayList<T>(gold);
+	}
+
+	public T getPredicted() {
+		return predicted.get(0);
+	}
+
+	public List<T> getPredictedMultiLabel() {
+		return new ArrayList<T>(predicted);
+	}
+
+	public void setPredicted(T predicted) {
+		this.predicted.set(0, predicted);
+	}
+
+	public void setPredicted(Collection<T> predicted) {
+		this.predicted = new ArrayList<T>(predicted);
+	}
+
 	@Override
 	public String toString() {
 		return gold.toString() + "\t" + predicted.toString();
