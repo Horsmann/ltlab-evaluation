@@ -44,6 +44,7 @@ public class MeanSquaredError extends EvaluationMeasure<Double> {
 		}
 		
 		result = val/data.size();
+		didCalculate=true;
 	}
 
 	@Override

@@ -50,7 +50,7 @@ public class RSquared extends EvaluationMeasure<Double> {
 		}
 		
 		result = 1 - (squared_error/sum_prediction_avg_diff);
-		
+		didCalculate=true;
 	}
 
 	@Override

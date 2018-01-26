@@ -50,6 +50,7 @@ public class ExactMatchRatio<T> extends EvaluationMeasure<T> {
 		}
 		
 		result = exactMatches / data.size();
+		didCalculate=true;
 	}
 
 	@Override
