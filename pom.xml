@@ -20,7 +20,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.unidue.ltl</groupId>
 	<artifactId>ltlab-evaluation</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<organization>
 		<name>Language Technology Lab</name>
@@ -267,6 +267,6 @@
 		</profile>
 	</profiles>
 	<properties>
-		<ltlab.eval.version>0.0.1-SNAPSHOT</ltlab.eval.version>
+		<ltlab.eval.version>0.1.0-SNAPSHOT</ltlab.eval.version>
 	</properties>
 </project>
