@@ -21,7 +21,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import de.unidue.ltl.evaluation.core.EvaluationData;
@@ -98,16 +100,35 @@ public class DKProTcDataFormatConverter {
 			String values = split[1];
 
 			String[] valSplit = values.split(";");
-			String prediction = map.get(valSplit[0]);
-			String gold = map.get(valSplit[1]);
-			// String threshold = valSplit[2];
+			
+			Double threshold = Double.valueOf(valSplit[2]);
+			
+			String prediction = valSplit[0];
+			List<String> mappedPred = convertMultiLabel(prediction.split(","), threshold, map);
+			
+			String gold = valSplit[1];
+			List<String> mappedGold = convertMultiLabel(gold.split(","), threshold, map);
+			
 
-			data.register(gold, prediction, docName);
+			data.registerMultiLabel(mappedGold, mappedPred, docName);
 		}
 
 		reader.close();
 
 		return data;
+	}
+
+	private static List<String> convertMultiLabel(String[] vals, Double threshold, Map<String, String> map) {
+		
+		List<String> outLabels = new ArrayList<>();
+		
+		for(int i=0; i < vals.length; i++){
+			if(Double.valueOf(vals[i]) >= threshold){
+				outLabels.add(map.get(""+i));
+			}
+		}
+		
+		return outLabels;
 	}
 
 	private static Map<String, String> buildMappingFromHeader(String header) {

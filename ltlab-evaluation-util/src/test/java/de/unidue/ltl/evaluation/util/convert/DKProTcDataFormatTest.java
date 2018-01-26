@@ -60,32 +60,64 @@ public class DKProTcDataFormatTest {
 				.convertRegressionModeId2Outcome(new File("src/test/resources/DKProTC/regressionID2outcome.txt"));
 
 		assertEquals(50, data.size());
-		
+
 		assertEquals(1.285762, data.get(0).getPredicted(), 0.0001);
 		assertEquals(1.0, data.get(0).getGold(), 0.0001);
-		
+
 		assertEquals(1.999316, data.get(1).getPredicted(), 0.0001);
 		assertEquals(1.0, data.get(1).getGold(), 0.0001);
-		
+
 		assertEquals(4.10318, data.get(2).getPredicted(), 0.0001);
 		assertEquals(7.0, data.get(2).getGold(), 0.0001);
-		
+
 		assertEquals(3.842336, data.get(3).getPredicted(), 0.0001);
 		assertEquals(3.0, data.get(3).getGold(), 0.0001);
-		
 
 		// names
 		assertEquals("Document\\ 0", data.get(0).getName());
 		assertEquals("Document\\ 1", data.get(1).getName());
 		assertEquals("Document\\ 10", data.get(2).getName());
 		assertEquals("Document\\ 11", data.get(3).getName());
-		
+
 	}
-	
+
 	@Test
 	public void testMultilabelModeDataFormat() throws Exception {
-		EvaluationData<Double> data = DKProTcDataFormatConverter
-				.convertRegressionModeId2Outcome(new File("src/test/resources/DKProTC/multiLabelId2outcome.txt"));
+		EvaluationData<String> data = DKProTcDataFormatConverter
+				.convertMultiLabelModeId2Outcome(new File("src/test/resources/DKProTC/multiLabelId2outcome.txt"));
 
+		assertEquals(3, data.size());
+
+		// Match prediction/gold value mapping
+		assertTrue(isMultiLabelMatch(data.get(0).getPredictedMultiLabel().toArray(new String[0]),
+				new String[] { "__grain" }));
+		
+		assertTrue(isMultiLabelMatch(data.get(1).getPredictedMultiLabel().toArray(new String[0]),
+				new String[] { "__grain", "__crude", "__corn" }));
+		
+		assertTrue(isMultiLabelMatch(data.get(2).getPredictedMultiLabel().toArray(new String[0]),
+				new String[] { "__grain", "__earn", "__corn" }));
+		
+		//names
+		assertEquals("0", data.get(0).getName());
+		assertEquals("1", data.get(1).getName());
+		assertEquals("2", data.get(2).getName());
+	}
+
+	private boolean isMultiLabelMatch(String[] actual, String[] gold) {
+
+		if (!(actual.length == gold.length)) {
+			return false;
+		}
+
+		boolean equal = true;
+		for (int i = 0; i < actual.length; i++) {
+			if (!actual[i].equals(gold[i])) {
+				equal = false;
+				break;
+			}
+		}
+
+		return equal;
 	}
 }
