@@ -26,31 +26,59 @@ import org.junit.Test;
 import de.unidue.ltl.evaluation.core.EvaluationData;
 
 public class DKProTcDataFormatTest {
-	
-	String labelA = "comp.graphics";
-	String labelB = "alt.atheism";
-	
+
 	@Test
-	public void testDocumentModeDataFormat() throws Exception{
+	public void testDocumentModeDataFormat() throws Exception {
+		String labelA = "comp.graphics";
+		String labelB = "alt.atheism";
+
 		EvaluationData<String> data = DKProTcDataFormatConverter
-				.convertId2Outcome(new File("src/test/resources/DKProTC/documentModeID2outcome.txt"));
-		
+				.convertSingleLabelModeId2Outcome(new File("src/test/resources/DKProTC/documentModeID2outcome.txt"));
+
 		assertEquals(8, data.size());
-		
-		//values
+
+		// values
 		assertEquals(labelB, data.get(0).getGold());
 		assertEquals(labelA, data.get(0).getPredicted());
-		
+
 		assertEquals(labelB, data.get(1).getGold());
 		assertEquals(labelB, data.get(1).getPredicted());
-		
+
 		assertEquals(labelB, data.get(2).getGold());
 		assertEquals(labelA, data.get(2).getPredicted());
-		
-		//names
+
+		// names
 		assertEquals("alt.atheism/53068.txt", data.get(0).getName());
 		assertEquals("alt.atheism/53257.txt", data.get(1).getName());
 		assertEquals("alt.atheism/53260.txt", data.get(2).getName());
+
+	}
+
+	@Test
+	public void testRegressionModeDataFormat() throws Exception {
+		EvaluationData<Double> data = DKProTcDataFormatConverter
+				.convertRegressionModeId2Outcome(new File("src/test/resources/DKProTC/regressionModeID2outcome.txt"));
+
+		assertEquals(50, data.size());
+		
+		assertEquals(1.285762, data.get(0).getPredicted(), 0.0001);
+		assertEquals(1.0, data.get(0).getGold(), 0.0001);
+		
+		assertEquals(1.999316, data.get(1).getPredicted(), 0.0001);
+		assertEquals(1.0, data.get(1).getGold(), 0.0001);
+		
+		assertEquals(4.10318, data.get(2).getPredicted(), 0.0001);
+		assertEquals(7.0, data.get(2).getGold(), 0.0001);
+		
+		assertEquals(3.842336, data.get(3).getPredicted(), 0.0001);
+		assertEquals(3.0, data.get(3).getGold(), 0.0001);
+		
+
+		// names
+		assertEquals("Document\\ 0", data.get(0).getName());
+		assertEquals("Document\\ 1", data.get(1).getName());
+		assertEquals("Document\\ 10", data.get(2).getName());
+		assertEquals("Document\\ 11", data.get(3).getName());
 		
 	}
 
