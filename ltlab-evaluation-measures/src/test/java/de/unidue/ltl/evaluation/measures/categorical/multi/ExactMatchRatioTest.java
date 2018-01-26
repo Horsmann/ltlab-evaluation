@@ -33,14 +33,15 @@ public class ExactMatchRatioTest {
 	public void setup(){
 		data = new EvaluationData<>();
 		data.registerMultiLabel(new String[] {"A", "B", "C"}, new String[] {"A", "B", "C"});
-		data.registerMultiLabel(new String[] {"A", "B", "C"}, new String[] {"A", "C", "C"});
+		data.registerMultiLabel(new String[] {"C"}, new String[] {"A", "C", "C"});
+		data.registerMultiLabel(new String[] {"A", "C"}, new String[] {"C"});
 		data.registerMultiLabel(new String[] {"B", "B", "C"}, new String[] {"B", "B", "C"});
 	}
 	
 	@Test
 	public void runTest(){
 		ExactMatchRatio<String> emr = new ExactMatchRatio<String>(data);
-		assertEquals(0.6666, emr.getResult(), 0.0001);
+		assertEquals(0.5, emr.getResult(), 0.0001);
 	}
 	
 }

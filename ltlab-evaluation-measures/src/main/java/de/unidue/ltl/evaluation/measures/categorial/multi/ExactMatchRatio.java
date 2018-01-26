@@ -38,6 +38,11 @@ public class ExactMatchRatio<T> extends EvaluationMeasure<T> {
 			List<T> goldMulti = e.getGoldMultiLabel();
 			List<T> predictedMulti = e.getPredictedMultiLabel();
 			
+			if (goldMulti.size() != predictedMulti.size()){
+				//can't be an exact match the length is different
+				continue;
+			}
+			
 			boolean match=true;
 			for(int i=0; i < goldMulti.size(); i++){
 				if (!goldMulti.get(i).equals(predictedMulti.get(i))){
