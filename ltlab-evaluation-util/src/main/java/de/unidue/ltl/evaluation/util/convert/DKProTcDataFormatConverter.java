@@ -29,7 +29,7 @@ import de.unidue.ltl.evaluation.core.EvaluationData;
 public class DKProTcDataFormatConverter {
 
 	/**
-	 * Loads a DKPro TC id2outcome file into the evaluation data format
+	 * Loads a single-label DKPro TC id2outcome file into the evaluation data format
 	 * 
 	 * @param id2OutcomeFile
 	 * @return an evaluation data object
@@ -37,6 +37,47 @@ public class DKProTcDataFormatConverter {
 	 *             in case of error
 	 */
 	public static EvaluationData<String> convertSingleLabelModeId2Outcome(File id2OutcomeFile) throws Exception {
+
+		BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(id2OutcomeFile), "utf-8"));
+
+		reader.readLine(); // pop first line
+
+		Map<String, String> map = buildMappingFromHeader(reader.readLine());
+
+		EvaluationData<String> data = new EvaluationData<>();
+
+		String line = null;
+		while ((line = reader.readLine()) != null) {
+			if (line.isEmpty() || line.startsWith("#")) {
+				continue;
+			}
+
+			String[] split = line.split("=");
+			String docName = split[0];
+			String values = split[1];
+
+			String[] valSplit = values.split(";");
+			String prediction = map.get(valSplit[0]);
+			String gold = map.get(valSplit[1]);
+			// String threshold = valSplit[2];
+
+			data.register(gold, prediction, docName);
+		}
+
+		reader.close();
+
+		return data;
+	}
+	
+	/**
+	 * Loads a single-label DKPro TC id2outcome file into the evaluation data format
+	 * 
+	 * @param id2OutcomeFile
+	 * @return an evaluation data object
+	 * @throws Exception
+	 *             in case of error
+	 */
+	public static EvaluationData<String> convertMultiLabelModeId2Outcome(File id2OutcomeFile) throws Exception {
 
 		BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(id2OutcomeFile), "utf-8"));
 
@@ -87,7 +128,7 @@ public class DKProTcDataFormatConverter {
 	}
 
 	/**
-	 * Loads a DKPro TC id2outcome file into the evaluation data format
+	 * Loads a regression DKPro TC id2outcome file into the evaluation data format
 	 * 
 	 * @param id2OutcomeFile
 	 * @return an evaluation data object

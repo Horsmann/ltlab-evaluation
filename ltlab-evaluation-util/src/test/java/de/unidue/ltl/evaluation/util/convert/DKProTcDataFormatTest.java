@@ -33,7 +33,7 @@ public class DKProTcDataFormatTest {
 		String labelB = "alt.atheism";
 
 		EvaluationData<String> data = DKProTcDataFormatConverter
-				.convertSingleLabelModeId2Outcome(new File("src/test/resources/DKProTC/documentModeID2outcome.txt"));
+				.convertSingleLabelModeId2Outcome(new File("src/test/resources/DKProTC/singleLabelID2outcome.txt"));
 
 		assertEquals(8, data.size());
 
@@ -57,7 +57,7 @@ public class DKProTcDataFormatTest {
 	@Test
 	public void testRegressionModeDataFormat() throws Exception {
 		EvaluationData<Double> data = DKProTcDataFormatConverter
-				.convertRegressionModeId2Outcome(new File("src/test/resources/DKProTC/regressionModeID2outcome.txt"));
+				.convertRegressionModeId2Outcome(new File("src/test/resources/DKProTC/regressionID2outcome.txt"));
 
 		assertEquals(50, data.size());
 		
@@ -81,5 +81,11 @@ public class DKProTcDataFormatTest {
 		assertEquals("Document\\ 11", data.get(3).getName());
 		
 	}
+	
+	@Test
+	public void testMultilabelModeDataFormat() throws Exception {
+		EvaluationData<Double> data = DKProTcDataFormatConverter
+				.convertRegressionModeId2Outcome(new File("src/test/resources/DKProTC/multiLabelId2outcome.txt"));
 
+	}
 }
