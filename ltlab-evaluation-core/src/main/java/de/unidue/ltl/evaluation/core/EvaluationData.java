@@ -44,18 +44,100 @@ public class EvaluationData<T> implements Iterable<EvaluationEntry<T>> {
 		}
 	}
 
-	public void register(T gold, T predicted) {
-		EvaluationEntry<T> entry = new EvaluationEntry<T>(gold, predicted);
+	/**
+	 * This registers a single-label classification result where gold and
+	 * prediction are exactly one label
+	 * 
+	 * @param gold
+	 * 			the expected value
+	 * @param prediction
+	 * 			the actually predicted value
+	 */
+	public void register(T gold, T prediction) {
+		EvaluationEntry<T> entry = new EvaluationEntry<T>(gold, prediction);
+		entries.add(entry);
+	}
+	
+	/**
+	 * This registers a single-label classification result where gold and
+	 * prediction are exactly one label
+	 * 
+	 * @param gold
+	 * 			the expected value
+	 * @param prediction
+	 * 			the actually predicted value
+	 * @param name
+	 * 			a name that identifies the added entry
+	 */
+	public void register(T gold, T prediction, String name) {
+		EvaluationEntry<T> entry = new EvaluationEntry<T>(gold, prediction);
+		entry.setName(name);
 		entries.add(entry);
 	}
 
-	public void registerMultiLabel(Collection<T> gold, Collection<T> predicted) {
-		EvaluationEntry<T> entry = new EvaluationEntry<T>(gold, predicted);
+	/**
+	 * This registers a multi-label classification result where gold and
+	 * prediction can consists of two or more labels that have to be predicted
+	 * simultaneously
+	 * 
+	 * @param gold
+	 * 			the expected value
+	 * @param prediction
+	 * 			the actually predicted value
+	 */
+	public void registerMultiLabel(Collection<T> gold, Collection<T> prediction) {
+		EvaluationEntry<T> entry = new EvaluationEntry<T>(gold, prediction);
+		entries.add(entry);
+	}
+	
+	/**
+	 * This registers a multi-label classification result where gold and
+	 * prediction can consists of two or more labels that have to be predicted
+	 * simultaneously
+	 * 
+	 * @param gold
+	 * 			the expected value
+	 * @param prediction
+	 * 			the actually predicted value
+	 * @param name
+	 * 			a name that identifies the added entry
+	 */
+	public void registerMultiLabel(Collection<T> gold, Collection<T> prediction, String name) {
+		EvaluationEntry<T> entry = new EvaluationEntry<T>(gold, prediction);
+		entry.setName(name);
 		entries.add(entry);
 	}
 
-	public void registerMultiLabel(T[] gold, T[] predicted) {
-		EvaluationEntry<T> entry = new EvaluationEntry<T>(gold, predicted);
+	/**
+	 * This registers a multi-label classification result where gold and
+	 * prediction can consists of two or more labels that have to be predicted
+	 * simultaneously
+	 * 
+	 * @param gold
+	 * 			the expected value
+	 * @param prediction
+	 * 			the actually predicted value
+	 */
+	public void registerMultiLabel(T[] gold, T[] prediction) {
+		EvaluationEntry<T> entry = new EvaluationEntry<T>(gold, prediction);
+		entries.add(entry);
+	}
+	
+	/**
+	 * This registers a multi-label classification result where gold and
+	 * prediction can consists of two or more labels that have to be predicted
+	 * simultaneously
+	 * 
+	 * @param gold
+	 * 			the expected value
+	 * @param prediction
+	 * 			the actually predicted value
+	 * @param name
+	 * 			a name that identifies the added entry 
+	 */
+	public void registerMultiLabel(T[] gold, T[] prediction, String name) {
+		EvaluationEntry<T> entry = new EvaluationEntry<T>(gold, prediction);
+		entry.setName(name);
 		entries.add(entry);
 	}
 

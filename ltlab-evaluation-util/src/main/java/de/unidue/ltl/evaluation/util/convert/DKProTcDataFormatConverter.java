@@ -17,21 +17,75 @@
  ******************************************************************************/
 package de.unidue.ltl.evaluation.util.convert;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
 
 import de.unidue.ltl.evaluation.core.EvaluationData;
 
-public class DKProTcDataFormatConverter<T> {
+public class DKProTcDataFormatConverter {
 
 	/**
 	 * Loads a DKPro TC id2outcome file into the evaluation data format
 	 * @param id2OutcomeFile
 	 * @return
 	 * 		an evaluation data object
+	 * @throws Exception
+	 * 			in case of error 
 	 */
-	public EvaluationData<T> convertId2Outcome(File id2OutcomeFile){
+	public static EvaluationData<String> convertId2Outcome(File id2OutcomeFile) throws Exception{
 		
-		return null;
+		BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(id2OutcomeFile), "utf-8"));
+		
+		reader.readLine(); //pop first line
+		
+		Map<String,String> map = buildMappingFromHeader(reader.readLine());
+
+		EvaluationData<String> data = new EvaluationData<>();
+		
+		String line=null;
+		while((line=reader.readLine())!=null){
+			if(line.isEmpty() || line.startsWith("#")){
+				continue;
+			}
+
+			String[] split = line.split("=");
+			String docName = split[0];
+			String values = split[1];
+			
+			
+			String[] valSplit = values.split(";");
+			String prediction = map.get(valSplit[0]);
+			String gold = map.get(valSplit[1]);
+			//String threshold = valSplit[2];
+			
+			data.register(gold, prediction, docName);
+		}
+		
+		
+		reader.close();
+		
+		return data;
+	}
+
+	private static Map<String, String> buildMappingFromHeader(String header) {
+		
+		header = header.replaceAll("#labels", "").trim();
+		
+		Map<String,String> map = new HashMap<>();
+		
+		String[] split = header.split(" ");
+		for(String entry : split){
+			int indexOf = entry.indexOf("=");
+			String key = entry.substring(0, indexOf).trim();
+			String val = entry.substring(indexOf+1).trim();
+			map.put(key, val);
+		}
+		
+		return map;
 	}
 	
 }

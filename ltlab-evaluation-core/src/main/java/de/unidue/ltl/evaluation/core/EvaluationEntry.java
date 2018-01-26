@@ -25,6 +25,7 @@ import java.util.List;
 public class EvaluationEntry<T> {
 	private List<T> gold;
 	private List<T> predicted;
+	private String entryName;
 
 	/**
 	 * A single label/value entry
@@ -95,6 +96,26 @@ public class EvaluationEntry<T> {
 
 	public void setPredicted(Collection<T> predicted) {
 		this.predicted = new ArrayList<T>(predicted);
+	}
+	
+	/**
+	 * Passes the entry an additional name that can be used to carry some
+	 * identification information with each instance
+	 * 
+	 * @param name
+	 * 			the name of the entry
+	 */
+	public void setName(String name){
+		this.entryName = name;
+	}
+	
+	/**
+	 * Returns the name of an entry
+	 * @return
+	 * 		the name or an empty string if the value has not been set
+	 */
+	public String getName() {
+		return this.entryName == null ? "" : this.entryName;
 	}
 
 	@Override
