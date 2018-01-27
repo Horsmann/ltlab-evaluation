@@ -28,8 +28,6 @@ import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
 import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.general.DefaultPieDataset;
 
-import de.unidue.ltl.evaluation.core.EvaluationMetaData;
-
 public class MetaDataVisualizer<T>
 {
     static final String PREDICTED_FILE = "pieChart_predicted.jpeg";
