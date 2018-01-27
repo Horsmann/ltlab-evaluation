@@ -15,33 +15,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.unidue.ltl.evaluation.measures.categorical.multi;
+package de.unidue.ltl.evaluation.measures.categorial;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import de.unidue.ltl.evaluation.core.EvaluationData;
-import de.unidue.ltl.evaluation.measures.categorial.multilabel.ExactMatchRatio;
+import de.unidue.ltl.evaluation.measures.categorial.Precision;
+import de.unidue.ltl.evaluation.testing.TestUtils;
 
-public class ExactMatchRatioTest {
-	
-	EvaluationData<String> data;
-
-	@Before
-	public void setup(){
-		data = new EvaluationData<>();
-		data.registerMultiLabel(new String[] {"A", "B", "C"}, new String[] {"A", "B", "C"});
-		data.registerMultiLabel(new String[] {"C"}, new String[] {"A", "C", "C"});
-		data.registerMultiLabel(new String[] {"A", "C"}, new String[] {"C"});
-		data.registerMultiLabel(new String[] {"B", "B", "C"}, new String[] {"B", "B", "C"});
-	}
+public class PrecisionTest {
 	
 	@Test
-	public void runTest(){
-		ExactMatchRatio<String> emr = new ExactMatchRatio<String>(data);
-		assertEquals(0.5, emr.getResult(), 0.0001);
+	public void precisionTest(){
+		EvaluationData<String> data = new EvaluationData<>(TestUtils.getExampleCategorial());
+		assertEquals(0.75, new Precision<>(data).getPrecisionForLabel("A"), 0.001);
+		assertEquals(0.6, new Precision<>(data).getPrecisionForLabel("B"), 0.001);
+        assertEquals(0.57143, new Precision<>(data).getPrecisionForLabel("C"), 0.001);
+        assertEquals(0.6405, new Precision<>(data).getMacroPrecision(), 0.001);
 	}
 	
+
 }
