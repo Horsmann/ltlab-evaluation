@@ -122,4 +122,8 @@ public class EvaluationEntry<T> {
 	public String toString() {
 		return gold.toString() + "\t" + predicted.toString();
 	}
+
+	public int getSize() {
+		return gold.size();
+	}
 }
