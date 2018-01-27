@@ -23,15 +23,14 @@ import java.util.Set;
 
 import de.unidue.ltl.evaluation.core.EvaluationData;
 import de.unidue.ltl.evaluation.core.EvaluationEntry;
-import de.unidue.ltl.evaluation.measures.EvaluationMeasure;
 
 public abstract class CategoricalMeasure<T>
-    extends EvaluationMeasure<T>
 {
-
+	
+	protected EvaluationData<T> data;
     public CategoricalMeasure(EvaluationData<T> data)
     {
-        super(data);
+    	this.data = data;
     }
 
     protected Category getCategoryBaseValues(T category)

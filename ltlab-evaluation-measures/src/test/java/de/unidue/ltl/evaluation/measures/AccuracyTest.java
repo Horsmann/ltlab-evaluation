@@ -22,7 +22,6 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import de.unidue.ltl.evaluation.core.EvaluationData;
-import de.unidue.ltl.evaluation.measures.categorial.single.Accuracy;
 
 public class AccuracyTest {
 	

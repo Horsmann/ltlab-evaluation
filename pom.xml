@@ -55,11 +55,6 @@
 			</dependency>
 			<dependency>
 				<groupId>de.unidue.ltl</groupId>
-				<artifactId>ltlab-evaluation-io</artifactId>
-				<version>${ltlab.eval.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>de.unidue.ltl</groupId>
 				<artifactId>ltlab-evaluation-measures</artifactId>
 				<version>${ltlab.eval.version}</version>
 			</dependency>

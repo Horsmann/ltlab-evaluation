@@ -119,9 +119,4 @@ public class Fscore<T> extends CategoricalMeasure<T> {
 		return weighted_fscore;
 	}
 
-	@Override
-	public double getResult() {
-		throw new UnsupportedOperationException("This method is not implemented");
-	}
-
 }

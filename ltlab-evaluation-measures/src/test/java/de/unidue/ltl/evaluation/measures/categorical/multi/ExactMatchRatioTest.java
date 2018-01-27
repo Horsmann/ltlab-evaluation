@@ -23,7 +23,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.unidue.ltl.evaluation.core.EvaluationData;
-import de.unidue.ltl.evaluation.measures.categorial.multi.ExactMatchRatio;
+import de.unidue.ltl.evaluation.measures.categorial.multilabel.ExactMatchRatio;
 
 public class ExactMatchRatioTest {
 	

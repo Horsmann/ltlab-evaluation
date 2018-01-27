@@ -97,9 +97,4 @@ public class Recall<T>
         return micro_recall;
     }
 
-	@Override
-	public double getResult() {
-		throw new UnsupportedOperationException("This method is not implemented");
-	}
-
 }
