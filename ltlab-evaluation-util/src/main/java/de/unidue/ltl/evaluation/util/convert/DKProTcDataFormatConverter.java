@@ -21,6 +21,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -70,9 +71,9 @@ public class DKProTcDataFormatConverter {
 
 		return data;
 	}
-	
+
 	/**
-	 * Loads a single-label DKPro TC id2outcome file into the evaluation data format
+	 * Loads a multi-label DKPro TC id2outcome file into the evaluation data format
 	 * 
 	 * @param id2OutcomeFile
 	 * @return an evaluation data object
@@ -100,15 +101,14 @@ public class DKProTcDataFormatConverter {
 			String values = split[1];
 
 			String[] valSplit = values.split(";");
-			
+
 			Double threshold = Double.valueOf(valSplit[2]);
-			
+
 			String prediction = valSplit[0];
 			List<String> mappedPred = convertMultiLabel(prediction.split(","), threshold, map);
-			
+
 			String gold = valSplit[1];
 			List<String> mappedGold = convertMultiLabel(gold.split(","), threshold, map);
-			
 
 			data.registerMultiLabel(mappedGold, mappedPred, docName);
 		}
@@ -118,16 +118,80 @@ public class DKProTcDataFormatConverter {
 		return data;
 	}
 
-	private static List<String> convertMultiLabel(String[] vals, Double threshold, Map<String, String> map) {
-		
-		List<String> outLabels = new ArrayList<>();
-		
-		for(int i=0; i < vals.length; i++){
-			if(Double.valueOf(vals[i]) >= threshold){
-				outLabels.add(map.get(""+i));
+	/**
+	 * Loads a multi-label DKPro TC id2outcome file into the evaluation data format.
+	 * The values are not mapped to their label names, the integer representation is
+	 * used instead. This is necessary for some evaluation metrics which work on the
+	 * integer values
+	 * 
+	 * @param id2OutcomeFile
+	 * @return an evaluation data object
+	 * @throws Exception
+	 *             in case of error
+	 */
+	public static EvaluationData<Integer> convertMultiLabelModeId2OutcomeUseInteger(File id2OutcomeFile)
+			throws Exception {
+
+		BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(id2OutcomeFile), "utf-8"));
+
+		reader.readLine(); // pop first line
+		reader.readLine(); // pop header
+
+		EvaluationData<Integer> data = new EvaluationData<>();
+
+		String line = null;
+		while ((line = reader.readLine()) != null) {
+			if (line.isEmpty() || line.startsWith("#")) {
+				continue;
+			}
+
+			String[] split = line.split("=");
+			String docName = split[0];
+			String values = split[1];
+
+			String[] valSplit = values.split(";");
+
+			Double threshold = Double.valueOf(valSplit[2]);
+
+			String prediction = valSplit[0];
+			List<Integer> mappedPred = convertMultiLabelToIntegerArray(prediction.split(","), threshold);
+
+			String gold = valSplit[1];
+			List<Integer> mappedGold = convertMultiLabelToIntegerArray(gold.split(","), threshold);
+
+			data.registerMultiLabel(mappedGold, mappedPred, docName);
+		}
+
+		reader.close();
+
+		return data;
+	}
+
+	private static List<Integer> convertMultiLabelToIntegerArray(String[] vals, Double threshold)
+			throws ParseException {
+
+		List<Integer> out = new ArrayList<>();
+		for (int i = 0; i < vals.length; i++) {
+			if (Double.valueOf(vals[i]) >= threshold) {
+				out.add(1);
+			} else {
+				out.add(0);
 			}
 		}
-		
+
+		return out;
+	}
+
+	private static List<String> convertMultiLabel(String[] vals, Double threshold, Map<String, String> map) {
+
+		List<String> outLabels = new ArrayList<>();
+
+		for (int i = 0; i < vals.length; i++) {
+			if (Double.valueOf(vals[i]) >= threshold) {
+				outLabels.add(map.get("" + i));
+			}
+		}
+
 		return outLabels;
 	}
 
@@ -163,8 +227,7 @@ public class DKProTcDataFormatConverter {
 		reader.readLine(); // pop header (not needed for regression)
 
 		EvaluationData<Double> data = new EvaluationData<>();
-		
-		
+
 		String line = null;
 		while ((line = reader.readLine()) != null) {
 			if (line.isEmpty() || line.startsWith("#")) {
@@ -181,7 +244,7 @@ public class DKProTcDataFormatConverter {
 
 			data.register(gold, prediction, docName);
 		}
-		
+
 		reader.close();
 
 		return data;

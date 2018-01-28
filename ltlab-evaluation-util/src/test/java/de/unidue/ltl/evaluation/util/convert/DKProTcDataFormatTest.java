@@ -17,7 +17,8 @@
  ******************************************************************************/
 package de.unidue.ltl.evaluation.util.convert;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 
@@ -102,6 +103,39 @@ public class DKProTcDataFormatTest {
 		assertEquals("0", data.get(0).getName());
 		assertEquals("1", data.get(1).getName());
 		assertEquals("2", data.get(2).getName());
+	}
+	
+	@Test
+	public void testMultilabelModeDataFormatInteger() throws Exception {
+		EvaluationData<Integer> data = DKProTcDataFormatConverter
+				.convertMultiLabelModeId2OutcomeUseInteger(new File("src/test/resources/DKProTC/multiLabelId2outcome.txt"));
+
+		assertEquals(3, data.size());
+
+		// Match prediction/gold value mapping
+		Integer[] prediction = data.get(0).getPredictedMultiLabel().toArray(new Integer[0]);
+		assertTrue(compareIntArrays(prediction,
+				new Integer[] { 1, 0, 0, 0, 0}));
+		
+		//names
+		assertEquals("0", data.get(0).getName());
+	}
+
+ 
+
+	private boolean compareIntArrays(Integer[] array, Integer[] integers) {
+		
+		if (array.length != integers.length) {
+			return false;
+		}
+		
+		for(int i=0 ; i < array.length; i++) {
+			if(array[i]!=integers[i]) {
+				return false;
+			}
+		}
+		
+		return true;
 	}
 
 	private boolean isMultiLabelMatch(String[] actual, String[] gold) {
