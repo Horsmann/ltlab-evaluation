@@ -21,12 +21,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import static de.unidue.ltl.evaluation.core.EvaluationConstants.EPSILON;
 import de.unidue.ltl.evaluation.core.EvaluationData;
 
 public class Fscore<T> extends CategoricalMeasure<T> {
-	
-	double epsilon = 0.0000000001;
-	
+
 	Map<T, Double> f1Measures = new HashMap<>();
 	double macro_fscore;
 	double micro_fscore;
@@ -57,8 +56,8 @@ public class Fscore<T> extends CategoricalMeasure<T> {
 		for (T category : categories) {
 			Category cvb = getCategoryBaseValues(category);
 
-			double precision = (double) cvb.tp / (cvb.tp + cvb.fp+epsilon);
-			double recall = (double) cvb.tp / (cvb.tp + cvb.fn+epsilon);
+			double precision = (double) cvb.tp / (cvb.tp + cvb.fp + EPSILON);
+			double recall = (double) cvb.tp / (cvb.tp + cvb.fn + EPSILON);
 			double fscore = 2.0 * precision * recall / (precision + recall);
 
 			if (Double.isNaN(fscore)) {
