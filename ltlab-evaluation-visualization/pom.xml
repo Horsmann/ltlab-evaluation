@@ -25,38 +25,38 @@
 	</parent>
 	<artifactId>ltlab-evaluation-visualization</artifactId>
 	<dependencies>
-	<dependency>
-		<groupId>commons-lang</groupId>
-		<artifactId>commons-lang</artifactId>
-	</dependency>
-	<dependency>
-		<groupId>jfree</groupId>
-		<artifactId>jfreechart</artifactId>
-	</dependency>
-	<dependency>
-		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		<artifactId>
+		<dependency>
+			<groupId>de.unidue.ltl.evaluation</groupId>
+			<artifactId>ltlab-evaluation-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>de.unidue.ltl.evaluation</groupId>
+			<artifactId>ltlab-evaluation-testing</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>jfree</groupId>
+			<artifactId>jfreechart</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>
 	    	de.tudarmstadt.ukp.dkpro.core.api.frequency-asl
 	    </artifactId>
-	</dependency>
-	<dependency>
-		<groupId>de.vandermeer</groupId>
-		<artifactId>asciitable</artifactId>
-		<version>0.2.5</version>
-	</dependency>
-	    <dependency>
-      	<groupId>junit</groupId>
-      	<artifactId>junit</artifactId>
-      	<scope>test</scope>
-    </dependency>
-	    <dependency>
-	    	<groupId>de.unidue.ltl.evaluation</groupId>
-	    	<artifactId>ltlab-evaluation-core</artifactId>
-	    </dependency>
-	    <dependency>
-	    	<groupId>de.unidue.ltl.evaluation</groupId>
-	    	<artifactId>ltlab-evaluation-testing</artifactId>
-	    	<scope>test</scope>
-	    </dependency>
+		</dependency>
+		<dependency>
+			<groupId>de.vandermeer</groupId>
+			<artifactId>asciitable</artifactId>
+			<version>0.2.5</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 </project>

@@ -27,6 +27,7 @@ import java.util.Set;
 
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.ConditionalFrequencyDistribution;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyDistribution;
+import de.unidue.ltl.evaluation.core.AbstractConfusionMatrix;
 import de.unidue.ltl.evaluation.core.EvaluationData;
 import de.unidue.ltl.evaluation.core.EvaluationEntry;
 import de.vandermeer.asciitable.v2.V2_AsciiTable;
@@ -34,7 +35,7 @@ import de.vandermeer.asciitable.v2.render.V2_AsciiTableRenderer;
 import de.vandermeer.asciitable.v2.render.WidthLongestWord;
 import de.vandermeer.asciitable.v2.themes.V2_E_TableThemes;
 
-public class ConfusionMatrix<T>
+public class ConfusionMatrix<T> extends AbstractConfusionMatrix<T>
 {
     Set<T> allLabels = new HashSet<>();
     ConditionalFrequencyDistribution<T, T> cfd = new ConditionalFrequencyDistribution<>();
@@ -50,7 +51,8 @@ public class ConfusionMatrix<T>
         }
     }
 
-    public String toString()
+    @Override
+    public String toText()
     {
         List<T> labels = getLabels();
         int[][] array = getTwoDimensionalArray();
@@ -108,11 +110,13 @@ public class ConfusionMatrix<T>
     	return cfd.getCount(goldLabel, confusedLabel);
     }
     
+    @Override
     public long getTruePositives(T label)
     {
         return cfd.getCount(label, label);
     }
 
+    @Override
     public long getFalseNegatives(T label)
     {
         FrequencyDistribution<T> fd = cfd.getFrequencyDistribution(label);
@@ -129,6 +133,7 @@ public class ConfusionMatrix<T>
         return total;
     }
 
+    @Override
     public long getFalsePositives(T label)
     {
         long total = 0L;
@@ -140,6 +145,7 @@ public class ConfusionMatrix<T>
         return total;
     }
 
+    @Override
     public long getTrueNegatives(T label)
     {
         long total = 0L;
@@ -155,10 +161,13 @@ public class ConfusionMatrix<T>
         }
         return total;
     }
-    
+
     /**
-     * @return A list of the alphabetically sorted labels that are registered in this ConfusionMatrix.
+     * Returns an alphabetically sorted list of all labels
+     * @return 
+     * 		an alphabetically ordered list of all labels
      */
+    @Override
     public List<T> getLabels() {
         List<T> labels = new ArrayList<T>(allLabels);
         Collections.sort(labels, new Comparator<T>()
@@ -176,6 +185,13 @@ public class ConfusionMatrix<T>
         return labels;
     }
     
+    
+    /**
+     * Returns the matrix content as 2D-array of integers values
+     * @return
+     * 		2D-array of integers
+     */
+    @Override
     public int[][] getTwoDimensionalArray() {
     	List<T> labels = getLabels();
     	int n = labels.size();
