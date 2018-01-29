@@ -33,7 +33,7 @@
 		</developer>
 	</developers>
 	<name>LTL-Evaluation</name>
-	<inceptionYear>2017</inceptionYear>
+	<inceptionYear>2016</inceptionYear>
 	<modules>
 		<module>ltlab-evaluation-core</module>
 		<module>ltlab-evaluation-visualization</module>
@@ -269,4 +269,15 @@
 	<properties>
 		<ltlab.eval.version>0.1.0-SNAPSHOT</ltlab.eval.version>
 	</properties>
+	<scm>
+		<url>https://github.com/Horsmann/ltlab-evaluation</url>
+		<connection>scm:git:git://github.com/Horsmann/ltlab-evaluation</connection>
+		<developerConnection>https://github.com/Horsmann/ltlab-evaluation.git</developerConnection>
+		<tag>0.1.0-SNAPSHOT</tag>
+	</scm>
+	<issueManagement>
+		<system>GitHub Issues</system>
+		<url>https://github.com/Horsmann/ltlab-evaluation/issues</url>
+	</issueManagement>
+	<url>https://github.com/Horsmann/ltlab-evaluation</url>
 </project>
