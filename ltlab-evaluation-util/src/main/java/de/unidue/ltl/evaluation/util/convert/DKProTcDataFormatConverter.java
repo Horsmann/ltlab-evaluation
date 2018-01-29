@@ -35,6 +35,7 @@ public class DKProTcDataFormatConverter {
 	 * Loads a single-label DKPro TC id2outcome file into the evaluation data format
 	 * 
 	 * @param id2OutcomeFile
+	 * 			the id2outcome file
 	 * @return an evaluation data object
 	 * @throws Exception
 	 *             in case of error
@@ -76,6 +77,7 @@ public class DKProTcDataFormatConverter {
 	 * Loads a multi-label DKPro TC id2outcome file into the evaluation data format
 	 * 
 	 * @param id2OutcomeFile
+	 * 			the id2outcome file
 	 * @return an evaluation data object
 	 * @throws Exception
 	 *             in case of error
@@ -125,6 +127,7 @@ public class DKProTcDataFormatConverter {
 	 * integer values
 	 * 
 	 * @param id2OutcomeFile
+	 * 			the id2outcome file
 	 * @return an evaluation data object
 	 * @throws Exception
 	 *             in case of error
@@ -216,6 +219,7 @@ public class DKProTcDataFormatConverter {
 	 * Loads a regression DKPro TC id2outcome file into the evaluation data format
 	 * 
 	 * @param id2OutcomeFile
+	 * 		the id2outcome file
 	 * @return an evaluation data object
 	 * @throws Exception
 	 *             in case of error
