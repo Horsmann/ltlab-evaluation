@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.unidue.ltl.evaluation.measures.multilabel;
 
-import static de.unidue.ltl.evaluation.core.EvaluationConstants.EPSILON;
+import static de.unidue.ltl.evaluation.core.EvaluationConstants.EPS;
 import de.unidue.ltl.evaluation.core.EvaluationData;
 import de.unidue.ltl.evaluation.core.EvaluationEntry;
 import de.unidue.ltl.evaluation.measures.EvaluationMeasure;
@@ -48,7 +48,7 @@ public class MultilabelAccuracy extends EvaluationMeasure<Integer> {
 			}
 			
 			
-			avg += (and / (or + EPSILON));
+			avg += (and / (or + EPS));
 		}
 
 		result = avg / data.size();

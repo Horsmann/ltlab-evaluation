@@ -19,13 +19,12 @@
 package de.unidue.ltl.evaluation.measures;
 
 import de.unidue.ltl.evaluation.core.EvaluationData;
+import static de.unidue.ltl.evaluation.core.EvaluationConstants.EPS;
 import de.unidue.ltl.evaluation.core.EvaluationEntry;
 
 public class BinaryLogLoss<T extends Number>
     extends EvaluationMeasure<Double>
 {
-	private static final double EPS = 1e-15;
-
     boolean didCalculate = false;
     double binaryLogLoss;
 

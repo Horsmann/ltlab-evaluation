@@ -19,6 +19,6 @@ package de.unidue.ltl.evaluation.core;
 
 public class EvaluationConstants {
 
-	public static double EPSILON = 0.1e-15;
+	public static double EPS = 0.1e-15;
 	
 }
