@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.unidue.ltl.evaluation.significance;
+package de.unidue.ltl.evaluation.measure.significance;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,6 +23,9 @@ import java.util.List;
 import java.util.Map;
 
 import de.unidue.ltl.evaluation.core.EvaluationData;
+import de.unidue.ltl.evaluation.measure.significance.ChiSquare;
+import de.unidue.ltl.evaluation.measure.significance.McNemarTest;
+import de.unidue.ltl.evaluation.measure.significance.McNemarType;
 
 public class McNemarBulkTest
 {

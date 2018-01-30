@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.unidue.ltl.evaluation.significance;
+package de.unidue.ltl.evaluation.measure.significance;
 
 import static org.junit.Assert.assertEquals;
 
@@ -24,6 +24,8 @@ import java.util.Map;
 import org.junit.Test;
 
 import de.unidue.ltl.evaluation.core.EvaluationData;
+import de.unidue.ltl.evaluation.measure.significance.McNemarBulkTest;
+import de.unidue.ltl.evaluation.measure.significance.McNemarType;
 
 public class McNemarBulkTestUnitTest {
 
