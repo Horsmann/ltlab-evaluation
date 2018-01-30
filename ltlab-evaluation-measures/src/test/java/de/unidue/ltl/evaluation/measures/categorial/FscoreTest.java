@@ -60,5 +60,21 @@ public class FscoreTest {
 	    assertEquals(new Fscore<>(data).getMicroFscore(), fmicro, 0.001);
 	}
 	
+	
+	@Test
+	public void numericalTest(){
+		EvaluationData<Integer> d = new EvaluationData<>();
+		d.register(0, 0);
+		d.register(1,2);
+		d.register(2, 1);
+		d.register(0, 0);
+		d.register(1, 0);
+		d.register(2, 1);
+		
+		Fscore<Integer> f = new Fscore<>(d);
+		assertEquals(0.2666, f.getMacroFscore(), 0.001);
+		assertEquals(0.3333, f.getMicroFscore(), 0.001);
+		assertEquals(0.2666, f.getWeightedFscore(), 0.001);
+	}
 
 }
