@@ -19,7 +19,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.unidue.ltl.evaluation</groupId>
 	<artifactId>ltlab-evaluation</artifactId>
-	<version>0.1.1</version>
+	<version>0.1.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<organization>
 		<name>Language Technology Lab</name>
@@ -449,13 +449,13 @@
     </profile>
   </profiles>
 	<properties>
-		<ltlab.eval.version>0.1.1</ltlab.eval.version>
+		<ltlab.eval.version>0.1.2-SNAPSHOT</ltlab.eval.version>
 	</properties>
 	<scm>
 		<url>https://github.com/horsmann/ltlab-evaluation</url>
 		<connection>scm:git:git://github.com/horsmann/ltlab-evaluation</connection>
 		<developerConnection>scm:git:git@github.com:horsmann/ltlab-evaluation.git</developerConnection>
-		<tag>0.1.1</tag>
+		<tag>0.1.0-SNAPSHOT</tag>
 	</scm>
 	<issueManagement>
 		<system>GitHub Issues</system>
