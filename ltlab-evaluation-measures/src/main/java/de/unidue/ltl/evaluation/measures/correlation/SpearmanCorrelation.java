@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2017
+ * Copyright 2018
  * Language Technology Lab
  * University of Duisburg-Essen
  *
@@ -23,7 +23,7 @@ import de.unidue.ltl.evaluation.core.VectorPair;
 
 public class SpearmanCorrelation extends CorrelationMeasure<Double> {
 	boolean didCalculate = false;
-	double computeCorrelation;
+	double correlation;
 
 	public SpearmanCorrelation(EvaluationData<Double> data) {
 		super(data);
@@ -35,8 +35,10 @@ public class SpearmanCorrelation extends CorrelationMeasure<Double> {
 		}
 		VectorPair<Double> vectors = new VectorPair<>(data);
 
-		computeCorrelation = org.dkpro.statistics.correlation.SpearmansRankCorrelation
+		correlation = org.dkpro.statistics.correlation.SpearmansRankCorrelation
 				.computeCorrelation(vectors.getVal1(), vectors.getVal2());
+		
+		didCalculate = true;
 	}
 
 	@Override
@@ -45,6 +47,6 @@ public class SpearmanCorrelation extends CorrelationMeasure<Double> {
 			calculate();
 		}
 
-		return computeCorrelation;
+		return correlation;
 	}
 }

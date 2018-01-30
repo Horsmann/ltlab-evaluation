@@ -25,7 +25,7 @@ public class PearsonCorrelation extends CorrelationMeasure<Double>
 {
     
     boolean didCalculate=false;
-    double computeCorrelation;
+    double correlation;
 
     public PearsonCorrelation(EvaluationData<Double> data)
     {
@@ -39,7 +39,8 @@ public class PearsonCorrelation extends CorrelationMeasure<Double>
         }
         VectorPair<Double> vectors = new VectorPair<>(data);
         
-        computeCorrelation = org.dkpro.statistics.correlation.PearsonCorrelation.computeCorrelation(vectors.getVal1(), vectors.getVal2());
+        correlation = org.dkpro.statistics.correlation.PearsonCorrelation.computeCorrelation(vectors.getVal1(), vectors.getVal2());
+        didCalculate=true;
     }
 
 	@Override
@@ -48,7 +49,7 @@ public class PearsonCorrelation extends CorrelationMeasure<Double>
             calculate();
         }
         
-        return computeCorrelation;
+        return correlation;
 	}
 
 }
