@@ -29,4 +29,7 @@
   		<artifactId>ltlab-evaluation-core</artifactId>
   	</dependency>
   </dependencies>
+  <properties>
+  	<maven.deploy.skip>true</maven.deploy.skip>
+  </properties>
 </project>
