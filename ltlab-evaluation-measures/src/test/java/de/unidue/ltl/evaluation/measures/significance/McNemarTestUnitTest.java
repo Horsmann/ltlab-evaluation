@@ -23,8 +23,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import de.unidue.ltl.evaluation.core.EvaluationData;
-import de.unidue.ltl.evaluation.measure.significance.McNemarTest;
-import de.unidue.ltl.evaluation.measure.significance.McNemarType;
+import de.unidue.ltl.evaluation.measures.significance.mcnemar.McNemar;
+import de.unidue.ltl.evaluation.measures.significance.mcnemar.McNemarType;
 
 public class McNemarTestUnitTest {
 
@@ -53,7 +53,7 @@ public class McNemarTestUnitTest {
 			evaluation2.register("A", "B");
 		}
 		
-		assertEquals(5.25, McNemarTest.computeSignificance(evaluation1, evaluation2, McNemarType.YATES), 0.001);
+		assertEquals(5.25, McNemar.computeSignificance(evaluation1, evaluation2, McNemarType.YATES), 0.001);
 		
 	}
 

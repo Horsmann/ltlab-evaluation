@@ -21,7 +21,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import de.unidue.ltl.evaluation.measure.significance.ChiSquare;
+import de.unidue.ltl.evaluation.measures.significance.ChiSquare;
 
 public class ChiSquareTestUnitTest {
 

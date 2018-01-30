@@ -24,8 +24,8 @@ import java.util.Map;
 import org.junit.Test;
 
 import de.unidue.ltl.evaluation.core.EvaluationData;
-import de.unidue.ltl.evaluation.measure.significance.McNemarBulkTest;
-import de.unidue.ltl.evaluation.measure.significance.McNemarType;
+import de.unidue.ltl.evaluation.measures.significance.mcnemar.McNemarBulk;
+import de.unidue.ltl.evaluation.measures.significance.mcnemar.McNemarType;
 
 public class McNemarBulkTestUnitTest {
 
@@ -55,7 +55,7 @@ public class McNemarBulkTestUnitTest {
 			evaluation2.register("A", "B");
 		}
 	
-		McNemarBulkTest test = new McNemarBulkTest();
+		McNemarBulk test = new McNemarBulk();
 		test.register(evaluation1);
 		test.register(evaluation2);
 		Map<String, Map<String, Double>> table = test.computeBulkTable(McNemarType.YATES);
