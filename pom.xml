@@ -453,9 +453,9 @@
 		<ltlab.eval.version>0.1.0-SNAPSHOT</ltlab.eval.version>
 	</properties>
 	<scm>
-		<url>https://github.com/Horsmann/ltlab-evaluation</url>
-		<connection>scm:git:git://github.com/Horsmann/ltlab-evaluation</connection>
-		<developerConnection>scm:git:git@github.com/Horsmann/ltlab-evaluation.git</developerConnection>
+		<url>https://github.com/horsmann/ltlab-evaluation</url>
+		<connection>scm:git:git://github.com/horsmann/ltlab-evaluation</connection>
+		<developerConnection>scm:git:git@github.com:horsmann/ltlab-evaluation.git</developerConnection>
 		<tag>0.1.0-SNAPSHOT</tag>
 	</scm>
 	<issueManagement>
