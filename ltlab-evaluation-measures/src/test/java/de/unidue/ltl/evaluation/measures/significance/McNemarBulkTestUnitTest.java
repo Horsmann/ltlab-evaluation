@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2017
+ * Copyright 2018
  * Language Technology Lab
  * University of Duisburg-Essen
  *
@@ -15,23 +15,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-
-package de.unidue.ltl.evaluation.measure.significance;
+package de.unidue.ltl.evaluation.measures.significance;
 
 import static org.junit.Assert.assertEquals;
+
+import java.util.Map;
 
 import org.junit.Test;
 
 import de.unidue.ltl.evaluation.core.EvaluationData;
-import de.unidue.ltl.evaluation.measure.significance.McNemarTest;
+import de.unidue.ltl.evaluation.measure.significance.McNemarBulkTest;
 import de.unidue.ltl.evaluation.measure.significance.McNemarType;
 
-public class McNemarTestUnitTest {
+public class McNemarBulkTestUnitTest {
 
 	@Test
 	public void mcnemareSignificanceTest() throws Exception {
-	    EvaluationData<String> evaluation1 = new EvaluationData<String>();
-	    EvaluationData<String> evaluation2 = new EvaluationData<String>();
+		EvaluationData<String> evaluation1 = new EvaluationData<String>();
+		EvaluationData<String> evaluation2 = new EvaluationData<String>();
+		
 		
 		for(int i=0; i< 8; i++){
 			evaluation1.register("A", "A");
@@ -52,9 +54,22 @@ public class McNemarTestUnitTest {
 			evaluation1.register("A", "A");
 			evaluation2.register("A", "B");
 		}
-		
-		assertEquals(5.25, McNemarTest.computeSignificance(evaluation1, evaluation2, McNemarType.YATES), 0.001);
+	
+		McNemarBulkTest test = new McNemarBulkTest();
+		test.register(evaluation1);
+		test.register(evaluation2);
+		Map<String, Map<String, Double>> table = test.computeBulkTable(McNemarType.YATES);
+		System.out.println("McNemarBulk p-values");
+		for (String row : table.keySet()) {
+			for (String column : table.get(row).keySet()) {
+				System.out.print(table.get(row).get(column)+"\t");
+			}
+			System.out.print("\n");
+		}
+		assertEquals(0.025, table.get(evaluation1.getId().toString())
+				.get(evaluation2.getId().toString()), 0.001);
 		
 	}
-
+	
+	
 }
