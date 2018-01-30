@@ -455,7 +455,7 @@
 	<scm>
 		<url>https://github.com/Horsmann/ltlab-evaluation</url>
 		<connection>scm:git:git://github.com/Horsmann/ltlab-evaluation</connection>
-		<developerConnection>https://github.com/Horsmann/ltlab-evaluation.git</developerConnection>
+		<developerConnection>scm:git:git@github.com/Horsmann/ltlab-evaluation.git</developerConnection>
 		<tag>0.1.0-SNAPSHOT</tag>
 	</scm>
 	<issueManagement>
@@ -547,4 +547,7 @@
       </plugins>
     </pluginManagement>
   </build>
+	 <ciManagement>
+	 	<url>https://github.com/Horsmann/ltlab-evaluation.git</url>
+	 </ciManagement>
 </project>
